@@ -83,9 +83,9 @@
                                             <th scope="row"><?= $fg['fg_id']; ?></th>
                                             <td>
                                                 <?php 
-                                                    if($fg['fg_type'] = 1){
+                                                    if($fg['fg_type'] == 1){
                                                         echo "อาหารธรรมชาติ";
-                                                    }elseif($fg['fg_type'] = 2){
+                                                    }elseif($fg['fg_type'] == 2){
                                                         echo "อาหารข้น";
                                                     }else{
                                                         echo "อาหาร TMR";
