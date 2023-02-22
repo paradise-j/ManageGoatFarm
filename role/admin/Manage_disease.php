@@ -52,8 +52,12 @@
                 <div class="modal-body">
                     <form action="Check_add_fg.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภทโรค</label>
-                            <input type="text" required class="form-control" name="type">
+                            <label for="firstname" class="col-form-label">=ชื่อโรค</label>
+                            <input type="text" required class="form-control" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">อาการ</label>
+                            <input type="text" required class="form-control" name="descrip">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
@@ -75,7 +79,7 @@
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
-                                <a href="Add_fg.php" class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลโรค</a>
+                                <a href="Add_gdis.php" class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลโรค</a>
                             </div>
                         </div>
                         <div class="card-body">
