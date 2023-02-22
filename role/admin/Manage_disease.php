@@ -50,7 +50,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_fg.php" method="POST">
+                    <form action="Check_add_gdis.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ชื่อโรค</label>
                             <input type="text" required class="form-control" name="name">
@@ -79,7 +79,7 @@
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
-                                <a href="Add_gdis.php" class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลโรค</a>
+                                <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลโรค</a>
                             </div>
                         </div>
                         <div class="card-body">
