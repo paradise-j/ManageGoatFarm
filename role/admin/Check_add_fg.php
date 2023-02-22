@@ -6,8 +6,7 @@
 
     if (isset($_POST['submit'])) {
         $type = $_POST['type'];
-        $sql = $db->prepare("INSERT INTO `fg_data`(`fg_type`) VALUES (:type)");
-        $sql->bindParam(":type", $type);
+        $sql = $db->prepare("INSERT INTO `fg_data`(`fg_type`) VALUES ('$type')");
         $sql->execute();
 
         if ($sql) {
@@ -23,10 +22,10 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_fg.php");
+            header("refresh:2; url=Manage_food.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Manage_fg.php");
+            header("location: Manage_food.php");
         }
     }
 ?>
