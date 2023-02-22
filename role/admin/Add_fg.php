@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>เพิ่มข้อมูลเกษตรกร</title>
+    <title>เพิ่มข้อมูลอาหาร</title>
 
     <!-- Custom fonts for this template-->
     <link rel="icon" type="image/png" href="img/edit_pro.png" />
@@ -37,21 +37,10 @@
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">เพิ่มข้อมูลเกษตรกร</h3>
+                                    <h3 class="m-0 font-weight-bold text-primary">เพิ่มข้อมูลอาหาร</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="Chack_Add_agc.php" method="POST" enctype="multipart/form-data">
-                                        <div class="row mb-4">
-                                            <div class="col-md-5"></div>
-                                            <div class="col-md-1 text-center">
-                                                <img loading="lazy" width="175px" style="border-radius: 200px;" id="previewImg" alt="">
-                                            </div>
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <label for="img" class="form-label">อัปโหลดรูปภาพ</label>
-                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" required>
-                                            </div>
-                                        </div>
+                                    <form action="Chack_Add_fg.php" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-4">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-3">
@@ -71,64 +60,6 @@
                                                     <option value="3">เลขานุการ</option>
                                                     <option value="4">สมาชิก</option>
                                                     <option value="4">การตลาด</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
-                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">เลขประจำตัวประชาชน</label>
-                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">เบอร์โทรศัพท์</label>
-                                                <input type="text" class="form-control" id="phone" name="phone" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">ระดับการศึกษา</label>
-                                                <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">ประถมศึกษา</option>
-                                                    <option value="2">มัธยมศึกษา</option>
-                                                    <option value="3">ปวช.</option>
-                                                    <option value="4">ปวส.</option>
-                                                    <option value="5">ปริญาตรี</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">ประสบการณ์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">จุดประสงค์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">เพื่อขุนขาย</option>
-                                                    <option value="2">เพื่อขายพ่อ-แม่พันธุ์</option>
-                                                    <option value="3">เพื่อขุนขายและขายพ่อ-แม่พันธุ์</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">ประเภทลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">แบบยืนโรง</option>
-                                                    <option value="2">แบบกึ่ง</option>
-                                                    <option value="3">แบบธรรมชาติ</option>
                                                 </select>
                                             </div>
                                         </div>
