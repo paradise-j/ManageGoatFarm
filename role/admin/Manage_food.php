@@ -23,7 +23,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>จัดการข้อมูลเกษตรกร</title>
+        <title>จัดการข้อมูลอาหาร</title>
 
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,12 +45,12 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3 text-center">
-                                <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลเกษตรกร</h3>
+                                <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลอาหาร</h3>
                             </div>
                             <div class="row mt-4 ml-2">
                                 <div class="col">
-                                    <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</a>
-                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</button> -->
+                                    <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลอาหาร</a>
+                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลอาหาร</button> -->
                                 </div>
                             </div>
                             <div class="card-body">
@@ -58,7 +58,7 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>รหัสเกษตรกร</th>
+                                                <th>รหัสอาหาร</th>
                                                 <th>ชื่อ-สกุล</th>
                                                 <th>ชื่อฟาร์ม</th>
                                                 <th>ตำแหน่ง</th>
