@@ -13,6 +13,8 @@
             header("refresh:1; url=Manage_agc.php");
         }
     }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -48,10 +50,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="insert.php" method="post" enctype="multipart/form-data">
+                <form action="Check_add_fg.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
-                        <input type="text" required class="form-control" name="firstname">
+                        <input type="text" required class="form-control" name="tpye">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
