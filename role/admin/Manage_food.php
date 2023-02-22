@@ -45,23 +45,22 @@
     <div class="modal fade" id="AddFooodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลอาหาร</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="Check_add_fg.php" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
-                        <input type="text" required class="form-control" name="type">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                        <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
-                    </div>
-                </form>
-            </div>
-            
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลอาหาร</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="Check_add_fg.php" method="POST">
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
+                            <input type="text" required class="form-control" name="type">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                            <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -104,17 +103,7 @@
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $fg['fg_id']; ?></th>
-                                            <td>
-                                                <?php 
-                                                    if($fg['fg_type'] == 1){
-                                                        echo "อาหารธรรมชาติ";
-                                                    }elseif($fg['fg_type'] == 2){
-                                                        echo "อาหารข้น";
-                                                    }else{
-                                                        echo "อาหาร TMR";
-                                                    }
-                                                ?>
-                                            </td>
+                                            <td><?= $fg['fg_type']; ?></td>
                                             <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
