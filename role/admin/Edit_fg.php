@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>แก้ไขข้อมูลเกษตรกร</title>
+    <title>แก้ไขข้อมูลอาหาร</title>
 
     <!-- Custom fonts for this template-->
     <link rel="icon" type="image/png" href="img/edit_pro.png" />
@@ -43,14 +43,14 @@
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">แก้ไขข้อมูลเกษตรกร</h3>
+                                    <h3 class="m-0 font-weight-bold text-primary">แก้ไขข้อมูลอาหาร</h3>
                                 </div>
                                 <div class="card-body">
                                     <form action="Chack_edit_agc.php" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-4">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-2">
-                                                <label class="form-label">รหัสเกษตรกร</label>
+                                                <label class="form-label">รหัสอาหาร</label>
                                                 <input type="text" class="form-control" id="id" name="id" style="border-radius: 30px;" value="<?= $agc_id; ?>" required>
                                             </div>
                                             <div class="col-md-3">
