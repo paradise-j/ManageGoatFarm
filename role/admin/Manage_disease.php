@@ -28,7 +28,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>จัดการข้อมูลอาหาร</title>
+    <title>จัดการข้อมูลโรค</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,13 +46,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลอาหาร</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลโรค</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="Check_add_fg.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
+                            <label for="firstname" class="col-form-label">ประเภทโรค</label>
                             <input type="text" required class="form-control" name="type">
                         </div>
                         <div class="modal-footer">
@@ -71,11 +71,11 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 text-center">
-                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลอาหาร</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลโรค</h3>
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
-                                <a href="Add_fg.php" class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลอาหาร</a>
+                                <a href="Add_fg.php" class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลโรค</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -83,28 +83,30 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>รหัสอาหาร</th>
-                                            <th>ประเภทอาหาร</th>
+                                            <th>รหัสโรค</th>
+                                            <th>ชื่อโรค</th>
+                                            <th>อาการ</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `fg_data`");
+                                            $stmt = $db->query("SELECT * FROM `gdis_data`");
                                             $stmt->execute();
-                                            $fgs = $stmt->fetchAll();
+                                            $gdiss = $stmt->fetchAll();
 
-                                            if (!$fgs) {
+                                            if (!$gdiss) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($fgs as $fg)  {  
+                                            foreach($gdiss as $gdis)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $fg['fg_id']; ?></th>
-                                            <td><?= $fg['fg_type']; ?></td>
-                                            <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <th scope="row"><?= $gdis['gdis_id']; ?></th>
+                                            <td><?= $gdis['gdis_name']; ?></td>
+                                            <td><?= $gdis['gdis_descrip']; ?></td>
+                                            <td><a href="Edit_gdis.php?edit_id=<?= $gdis['gdis_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gdis['gdis_id']; ?>" href="?delete=<?= $gdis['gdis_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
