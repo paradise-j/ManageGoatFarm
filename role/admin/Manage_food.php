@@ -56,7 +56,6 @@
                             <input type="text" required class="form-control" name="type">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
                         </div>
                     </form>
