@@ -32,8 +32,13 @@
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        <div class="card-header py-3 text-center">
+                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลอาหาร</h3>
+                        </div>
+                        <div class="row mt-4 ml-2">
+                            <div class="col">
+                                <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลอาหาร</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

@@ -50,7 +50,6 @@
                             <div class="row mt-4 ml-2">
                                 <div class="col">
                                     <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลอาหาร</a>
-                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลอาหาร</button> -->
                                 </div>
                             </div>
                             <div class="card-body">
