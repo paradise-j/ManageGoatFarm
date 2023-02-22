@@ -10,7 +10,7 @@
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Manage_food.php");
+            header("refresh:1; url=Manage_disease.php");
         }
     }
 
@@ -52,7 +52,7 @@
                 <div class="modal-body">
                     <form action="Check_add_fg.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">=ชื่อโรค</label>
+                            <label for="firstname" class="col-form-label">ชื่อโรค</label>
                             <input type="text" required class="form-control" name="name">
                         </div>
                         <div class="mb-3">
@@ -166,7 +166,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_food.php',
+                                url: 'Manage_disease.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -176,7 +176,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_food.php';
+                                    document.location.href = 'Manage_disease.php';
                                 })
                             })
                             .fail(function() {
