@@ -5,7 +5,7 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `fg_data` WHERE `fg_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `gdis_data` WHERE `gdis_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
