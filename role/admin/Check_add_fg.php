@@ -5,7 +5,7 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $tpye = $_POST['tpye'];
+        $type = $_POST['type'];
         $sql = $db->prepare("INSERT INTO `fg_data`(`fg_type`) VALUES (:type)");
         $sql->bindParam(":type", $type);
         $sql->execute();

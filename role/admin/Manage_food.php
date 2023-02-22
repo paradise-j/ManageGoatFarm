@@ -53,7 +53,7 @@
                 <form action="Check_add_fg.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
-                        <input type="text" required class="form-control" name="tpye">
+                        <input type="text" required class="form-control" name="type">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
