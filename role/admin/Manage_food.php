@@ -40,6 +40,43 @@
 </head>
 
 <body id="page-top">
+    <div class="modal fade" id="AddFooodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="insert.php" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="firstname" class="col-form-label">First Name:</label>
+                        <input type="text" required class="form-control" name="firstname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="col-form-label">Last Name:</label>
+                        <input type="text" required class="form-control" name="lastname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="col-form-label">Position:</label>
+                        <input type="text" required class="form-control" name="position">
+                    </div>
+                    <div class="mb-3">
+                        <label for="img" class="col-form-label">Image:</label>
+                        <input type="file" required class="form-control" id="imgInput" name="img">
+                        <img loading="lazy" width="100%" id="previewImg" alt="">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+            
+            </div>
+        </div>
+    </div>
     <div id="wrapper">
         <?php include('sidebar.php'); ?><!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -99,6 +136,7 @@
                                 </table>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
