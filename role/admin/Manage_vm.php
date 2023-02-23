@@ -50,7 +50,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_vc.php" method="POST">
+                    <form action="Check_add_vm.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภท</label>
                             <select class="form-control" aria-label="Default select example" id="typeVM" name="typeVM" style="border-radius: 30px;" required>
@@ -61,11 +61,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ชื่อ</label>
-                            <input type="text" required class="form-control" name="name" style="border-radius: 30px;">
+                            <input type="text" required class="form-control" name="namevm" style="border-radius: 30px;">
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">รายละเอียด</label>
-                            <input type="text" required class="form-control" name="descrip" style="border-radius: 30px;">
+                            <input type="text" required class="form-control" name="descripvm" style="border-radius: 30px;">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
