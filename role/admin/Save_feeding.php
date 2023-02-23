@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>เพิ่มข้อมูลเกษตรกร</title>
+    <title>บันทึกข้อมูลเกษตรกร</title>
 
     <!-- Custom fonts for this template-->
     <link rel="icon" type="image/png" href="img/edit_pro.png" />
@@ -37,21 +37,10 @@
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">เพิ่มข้อมูลเกษตรกร</h3>
+                                    <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลเกษตรกร</h3>
                                 </div>
                                 <div class="card-body">
                                     <form action="Chack_Add_agc.php" method="POST" enctype="multipart/form-data">
-                                        <div class="row mb-4">
-                                            <div class="col-md-5"></div>
-                                            <div class="col-md-1 text-center">
-                                                <img loading="lazy" width="175px" style="border-radius: 200px;" id="previewImg" alt="">
-                                            </div>
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <label for="img" class="form-label">อัปโหลดรูปภาพ</label>
-                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" required>
-                                            </div>
-                                        </div>
                                         <div class="row mb-4">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-3">
