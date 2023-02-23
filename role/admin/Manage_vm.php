@@ -5,7 +5,7 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `gdis_data` WHERE `gdis_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `vc_data` WHERE `vc_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
@@ -50,7 +50,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_gdis.php" method="POST">
+                    <form action="Check_add_vc.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภท</label>
                             <select class="form-control" aria-label="Default select example" id="typeVM" name="typeVM" style="border-radius: 30px;" required>
@@ -96,29 +96,31 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th>รหัสยาและวัคซีน</th>
-                                            <th>ชื่อยาและวัคซีน</th>
-                                            <th>อาการ</th>
+                                            <th>ประเภท</th>
+                                            <th>ชื่อ</th>
+                                            <th>รายละเอียด</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `gdis_data`");
+                                            $stmt = $db->query("SELECT * FROM `vc_data`");
                                             $stmt->execute();
-                                            $gdiss = $stmt->fetchAll();
+                                            $vcs = $stmt->fetchAll();
 
-                                            if (!$gdiss) {
+                                            if (!$vcs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($gdiss as $gdis)  {  
+                                            foreach($vcs as $vc)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $gdis['gdis_id']; ?></th>
-                                            <td><?= $gdis['gdis_name']; ?></td>
-                                            <td><?= $gdis['gdis_descrip']; ?></td>
-                                            <td><a href="Edit_gdis.php?edit_id=<?= $gdis['gdis_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gdis['gdis_id']; ?>" href="?delete=<?= $gdis['gdis_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <th scope="row"><?= $vc['vc_id']; ?></th>
+                                            <td><?= $vc['vc_type']; ?></td>
+                                            <td><?= $vc['vc_name']; ?></td>
+                                            <td><?= $vc['vc_descrip']; ?></td>
+                                            <td><a href="Edit_vc.php?edit_id=<?= $vc['vc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $vc['vc_id']; ?>" href="?delete=<?= $vc['vc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
