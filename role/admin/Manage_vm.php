@@ -53,7 +53,7 @@
                     <form action="Check_add_vm.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" id="typeVM" name="typeVM" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" id="typevm" name="typevm" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <option value="1">ยา</option>
                                 <option value="2">วัคซีน</option>
@@ -116,7 +116,15 @@
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $vc['vc_id']; ?></th>
-                                            <td><?= $vc['vc_type']; ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($vc['vc_type'] == 1){
+                                                        echo "ยา";
+                                                    }else{
+                                                        echo "วัคซีน";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?= $vc['vc_name']; ?></td>
                                             <td><?= $vc['vc_descrip']; ?></td>
                                             <td><a href="Edit_vc.php?edit_id=<?= $vc['vc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
