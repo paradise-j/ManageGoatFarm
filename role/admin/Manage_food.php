@@ -53,7 +53,7 @@
                     <form action="Check_add_fg.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
-                            <input type="text" required class="form-control" name="type">
+                            <input type="text" required class="form-control" name="type" style="border-radius: 30px;">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
