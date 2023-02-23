@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>บันทึกข้อมูลเกษตรกร</title>
+    <title>บันทึกข้อมูลการให้อาหาร</title>
 
     <!-- Custom fonts for this template-->
     <link rel="icon" type="image/png" href="img/edit_pro.png" />
@@ -37,22 +37,19 @@
                         <div class="col-lg-10">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลเกษตรกร</h3>
+                                    <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้อาหาร</h3>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col text-center">
+                                            <img loading="lazy" width="175px" style="border-radius: 200px;" src="img/Goat.png" alt="">
+                                        </div>
+                                    </div>
                                     <form action="Chack_Add_agc.php" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-4">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-3">
-                                                <label class="form-label">ชื่อ-สกุล</label>
-                                                <input type="text" class="form-control" id="name" name="name" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label class="form-label">ชื่อฟาร์ม</label>
-                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ตำแหน่ง</label>
+                                                <label class="form-label">ประเภท</label>
                                                 <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">ประธาน</option>
@@ -62,7 +59,23 @@
                                                     <option value="4">การตลาด</option>
                                                 </select>
                                             </div>
-
+                                            <div class="col-md-3">
+                                                <label class="form-label">ช่วงอายุ</label>
+                                                <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
+                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option value="1">1-2 ปี</option>
+                                                    <option value="2">3-5 ปี</option>
+                                                    <option value="3">5 ปีขึ้นไป</option>
+                                                    <option value="4">ไม่เกิน 4 เดือน</option>
+                                                    <option value="4">ไม่เกิน 5 เดือน</option>
+                                                    <option value="4">ไม่เกิน 6 เดือน</option>
+                                                    <option value="4">6 เดือนขึ้นไป</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">ชื่อฟาร์ม</label>
+                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
+                                            </div>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-md-1"></div>
