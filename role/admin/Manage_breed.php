@@ -5,12 +5,12 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `gb_data` WHERE `gb_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `g_breed` WHERE `gb_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Manage_vm.php");
+            header("refresh:1; url=Manage_breed.php");
         }
     }
 
@@ -50,10 +50,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_vm.php" method="POST">
+                    <form action="Check_add_gb.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ชื่อสายพันธุ์</label>
-                            <input type="text" required class="form-control" name="nameB" style="border-radius: 30px;">
+                            <input type="text" required class="form-control" name="namegb" style="border-radius: 30px;">
                         </div>
                         <!-- <div class="mb-3">
                             <label for="firstname" class="col-form-label">รายละเอียด</label>
@@ -164,7 +164,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_vm.php',
+                                url: 'Manage_breed.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -174,7 +174,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_vm.php';
+                                    document.location.href = 'Manage_breed.php';
                                 })
                             })
                             .fail(function() {
