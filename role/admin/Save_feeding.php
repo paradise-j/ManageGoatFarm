@@ -52,11 +52,9 @@
                                                 <label class="form-label">ประเภท</label>
                                                 <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">ประธาน</option>
-                                                    <option value="2">รองประธาน</option>
-                                                    <option value="3">เลขานุการ</option>
-                                                    <option value="4">สมาชิก</option>
-                                                    <option value="4">การตลาด</option>
+                                                    <option value="1">แพะพ่อพันธุ์</option>
+                                                    <option value="2">แพะแม่พันธุ์</option>
+                                                    <option value="3">แพะขุน</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
@@ -83,14 +81,6 @@
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
                                                 <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
                                             </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">เลขประจำตัวประชาชน</label>
-                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">เบอร์โทรศัพท์</label>
-                                                <input type="text" class="form-control" id="phone" name="phone" style="border-radius: 30px;" required>
-                                            </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ระดับการศึกษา</label>
                                                 <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
@@ -102,7 +92,6 @@
                                                     <option value="5">ปริญาตรี</option>
                                                 </select>
                                             </div>
-
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-md-1"></div>
