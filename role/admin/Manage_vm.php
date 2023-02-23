@@ -10,7 +10,7 @@
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Manage_disease.php");
+            header("refresh:1; url=Manage_vm.php");
         }
     }
 
@@ -176,7 +176,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_disease.php',
+                                url: 'Manage_vm.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -186,7 +186,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_disease.php';
+                                    document.location.href = 'Manage_vm.php';
                                 })
                             })
                             .fail(function() {
