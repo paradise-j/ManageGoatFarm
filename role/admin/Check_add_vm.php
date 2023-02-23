@@ -8,7 +8,7 @@
         $typevm = $_POST['typevm'];
         $namevm = $_POST['namevm'];
         $descripvm = $_POST['descripvm'];
-        $sql = $db->prepare("INSERT INTO `gdis_data`(`vc_type`, `vc_name`, `vc_descrip`) VALUES ('$typevm','$namevm','$descripvm')");
+        $sql = $db->prepare("INSERT INTO `vc_data`(`vc_type`, `vc_name`, `vc_descrip`) VALUES ('$typevm','$namevm','$descripvm')");
         $sql->execute();
 
         if ($sql) {
@@ -24,10 +24,10 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_disease.php");
+            header("refresh:2; url=Manage_vm.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Manage_disease.php");
+            header("location: Manage_vm.php");
         }
     }
 ?>
