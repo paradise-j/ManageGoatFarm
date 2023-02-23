@@ -5,7 +5,7 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `vc_data` WHERE `vc_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `gb_data` WHERE `gb_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
@@ -28,7 +28,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>จัดการข้อมูลยาและวัคซีน</title>
+    <title>จัดการข้อมูลสายพันธุ์</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,27 +46,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลยาและวัคซีน</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลสายพันธุ์</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="Check_add_vm.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" id="typevm" name="typevm" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">ยา</option>
-                                <option value="2">วัคซีน</option>
-                            </select>
+                            <label for="firstname" class="col-form-label">ชื่อสายพันธุ์</label>
+                            <input type="text" required class="form-control" name="nameB" style="border-radius: 30px;">
                         </div>
-                        <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ชื่อ</label>
-                            <input type="text" required class="form-control" name="namevm" style="border-radius: 30px;">
-                        </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="firstname" class="col-form-label">รายละเอียด</label>
-                            <input type="text" required class="form-control" name="descripvm" style="border-radius: 30px;">
-                        </div>
+                            <input type="text" required class="form-control" name="descripB" style="border-radius: 30px;">
+                        </div> -->
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
                         </div>
@@ -83,11 +75,11 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 text-center">
-                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลยาและวัคซีน</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลสายพันธุ์</h3>
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
-                                <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลยาและวัคซีน</a>
+                                <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลสายพันธุ์</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -95,40 +87,28 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>รหัสยาและวัคซีน</th>
-                                            <th>ประเภท</th>
-                                            <th>ชื่อ</th>
-                                            <th>รายละเอียด</th>
+                                            <th>รหัสสายพันธุ์</th>
+                                            <th>ชื่อสายพันธุ์</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `vc_data`");
+                                            $stmt = $db->query("SELECT * FROM `g_breed`");
                                             $stmt->execute();
-                                            $vcs = $stmt->fetchAll();
+                                            $gbs = $stmt->fetchAll();
 
-                                            if (!$vcs) {
+                                            if (!$gbs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($vcs as $vc)  {  
+                                            foreach($gbs as $gb)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $vc['vc_id']; ?></th>
-                                            <td>
-                                                <?php 
-                                                    if($vc['vc_type'] == 1){
-                                                        echo "ยา";
-                                                    }else{
-                                                        echo "วัคซีน";
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td><?= $vc['vc_name']; ?></td>
-                                            <td><?= $vc['vc_descrip']; ?></td>
-                                            <td><a href="Edit_vc.php?edit_id=<?= $vc['vc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $vc['vc_id']; ?>" href="?delete=<?= $vc['vc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <th scope="row"><?= $gb['gb_id']; ?></th>
+                                            <td><?= $gb['gb_name']; ?></td>
+                                            <td><a href="Edit_gb.php?edit_id=<?= $gb['gb_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gb['gb_id']; ?>" href="?delete=<?= $gb['gb_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
