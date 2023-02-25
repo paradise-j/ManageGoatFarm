@@ -65,14 +65,14 @@
                                                     <option value="2">3-5 ปี</option>
                                                     <option value="3">5 ปีขึ้นไป</option>
                                                     <option value="4">ไม่เกิน 4 เดือน</option>
-                                                    <option value="4">ไม่เกิน 5 เดือน</option>
-                                                    <option value="4">ไม่เกิน 6 เดือน</option>
-                                                    <option value="4">6 เดือนขึ้นไป</option>
+                                                    <option value="5">ไม่เกิน 5 เดือน</option>
+                                                    <option value="6">ไม่เกิน 6 เดือน</option>
+                                                    <option value="7">6 เดือนขึ้นไป</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
-                                                <label class="form-label">ชื่อฟาร์ม</label>
-                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
+                                                <label class="form-label">ปริมาณอาหาร</label>
+                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required> <label class="form-label">กิโลกรัม</label>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
