@@ -70,56 +70,33 @@
                                                     <option value="7">6 เดือนขึ้นไป</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label class="form-label">ปริมาณอาหาร</label>
-                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required> <label class="form-label">กิโลกรัม</label>
+                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-md-1"></div>
+                                            <div class="col-md-3"></div>
                                             <div class="col-md-3">
-                                                <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
+                                                <label class="form-label">ราคาต่อกิโลกรัม</label>
                                                 <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="inputState" class="form-label">ระดับการศึกษา</label>
+                                                <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
                                                 <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">ประถมศึกษา</option>
-                                                    <option value="2">มัธยมศึกษา</option>
-                                                    <option value="3">ปวช.</option>
-                                                    <option value="4">ปวส.</option>
-                                                    <option value="5">ปริญาตรี</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">ประสบการณ์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">จุดประสงค์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">เพื่อขุนขาย</option>
-                                                    <option value="2">เพื่อขายพ่อ-แม่พันธุ์</option>
-                                                    <option value="3">เพื่อขุนขายและขายพ่อ-แม่พันธุ์</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="inputState" class="form-label">ประเภทลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">แบบยืนโรง</option>
-                                                    <option value="2">แบบกึ่ง</option>
-                                                    <option value="3">แบบธรรมชาติ</option>
+                                                    <option value="1">มกราคม</option>
+                                                    <option value="2">กุมภาพันธ์</option>
+                                                    <option value="3">มีนาคม</option>
+                                                    <option value="4">เมษายน</option>
+                                                    <option value="5">พฤษภาคม</option>
+                                                    <option value="6">มิถุนายน</option>
+                                                    <option value="7">กรกฎาคม</option>
+                                                    <option value="8">สิงหาคม</option>
+                                                    <option value="9">กันยายน</option>
+                                                    <option value="10">ตุลาคม</option>
+                                                    <option value="11">พฤศจิกายน</option>
+                                                    <option value="12">ธันวาคม</option>
                                                 </select>
                                             </div>
                                         </div>
