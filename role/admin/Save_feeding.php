@@ -34,8 +34,7 @@
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <div class="card shadow mb-2">
                                 <div class="card-header py-3 text-center">
                                     <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้อาหาร</h3>
@@ -46,8 +45,8 @@
                                             <img loading="lazy" width="75px" style="border-radius: 200px;" src="img/Goat.png" alt="">
                                         </div>
                                     </div> -->
-                                    <form action="Chack_Add_agc.php" method="POST" enctype="multipart/form-data">
-                                        <div class="row mb-2">
+                                    <form action="Chack_Add_gfg.php" method="POST" enctype="multipart/form-data">
+                                        <div class="row mb-4">
                                             <div class="col-md-3">
                                                 <label class="form-label">ประเภท</label>
                                                 <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
@@ -108,7 +107,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-1"></div>
                     </div>
                 </div>
                 <div class="container-fluid">
@@ -131,24 +129,24 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `agriculturist`");
+                                            $stmt = $db->query("SELECT * FROM `gfg_data`");
                                             $stmt->execute();
-                                            $agcs = $stmt->fetchAll();
+                                            $gfgs = $stmt->fetchAll();
 
-                                            if (!$agcs) {
+                                            if (!$gfgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($agcs as $agc)  {  
+                                            foreach($gfgs as $gfg)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $agc['agc_id']; ?></th>
-                                            <td><?= $agc['agc_name']; ?></td>
-                                            <td><?= $agc['agc_nfarm']; ?></td>
-                                            <td><?= $agc['agc_position_G']; ?></td>
-                                            <td><?= $agc['agc_gfarm']; ?></td>
-                                            <td><?= $agc['agc_phone']; ?></td>
-                                            <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <th scope="row"><?= $gfg['gfg_id']; ?></th>
+                                            <td><?= $gfg['gfg_type']; ?></td>
+                                            <td><?= $gfg['gfg_range_age']; ?></td>
+                                            <td><?= $gfg['gfg_quantity']; ?></td>
+                                            <td><?= $gfg['gfg_price']; ?></td>
+                                            <td><?= $gfg['gfg_date']; ?></td>
+                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
@@ -212,7 +210,7 @@
             }
         }
         function enable() {
-            document.getElementById("idAgc").disabled = false;
+            document.getElementById("idgfg").disabled = false;
             document.getElementById("name").disabled = false;
             document.getElementById("Fname").disabled = false;
             document.getElementById("position").disabled = false;
@@ -226,7 +224,7 @@
             document.getElementById("imgInput").disabled = false;
         }
         function disable() {
-            document.getElementById("idAgc").disabled = true;
+            document.getElementById("idgfg").disabled = true;
             document.getElementById("name").disabled = true;
             document.getElementById("Fname").disabled = true;
             document.getElementById("position").disabled = true;
