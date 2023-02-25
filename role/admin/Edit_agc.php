@@ -55,7 +55,7 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label for="img" class="form-label">อัปโหลดรูปภาพ</label>
-                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" value="<?= $agc_img; ?>"required>
+                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" value="uploads/<?= $agc_img; ?>"required>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -75,7 +75,6 @@
                                             <div class="col-md-2">
                                                 <label class="form-label">ตำแหน่ง</label>
                                                 <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" value="<?= $agc_position_G; ?>" required>
-                                                    <option selected>กรุณาเลือก....</option>
                                                     <option value="1">ประธาน</option>
                                                     <option value="2">รองประธาน</option>
                                                     <option value="3">เลขานุการ</option>
