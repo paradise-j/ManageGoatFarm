@@ -79,12 +79,11 @@
 
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
                                                 <input type="text" class="form-control" id="Gname" style="border-radius: 30px;" required disabled>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
                                                 <input type="text" class="form-control" id="personid" style="border-radius: 30px;" required disabled>
                                             </div>
