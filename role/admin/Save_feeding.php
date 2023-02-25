@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -47,7 +48,6 @@
                                     </div> -->
                                     <form action="Chack_Add_agc.php" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-2">
-                                            <div class="col-md-2"></div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ประเภท</label>
                                                 <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
@@ -74,14 +74,11 @@
                                                 <label class="form-label">ปริมาณอาหาร</label>
                                                 <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
                                             </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-3"></div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
                                                 <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
                                                 <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
@@ -112,6 +109,53 @@
                             </div>
                         </div>
                         <div class="col-lg-1"></div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>รหัสการให้อาหาร</th>
+                                            <th>ประเภท</th>
+                                            <th>ช่วงอายุ</th>
+                                            <th>ปริมาณอาหาร</th>
+                                            <th>ราคา</th>
+                                            <th>เดือนที่ให้</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $stmt = $db->query("SELECT * FROM `agriculturist`");
+                                            $stmt->execute();
+                                            $agcs = $stmt->fetchAll();
+
+                                            if (!$agcs) {
+                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                            } else {
+                                            foreach($agcs as $agc)  {  
+                                        ?>
+                                        <tr>
+                                            <th scope="row"><?= $agc['agc_id']; ?></th>
+                                            <td><?= $agc['agc_name']; ?></td>
+                                            <td><?= $agc['agc_nfarm']; ?></td>
+                                            <td><?= $agc['agc_position_G']; ?></td>
+                                            <td><?= $agc['agc_gfarm']; ?></td>
+                                            <td><?= $agc['agc_phone']; ?></td>
+                                            <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                        </tr>
+                                        <?php }  
+                                            } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,6 +197,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let imgInput = document.getElementById('imgInput');
         let previewImg = document.getElementById('previewImg');
