@@ -55,7 +55,7 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label for="img" class="form-label">อัปโหลดรูปภาพ</label>
-                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" value="uploads/<?= $agc_img; ?>"required>
+                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" value="<?= $agc_img; ?>" required>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -84,12 +84,11 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
                                                 <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" value="<?= $agc_gfarm; ?>" required>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
                                                 <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" value="<?= $agc_personid; ?>" required>
                                             </div>
