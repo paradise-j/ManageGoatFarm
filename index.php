@@ -16,7 +16,7 @@
 		<div class="login-content">
 			<form action="index.html">
 				<img src="img/avatar.svg">
-				<h3>ระบบจัดการข้อมูลการเลี้ยงแพะ</h3>
+				<h2>ระบบจัดการข้อมูลการเลี้ยงแพะ</h2>
                 <h4>จังหวัดสุราษฎร์ธานี</h4>
            		<div class="input-div one">
            		   <div class="i">
