@@ -14,7 +14,7 @@
 			<img src="img/bg.svg">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+			<form action="Check_login.php">
 				<img src="img/avatar.svg">
 				<h2>ระบบจัดการข้อมูลการเลี้ยงแพะ จังหวัดสุราษฎร์ธานี</h2>
            		<div class="input-div one">
@@ -22,8 +22,7 @@
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<h5>ชื่อผู้ใช้</h5>
-           		   		<input type="text" class="input">
+           		   		<input type="text" class="input" placeholder="ชื่อผู้ใช้">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -31,8 +30,7 @@
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
-           		    	<h5>รหัสผ่าน</h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" class="input" placeholder="รหัสผ่าน">
             	   </div>
             	</div>
             	<a href="#">ลืมรหัสผ่าน?</a>
