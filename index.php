@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    require_once 'connect.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +18,7 @@
 			<img src="img/bg.svg">
 		</div>
 		<div class="login-content">
-			<form action="Check_login.php">
+			<form action="Check_login.php" method="POST">
 				<img src="img/avatar.svg">
 				<h2>ระบบจัดการข้อมูลการเลี้ยงแพะ จังหวัดสุราษฎร์ธานี</h2>
            		<div class="input-div one">
@@ -22,7 +26,7 @@
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<input type="text" class="input" placeholder="ชื่อผู้ใช้">
+           		   		<input type="text" class="input" name="username" placeholder="ชื่อผู้ใช้">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -30,11 +34,11 @@
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
-           		    	<input type="password" class="input" placeholder="รหัสผ่าน">
+           		    	<input type="password" class="input" name="password"  placeholder="รหัสผ่าน">
             	   </div>
             	</div>
             	<a href="#">ลืมรหัสผ่าน?</a>
-            	<input type="submit" class="btn" value="Login">
+            	<input type="submit" class="btn" value="Login" name="btn_login">
             </form>
         </div>
     </div>
