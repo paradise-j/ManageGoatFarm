@@ -55,7 +55,7 @@ form{
 	margin: 15px 0;
 	color: #333;
 	text-transform: uppercase;
-	font-size: 2.9rem;
+	font-size: 2rem;
 }
 
 .login-content .input-div{
@@ -190,7 +190,7 @@ a:hover{
 
 @media screen and (max-width: 1000px){
 	form{
-		width: 700px;
+		width: 290px;
 	}
 
 	.login-content h2{
