@@ -5,13 +5,13 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $type = $_POST['type'];
-        $range_age = $_POST['range_age'];
-        $amount = $_POST['amount'];
-        $priceKG = $_POST['priceKG'];
-        $month = $_POST['month'];
-        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_quantity`, `nbg_male`, `nbg_female`, `nbg_Fg`, `nbg_Mg`)
-                             VALUES ('$type','$range_age','$amount','$priceKG','$month')");
+        $FB = $_POST['FB'];
+        $MB = $_POST['MB'];
+        $quantity = $_POST['quantity'];
+        $g_male = $_POST['g_male'];
+        $g_female = $_POST['g_female'];
+        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_Fg`, `nbg_Mg`, `nbg_quantity`, `nbg_male`, `nbg_female`)
+                             VALUES ('$FB','$MB','$quantity','$g_male','$g_female')");
         $sql->execute();
 
         if ($sql) {
@@ -27,10 +27,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Save_feeding.php");
+            header("refresh:1; url=Save_NBgoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Save_feeding.php");
+            header("location: Save_NBgoat.php");
         }
     }
 ?>

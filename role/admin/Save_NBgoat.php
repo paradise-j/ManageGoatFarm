@@ -5,12 +5,12 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `vc_data` WHERE `vc_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `nbg_data` WHERE `nbg_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Manage_vm.php");
+            header("refresh:1; url=Save_NBgoat.php");
         }
     }
 
@@ -51,7 +51,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_nbg.php" method="POST">
+                    <form action="Check_Add_nbg.php" method="POST">
                         <div class="mb-3">
                             <label class="form-label">พ่อพันธุ์</label>
                             <select class="form-control" aria-label="Default select example" name="FB" style="border-radius: 30px;" required>
@@ -63,7 +63,7 @@
                                     
                                     foreach($fms as $fm){
                                 ?>
-                                <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
+                                <option value="<?= $fm['fm_name']?>"><?= $fm['fm_name']?></option>
                                 <?php
                                     }
                                 ?>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">แม่พันธุ์</label>
-                            <select class="form-control" aria-label="Default select example"name="MB" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" name="MB" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <?php 
                                     $stmt = $db->query("SELECT * FROM `fm_data` WHERE `fm_type` = '2'");
@@ -80,7 +80,7 @@
                                     
                                     foreach($fms as $fm){
                                 ?>
-                                <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
+                                <option value="<?= $fm['fm_name']?>"><?= $fm['fm_name']?></option>
                                 <?php
                                     }
                                 ?>
@@ -114,7 +114,7 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 text-center">
-                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลแพะเกิด</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลแพะเกิด</h3>
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
@@ -211,7 +211,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_vm.php',
+                                url: 'Save_NBgoat.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -221,7 +221,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_vm.php';
+                                    document.location.href = 'Save_NBgoat.php';
                                 })
                             })
                             .fail(function() {

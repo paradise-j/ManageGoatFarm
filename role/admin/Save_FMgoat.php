@@ -10,7 +10,7 @@
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_feeding.php");
+            header("refresh:1; url=Save_NBgoat.php");
         }
     }
 
@@ -73,7 +73,7 @@
                                                         
                                                         foreach($fms as $fm){
                                                     ?>
-                                                    <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
+                                                    <option value="<?= $fm['fm_name']?>"><?= $fm['fm_name']?></option>
                                                     <?php
                                                         }
                                                     ?>
@@ -90,7 +90,7 @@
                                                         
                                                         foreach($fms as $fm){
                                                     ?>
-                                                    <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
+                                                    <option value="<?= $fm['fm_name']?>"><?= $fm['fm_name']?></option>
                                                     <?php
                                                         }
                                                     ?>
@@ -211,7 +211,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_feeding.php',
+                                url: 'Save_NBgoat.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -221,7 +221,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_feeding.php';
+                                    document.location.href = 'Save_NBgoat.php';
                                 })
                             })
                             .fail(function() {
