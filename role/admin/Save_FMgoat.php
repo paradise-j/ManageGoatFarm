@@ -126,7 +126,7 @@
                                             $fms = $stmt->fetchAll();
 
                                             if (!$fms) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='6' class='text-center'>ไม่มีข้อมูลที่สามารถใช้ได้</td></p>";
                                             } else {
                                             foreach($fms as $fm)  {  
                                         ?>
