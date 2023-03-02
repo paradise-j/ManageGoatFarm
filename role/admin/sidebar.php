@@ -45,6 +45,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="Save_Goat.php">บันทึกแพะขุน</a>
+                <a class="collapse-item" href="Save_FMgoat.php">บันทึกแพะพ่อ-แม่พันธุ์</a>
                 <a class="collapse-item" href="Save_feeding.php">การให้อาหาร</a>
                 <a class="collapse-item" href="Save_VM.php">การให้ยาและวัคซีน</a>
                 <a class="collapse-item" href="Save_disease.php">การเป็นโรค</a>
