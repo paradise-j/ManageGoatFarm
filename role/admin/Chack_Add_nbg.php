@@ -10,7 +10,7 @@
         $amount = $_POST['amount'];
         $priceKG = $_POST['priceKG'];
         $month = $_POST['month'];
-        $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_type`, `gfg_range_age`, `gfg_quantity`, `gfg_price`, `gfg_month`) 
+        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_quantity`, `nbg_male`, `nbg_female`, `nbg_Fg`, `nbg_Mg`)
                              VALUES ('$type','$range_age','$amount','$priceKG','$month')");
         $sql->execute();
 

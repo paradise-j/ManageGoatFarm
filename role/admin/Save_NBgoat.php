@@ -51,22 +51,52 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_vm.php" method="POST">
+                    <form action="Check_add_nbg.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" id="typevm" name="typevm" style="border-radius: 30px;" required>
+                            <label class="form-label">พ่อพันธุ์</label>
+                            <select class="form-control" aria-label="Default select example" name="FB" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
-                                <option value="1">ยา</option>
-                                <option value="2">วัคซีน</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `fm_data` WHERE `fm_type` = '1'");
+                                    $stmt->execute();
+                                    $fms = $stmt->fetchAll();
+                                    
+                                    foreach($fms as $fm){
+                                ?>
+                                <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
+                                <?php
+                                    }
+                                ?>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ชื่อ</label>
-                            <input type="text" required class="form-control" name="namevm" style="border-radius: 30px;">
+                            <label class="form-label">แม่พันธุ์</label>
+                            <select class="form-control" aria-label="Default select example"name="MB" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `fm_data` WHERE `fm_type` = '2'");
+                                    $stmt->execute();
+                                    $fms = $stmt->fetchAll();
+                                    
+                                    foreach($fms as $fm){
+                                ?>
+                                <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>                       
+                        <div class="mb-3">
+                            <label class="form-label">จำนวนแพะที่เกิด</label>
+                            <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">รายละเอียด</label>
-                            <input type="text" required class="form-control" name="descripvm" style="border-radius: 30px;">
+                            <label class="form-label">จำนวนเพศผู้</label>
+                            <input type="text" class="form-control" name="g_male" style="border-radius: 30px;" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">จำนวนเพศเมีย</label>
+                            <input type="text" class="form-control" name="g_female" style="border-radius: 30px;" required>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
@@ -84,11 +114,11 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 text-center">
-                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลยาและวัคซีน</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลแพะเกิด</h3>
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
-                                <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลยาและวัคซีน</a>
+                                <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลแพะเกิด</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -96,40 +126,36 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>รหัสยาและวัคซีน</th>
-                                            <th>ประเภท</th>
-                                            <th>ชื่อ</th>
-                                            <th>รายละเอียด</th>
+                                            <th>รหัสการเกิดแพะ</th>
+                                            <th>พ่อพัน</th>
+                                            <th>แม่พันธุ์</th>
+                                            <th>จำนวนแพะที่เกิด</th>
+                                            <th>จำนวนเพศผู้</th>
+                                            <th>จำนวนเพศเมีย</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `vc_data`");
+                                            $stmt = $db->query("SELECT * FROM `nbg_data`");
                                             $stmt->execute();
-                                            $vcs = $stmt->fetchAll();
+                                            $nbgs = $stmt->fetchAll();
 
-                                            if (!$vcs) {
+                                            if (!$nbgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($vcs as $vc)  {  
+                                            foreach($nbgs as $nbg)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $vc['vc_id']; ?></th>
-                                            <td>
-                                                <?php 
-                                                    if($vc['vc_type'] == 1){
-                                                        echo "ยา";
-                                                    }else{
-                                                        echo "วัคซีน";
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td><?= $vc['vc_name']; ?></td>
-                                            <td><?= $vc['vc_descrip']; ?></td>
-                                            <td><a href="Edit_vc.php?edit_id=<?= $vc['vc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $vc['vc_id']; ?>" href="?delete=<?= $vc['vc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <th scope="row"><?= $nbg['nbg_id']; ?></th>
+                                            <td><?= $nbg['nbg_Fg']; ?></td>
+                                            <td><?= $nbg['nbg_Mg']; ?></td>
+                                            <td><?= $nbg['nbg_quantity']; ?></td>
+                                            <td><?= $nbg['nbg_male']; ?></td>
+                                            <td><?= $nbg['nbg_female']; ?></td>
+                                            <td><a href="Edit_nbg.php?edit_id=<?= $nbg['nbg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $nbg['nbg_id']; ?>" href="?delete=<?= $nbg['nbg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
