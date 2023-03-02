@@ -49,7 +49,7 @@
                                         <div class="row mb-4">
                                             <div class="col-md-3">
                                                 <label class="form-label">ประเภท</label>
-                                                <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">แพะพ่อพันธุ์</option>
                                                     <option value="2">แพะแม่พันธุ์</option>
@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ช่วงอายุ</label>
-                                                <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">1-2 ปี</option>
                                                     <option value="2">3-5 ปี</option>
@@ -71,15 +71,15 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ปริมาณอาหาร</label>
-                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" name="Fname" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" name="Gname" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
-                                                <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">มกราคม</option>
                                                     <option value="2">กุมภาพันธ์</option>

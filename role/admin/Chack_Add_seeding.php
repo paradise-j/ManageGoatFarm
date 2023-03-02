@@ -5,9 +5,13 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $name = $_POST['name'];
-        $descrip = $_POST['descrip'];
-        $sql = $db->prepare("INSERT INTO `gdis_data`(`gdis_name`, `gdis_descrip`) VALUES ('$name','$descrip')");
+        $type = $_POST['type'];
+        $range_age = $_POST['range_age'];
+        $amount = $_POST['amount'];
+        $priceKG = $_POST['priceKG'];
+        $month = $_POST['month'];
+        $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_type`, `gfg_range_age`, `gfg_quantity`, `gfg_price`, `gfg_date`) 
+                             VALUES ('$type','$range_age','$amount','$priceKG','$month')");
         $sql->execute();
 
         if ($sql) {
@@ -23,10 +27,10 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_disease.php");
+            header("refresh:2; url=Save_feeding.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Manage_disease.php");
+            header("location: Save_feeding.php");
         }
     }
 ?>
