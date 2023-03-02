@@ -45,7 +45,7 @@
                                             <img loading="lazy" width="75px" style="border-radius: 200px;" src="img/Goat.png" alt="">
                                         </div>
                                     </div> -->
-                                    <form action="Chack_Add_gfg.php" method="POST" enctype="multipart/form-data">
+                                    <form action="Chack_Add_seeding.php" method="POST">
                                         <div class="row mb-4">
                                             <div class="col-md-3">
                                                 <label class="form-label">ประเภท</label>
