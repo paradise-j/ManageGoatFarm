@@ -54,14 +54,14 @@
                                     <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้อาหาร</h3>
                                 </div>
                                 <div class="card-body">
-                                    <!-- <div class="row mb-2">
+                                    <div class="row mb-2">
                                         <div class="col text-center">
-                                            <img loading="lazy" width="75px" style="border-radius: 200px;" src="img/Goat.png" alt="">
+                                            <img loading="lazy" width="150px" style="border-radius: 200px;" src="img/VM.png" alt="">
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <form action="Chack_Add_seeding.php" method="POST">
                                         <div class="row mb-4">
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label class="form-label">ประเภท</label>
                                                 <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
@@ -70,7 +70,7 @@
                                                     <option value="3">แพะขุน</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label class="form-label">ช่วงอายุ</label>
                                                 <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
@@ -85,10 +85,18 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ปริมาณอาหาร</label>
-                                                <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
+                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option value="1">ยา</option>
+                                                    <option value="2">วัคซีน</option>
+                                                </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <label class="form-label">ราคาต่อกิโลกรัม</label>
+                                                <label class="form-label">ปริมาณ</label>
+                                                <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ราคา</label>
                                                 <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
@@ -131,10 +139,12 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>รหัสการให้อาหาร</th>
+                                            <th>รหัสการให้ยาและวัคซีน</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
-                                            <th>ปริมาณอาหาร</th>
+                                            <th>ประเภทการให้</th>
+                                            <th>ชื่อผลิตภัณฑ์</th>
+                                            <th>ปริมาณ</th>
                                             <th>ราคา</th>
                                             <th>เดือนที่ให้</th>
                                             <th></th>
