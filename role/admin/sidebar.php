@@ -25,6 +25,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="Manage_agc.php">ข้อมูลเกษตรกร</a>
+                <a class="collapse-item" href="Manage_goat.php">ข้อมูลกลุ่มแพะ</a>
                 <a class="collapse-item" href="Manage_food.php">ข้อมูลอาหาร</a>
                 <a class="collapse-item" href="Manage_disease.php">ข้อมูลโรค</a>
                 <a class="collapse-item" href="Manage_vm.php">ข้อมูลยาและวัคซีน</a>

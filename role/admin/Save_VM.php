@@ -61,9 +61,32 @@
                                     </div>
                                     <form action="Chack_Add_seeding.php" method="POST">
                                         <div class="row mb-4">
+                                            <div class="col-md-2"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ประเภท</label>
-                                                <select class="form-control" aria-label="Default select example" name="type_vn" id="type_vn" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option value="1">แพะพ่อพันธุ์</option>
+                                                    <option value="2">แพะแม่พันธุ์</option>
+                                                    <option value="3">แพะขุน</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ช่วงอายุ</label>
+                                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option value="1">1-2 ปี</option>
+                                                    <option value="2">3-5 ปี</option>
+                                                    <option value="3">5 ปีขึ้นไป</option>
+                                                    <option value="4">ไม่เกิน 4 เดือน</option>
+                                                    <option value="5">ไม่เกิน 5 เดือน</option>
+                                                    <option value="6">ไม่เกิน 6 เดือน</option>
+                                                    <option value="7">6 เดือนขึ้นไป</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ปริมาณอาหาร</label>
+                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">ยา</option>
                                                     <option value="2">วัคซีน</option>
@@ -86,27 +109,9 @@
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ช่วงอายุ</label>
-                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
-                                                    <option value="4">ไม่เกิน 4 เดือน</option>
-                                                    <option value="5">ไม่เกิน 5 เดือน</option>
-                                                    <option value="6">ไม่เกิน 6 เดือน</option>
-                                                    <option value="7">6 เดือนขึ้นไป</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ปริมาณอาหาร</label>
-                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">ยา</option>
-                                                    <option value="2">วัคซีน</option>
-                                                </select>
-                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-md-3"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ปริมาณ</label>
                                                 <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
