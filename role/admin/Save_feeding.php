@@ -232,7 +232,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_disease.php',
+                                url: 'Save_feeding.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -242,7 +242,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_disease.php';
+                                    document.location.href = 'Save_feeding.php';
                                 })
                             })
                             .fail(function() {
