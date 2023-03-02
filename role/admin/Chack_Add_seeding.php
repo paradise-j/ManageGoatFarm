@@ -27,7 +27,7 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Save_feeding.php");
+            header("refresh:1; url=Save_feeding.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
             header("location: Save_feeding.php");
