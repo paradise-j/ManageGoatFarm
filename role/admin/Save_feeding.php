@@ -71,11 +71,11 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ปริมาณอาหาร</label>
-                                                <input type="text" class="form-control" name="Fname" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                                <input type="text" class="form-control" name="Gname" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
@@ -144,7 +144,7 @@
                                             <td><?= $gfg['gfg_range_age']; ?></td>
                                             <td><?= $gfg['gfg_quantity']; ?></td>
                                             <td><?= $gfg['gfg_price']; ?></td>
-                                            <td><?= $gfg['gfg_date']; ?></td>
+                                            <td><?= $gfg['gfg_month']; ?></td>
                                             <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
