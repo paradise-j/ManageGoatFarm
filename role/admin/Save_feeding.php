@@ -1,6 +1,20 @@
 <?php 
     require_once 'connect.php';
     session_start();
+
+    if (isset($_GET['delete'])) {
+        $delete_id = $_GET['delete'];
+        echo $delete_id;
+        $deletestmt = $db->query("DELETE FROM `gfg_data` WHERE `gfg_id` = '$delete_id'");
+        $deletestmt->execute();
+        
+        if ($deletestmt) {
+            echo "<script>alert('Data has been deleted successfully');</script>";
+            header("refresh:1; url=Save_feeding.php");
+        }
+    }
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -200,42 +214,48 @@
     <script src="js/demo/datatables-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        let imgInput = document.getElementById('imgInput');
-        let previewImg = document.getElementById('previewImg');
+        $(".delete-btn").click(function(e) {
+            var userId = $(this).data('id');
+            e.preventDefault();
+            deleteConfirm(userId);
+        })
 
-        imgInput.onchange = evt => {
-            const [file] = imgInput.files;
-                if (file) {
-                    previewImg.src = URL.createObjectURL(file)
-            }
-        }
-        function enable() {
-            document.getElementById("idgfg").disabled = false;
-            document.getElementById("name").disabled = false;
-            document.getElementById("Fname").disabled = false;
-            document.getElementById("position").disabled = false;
-            document.getElementById("Gname").disabled = false;
-            document.getElementById("personid").disabled = false;
-            document.getElementById("phone").disabled = false;
-            document.getElementById("edu").disabled = false;
-            document.getElementById("exper").disabled = false;
-            document.getElementById("obj").disabled = false;
-            document.getElementById("type").disabled = false;
-            document.getElementById("imgInput").disabled = false;
-        }
-        function disable() {
-            document.getElementById("idgfg").disabled = true;
-            document.getElementById("name").disabled = true;
-            document.getElementById("Fname").disabled = true;
-            document.getElementById("position").disabled = true;
-            document.getElementById("Gname").disabled = true;
-            document.getElementById("personid").disabled = true;
-            document.getElementById("phone").disabled = true;
-            document.getElementById("edu").disabled = true;
-            document.getElementById("exper").disabled = true;
-            document.getElementById("obj").disabled = true;
-            document.getElementById("type").disabled = true;
-            document.getElementById("imgInput").disabled = true;
+        function deleteConfirm(userId) {
+            Swal.fire({
+                title: 'ลบข้อมูล',
+                text: "คุณแน่ใจใช่หรือไม่ที่จบลบข้อมูลนี้",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ลบข้อมูล',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                                url: 'Manage_disease.php',
+                                type: 'GET',
+                                data: 'delete=' + userId,
+                            })
+                            .done(function() {
+                                Swal.fire({
+                                    title: 'สำเร็จ',
+                                    text: 'ลบข้อมูลเรียบร้อยแล้ว',
+                                    icon: 'success',
+                                }).then(() => {
+                                    document.location.href = 'Manage_disease.php';
+                                })
+                            })
+                            .fail(function() {
+                                Swal.fire({
+                                    title: 'ไม่สำเร็จ',
+                                    text: 'ลบข้อมูลไม่สำเร็จ',
+                                    icon: 'danger',
+                                })
+                                window.location.reload();
+                            });
+                    });
+                },
+            });
         }
     </script>
 
