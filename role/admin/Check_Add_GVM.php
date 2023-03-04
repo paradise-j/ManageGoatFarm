@@ -17,8 +17,10 @@
         $VM = $db->prepare("SELECT * FROM `group_g`");
         $VM->execute();
 
-        while ($Gtype == $VM["gg_type"] and $range_age == $VM["gg_range_age"]) {
-            $gg_id = $VM["gg_id"];
+        while ($row = $VM->fetch(PDO::FETCH_ASSOC)) {
+            if($Gtype == $VM["gg_type"] and $range_age == $VM["gg_range_age"]){
+                $gg_id = $VM["gg_id"]; break;
+            }
         }
 
 
