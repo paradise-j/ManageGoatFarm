@@ -5,7 +5,7 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `gfg_data` WHERE `gfg_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `gvc_data` WHERE `gvc_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
@@ -59,12 +59,12 @@
                                             <img loading="lazy" width="150px" style="border-radius: 200px;" src="img/VM.png" alt="">
                                         </div>
                                     </div>
-                                    <form action="Chack_Add_seeding.php" method="POST">
+                                    <form action="Check_Add_GVM.php" method="POST">
                                         <div class="row mb-4">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-2">
-                                                <label class="form-label">ประเภท</label>
-                                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                                <label class="form-label">ประเภทแพะ</label>
+                                                <select class="form-control" aria-label="Default select example" name="Gtype" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">แพะพ่อพันธุ์</option>
                                                     <option value="2">แพะแม่พันธุ์</option>
@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ช่วงอายุ</label>
-                                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">1-2 ปี</option>
                                                     <option value="2">3-5 ปี</option>
@@ -85,8 +85,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <label class="form-label">ปริมาณอาหาร</label>
-                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
+                                                <label class="form-label">ประเภท</label>
+                                                <select class="form-control" aria-label="Default select example" name="VMtype" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">ยา</option>
                                                     <option value="2">วัคซีน</option>
@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ชื่อผลิตภัณฑ์</label>
-                                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                                <select class="form-control" aria-label="Default select example"name="VMname" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <?php 
                                                         $stmt = $db->query("SELECT * FROM `vc_data`");
@@ -114,11 +114,11 @@
                                             <div class="col-md-3"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ปริมาณ</label>
-                                                <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ราคา</label>
-                                                <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" name="price" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
@@ -174,22 +174,25 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `gfg_data`");
+                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity , gvc_data.gvc_price , gvc_data.gvc_month 
+                                                                FROM `gvc_data` 
+                                                                INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
+                                                                INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
                                             $stmt->execute();
-                                            $gfgs = $stmt->fetchAll();
+                                            $gvcs = $stmt->fetchAll();
 
-                                            if (!$gfgs) {
+                                            if (!$gvcs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($gfgs as $gfg)  {  
+                                            foreach($gvcs as $gvc)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $gfg['gfg_id']; ?></th>
+                                            <th scope="row"><?= $gvc['gvc_id']; ?></th>
                                             <td>
                                                 <?php 
-                                                    if($gfg['gfg_type'] == 1){
+                                                    if($gvc['gvc_type'] == 1){
                                                         echo "แพะพ่อพันธุ์";
-                                                    }elseif($gfg['gfg_type'] == 2){
+                                                    }elseif($gvc['gvc_type'] == 2){
                                                         echo "แพะแม่พันธุ์";
                                                     }else{
                                                         echo "แพะขุน";
@@ -198,28 +201,30 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                    if($gfg['gfg_range_age'] == 1){
+                                                    if($gvc['gg_range_age'] == 1){
                                                         echo "1-2 ปี";
-                                                    }elseif($gfg['gfg_range_age'] == 2){
+                                                    }elseif($gvc['gg_range_age'] == 2){
                                                         echo "3-5 ปี";
-                                                    }elseif($gfg['gfg_range_age'] == 3){
+                                                    }elseif($gvc['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
-                                                    }elseif($gfg['gfg_range_age'] == 4){
+                                                    }elseif($gvc['gg_range_age'] == 4){
                                                         echo "ไม่เกิน 4 เดือน";
-                                                    }elseif($gfg['gfg_range_age'] == 5){
+                                                    }elseif($gvc['gg_range_age'] == 5){
                                                         echo "ไม่เกิน 5 เดือน";
-                                                    }elseif($gfg['gfg_range_age'] == 6){
+                                                    }elseif($gvc['gg_range_age'] == 6){
                                                         echo "ไม่เกิน 6 เดือน";
                                                     }else{
                                                         echo "6 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
-                                            <td><?= $gfg['gfg_quantity']; ?></td>
-                                            <td><?= $gfg['gfg_price']; ?></td>
-                                            <td><?= $gfg['gfg_month']; ?></td>
-                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><?= $gvc['gvc_type']; ?></td>
+                                            <td><?= $gvc['vc_name']; ?></td>
+                                            <td><?= $gvc['gvc_quantity']; ?></td>
+                                            <td><?= $gvc['gvc_price']; ?></td>
+                                            <td><?= $gvc['gvc_month']; ?></td>
+                                            <td><a href="Edit_gvc.php?edit_id=<?= $gvc['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gvc['gvc_id']; ?>" href="?delete=<?= $gvc['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
