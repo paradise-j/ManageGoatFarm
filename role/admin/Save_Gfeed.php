@@ -51,59 +51,59 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Chack_Add_seeding.php" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label">ประเภท</label>
-                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">แพะพ่อพันธุ์</option>
-                                    <option value="2">แพะแม่พันธุ์</option>
-                                    <option value="3">แพะขุน</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ช่วงอายุ</label>
-                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">1-2 ปี</option>
-                                    <option value="2">3-5 ปี</option>
-                                    <option value="3">5 ปีขึ้นไป</option>
-                                    <option value="4">ไม่เกิน 4 เดือน</option>
-                                    <option value="5">ไม่เกิน 5 เดือน</option>
-                                    <option value="6">ไม่เกิน 6 เดือน</option>
-                                    <option value="7">6 เดือนขึ้นไป</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ปริมาณอาหาร</label>
-                                <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
-                                <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">มกราคม</option>
-                                    <option value="2">กุมภาพันธ์</option>
-                                    <option value="3">มีนาคม</option>
-                                    <option value="4">เมษายน</option>
-                                    <option value="5">พฤษภาคม</option>
-                                    <option value="6">มิถุนายน</option>
-                                    <option value="7">กรกฎาคม</option>
-                                    <option value="8">สิงหาคม</option>
-                                    <option value="9">กันยายน</option>
-                                    <option value="10">ตุลาคม</option>
-                                    <option value="11">พฤศจิกายน</option>
-                                    <option value="12">ธันวาคม</option>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
-                                <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
-                            </div>
+                    <form action="Check_Add_seeding.php" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">ประเภท</label>
+                            <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">แพะพ่อพันธุ์</option>
+                                <option value="2">แพะแม่พันธุ์</option>
+                                <option value="3">แพะขุน</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ช่วงอายุ</label>
+                            <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">1-2 ปี</option>
+                                <option value="2">3-5 ปี</option>
+                                <option value="3">5 ปีขึ้นไป</option>
+                                <option value="4">ไม่เกิน 4 เดือน</option>
+                                <option value="5">ไม่เกิน 5 เดือน</option>
+                                <option value="6">ไม่เกิน 6 เดือน</option>
+                                <option value="7">6 เดือนขึ้นไป</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ปริมาณอาหาร</label>
+                            <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ราคาต่อกิโลกรัม</label>
+                            <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
+                            <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">มกราคม</option>
+                                <option value="2">กุมภาพันธ์</option>
+                                <option value="3">มีนาคม</option>
+                                <option value="4">เมษายน</option>
+                                <option value="5">พฤษภาคม</option>
+                                <option value="6">มิถุนายน</option>
+                                <option value="7">กรกฎาคม</option>
+                                <option value="8">สิงหาคม</option>
+                                <option value="9">กันยายน</option>
+                                <option value="10">ตุลาคม</option>
+                                <option value="11">พฤศจิกายน</option>
+                                <option value="12">ธันวาคม</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
+                            <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
+                        </div>
                     </form>
                 </div>
             </div>
