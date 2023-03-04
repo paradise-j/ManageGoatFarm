@@ -10,7 +10,7 @@
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_feeding.php");
+            header("refresh:1; url=Save_vm.php");
         }
     }
 
@@ -25,7 +25,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>บันทึกข้อมูลการให้อาหาร</title>
+    <title>บันทึกข้อมูลการให้ยาและวัคซีน</title>
 
     <!-- Custom fonts for this template-->
     <link rel="icon" type="image/png" href="img/seedling-solid.svg" />
@@ -51,7 +51,7 @@
                         <div class="col-lg-12">
                             <div class="card shadow mb-2">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้อาหาร</h3>
+                                    <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้ยาและวัคซีน</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-2">
@@ -88,8 +88,8 @@
                                                 <label class="form-label">ประเภท</label>
                                                 <select class="form-control" aria-label="Default select example" name="VMtype" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">ยา</option>
-                                                    <option value="2">วัคซีน</option>
+                                                    <option value="1">ให้ยา</option>
+                                                    <option value="2">ให้วัคซีน</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
@@ -121,7 +121,7 @@
                                                 <input type="text" class="form-control" name="price" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
+                                                <label for="inputState" class="form-label">เดือนที่ให้ยาและวัคซีน</label>
                                                 <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
                                                     <option selected>กรุณาเลือก....</option>
                                                     <option value="1">มกราคม</option>
@@ -190,10 +190,11 @@
                                             <th scope="row"><?= $gvc['gvc_id']; ?></th>
                                             <td>
                                                 <?php 
-                                                    if($gvc['gvc_type'] == 1){
+                                                    if($gvc['gg_type'] == 1){
                                                         echo "แพะพ่อพันธุ์";
-                                                    }elseif($gvc['gvc_type'] == 2){
+                                                    }elseif($gvc['gg_type'] == 2){
                                                         echo "แพะแม่พันธุ์";
+                                                        // echo $gvc['gg_type']; 
                                                     }else{
                                                         echo "แพะขุน";
                                                     }
@@ -276,7 +277,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_feeding.php',
+                                url: 'Save_vm.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -286,7 +287,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_feeding.php';
+                                    document.location.href = 'Save_vm.php';
                                 })
                             })
                             .fail(function() {

@@ -18,8 +18,9 @@
         $VM->execute();
 
         while ($row = $VM->fetch(PDO::FETCH_ASSOC)) {
-            if($Gtype == $VM["gg_type"] and $range_age == $VM["gg_range_age"]){
-                $gg_id = $VM["gg_id"]; break;
+            if($Gtype == $row["gg_type"] and $range_age == $row["gg_range_age"]){
+                $gg_id = $row["gg_id"]; 
+                break;
             }
         }
 
@@ -41,10 +42,11 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_vm.php");
+            header("refresh:1; url=Save_vm.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Manage_vm.php");
+            header("location: Save_vm.php");
         }
     }
+    $db = null; 
 ?>
