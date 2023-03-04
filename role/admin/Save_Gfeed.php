@@ -5,162 +5,131 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `gvc_data` WHERE `gvc_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `nbg_data` WHERE `nbg_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_vm.php");
+            header("refresh:1; url=Save_NBgoat.php");
         }
     }
 
     
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>บันทึกข้อมูลการให้ยาและวัคซีน</title>
+    <title>บันทึกข้อมูลการให้อาหาร</title>
 
-    <!-- Custom fonts for this template-->
-    <link rel="icon" type="image/png" href="img/seedling-solid.svg" />
+    <!-- Custom fonts for this template -->
+    <link rel="icon" type="image/png" href="img/Vaccine.png"/>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
+    <div class="modal fade" id="AddFooodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลการให้อาหาร</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="Chack_Add_seeding.php" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">ประเภท</label>
+                                <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
+                                    <option selected>กรุณาเลือก....</option>
+                                    <option value="1">แพะพ่อพันธุ์</option>
+                                    <option value="2">แพะแม่พันธุ์</option>
+                                    <option value="3">แพะขุน</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">ช่วงอายุ</label>
+                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
+                                    <option selected>กรุณาเลือก....</option>
+                                    <option value="1">1-2 ปี</option>
+                                    <option value="2">3-5 ปี</option>
+                                    <option value="3">5 ปีขึ้นไป</option>
+                                    <option value="4">ไม่เกิน 4 เดือน</option>
+                                    <option value="5">ไม่เกิน 5 เดือน</option>
+                                    <option value="6">ไม่เกิน 6 เดือน</option>
+                                    <option value="7">6 เดือนขึ้นไป</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">ปริมาณอาหาร</label>
+                                <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">ราคาต่อกิโลกรัม</label>
+                                <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
+                                <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
+                                    <option selected>กรุณาเลือก....</option>
+                                    <option value="1">มกราคม</option>
+                                    <option value="2">กุมภาพันธ์</option>
+                                    <option value="3">มีนาคม</option>
+                                    <option value="4">เมษายน</option>
+                                    <option value="5">พฤษภาคม</option>
+                                    <option value="6">มิถุนายน</option>
+                                    <option value="7">กรกฎาคม</option>
+                                    <option value="8">สิงหาคม</option>
+                                    <option value="9">กันยายน</option>
+                                    <option value="10">ตุลาคม</option>
+                                    <option value="11">พฤศจิกายน</option>
+                                    <option value="12">ธันวาคม</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
+                                <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="wrapper">
         <?php include('sidebar.php'); ?><!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card shadow mb-2">
-                                <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้ยาและวัคซีน</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col text-center">
-                                            <img loading="lazy" width="150px" style="border-radius: 200px;" src="img/VM.png" alt="">
-                                        </div>
-                                    </div>
-                                    <form action="Check_Add_GVM.php" method="POST">
-                                        <div class="row mb-4">
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ประเภทแพะ</label>
-                                                <select class="form-control" aria-label="Default select example" name="Gtype" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">แพะพ่อพันธุ์</option>
-                                                    <option value="2">แพะแม่พันธุ์</option>
-                                                    <option value="3">แพะขุน</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ช่วงอายุ</label>
-                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
-                                                    <option value="4">ไม่เกิน 4 เดือน</option>
-                                                    <option value="5">ไม่เกิน 5 เดือน</option>
-                                                    <option value="6">ไม่เกิน 6 เดือน</option>
-                                                    <option value="7">6 เดือนขึ้นไป</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ประเภท</label>
-                                                <select class="form-control" aria-label="Default select example" name="VMtype" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">ให้ยา</option>
-                                                    <option value="2">ให้วัคซีน</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ชื่อผลิตภัณฑ์</label>
-                                                <select class="form-control" aria-label="Default select example"name="VMname" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <?php 
-                                                        $stmt = $db->query("SELECT * FROM `vc_data`");
-                                                        $stmt->execute();
-                                                        $vcs = $stmt->fetchAll();
-                                                        
-                                                        foreach($vcs as $vc){
-                                                    ?>
-                                                    <option value="<?= $vc['vc_id']?>"><?= $vc['vc_name']?></option>
-                                                    <?php
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-md-3"></div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ปริมาณ</label>
-                                                <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ราคา</label>
-                                                <input type="text" class="form-control" name="price" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="inputState" class="form-label">เดือนที่ให้ยาและวัคซีน</label>
-                                                <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">มกราคม</option>
-                                                    <option value="2">กุมภาพันธ์</option>
-                                                    <option value="3">มีนาคม</option>
-                                                    <option value="4">เมษายน</option>
-                                                    <option value="5">พฤษภาคม</option>
-                                                    <option value="6">มิถุนายน</option>
-                                                    <option value="7">กรกฎาคม</option>
-                                                    <option value="8">สิงหาคม</option>
-                                                    <option value="9">กันยายน</option>
-                                                    <option value="10">ตุลาคม</option>
-                                                    <option value="11">พฤศจิกายน</option>
-                                                    <option value="12">ธันวาคม</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
-                                                &nbsp&nbsp&nbsp
-                                                <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 text-center">
+                            <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลการให้อาหาร</h3>
+                        </div>
+                        <div class="row mt-4 ml-2">
+                            <div class="col">
+                                <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลการให้อาหาร</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>รหัสการให้ยาและวัคซีน</th>
+                                            <th>รหัสการให้อาหาร</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
                                             <th>ประเภทการให้</th>
@@ -239,8 +208,6 @@
             <?php include('footer.php'); ?><!-- Footer -->
         </div>
     </div>
-
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -254,10 +221,16 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $(".delete-btn").click(function(e) {
             var userId = $(this).data('id');
@@ -277,7 +250,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_vm.php',
+                                url: 'Save_NBgoat.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -287,7 +260,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_vm.php';
+                                    document.location.href = 'Save_NBgoat.php';
                                 })
                             })
                             .fail(function() {
