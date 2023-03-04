@@ -9,10 +9,21 @@
         $range_age = $_POST['range_age'];
         $VMtype = $_POST['VMtype'];
         $VMname = $_POST['VMname'];
-        $typevm = $_POST['typevm'];
-        $namevm = $_POST['namevm'];
-        $descripvm = $_POST['descripvm'];
-        $sql = $db->prepare("INSERT INTO `vc_data`(`vc_type`, `vc_name`, `vc_descrip`) VALUES ('$typevm','$namevm','$descripvm')");
+        $quantity = $_POST['quantity'];
+        $price = $_POST['price'];
+        $month = $_POST['month'];
+
+
+        $VM = $db->prepare("SELECT * FROM `group_g`");
+        $VM->execute();
+
+        while ($Gtype == $VM["gg_type"] and $range_age == $VM["gg_range_age"]) {
+            $gg_id = $VM["gg_id"];
+        }
+
+
+        $sql = $db->prepare("INSERT INTO `gvc_data`(`gvc_type`, `gvc_quantity`, `gvc_price`, `gvc_month`, `gg_id`, `vc_id`) 
+                                            VALUES ('$VMtype','$quantity','$price','$month','$gg_id','$VMname')");
         $sql->execute();
 
         if ($sql) {
