@@ -5,12 +5,12 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `nbg_data` WHERE `nbg_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `gfg_data` WHERE `gfg_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_NBgoat.php");
+            header("refresh:1; url=Save_Gfeed.php");
         }
     }
 
@@ -53,7 +53,7 @@
                 <div class="modal-body">
                     <form action="Check_Add_seeding.php" method="POST">
                         <div class="mb-3">
-                            <label class="form-label">ประเภท</label>
+                            <label class="form-label">ประเภทแพะ</label>
                             <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <option value="1">แพะพ่อพันธุ์</option>
@@ -73,6 +73,10 @@
                                 <option value="6">ไม่เกิน 6 เดือน</option>
                                 <option value="7">6 เดือนขึ้นไป</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ประเภทอาหาร</label>
+                            <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ปริมาณอาหาร</label>
@@ -132,9 +136,7 @@
                                             <th>รหัสการให้อาหาร</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
-                                            <th>ประเภทการให้</th>
-                                            <th>ชื่อผลิตภัณฑ์</th>
-                                            <th>ปริมาณ</th>
+                                            <th>ปริมาณอาหาร</th>
                                             <th>ราคา</th>
                                             <th>เดือนที่ให้</th>
                                             <th></th>
@@ -143,27 +145,23 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity , gvc_data.gvc_price , gvc_data.gvc_month 
-                                                                FROM `gvc_data` 
-                                                                INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
-                                                                INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
+                                            $stmt = $db->query("SELECT * FROM `gfg_data`");
                                             $stmt->execute();
-                                            $gvcs = $stmt->fetchAll();
+                                            $gfgs = $stmt->fetchAll();
 
-                                            if (!$gvcs) {
+                                            if (!$gfgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($gvcs as $gvc)  {  
+                                            foreach($gfgs as $gfg)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $gvc['gvc_id']; ?></th>
+                                            <th scope="row"><?= $gfg['gfg_id']; ?></th>
                                             <td>
                                                 <?php 
-                                                    if($gvc['gg_type'] == 1){
+                                                    if($gfg['gfg_type'] == 1){
                                                         echo "แพะพ่อพันธุ์";
-                                                    }elseif($gvc['gg_type'] == 2){
+                                                    }elseif($gfg['gfg_type'] == 2){
                                                         echo "แพะแม่พันธุ์";
-                                                        // echo $gvc['gg_type']; 
                                                     }else{
                                                         echo "แพะขุน";
                                                     }
@@ -171,30 +169,28 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                    if($gvc['gg_range_age'] == 1){
+                                                    if($gfg['gfg_range_age'] == 1){
                                                         echo "1-2 ปี";
-                                                    }elseif($gvc['gg_range_age'] == 2){
+                                                    }elseif($gfg['gfg_range_age'] == 2){
                                                         echo "3-5 ปี";
-                                                    }elseif($gvc['gg_range_age'] == 3){
+                                                    }elseif($gfg['gfg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
-                                                    }elseif($gvc['gg_range_age'] == 4){
+                                                    }elseif($gfg['gfg_range_age'] == 4){
                                                         echo "ไม่เกิน 4 เดือน";
-                                                    }elseif($gvc['gg_range_age'] == 5){
+                                                    }elseif($gfg['gfg_range_age'] == 5){
                                                         echo "ไม่เกิน 5 เดือน";
-                                                    }elseif($gvc['gg_range_age'] == 6){
+                                                    }elseif($gfg['gfg_range_age'] == 6){
                                                         echo "ไม่เกิน 6 เดือน";
                                                     }else{
                                                         echo "6 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
-                                            <td><?= $gvc['gvc_type']; ?></td>
-                                            <td><?= $gvc['vc_name']; ?></td>
-                                            <td><?= $gvc['gvc_quantity']; ?></td>
-                                            <td><?= $gvc['gvc_price']; ?></td>
-                                            <td><?= $gvc['gvc_month']; ?></td>
-                                            <td><a href="Edit_gvc.php?edit_id=<?= $gvc['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gvc['gvc_id']; ?>" href="?delete=<?= $gvc['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><?= $gfg['gfg_quantity']; ?></td>
+                                            <td><?= $gfg['gfg_price']; ?></td>
+                                            <td><?= $gfg['gfg_month']; ?></td>
+                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
@@ -250,7 +246,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_NBgoat.php',
+                                url: 'Save_Gfeed.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -260,7 +256,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_NBgoat.php';
+                                    document.location.href = 'Save_Gfeed.php';
                                 })
                             })
                             .fail(function() {
