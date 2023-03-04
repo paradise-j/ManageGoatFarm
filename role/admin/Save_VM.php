@@ -41,6 +41,52 @@
 </head>
 
 <body id="page-top">
+    <div class="modal fade" id="AddFooodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลพ่อ-แม่พันธุ์</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="Check_Add_fm.php" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">ประเภท</label>
+                            <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">พ่อพันธุ์</option>
+                                <option value="2">แม่พันธุ์</option>
+                            </select>
+                        </div>                    
+                        <div class="mb-3">
+                            <label class="form-label">ชื่อ</label>
+                            <input type="text" class="form-control" name="name" style="border-radius: 30px;" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">สายพันธุ์</label>
+                            <select class="form-control" aria-label="Default select example" name="gb" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `g_breed`");
+                                    $stmt->execute();
+                                    $gbs = $stmt->fetchAll();
+                                    
+                                    foreach($gbs as $gb){
+                                ?>
+                                <option value="<?= $gb['gb_id']?>"><?= $gb['gb_name']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="wrapper">
         <?php include('sidebar.php'); ?><!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
