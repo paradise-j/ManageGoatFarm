@@ -145,7 +145,10 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `gfg_data`");
+                                            $stmt = $db->query("SELECT gfg_data.gfg_id , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , gfg_data.gfg_quantity , gfg_data.gfg_price , gfg_data.gfg_month
+                                                                FROM `gfg_data` 
+                                                                INNER JOIN `group_g` ON group_g.gg_id = gfg_data.gg_id
+                                                                INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id ");
                                             $stmt->execute();
                                             $gfgs = $stmt->fetchAll();
 
@@ -158,9 +161,9 @@
                                             <th scope="row"><?= $gfg['gfg_id']; ?></th>
                                             <td>
                                                 <?php 
-                                                    if($gfg['gfg_type'] == 1){
+                                                    if($gfg['gg_type'] == 1){
                                                         echo "แพะพ่อพันธุ์";
-                                                    }elseif($gfg['gfg_type'] == 2){
+                                                    }elseif($gfg['gg_type'] == 2){
                                                         echo "แพะแม่พันธุ์";
                                                     }else{
                                                         echo "แพะขุน";
@@ -169,17 +172,17 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                    if($gfg['gfg_range_age'] == 1){
+                                                    if($gfg['gg_range_age'] == 1){
                                                         echo "1-2 ปี";
-                                                    }elseif($gfg['gfg_range_age'] == 2){
+                                                    }elseif($gfg['gg_range_age'] == 2){
                                                         echo "3-5 ปี";
-                                                    }elseif($gfg['gfg_range_age'] == 3){
+                                                    }elseif($gfg['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
-                                                    }elseif($gfg['gfg_range_age'] == 4){
+                                                    }elseif($gfg['gg_range_age'] == 4){
                                                         echo "ไม่เกิน 4 เดือน";
-                                                    }elseif($gfg['gfg_range_age'] == 5){
+                                                    }elseif($gfg['gg_range_age'] == 5){
                                                         echo "ไม่เกิน 5 เดือน";
-                                                    }elseif($gfg['gfg_range_age'] == 6){
+                                                    }elseif($gfg['gg_range_age'] == 6){
                                                         echo "ไม่เกิน 6 เดือน";
                                                     }else{
                                                         echo "6 เดือนขึ้นไป";

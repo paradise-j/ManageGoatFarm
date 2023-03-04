@@ -10,7 +10,7 @@
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_NBgoat.php");
+            header("refresh:1; url=Save_GVM.php");
         }
     }
 
@@ -175,22 +175,21 @@
                                                                 INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
                                                                 INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
                                             $stmt->execute();
-                                            $gvcs = $stmt->fetchAll();
+                                            $vms = $stmt->fetchAll();
 
-                                            if (!$gvcs) {
+                                            if (!$vms) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($gvcs as $gvc)  {  
+                                            foreach($vms as $vm)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $gvc['gvc_id']; ?></th>
+                                            <th scope="row"><?= $vm['gvc_id']; ?></th>
                                             <td>
                                                 <?php 
-                                                    if($gvc['gg_type'] == 1){
+                                                    if($vm['gg_type'] == 1){
                                                         echo "แพะพ่อพันธุ์";
-                                                    }elseif($gvc['gg_type'] == 2){
+                                                    }elseif($vm['gg_type'] == 2){
                                                         echo "แพะแม่พันธุ์";
-                                                        // echo $gvc['gg_type']; 
                                                     }else{
                                                         echo "แพะขุน";
                                                     }
@@ -198,30 +197,30 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                    if($gvc['gg_range_age'] == 1){
+                                                    if($vm['gg_range_age'] == 1){
                                                         echo "1-2 ปี";
-                                                    }elseif($gvc['gg_range_age'] == 2){
+                                                    }elseif($vm['gg_range_age'] == 2){
                                                         echo "3-5 ปี";
-                                                    }elseif($gvc['gg_range_age'] == 3){
+                                                    }elseif($vm['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
-                                                    }elseif($gvc['gg_range_age'] == 4){
+                                                    }elseif($vm['gg_range_age'] == 4){
                                                         echo "ไม่เกิน 4 เดือน";
-                                                    }elseif($gvc['gg_range_age'] == 5){
+                                                    }elseif($vm['gg_range_age'] == 5){
                                                         echo "ไม่เกิน 5 เดือน";
-                                                    }elseif($gvc['gg_range_age'] == 6){
+                                                    }elseif($vm['gg_range_age'] == 6){
                                                         echo "ไม่เกิน 6 เดือน";
                                                     }else{
                                                         echo "6 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
-                                            <td><?= $gvc['gvc_type']; ?></td>
-                                            <td><?= $gvc['vc_name']; ?></td>
-                                            <td><?= $gvc['gvc_quantity']; ?></td>
-                                            <td><?= $gvc['gvc_price']; ?></td>
-                                            <td><?= $gvc['gvc_month']; ?></td>
-                                            <td><a href="Edit_gvc.php?edit_id=<?= $gvc['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gvc['gvc_id']; ?>" href="?delete=<?= $gvc['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><?= $vm['gvc_type']; ?></td>
+                                            <td><?= $vm['vc_name']; ?></td>
+                                            <td><?= $vm['gvc_quantity']; ?></td>
+                                            <td><?= $vm['gvc_price']; ?></td>
+                                            <td><?= $vm['gvc_month']; ?></td>
+                                            <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
@@ -277,7 +276,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_NBgoat.php',
+                                url: 'Save_GVM.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -287,7 +286,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_NBgoat.php';
+                                    document.location.href = 'Save_GVM.php';
                                 })
                             })
                             .fail(function() {
