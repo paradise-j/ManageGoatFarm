@@ -204,15 +204,9 @@
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
                                     </div>
-                                    <div class="mt-4 text-center small">
+                                    <div class="mt-4 text-center small"> 
                                         <span class="mr-2">
-                                            <i class="fas fa-circle"></i> แพะพ่อพันธุ์
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle"></i> แพะแม่พันธุ์
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle"></i> แพะขุน
+                                            <i class="fas fa-circle"></i> สรุปยอดขายของแพะแต่ละประเภท
                                         </span>
                                     </div>
                                 </div>
