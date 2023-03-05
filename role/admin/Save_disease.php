@@ -54,7 +54,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_Add_Gdis.php" method="POST" enctype="multipart/form-data">
+                    <form action="Check_Add_disease.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">ชื่อโรค</label>
                             <select class="form-control" aria-label="Default select example" name="Dname" style="border-radius: 30px;" required>
@@ -74,13 +74,18 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ระดับความรุนแรง</label>
-                            <input type="text" class="form-control" name="level" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" name="level" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">น้อย</option>
+                                <option value="2">ปานกลาง</option>
+                                <option value="3">รุนแรง</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
                             <!-- <input type="text" class="form-control" name="price" style="border-radius: 30px;" required> -->
                             <div type="date" class='input-group date' id='datetimepicker1' data-date-language="th-th" name="date">
-                                <input type='text' class="form-control"/>
+                                <input type='text' style="border-radius: 30px;" class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -231,8 +236,7 @@
 
         $(function () {
              $('#datetimepicker1').datepicker({
-                format: 'dd-mm-yyyy',
-                locale: 'ru'
+                locale: 'th'
              });
          });
     </script>

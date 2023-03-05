@@ -8,7 +8,7 @@
         $Dname = $_POST['Dname'];
         $level = $_POST['level'];
         $date = $_POST['date'];
-        $sql = $db->prepare("INSERT INTO `g_disease`(`gd_date`, `gd_level`, `gdis_id`) VALUES ('$Dname','$level','$date')");
+        $sql = $db->prepare("INSERT INTO `g_disease`(`gd_date`, `gd_level`, `gdis_id`) VALUES ('$date','$level','$Dname')");
         $sql->execute();
 
         if ($sql) {

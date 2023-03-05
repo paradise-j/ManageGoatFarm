@@ -30,29 +30,37 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
     <div id="wrapper">
-        <!-- Sidebar -->
-        <?php include('sidebar.php'); ?>
-        <!-- End of Sidebar -->
+        <?php include('sidebar.php'); ?><!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <div id="content">
-                <!-- Topbar -->
-                <?php include('Topbar.php'); ?>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
+                <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
-
-                    <!-- Content Row -->
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <label class="form-label">เดือน</label>
+                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 10px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">ประธาน</option>
+                                <option value="2">รองประธาน</option>
+                                <option value="3">เลขานุการ</option>
+                                <option value="4">สมาชิก</option>
+                                <option value="5">การตลาด</option>
+                                <option value="6">การตลาด</option>
+                                <option value="7">การตลาด</option>
+                                <option value="8">การตลาด</option>
+                                <option value="9">การตลาด</option>
+                                <option value="10">การตลาด</option>
+                                <option value="11">การตลาด</option>
+                                <option value="12">การตลาด</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row">
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
