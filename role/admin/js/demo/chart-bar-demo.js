@@ -12,7 +12,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
     dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
     s = '',
-    toFixedFix = function(n, prec) {
+    toFixedFix = function (n, prec) {
       var k = Math.pow(10, prec);
       return '' + Math.round(n * k) / k;
     };
@@ -33,23 +33,23 @@ var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"],
+    labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
     datasets: [{
       label: "แพะพ่อพันธุ์",
       backgroundColor: "#ed2222",
-      hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
+      // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
       borderColor: "#4e73df",
       data: [150, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
-    },{
+    }, {
       label: "แพะแม่พันธุ์",
       backgroundColor: "#22ed75",
-      hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
+      // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
       borderColor: "#4e73df",
       data: [100, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
-    },{
+    }, {
       label: "แพะขุน",
-      backgroundColor:"#22eddb",
-      hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
+      backgroundColor: "#22eddb",
+      // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
       borderColor: "#4e73df",
       data: [160, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
     }],
@@ -86,7 +86,7 @@ var myBarChart = new Chart(ctx, {
           maxTicksLimit: 6,
           padding: 10,
           // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
+          callback: function (value, index, values) {
             return '$' + number_format(value);
           }
         },
@@ -100,7 +100,7 @@ var myBarChart = new Chart(ctx, {
       }],
     },
     legend: {
-      display: false
+      display: true
     },
     tooltips: {
       titleMarginBottom: 10,
@@ -115,9 +115,9 @@ var myBarChart = new Chart(ctx, {
       displayColors: false,
       caretPadding: 10,
       callbacks: {
-        label: function(tooltipItem, chart) {
+        label: function (tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + number_format(tooltipItem.yLabel)+ ' ตัว';
+          return datasetLabel + number_format(tooltipItem.yLabel) + ' ตัว';
         }
       }
     },
