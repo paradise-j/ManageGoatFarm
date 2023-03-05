@@ -5,12 +5,12 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `gvc_data` WHERE `gvc_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `g_disease` WHERE `gdis_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_GVM.php");
+            header("refresh:1; url=Save_disease.php");
         }
     }
 
@@ -54,10 +54,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_Add_Gdis.php" method="POST">
+                    <form action="Check_Add_Gdis.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">ชื่อโรค</label>
-                            <select class="form-control" aria-label="Default select example"name="VMname" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" name="Dname" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <?php 
                                     $stmt = $db->query("SELECT * FROM `gdis_data`");
@@ -74,12 +74,12 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ระดับความรุนแรง</label>
-                            <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
+                            <input type="text" class="form-control" name="level" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
                             <!-- <input type="text" class="form-control" name="price" style="border-radius: 30px;" required> -->
-                            <div class='input-group date' id='datetimepicker1' data-date-language="th-th">
+                            <div type="date" class='input-group date' id='datetimepicker1' data-date-language="th-th" name="date">
                                 <input type='text' class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -126,51 +126,22 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity , gvc_data.gvc_price , gvc_data.gvc_month 
-                                                                FROM `gvc_data` 
-                                                                INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
-                                                                INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
+                                            $stmt = $db->query("SELECT g_disease.gd_id , gdis_data.gdis_name ,  g_disease.gd_level , g_disease.gd_date
+                                                                FROM `g_disease`
+                                                                INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id");
                                             $stmt->execute();
-                                            $vms = $stmt->fetchAll();
+                                            $gds = $stmt->fetchAll();
 
-                                            if (!$vms) {
+                                            if (!$gds) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($vms as $vm)  {  
+                                            foreach($gds as $gd)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $vm['gvc_id']; ?></th>
-                                            <td>
-                                                <?php 
-                                                    if($vm['gg_type'] == 1){
-                                                        echo "แพะพ่อพันธุ์";
-                                                    }elseif($vm['gg_type'] == 2){
-                                                        echo "แพะแม่พันธุ์";
-                                                    }else{
-                                                        echo "แพะขุน";
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                    if($vm['gg_range_age'] == 1){
-                                                        echo "1-2 ปี";
-                                                    }elseif($vm['gg_range_age'] == 2){
-                                                        echo "3-5 ปี";
-                                                    }elseif($vm['gg_range_age'] == 3){
-                                                        echo "5 ปีขึ้นไป";
-                                                    }elseif($vm['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 4 เดือน";
-                                                    }elseif($vm['gg_range_age'] == 5){
-                                                        echo "ไม่เกิน 5 เดือน";
-                                                    }elseif($vm['gg_range_age'] == 6){
-                                                        echo "ไม่เกิน 6 เดือน";
-                                                    }else{
-                                                        echo "6 เดือนขึ้นไป";
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td><?= $vm['gvc_type']; ?></td>
+                                            <th scope="row"><?= $gd['gd_id']; ?></th>
+                                            <td><?= $gd['gdis_name']; ?></td>
+                                            <td><?= $gd['gd_level']; ?></td>
+                                            <td><?= $gd['gd_date']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
@@ -232,7 +203,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_GVM.php',
+                                url: 'Save_disease.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -242,7 +213,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_GVM.php';
+                                    document.location.href = 'Save_disease.php';
                                 })
                             })
                             .fail(function() {
@@ -258,11 +229,12 @@
             });
         }
 
-        $('#datetimepicker1').datepicker(
-            format: 'dd-mm-yyyy',
-            locale: 'ru'
-        );
-
+        $(function () {
+             $('#datetimepicker1').datepicker({
+                format: 'dd-mm-yyyy',
+                locale: 'ru'
+             });
+         });
     </script>
 
 </body>
