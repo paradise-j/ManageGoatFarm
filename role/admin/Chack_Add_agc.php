@@ -5,7 +5,6 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        echo "1";
         $name = $_POST['name'];
         $Fname = $_POST['Fname'];
         $position = $_POST['position'];
@@ -24,13 +23,9 @@
             $fileNew = rand() . "." . $fileActExt; 
             $filePath = 'uploads/'.$fileNew;
 
-            echo "==".$fileNew;
             if (in_array($fileActExt, $allow)) {
-                echo "2";
                 if ($img['size'] > 0 && $img['error'] == 0) {
-                    echo "3";
                     if (move_uploaded_file($img['tmp_name'], $filePath)) {
-                        echo "4";
                         $sql = $db->prepare("INSERT INTO `agriculturist`( 
                                                                          `agc_name`, 
                                                                          `agc_nfarm`, 

@@ -5,7 +5,7 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `g_disease` WHERE `gdis_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `g_disease` WHERE `gd_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
@@ -84,12 +84,13 @@
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
                             <!-- <input type="text" class="form-control" name="price" style="border-radius: 30px;" required> -->
-                            <div type="date" class='input-group date' id='datetimepicker1' data-date-language="th-th" name="date">
+                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                            <!-- <div type="date" class='input-group date' id='datetimepicker1' data-date-language="th-th" name="date">
                                 <input type='text' style="border-radius: 30px;" class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="modal-footer"> 
                             <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
@@ -146,9 +147,9 @@
                                             <th scope="row"><?= $gd['gd_id']; ?></th>
                                             <td><?= $gd['gdis_name']; ?></td>
                                             <td><?= $gd['gd_level']; ?></td>
-                                            <td><?= $gd['gd_date']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td class="date_th"><?= $gd['gd_date']; ?></td>
+                                            <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
@@ -233,12 +234,27 @@
                 },
             });
         }
+        const dom_date = document.querySelectorAll('.date_th')
+        dom_date.forEach((elem)=>{
+            const my_date = elem.textContent
+            const date = new Date(my_date)
 
-        $(function () {
-             $('#datetimepicker1').datepicker({
-                locale: 'th'
-             });
-         });
+            const result = date.toLocaleDateString('th-TH', {
+
+            year: 'numeric',
+
+            month: 'long',
+
+            day: 'numeric',
+
+            }) 
+            elem.textContent=result
+        })
+        // $(function () {
+        //      $('#datetimepicker1').datepicker({
+        //         locale: 'th'
+        //      });
+        //  });
     </script>
 
 </body>

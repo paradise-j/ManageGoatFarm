@@ -68,7 +68,7 @@ async function get_total_goat(){
       legend: {
         display: true
       },
-      cutoutPercentage: 70,
+      cutoutPercentage: 50,
     },
   });
   
