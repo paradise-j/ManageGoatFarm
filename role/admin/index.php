@@ -77,7 +77,17 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-md font-weight-bold text-primary text-uppercase mb-1">จำนวนกลุ่ม</div>
-                                            <div class="h5 mb-1 font-weight-bold text-gray-800">กลุ่ม</div>
+                                            <div class="h5 mb-1 font-weight-bold text-gray-800">
+                                                <?php
+                                                    $stmt = $db->prepare("SELECT COUNT(`Gf_id`) as total_gfarm FROM `group_farm`");
+                                                    $stmt->execute();
+                                                    $Gfs = $stmt->fetchAll();
+                                                    foreach($Gfs as $Gf){
+                                                        echo $Gf['total_gfarm'];
+                                                    }
+                                                ?>
+                                                กลุ่ม
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-solid fa-users fa-2x text-gray-300"></i>
@@ -93,7 +103,17 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">จำนวนเกษตรกร</div>
-                                            <div class="h5 mb-1 font-weight-bold text-gray-800">คน</div>
+                                            <div class="h5 mb-1 font-weight-bold text-gray-800">
+                                                <?php
+                                                    $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc FROM `agriculturist`");
+                                                    $stmt->execute();
+                                                    $agcs = $stmt->fetchAll();
+                                                    foreach($agcs as $agc){
+                                                        echo $agc['total_agc'];
+                                                    }
+                                                ?>
+                                                คน
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
@@ -246,7 +266,8 @@
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    
+    <script src="js/demo/chartjs-plugin-datalabels.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
