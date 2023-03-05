@@ -77,11 +77,11 @@
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
                             <!-- <input type="text" class="form-control" name="price" style="border-radius: 30px;" required> -->
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' style="border-radius: 30px;" class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" value="12-02-2012">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer"> 
