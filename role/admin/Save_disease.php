@@ -38,6 +38,7 @@
         rel="stylesheet">
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/datepicker.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
@@ -196,6 +197,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/datepicker.js"></script>
 
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
