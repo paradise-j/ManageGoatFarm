@@ -36,33 +36,33 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"],
     datasets: [{
-      label: "Earnings",
+      label: "รายรับ",
       lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
+      backgroundColor: "rgba(78, 115, 223, 0.07)",
       borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
+      pointRadius: 5,
       pointBackgroundColor: "rgba(78, 115, 223, 1)",
       pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
+      pointHoverRadius: 5,
       pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 0, 5, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800],
     },{
-      label: "dataset 2",
+      label: "รายจ่าย",
       lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+      backgroundColor: "rgba(255,23,0,0.07)",
+      borderColor: "rgba(255,23,0,1)",
+      pointRadius: 5,
+      pointBackgroundColor: "rgba(255,23,0,1)",
+      pointBorderColor: "rgba(255,23,0,1)",
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(178,21,6,1)",
+      pointHoverBorderColor: "rgba(178,21,6,1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [1, 2, 3, 5, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [5690, 6870, 7450, 6500, 6540, 5870, 6840, 6500, 7800, 8500, 4580, 3500],
     }],
   },
   options: {
@@ -81,7 +81,7 @@ var myLineChart = new Chart(ctx, {
           unit: 'date'
         },
         gridLines: {
-          display: false,
+          display: true,
           drawBorder: false
         },
         ticks: {
@@ -107,7 +107,7 @@ var myLineChart = new Chart(ctx, {
       }],
     },
     legend: {
-      display: false
+      display: true
     },
     tooltips: {
       backgroundColor: "rgb(255,255,255)",

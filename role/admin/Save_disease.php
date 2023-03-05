@@ -250,11 +250,7 @@
             }) 
             elem.textContent=result
         })
-        // $(function () {
-        //      $('#datetimepicker1').datepicker({
-        //         locale: 'th'
-        //      });
-        //  });
+
     </script>
 
 </body>
