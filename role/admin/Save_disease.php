@@ -38,9 +38,9 @@
         rel="stylesheet">
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- <link href="css/datepicker.min.css" rel="stylesheet" type="text/css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" 
-    integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" 
+    integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
@@ -79,7 +79,7 @@
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
                             <!-- <input type="text" class="form-control" name="price" style="border-radius: 30px;" required> -->
-                            <div class='input-group date' id='datetimepicker1'>
+                            <div class='input-group date' id='datetimepicker1' data-date-language="th-th">
                                 <input type='text' class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -199,9 +199,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <!-- <script src="js/datepicker.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/datepicker.js"></script>
+    <script src="js/datepicker.th.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
@@ -257,9 +258,10 @@
             });
         }
 
-        $(function () {
-            $('#datetimepicker1').datetimepicker();
-        });
+        $('#datetimepicker1').datepicker(
+            format: 'dd-mm-yyyy',
+            locale: 'ru'
+        );
 
     </script>
 
