@@ -50,7 +50,7 @@
                             </div>
                             <div class="row mt-4 ml-2">
                                 <div class="col">
-                                    <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</a>
+                                    <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</a>
                                     <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</button> -->
                                 </div>
                             </div>
