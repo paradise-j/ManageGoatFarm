@@ -5,12 +5,12 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `g_disease` WHERE `gd_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `money_inex` WHERE `money_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Save_disease.php");
+            header("refresh:1; url=Save_money.php");
         }
     }
 
@@ -54,10 +54,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_Add_disease.php" method="POST" enctype="multipart/form-data">
+                    <form action="Check_Add_monry.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" name="level" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <option value="1">รายรับ</option>
                                 <option value="2">รายจ่าย</option>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">จำนวนเงิน</label>
-                            <input type="text" style="border-radius: 30px;" name="list" class="form-control" required>
+                            <input type="text" style="border-radius: 30px;" name="quan" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
@@ -115,24 +115,31 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT g_disease.gd_id , gdis_data.gdis_name ,  g_disease.gd_level , g_disease.gd_date
-                                                                FROM `g_disease`
-                                                                INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id");
+                                            $stmt = $db->query("SELECT * FROM `money_inex`");
                                             $stmt->execute();
-                                            $gds = $stmt->fetchAll();
+                                            $moneys = $stmt->fetchAll();
 
-                                            if (!$gds) {
+                                            if (!$moneys) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
-                                            foreach($gds as $gd)  {  
+                                            foreach($moneys as $money)  {  
                                         ?>
                                         <tr>
-                                            <th scope="row"><?= $gd['gd_id']; ?></th>
-                                            <td><?= $gd['gdis_name']; ?></td>
-                                            <td><?= $gd['gd_level']; ?></td>
-                                            <td class="date_th"><?= $gd['gd_date']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <th scope="row"><?= $money['money_id']; ?></th>
+                                            <td>
+                                                <?php 
+                                                    if($money['money_type'] == 1){
+                                                        echo "รายรับ";
+                                                    }else{
+                                                        echo "รายจ่าย";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td><?= $money['money_list']; ?></td>
+                                            <td><?= $money['money_quan']; ?></td>
+                                            <td class="date_th"><?= $money['money_date']; ?></td>
+                                            <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $money['money_id']; ?>" href="?delete=<?= $money['money_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
@@ -192,7 +199,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Save_disease.php',
+                                url: 'Save_money.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -202,7 +209,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Save_disease.php';
+                                    document.location.href = 'Save_money.php';
                                 })
                             })
                             .fail(function() {
