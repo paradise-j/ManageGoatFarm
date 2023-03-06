@@ -76,7 +76,7 @@
                                     <h3 class="m-0 font-weight-bold text-primary">การขายแพะ</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="Chack_Add_agc.php" method="POST" enctype="multipart/form-data">
+                                    <form action="?" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-2">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
@@ -142,7 +142,6 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>รหัสการขาย</th>
                                                 <th>ชื่อ-สกุล เกษตรกร</th>
                                                 <th>ชื่อ-สกุล ผู้ซื้อ</th>
                                                 <th>ประเภทแพะ</th>
@@ -150,6 +149,7 @@
                                                 <th>จำนวน</th>
                                                 <th>น้ำหนักรวม</th>
                                                 <th>ราคา</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -173,7 +173,7 @@
                                                 }
                                             ?>
                                             <tr>
-                                                <td colspan="3" align="right">ราคารวม</td>
+                                                <td colspan="6" align="right">ราคารวม</td>
                                                 <td align="right">฿ <?php echo number_format($total, 2); ?></td>
                                                 <td></td>
                                                 </tr>
