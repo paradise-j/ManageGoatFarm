@@ -12,9 +12,7 @@
             echo "<script>alert('Data has been deleted successfully');</script>";
             header("refresh:1; url=Save_money.php");
         }
-    }
-
-    
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -166,10 +164,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <script src="js/datepicker.js"></script>
-    <script src="js/datepicker.th.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
