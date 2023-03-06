@@ -24,7 +24,13 @@
             exit;
           }
         }
-    foreach($_SESSION["shopping_cart"])
+
+    foreach($_SESSION["shopping_cart"] as $key=>$value){
+
+        $sql = "INSERT INTO `sale` ('') VALUES ('')";
+        $conn->execute($sql)
+        
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
