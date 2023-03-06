@@ -2,31 +2,8 @@
     require_once 'connect.php';
     session_start();
 
-
     if(isset($_POST["add_sale"])){
-        if(isset($_SESSION["shopping_cart"])){
-             $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
-             if(!in_array($_GET["id"], $item_array_id)){
-                $count = count($_SESSION["shopping_cart"]);
-                $item_array = array(
-                    'item_id'            =>     $_GET["id"],
-                    'item_agc'           =>     $_POST["agc"],
-                    'item_cus'           =>     $_POST["cus"],
-                    'item_gg_type'       =>     $_POST["gg_type"],
-                    'item_gg_age'        =>     $_POST["gg_age"],
-                    'item_quantity'          =>     $_POST["quantity"],
-                    'item_weight'      =>     $_POST["weight"],
-                    'item_price'         =>     $_POST["price"]
-                );
-                $_SESSION["shopping_cart"][$count] = $item_array;
-             }else{
-                  echo '<script>alert("สินค้าถูกเพิ่มแล้ว")</script>';
-                  echo '<script>window.location="index.php"</script>';
-             }
-        }
-        else{
-             $item_array = array(
-                'item_id'            =>     $_GET["id"],
+         $item_array = array(
                 'item_agc'           =>     $_POST["agc"],
                 'item_cus'           =>     $_POST["cus"],
                 'item_gg_type'       =>     $_POST["gg_type"],
@@ -35,9 +12,19 @@
                 'item_weight'      =>     $_POST["weight"],
                 'item_price'         =>     $_POST["price"]
              );
-             $_SESSION["shopping_cart"][0] = $item_array;
-        }
+             $_SESSION["shopping_cart"][] =  $item_array;
+            header("location:add_salegoat.php");
+            exit;
     }
+    if(isset($_GET['action'])){
+        if($_GET['action']=="delete"){
+            $id = $_GET["id"];
+            unset($_SESSION["shopping_cart"][$id]);
+            header("location:add_salegoat.php");
+            exit;
+          }
+        }
+    foreach($_SESSION["shopping_cart"])
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,10 +153,10 @@
                                                     <td><?php echo number_format($value['item_quantity'],2);?></td>
                                                     <td><?php echo number_format($value['item_weight'],2);?></td>
                                                     <td><?php echo number_format($value['item_quantity']*$value['item_weight'],2);?></td>
-                                                    <td><a href="index.php?action=delete&id=<?php echo $value['item_id'];?>">ลบสินค้า</td>
+                                                    <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
                                                 </tr>
                                             <?php
-                                                $total=$total+($value['item_price']*$value['item_quantity']);
+                                                $total=$total+($value['item_weight']*$value['item_quantity']);
                                                 }
                                             ?>
                                             <tr>
