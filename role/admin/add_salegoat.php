@@ -11,7 +11,7 @@
                 'item_gg_age'        =>     $_POST["gg_age"],
                 'item_quantity'      =>     $_POST["quantity"],
                 'item_weight'        =>     $_POST["weight"],
-                'item_price'         =>     $_POST["price"]
+                'item_pricekg'         =>     $_POST["pricekg"]
              );
              $_SESSION["shopping_cart"][] =  $item_array;
             header("location:add_salegoat.php");
@@ -24,25 +24,27 @@
             unset($_SESSION["shopping_cart"][$id]);
             header("location:add_salegoat.php");
             exit;
+            $total = $total-($_SESSION["shopping_cart"]['item_weight']*$_SESSION["shopping_cart"]['item_quantity']);
           }
     }
 
 
-    for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
-        foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
-            echo $key." = ".$value <br>;
-        }
-    }
+    // for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
+    //     foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
+    //         echo $key."=".$value; 
+    //         echo "<br>" ;
+    //     }
+    // }
 
     
-    foreach($_SESSION["shopping_cart"] as $key=>$value){
-        $sql = "INSERT INTO `sale` (`sale_id`, `sale_quantity`, 
-                                    `sale_weight`, `sale_price`, 
-                                    `sale_date`, `cus_id`, 
-                                    `gg_id`, `agc_id`) VALUES ('')";
-        $conn->execute($sql);
+    // foreach($_SESSION["shopping_cart"] as $key=>$value){
+    //     $sql = "INSERT INTO `sale` (`sale_id`, `sale_quantity`, 
+    //                                 `sale_weight`, `sale_price`, 
+    //                                 `sale_date`, `cus_id`, 
+    //                                 `gg_id`, `agc_id`) VALUES ('')";
+    //     $conn->execute($sql);
         
-    }
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +129,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                                <input type="text" class="form-control" id="phone" name="price" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -153,6 +155,7 @@
                                                 <th>ช่วงอายุแพะ</th>
                                                 <th>จำนวน</th>
                                                 <th>น้ำหนักรวม</th>
+                                                <th>ราคาต่อกิโลกรัม</th>
                                                 <th>ราคา</th>
                                                 <th></th>
                                             </tr>
@@ -168,9 +171,10 @@
                                                     <td><?php echo $value['item_cus'];?></td>
                                                     <td><?php echo $value['item_gg_type'];?></td>
                                                     <td><?php echo $value['item_gg_age'];?></td>
-                                                    <td><?php echo number_format($value['item_quantity'],2);?></td>
-                                                    <td><?php echo number_format($value['item_weight'],2);?></td>
-                                                    <td><?php echo number_format($value['item_quantity']*$value['item_weight'],2);?></td>
+                                                    <td align="right"><?php echo number_format($value['item_quantity'],2);?></td>
+                                                    <td align="right"><?php echo number_format($value['item_weight'],2);?></td>
+                                                    <td align="right"><?php echo number_format($value['item_pricekg'],2);?></td>
+                                                    <td align="right"><?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?></td>
                                                     <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
                                                 </tr>
                                             <?php
@@ -178,7 +182,7 @@
                                                 }
                                             ?>
                                             <tr>
-                                                <td colspan="6" align="right">ราคารวม</td>
+                                                <td colspan="7" align="right">ราคารวม</td>
                                                 <td align="right">฿ <?php echo number_format($total, 2); ?></td>
                                                 <td></td>
                                                 </tr>
@@ -186,7 +190,7 @@
                                             }
                                             ?>
                                         </tbody>
-                                        <?php echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>'; ?> -->
+                                        <?php echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>'; ?> 
                                     </table>
                                 </div>
                             </div>
