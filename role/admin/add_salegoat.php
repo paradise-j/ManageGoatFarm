@@ -3,19 +3,21 @@
     session_start();
 
     if(isset($_POST["add_sale"])){
+         $newid = "SG000";
          $item_array = array(
                 'item_agc'           =>     $_POST["agc"],
                 'item_cus'           =>     $_POST["cus"],
                 'item_gg_type'       =>     $_POST["gg_type"],
                 'item_gg_age'        =>     $_POST["gg_age"],
-                'item_quantity'          =>     $_POST["quantity"],
-                'item_weight'      =>     $_POST["weight"],
+                'item_quantity'      =>     $_POST["quantity"],
+                'item_weight'        =>     $_POST["weight"],
                 'item_price'         =>     $_POST["price"]
              );
              $_SESSION["shopping_cart"][] =  $item_array;
             header("location:add_salegoat.php");
             exit;
     }
+
     if(isset($_GET['action'])){
         if($_GET['action']=="delete"){
             $id = $_GET["id"];
@@ -23,12 +25,22 @@
             header("location:add_salegoat.php");
             exit;
           }
+    }
+
+
+    for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
+        foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
+            echo $key." = ".$value <br>;
         }
+    }
 
+    
     foreach($_SESSION["shopping_cart"] as $key=>$value){
-
-        $sql = "INSERT INTO `sale` ('') VALUES ('')";
-        $conn->execute($sql)
+        $sql = "INSERT INTO `sale` (`sale_id`, `sale_quantity`, 
+                                    `sale_weight`, `sale_price`, 
+                                    `sale_date`, `cus_id`, 
+                                    `gg_id`, `agc_id`) VALUES ('')";
+        $conn->execute($sql);
         
     }
 ?>
