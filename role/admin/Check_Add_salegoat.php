@@ -5,6 +5,7 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
+
         $Gtype = $_POST['Gtype'];
         $range_age = $_POST['range_age'];
         $VMtype = $_POST['VMtype'];
@@ -14,10 +15,10 @@
         $date = $_POST['date'];
 
 
-        $VM = $db->prepare("SELECT * FROM `group_g`");
-        $VM->execute();
+        $gg = $db->prepare("SELECT * FROM `group_g`");
+        $gg->execute();
 
-        while ($row = $VM->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $gg->fetch(PDO::FETCH_ASSOC)) {
             if($Gtype == $row["gg_type"] and $range_age == $row["gg_range_age"]){
                 $gg_id = $row["gg_id"]; 
                 break;
