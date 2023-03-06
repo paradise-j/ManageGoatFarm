@@ -83,14 +83,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
-                            <!-- <input type="text" class="form-control" name="price" style="border-radius: 30px;" required> -->
                             <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
-                            <!-- <div type="date" class='input-group date' id='datetimepicker1' data-date-language="th-th" name="date">
-                                <input type='text' style="border-radius: 30px;" class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div> -->
                         </div>
                         <div class="modal-footer"> 
                             <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
@@ -234,6 +227,7 @@
                 },
             });
         }
+
         const dom_date = document.querySelectorAll('.date_th')
         dom_date.forEach((elem)=>{
             const my_date = elem.textContent

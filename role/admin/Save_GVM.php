@@ -108,22 +108,8 @@
                                 <input type="text" class="form-control" name="price" style="border-radius: 30px;" required>
                             </div>
                             <div class="mb-3">
-                                <label for="inputState" class="form-label">เดือนที่ให้ยาและวัคซีน</label>
-                                <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">มกราคม</option>
-                                    <option value="2">กุมภาพันธ์</option>
-                                    <option value="3">มีนาคม</option>
-                                    <option value="4">เมษายน</option>
-                                    <option value="5">พฤษภาคม</option>
-                                    <option value="6">มิถุนายน</option>
-                                    <option value="7">กรกฎาคม</option>
-                                    <option value="8">สิงหาคม</option>
-                                    <option value="9">กันยายน</option>
-                                    <option value="10">ตุลาคม</option>
-                                    <option value="11">พฤศจิกายน</option>
-                                    <option value="12">ธันวาคม</option>
-                                </select>
+                                <label for="inputState" class="form-label">วันที่ให้ยาและวัคซีน</label>
+                                <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
                             </div>
                             <div class="col text-center">
                                 <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
@@ -170,7 +156,7 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity , gvc_data.gvc_price , gvc_data.gvc_month 
+                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity , gvc_data.gvc_price , gvc_data.gvc_date 
                                                                 FROM `gvc_data` 
                                                                 INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
                                                                 INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
@@ -214,11 +200,19 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td><?= $vm['gvc_type']; ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($vm['gvc_type'] == 1) {
+                                                        echo "ให้ยา";
+                                                    }else{
+                                                        echo "ให้วัคซีน";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?= $vm['vc_name']; ?></td>
                                             <td><?= $vm['gvc_quantity']; ?></td>
                                             <td><?= $vm['gvc_price']; ?></td>
-                                            <td><?= $vm['gvc_month']; ?></td>
+                                            <td class="date_th"><?= $vm['gvc_date']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
@@ -301,6 +295,23 @@
                 },
             });
         }
+
+        const dom_date = document.querySelectorAll('.date_th')
+        dom_date.forEach((elem)=>{
+            const my_date = elem.textContent
+            const date = new Date(my_date)
+
+            const result = date.toLocaleDateString('th-TH', {
+
+            year: 'numeric',
+
+            month: 'long',
+
+            day: 'numeric',
+
+            }) 
+            elem.textContent=result
+        })
     </script>
 
 </body>

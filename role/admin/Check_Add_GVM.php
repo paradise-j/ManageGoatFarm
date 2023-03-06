@@ -11,7 +11,7 @@
         $VMname = $_POST['VMname'];
         $quantity = $_POST['quantity'];
         $price = $_POST['price'];
-        $month = $_POST['month'];
+        $date = $_POST['date'];
 
 
         $VM = $db->prepare("SELECT * FROM `group_g`");
@@ -25,8 +25,8 @@
         }
 
 
-        $sql = $db->prepare("INSERT INTO `gvc_data`(`gvc_type`, `gvc_quantity`, `gvc_price`, `gvc_month`, `gg_id`, `vc_id`) 
-                                            VALUES ('$VMtype','$quantity','$price','$month','$gg_id','$VMname')");
+        $sql = $db->prepare("INSERT INTO `gvc_data`(`gvc_type`, `gvc_quantity`, `gvc_price`, `gvc_date`, `gg_id`, `vc_id`) 
+                                            VALUES ('$VMtype','$quantity','$price','$date','$gg_id','$VMname')");
         $sql->execute();
 
         if ($sql) {

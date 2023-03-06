@@ -38,6 +38,7 @@
         rel="stylesheet">
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/datepicker.min.css" rel="stylesheet" type="text/css">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
@@ -87,22 +88,8 @@
                             <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">
-                            <label for="inputState" class="form-label">เดือนที่ให้อาหาร</label>
-                            <select class="form-control" aria-label="Default select example" name="month" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">มกราคม</option>
-                                <option value="2">กุมภาพันธ์</option>
-                                <option value="3">มีนาคม</option>
-                                <option value="4">เมษายน</option>
-                                <option value="5">พฤษภาคม</option>
-                                <option value="6">มิถุนายน</option>
-                                <option value="7">กรกฎาคม</option>
-                                <option value="8">สิงหาคม</option>
-                                <option value="9">กันยายน</option>
-                                <option value="10">ตุลาคม</option>
-                                <option value="11">พฤศจิกายน</option>
-                                <option value="12">ธันวาคม</option>
-                            </select>
+                            <label for="inputState" class="form-label">วันที่ให้อาหาร</label>
+                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
@@ -136,6 +123,7 @@
                                             <th>รหัสการให้อาหาร</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
+                                            <th>ประเภทอาหาร</th>
                                             <th>ปริมาณอาหาร</th>
                                             <th>ราคา</th>
                                             <th>เดือนที่ให้</th>
@@ -145,7 +133,7 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gfg_data.gfg_id , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , gfg_data.gfg_quantity , gfg_data.gfg_price , gfg_data.gfg_month
+                                            $stmt = $db->query("SELECT gfg_data.gfg_id , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , gfg_data.gfg_quantity , gfg_data.gfg_price , gfg_data.gfg_date
                                                                 FROM `gfg_data` 
                                                                 INNER JOIN `group_g` ON group_g.gg_id = gfg_data.gg_id
                                                                 INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id ");
@@ -189,9 +177,20 @@
                                                     }
                                                 ?>
                                             </td>
+                                            <td>
+                                                <?php 
+                                                    if($gfg['fg_type'] == 1 ){
+                                                        echo "ธรรมชาติ";
+                                                    }elseif($gfg['fg_type'] == 1 ){
+                                                        echo "ข้น";
+                                                    }else{
+                                                        echo "TMR";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?= $gfg['gfg_quantity']; ?></td>
                                             <td><?= $gfg['gfg_price']; ?></td>
-                                            <td><?= $gfg['gfg_month']; ?></td>
+                                            <td class="date_th"><?= $gfg['gfg_date']; ?></td>
                                             <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
@@ -220,6 +219,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script src="js/datepicker.th.min.js"></script>
 
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
@@ -274,6 +275,21 @@
                 },
             });
         }
+
+        const dom_date = document.querySelectorAll('.date_th')
+        dom_date.forEach((elem)=>{
+
+            const my_date = elem.textContent
+            const date = new Date(my_date)
+            const result = date.toLocaleDateString('th-TH', {
+
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+
+            }) 
+            elem.textContent=result
+        })
     </script>
 
 </body>
