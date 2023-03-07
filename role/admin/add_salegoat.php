@@ -24,21 +24,24 @@
             unset($_SESSION["shopping_cart"][$id]);
             header("location:add_salegoat.php");
             exit;
-            $total = $total-($_SESSION["shopping_cart"]['item_weight']*$_SESSION["shopping_cart"]['item_quantity']);
+            $total = $total-($_SESSION["shopping_cart"]['item_weight']*$_SESSION["shopping_cart"]['item_pricekg']);
           }
     }
 
 
     // for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
     //     foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
-    //         echo $key."=".$value; 
+
+    //         echo $key." => ".$value; 
     //         echo "<br>" ;
     //     }
     // }
 
     
     // foreach($_SESSION["shopping_cart"] as $key=>$value){
-    //     $sql = "INSERT INTO `sale` (`sale_id`, `sale_quantity`, 
+
+
+    //     $sql = "INSERT INTO `sale` (`sale_quantity`, 
     //                                 `sale_weight`, `sale_price`, 
     //                                 `sale_date`, `cus_id`, 
     //                                 `gg_id`, `agc_id`) VALUES ('')";
@@ -173,12 +176,12 @@
                                                     <td><?php echo $value['item_gg_age'];?></td>
                                                     <td align="right"><?php echo number_format($value['item_quantity'],2);?></td>
                                                     <td align="right"><?php echo number_format($value['item_weight'],2);?></td>
-                                                    <td align="right"><?php echo number_format($value['item_pricekg'],2);?></td>
-                                                    <td align="right"><?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?></td>
+                                                    <td align="right">฿<?php echo number_format($value['item_pricekg'],2);?></td>
+                                                    <td align="right">฿<?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?></td>
                                                     <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
                                                 </tr>
                                             <?php
-                                                $total=$total+($value['item_weight']*$value['item_quantity']);
+                                                $total=$total+($value['item_weight']*$value['item_pricekg']);
                                                 }
                                             ?>
                                             <tr>
@@ -190,7 +193,7 @@
                                             }
                                             ?>
                                         </tbody>
-                                        <?php echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>'; ?> 
+                                        <!-- <?php echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>'; ?>  -->
                                     </table>
                                 </div>
                             </div>
@@ -206,26 +209,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
