@@ -71,6 +71,11 @@
 </head>
 
 <body id="page-top">
+    <?php
+        $gg = $db->query("SELECT * FROM `group_g`");
+        $gg->execute();
+        while($row=mysqli_fetch_array($result)){
+    ?>
     <div id="wrapper">
         <?php include('sidebar.php'); ?><!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
