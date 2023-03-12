@@ -139,7 +139,17 @@
                                         <tr>
                                             <th scope="row"><?= $gd['gd_id']; ?></th>
                                             <td><?= $gd['gdis_name']; ?></td>
-                                            <td><?= $gd['gd_level']; ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($gd['gd_level'] == 1){
+                                                        echo "ระดับไม่ร้ายแรง";
+                                                    }elseif($gd['gd_level'] == 2){
+                                                        echo "ระดับปานกลาง";
+                                                    }else{
+                                                        echo "ระดับรุนแรง";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td class="date_th"><?= $gd['gd_date']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>

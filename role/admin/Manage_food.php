@@ -103,7 +103,17 @@
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $fg['fg_id']; ?></th>
-                                            <td><?= $fg['fg_type']; ?></td>
+                                            <td>
+                                                <?php
+                                                    if($fg['fg_type'] == 1){
+                                                        echo "อาหารธรรมชาติ";
+                                                    }elseif($fg['fg_type'] == 2){
+                                                        echo "อาหารข้น";
+                                                    }else{
+                                                        echo "อาหาร TMR";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
