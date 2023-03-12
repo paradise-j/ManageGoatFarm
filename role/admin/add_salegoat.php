@@ -67,6 +67,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -205,10 +206,10 @@
                                                             
                                                             ?>
                                                         </td>
-                                                        <td align="right"><?php echo number_format($value['item_quantity'],2);?></td>
-                                                        <td align="right"><?php echo number_format($value['item_weight'],2);?></td>
-                                                        <td align="right">฿<?php echo number_format($value['item_pricekg'],2);?></td>
-                                                        <td align="right">฿<?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?></td>
+                                                        <td align="right"><?php echo number_format($value['item_quantity'],2);?> ตัว</td>
+                                                        <td align="right"><?php echo number_format($value['item_weight'],2);?> กก.</td>
+                                                        <td align="right">฿ <?php echo number_format($value['item_pricekg'],2);?> บาท</td>
+                                                        <td align="right">฿ <?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?> บาท</td>
                                                         <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
                                                     </tr>
                                                 <?php
@@ -217,7 +218,7 @@
                                                 ?>
                                                 <tr>
                                                     <td colspan="7" align="right">ราคารวม</td>
-                                                    <td align="right">฿ <?php echo number_format($total, 2); ?></td>
+                                                    <td align="right">฿ <?php echo number_format($total, 2); ?> บาท</td>
                                                     <td></td>
                                                 </tr>
                                                 <?php
@@ -245,12 +246,17 @@
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
+    
     <script>
         let imgInput = document.getElementById('imgInput');
         let previewImg = document.getElementById('previewImg');

@@ -51,11 +51,11 @@
                                         <h3 class="m-0 font-weight-bold text-primary">การขายแพะ</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="?" method="POST" enctype="multipart/form-data">
+                                        <form action="Check_add_salegoat.php" method="POST" enctype="multipart/form-data">
                                             <div class="row mb-2">
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-3">
-                                                    <label class="form-label">ชื่อ-สกุล เกษตรกร</label>
+                                                    <label class="form-label">ชื่อ-สกุล การขายแพะ</label>
                                                     <input type="text" class="form-control" id="name" name="agc" style="border-radius: 30px;" value="นายสมรัก อึอิ" required>
                                                 </div>
                                                 <div class="col-md-3">
@@ -111,52 +111,87 @@
                             </div>
                         </div>
                         <div class="card shadow mb-4">
-                            <div class="card-header py-3 text-center">
-                                <h3 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h3>
-                            </div>
-                            <!-- <div class="row mt-4 ml-2">
-                                <div class="col">
-                                    <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</a> -->
-                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</button> -->
-                                <!-- </div>
+                            <!-- <div class="card-header py-3 text-center">
+                                <h3 class="m-0 font-weight-normal text-primary">รายการขายแพะ</h3>
                             </div> -->
+                            <div class="row mt-4 ml-2">
+                                <div class="col">
+                                    <!-- <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</a> -->
+                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</button> -->
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="thead-light">
-                                            <tr>
-                                                <th>รหัสเกษตรกร</th>
-                                                <th>ชื่อ-สกุล</th>
-                                                <th>ชื่อฟาร์ม</th>
-                                                <th>ตำแหน่ง</th>
-                                                <th>ชื่อกลุ่มเลี้ยง</th>
-                                                <th>เบอร์โทรศัพท์</th>
-                                                <th>รูปภาพ</th>
-                                                <th></th>
-                                                <th></th>
+                                            <tr align="center">
+                                                <th>รหัสการขายแพะ</th>
+                                                <th>ชื่อ-สกุล ผู้ซื้อ</th>
+                                                <th>ประเภทแพะ</th>
+                                                <th>ช่วงอายุแพะ</th>
+                                                <th>จำนวนแพะ</th>
+                                                <th>น้ำหนักรวม</th>
+                                                <th>ราคา</th>
+                                                <th>วันที่ทำการขาย</th>
+                                                <!-- <th></th> -->
+                                                <!-- <th></th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
-                                                $stmt = $db->query("SELECT * FROM `agriculturist`");
+                                                $stmt = $db->query("SELECT sale.sale_id , agriculturist.agc_name , customer.cus_name , group_g.gg_type , group_g.gg_range_age , sale.sale_quantity , sale.sale_weight , sale.sale_price , sale.sale_date
+                                                                    FROM sale
+                                                                    INNER JOIN agriculturist ON agriculturist.agc_id = sale.agc_id
+                                                                    INNER JOIN customer ON customer.cus_id = sale.cus_id
+                                                                    INNER JOIN group_g ON group_g.gg_id = sale.gg_id");
                                                 $stmt->execute();
-                                                $agcs = $stmt->fetchAll();
+                                                $sales = $stmt->fetchAll();
 
-                                                if (!$agcs) {
+                                                if (!$sales) {
                                                     echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                                 } else {
-                                                foreach($agcs as $agc)  {  
+                                                foreach($sales as $sale)  {  
                                             ?>
-                                            <tr>
-                                                <th scope="row"><?= $agc['agc_id']; ?></th>
-                                                <td><?= $agc['agc_name']; ?></td>
-                                                <td><?= $agc['agc_nfarm']; ?></td>
-                                                <td><?= $agc['agc_position_G']; ?></td>
-                                                <td><?= $agc['agc_gfarm']; ?></td>
-                                                <td><?= $agc['agc_phone']; ?></td>
-                                                <td width="100px"><img class="rounded" width="100%" src="uploads/<?= $agc['agc_img']; ?>" alt=""></td>
-                                                <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                                <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <tr align="center">
+                                                <th scope="row"><?= $sale['sale_id']; ?></th>
+                                                <!-- <td><?= $sale['agc_name']; ?></td> -->
+                                                <td><?= $sale['cus_name']; ?></td>
+                                                <td>
+                                                    <?php 
+                                                        if($sale['gg_type'] == 1){
+                                                            echo "แพะพ่อพันธุ์";
+                                                        }elseif($sale['gg_type'] == 2) {
+                                                            echo "แพะแม่พันธุ์";
+                                                        }else{
+                                                            echo "แพะขุน";
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                        if($sale['gg_range_age'] == 1 ) {
+                                                            echo "1-2 ปี";
+                                                        }elseif($sale['gg_range_age'] == 2 ) {
+                                                            echo "3-5 ปี";
+                                                        }elseif($sale['gg_range_age'] == 3 ) {
+                                                            echo "5 ปีขึ้นไป";
+                                                        }elseif($sale['gg_range_age'] == 4 ) {
+                                                            echo "ไม่เกิน 4 เดือน";
+                                                        }elseif($sale['gg_range_age'] == 5 ) {
+                                                            echo "ไม่เกิน 5 เดือน";
+                                                        }elseif($sale['gg_range_age'] == 6 ) {
+                                                            echo "ไม่เกิน 6 เดือน";
+                                                        }else{
+                                                            echo "6 เดือนขึ้นไป";
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td align="right"><?= number_format($sale['sale_quantity'],2); ?></td>
+                                                <td align="right"><?= number_format($sale['sale_weight'],2); ?></td>
+                                                <td align="right">฿ <?= number_format($sale['sale_price'],2); ?></td>
+                                                <td class="date_th"><?= $sale['sale_date']; ?></td>
+                                                <!-- <td><a href="Edit_sale.php?edit_id=<?= $sale['sale_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td> -->
+                                                <!-- <td><a data-id="<?= $sale['sale_id']; ?>" href="?delete=<?= $sale['sale_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td> -->
                                             </tr>
                                             <?php }  
                                                 } ?>
@@ -228,6 +263,23 @@
                     },
                 });
             }
+
+            const dom_date = document.querySelectorAll('.date_th')
+            dom_date.forEach((elem)=>{
+                const my_date = elem.textContent
+                const date = new Date(my_date)
+
+                const result = date.toLocaleDateString('th-TH', {
+
+                year: 'numeric',
+
+                month: 'long',
+
+                day: 'numeric',
+
+                }) 
+                elem.textContent=result
+            })
         </script>
     </body>
 </html>
