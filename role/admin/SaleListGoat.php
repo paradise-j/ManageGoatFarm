@@ -23,13 +23,13 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>จัดการข้อมูลเกษตรกร</title>
+        <title>การขายแพะ</title>
 
         <!-- Custom fonts for this template -->
         <link rel="icon" type="image/png" href="img/edit_pro.png" />
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -44,16 +44,82 @@
                     <?php include('Topbar.php'); ?><!-- Topbar -->
                     <div class="container-fluid">
                         <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3 text-center">
-                                <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลเกษตรกร</h3>
-                            </div>
-                            <div class="row mt-4 ml-2">
-                                <div class="col">
-                                    <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</a>
-                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</button> -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 text-center">
+                                        <h3 class="m-0 font-weight-bold text-primary">การขายแพะ</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="?" method="POST" enctype="multipart/form-data">
+                                            <div class="row mb-2">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">ชื่อ-สกุล เกษตรกร</label>
+                                                    <input type="text" class="form-control" id="name" name="agc" style="border-radius: 30px;" value="นายสมรัก อึอิ" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">ชื่อ-สกุล ผู้ซื้อ</label>
+                                                    <input type="text" class="form-control" id="Fname" name="cus" style="border-radius: 30px;" value="นายสมยศ คูคู" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">ประเภทแพะ</label>
+                                                    <select class="form-control" aria-label="Default select example"  name="gg_type" style="border-radius: 30px;" required>
+                                                        <option selected>กรุณาเลือก....</option>
+                                                        <option value="1">แพะพ่อพันธุ์</option>
+                                                        <option value="2">แพะแม่พันธุ์</option>
+                                                        <option value="3">แพะขุน</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">ช่วงอายุ</label>
+                                                    <select class="form-control" aria-label="Default select example"  name="gg_age" style="border-radius: 30px;" required>
+                                                        <option selected>กรุณาเลือก....</option>
+                                                        <option value="1">1-2 ปี</option>
+                                                        <option value="2">3-5 ปี</option>
+                                                        <option value="3">5 ปีขึ้นไป</option>
+                                                        <option value="4">ไม่เกิน 4 เดือน</option>
+                                                        <option value="5">ไม่เกิน 5 เดือน</option>
+                                                        <option value="6">ไม่เกิน 6 เดือน</option>
+                                                        <option value="7">6 เดือนขึ้นไป</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">จำนวน</label>
+                                                    <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">น้ำหนักรวม</label>
+                                                    <input type="text" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">ราคาต่อกิโลกรัม</label>
+                                                    <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="add_sale">เพิ่มรายการ</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 text-center">
+                                <h3 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h3>
+                            </div>
+                            <!-- <div class="row mt-4 ml-2">
+                                <div class="col">
+                                    <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</a> -->
+                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</button> -->
+                                <!-- </div>
+                            </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
