@@ -3,9 +3,8 @@
 <?php 
     session_start();
     require_once "connect.php";
-
-    if (isset($_POST['submit'])) {
-        echo "1";
+    
+    if (isset($_POST['submit'])){
         $agc = $_POST['agc'];
         $cus = $_POST['cus'];
         $gg_type = $_POST['gg_type'];
@@ -28,21 +27,21 @@
         }
 
         // ===================== Check id agriculturist =====================
-        $agc = $db->prepare("SELECT * FROM `agriculturist`");
-        $agc->execute();
-        while ($row = $agc->fetch(PDO::FETCH_ASSOC)) {
-            if($agc == $row["gg_name"]){
+        $agcs = $db->prepare("SELECT * FROM `agriculturist`");
+        $agcs->execute();
+        while ($row = $agcs->fetch(PDO::FETCH_ASSOC)) {
+            if($agc == $row["agc_name"]){
                 $agc_id = $row["agc_id"]; 
                 break;
             }
         }
 
         // ===================== Check id Customer =====================
-        $cus = $db->prepare("SELECT * FROM `customer`");
-        $cus->execute();
-        while ($row = $cus->fetch(PDO::FETCH_ASSOC)) {
+        $cuss = $db->prepare("SELECT * FROM `customer`");
+        $cuss->execute();
+        while ($row = $cuss->fetch(PDO::FETCH_ASSOC)) {
             if($cus == $row["cus_name"]){
-                $cus_id = $row["gg_id"]; 
+                $cus_id = $row["cus_id"]; 
                 break;
             }
         }
@@ -50,8 +49,8 @@
 
 
 
-        $sql = $db->prepare("INSERT INTO `sale`(`sale_quantity`, `sale_weight`, `sale_price`, `sale_date`, `cus_id`, `gg_id`, `agc_id`)
-                                            VALUES ('$quantity','$weight','$sumprice','$date','$cus_id','$gg_id','$agc_id')");
+        $sql = $db->prepare("INSERT INTO `sale`(`sale_quantity`, `sale_weight`, `sale_KgPirce`, `sale_price`, `sale_date`, `cus_id`, `gg_id`, `agc_id`) 
+                                            VALUES ($quantity, $weight ,'$pricekg',$sumprice,'$date','$cus_id','$gg_id','$agc_id')");
         $sql->execute();
 
         if ($sql) {

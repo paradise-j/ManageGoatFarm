@@ -1,3 +1,7 @@
+<?php
+    $id = $_SESSION["id"];
+    require_once 'connect.php';
+?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <h1></h1>
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -46,15 +50,26 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small text-right">
-                    Douglas McGee
-                    <br>
-                    ชื่อฟาร์ม
-                </span>
+                <?php
+                    $select_stmt = $db->query("SELECT officer.officer_name
+                                                FROM `user_login` 
+                                                INNER JOIN `officer` ON user_login.officer_id = officer.officer_id
+                                                WHERE user_login.user_id = '$id'");
+                    $select_stmt->execute(); 
+                    $logins = $select_stmt->fetchAll();
+                    foreach($logins as $login){
+                ?>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small text-right">
+                        <?= $login["officer_name"]; ?>
+                <?php
+                    } 
+                ?>
+                        <!-- <br>
+                    ชื่อฟาร์ม -->
+                    </span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
             </a>
 
         </li>
     </ul>
-
 </nav>

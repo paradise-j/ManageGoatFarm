@@ -152,7 +152,7 @@ strong {
 }
 
 small {
-    font-size: 80%
+    font-size: 1rem;
 }
 
 sub,
@@ -457,7 +457,7 @@ hr {
 
 .small,
 small {
-    font-size: 80%;
+    font-size: 1rem;
     font-weight: 400
 }
 

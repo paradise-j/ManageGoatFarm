@@ -12,20 +12,21 @@
             $select_stmt->execute(); 
 
             while($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
+                $dbid = $row['user_id'];
                 $dbusername = $row['user_name'];
                 $dbpassword = $row['user_password'];
                 $dbrole = $row['user_role'];
             }
-            echo $username;
-            echo $password;
-            echo $role;
 
             if ($username != null AND $password != null) {
                 if ($select_stmt->rowCount() > 0) {
                     if ($username == $dbusername AND $password == $dbpassword ) {
                         switch($dbrole) {
                             case '1':
-                                $_SESSION['admin_login'] = $username;
+                                $_SESSION['id'] = $dbid;
+                                $_SESSION['username'] = $dbusername;
+                                $_SESSION['password'] = $dbpassword;
+                                $_SESSION['permission'] = $dbrole;
                                 $_SESSION['success'] = "Admin... Successfully Login...";
                                 header("location: role/admin/index.php");
                             break;

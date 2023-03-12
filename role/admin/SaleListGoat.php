@@ -37,6 +37,12 @@
     </head>
 
     <body id="page-top">
+        <?php
+            $agc = $db->query("SELECT * FROM `agriculturist` WHERE `agc_id`= 'AG0001'");
+            $agc->execute();
+            $row = $agc->fetch(PDO::FETCH_ASSOC);
+            extract($row);
+        ?>
         <div id="wrapper">
             <?php include('sidebar.php'); ?><!-- Sidebar -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -51,16 +57,16 @@
                                         <h3 class="m-0 font-weight-bold text-primary">การขายแพะ</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="Check_Add_salegoat.php" method="POST" enctype="multipart/form-data">
+                                        <form action="Check_Add_salegoat.php" method="POST">
                                             <div class="row mb-2">
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-3">
                                                     <label class="form-label">ชื่อ-สกุล การขายแพะ</label>
-                                                    <input type="text" class="form-control" id="name" name="agc" style="border-radius: 30px;" value="นายสมรัก อึอิ" required>
+                                                    <input type="text" class="form-control" name="agc" style="border-radius: 30px;" value="<?= $agc_name ?>" required>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label class="form-label">ชื่อ-สกุล ผู้ซื้อ</label>
-                                                    <input type="text" class="form-control" id="Fname" name="cus" style="border-radius: 30px;" value="นายสมยศ คูคู" required>
+                                                    <input type="text" class="form-control" name="cus" style="border-radius: 30px;" value="นายประเทือง ทมทม" required>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">ประเภทแพะ</label>
@@ -89,15 +95,15 @@
                                                 <div class="col-md-2"></div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">จำนวน</label>
-                                                    <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
+                                                    <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">น้ำหนักรวม</label>
-                                                    <input type="text" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
+                                                    <input type="text" class="form-control" name="weight" style="border-radius: 30px;" required>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                                    <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
+                                                    <input type="text" class="form-control" name="pricekg" style="border-radius: 30px;" required>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label for="inputState" class="form-label">วันที่ทำการขาย</label>
@@ -106,7 +112,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col text-right">
-                                                    <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="add_sale">เพิ่มรายการ</button>
+                                                    <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">เพิ่มรายการ</button>
                                                 </div>
                                             </div>
                                         </form>

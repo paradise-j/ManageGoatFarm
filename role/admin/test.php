@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -67,4 +67,40 @@
     </script>
 
 </body>
-</html>
+</html> -->
+
+<?php
+    require_once 'connect.php';
+    session_start();
+
+
+    // ===================== Check id agriculturist =====================
+    $agc = "นายสุพล ทิมทอง";
+    echo $agc;
+    $agcs = $db->prepare("SELECT * FROM `agriculturist`");
+    $agcs->execute();
+    while ($row = $agcs->fetch(PDO::FETCH_ASSOC)) {
+        echo "1";
+        if($agc == $row["agc_name"]){
+            echo "2";
+            $agc_id = $row["agc_id"]; 
+            echo $agc_id;
+            break;
+        }
+    }
+    
+
+    // ===================== Check id Customer =====================
+    // $cus = "นายประเทือง ทมทม";
+    // echo $cus;
+    // $cus = $db->prepare("SELECT * FROM `customer`");
+    // $cus->execute();
+    // while ($row = $cus->fetch(PDO::FETCH_ASSOC)) {
+    //     if($cus == $row["cus_name"]){
+    //         $cus_id = $row["cus_id"]; 
+    //         echo $cus_id;
+    //         break;
+    //     }
+    // }
+    
+?>
