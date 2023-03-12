@@ -5,6 +5,7 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
+        echo "1";
         $agc = $_POST['agc'];
         $cus = $_POST['cus'];
         $gg_type = $_POST['gg_type'];

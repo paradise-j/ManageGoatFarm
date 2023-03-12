@@ -51,7 +51,7 @@
                                         <h3 class="m-0 font-weight-bold text-primary">การขายแพะ</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="Check_add_salegoat.php" method="POST" enctype="multipart/form-data">
+                                        <form action="Check_Add_salegoat.php" method="POST" enctype="multipart/form-data">
                                             <div class="row mb-2">
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-3">
