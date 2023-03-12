@@ -51,7 +51,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php
-                    $select_stmt = $db->query("SELECT officer.officer_name
+                    $select_stmt = $db->query("SELECT officer.officer_name, officer.officer_img
                                                 FROM `user_login` 
                                                 INNER JOIN `officer` ON user_login.officer_id = officer.officer_id
                                                 WHERE user_login.user_id = '$id'");
@@ -61,13 +61,14 @@
                 ?>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small text-right">
                         <?= $login["officer_name"]; ?>
-                <?php
-                    } 
-                ?>
+
                         <!-- <br>
                     ชื่อฟาร์ม -->
                     </span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                    <img class="img-profile rounded-circle" src="uploads/<?= $login["officer_img"]; ?>">
+                <?php
+                    } 
+                ?>
             </a>
 
         </li>
