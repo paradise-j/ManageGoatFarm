@@ -30,7 +30,7 @@
         $agc = $db->prepare("SELECT * FROM `agriculturist`");
         $agc->execute();
         while ($row = $agc->fetch(PDO::FETCH_ASSOC)) {
-            if($gg_type == $row["gg_type"]){
+            if($agc == $row["gg_name"]){
                 $agc_id = $row["agc_id"]; 
                 break;
             }
@@ -50,7 +50,7 @@
 
 
         $sql = $db->prepare("INSERT INTO `sale`(`sale_quantity`, `sale_weight`, `sale_price`, `sale_date`, `cus_id`, `gg_id`, `agc_id`)
-                                            VALUES ('$VMtype','$quantity','$price','$date','$gg_id','$gg_id','$VMname')");
+                                            VALUES ('$quantity','$weight','$sumprice','$date','$cus_id','$gg_id','$agc_id')");
         $sql->execute();
 
         if ($sql) {
@@ -66,10 +66,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Save_GVM.php");
+            header("refresh:1; url=SaleListGoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Save_GVM.php");
+            header("location: SaleListGoat.php");
         }
     }
     $db = null; 
