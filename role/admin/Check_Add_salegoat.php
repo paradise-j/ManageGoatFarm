@@ -5,29 +5,52 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-
-        $Gtype = $_POST['Gtype'];
-        $range_age = $_POST['range_age'];
-        $VMtype = $_POST['VMtype'];
-        $VMname = $_POST['VMname'];
+        $agc = $_POST['agc'];
+        $cus = $_POST['cus'];
+        $gg_type = $_POST['gg_type'];
+        $gg_age = $_POST['gg_age'];
         $quantity = $_POST['quantity'];
-        $price = $_POST['price'];
+        $weight = $_POST['weight'];
+        $pricekg = $_POST['pricekg'];
+        $sumprice = $_POST['weight'] * $_POST['pricekg'];
         $date = $_POST['date'];
 
 
+        // ===================== Check id G_Goat =====================
         $gg = $db->prepare("SELECT * FROM `group_g`");
         $gg->execute();
-
         while ($row = $gg->fetch(PDO::FETCH_ASSOC)) {
-            if($Gtype == $row["gg_type"] and $range_age == $row["gg_range_age"]){
+            if($gg_type == $row["gg_type"] and $gg_age == $row["gg_range_age"]){
                 $gg_id = $row["gg_id"]; 
                 break;
             }
         }
 
+        // ===================== Check id agriculturist =====================
+        $agc = $db->prepare("SELECT * FROM `agriculturist`");
+        $agc->execute();
+        while ($row = $agc->fetch(PDO::FETCH_ASSOC)) {
+            if($gg_type == $row["gg_type"]){
+                $agc_id = $row["agc_id"]; 
+                break;
+            }
+        }
 
-        $sql = $db->prepare("INSERT INTO `gvc_data`(`gvc_type`, `gvc_quantity`, `gvc_price`, `gvc_date`, `gg_id`, `vc_id`) 
-                                            VALUES ('$VMtype','$quantity','$price','$date','$gg_id','$VMname')");
+        // ===================== Check id Customer =====================
+        $cus = $db->prepare("SELECT * FROM `customer`");
+        $cus->execute();
+        while ($row = $cus->fetch(PDO::FETCH_ASSOC)) {
+            if($cus == $row["cus_name"]){
+                $cus_id = $row["gg_id"]; 
+                break;
+            }
+        }
+
+
+
+
+        $sql = $db->prepare("INSERT INTO `sale`(`sale_quantity`, `sale_weight`, `sale_price`, `sale_date`, `cus_id`, `gg_id`, `agc_id`)
+                                            VALUES ('$VMtype','$quantity','$price','$date','$gg_id','$gg_id','$VMname')");
         $sql->execute();
 
         if ($sql) {

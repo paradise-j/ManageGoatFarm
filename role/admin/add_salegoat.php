@@ -3,7 +3,6 @@
     session_start();
 
     if(isset($_POST["add_sale"])){
-         $newid = "SG000";
          $item_array = array(
                 'item_agc'           =>     $_POST["agc"],
                 'item_cus'           =>     $_POST["cus"],

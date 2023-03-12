@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-2">
-                                                <div class="col-md-3"></div>
+                                                <div class="col-md-2"></div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">จำนวน</label>
                                                     <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
@@ -98,6 +98,10 @@
                                                 <div class="col-md-2">
                                                     <label class="form-label">ราคาต่อกิโลกรัม</label>
                                                     <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="inputState" class="form-label">วันที่ทำการขาย</label>
+                                                    <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -131,7 +135,8 @@
                                                 <th>ช่วงอายุแพะ</th>
                                                 <th>จำนวนแพะ</th>
                                                 <th>น้ำหนักรวม</th>
-                                                <th>ราคา</th>
+                                                <th>ราคาต่อกิโลกรัม</th>
+                                                <th>ราคารวม</th>
                                                 <th>วันที่ทำการขาย</th>
                                                 <!-- <th></th> -->
                                                 <!-- <th></th> -->
@@ -139,7 +144,7 @@
                                         </thead>
                                         <tbody>
                                             <?php 
-                                                $stmt = $db->query("SELECT sale.sale_id , agriculturist.agc_name , customer.cus_name , group_g.gg_type , group_g.gg_range_age , sale.sale_quantity , sale.sale_weight , sale.sale_price , sale.sale_date
+                                                $stmt = $db->query("SELECT sale.sale_id , agriculturist.agc_name , customer.cus_name , group_g.gg_type , group_g.gg_range_age , sale.sale_quantity , sale.sale_weight ,sale.sale_KgPirce , sale.sale_price , sale.sale_date
                                                                     FROM sale
                                                                     INNER JOIN agriculturist ON agriculturist.agc_id = sale.agc_id
                                                                     INNER JOIN customer ON customer.cus_id = sale.cus_id
@@ -186,9 +191,10 @@
                                                         }
                                                     ?>
                                                 </td>
-                                                <td align="right"><?= number_format($sale['sale_quantity'],2); ?></td>
-                                                <td align="right"><?= number_format($sale['sale_weight'],2); ?></td>
-                                                <td align="right">฿ <?= number_format($sale['sale_price'],2); ?></td>
+                                                <td align="right"><?= number_format($sale['sale_quantity'],2); ?> ตัว</td>
+                                                <td align="right"><?= number_format($sale['sale_weight'],2); ?> กก.</td>
+                                                <td align="right"><?= number_format($sale['sale_KgPirce'],2); ?> บาท</td>
+                                                <td align="right">฿ <?= number_format($sale['sale_price'],2); ?> บาท</td>
                                                 <td class="date_th"><?= $sale['sale_date']; ?></td>
                                                 <!-- <td><a href="Edit_sale.php?edit_id=<?= $sale['sale_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td> -->
                                                 <!-- <td><a data-id="<?= $sale['sale_id']; ?>" href="?delete=<?= $sale['sale_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td> -->
