@@ -83,28 +83,13 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr align="center">
-                                            <th rowspan="2">รหัสกลุ่มแพะ</th>
-                                            <th colspan="3">แพะพ่อพันธุ์</th>
-                                            <th colspan="3">แพะแม่พันธุ์</th>
-                                            <th colspan="4">แพะขุน</th>
-                                            <th rowspan="2">เกษตรกร</th>
-                                            <!-- <th></th> -->
-                                            <!-- <th></th> -->
-                                        </tr>
-                                        <tr align="center">
-                                            <th>1-2 ปี</th>
-                                            <th>3-5 ปี</th>
-                                            <th>5 ปีขึ้นไป</th>
-                                            <th>1-2 ปี</th>
-                                            <th>3-5 ปี</th>
-                                            <th>5 ปีขึ้นไป</th>
-                                            <th>ไม่เกิน 4 เดือน</th>
-                                            <th>ไม่เกิน 5 เดือน</th>
-                                            <th>ไม่เกิน 6 เดือน</th>
-                                            <th>6 เดือนขึ้นไป</th>
-                                            <!-- <th></th> -->
-                                            <!-- <th></th> -->
+                                        <tr>
+                                            <th>รหัสกลุ่มแพะ</th>
+                                            <th>ประเภทกลุ่มแพะ</th>
+                                            <th>ช่วงอายุ</th>
+                                            <th>จำนวน</th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -120,19 +105,39 @@
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $gg['gg_id']; ?></th>
+                                            <td>
+                                                <?php
+                                                    if($gg['gg_type'] == 1){
+                                                        echo "แพะพ่อพันธุ์";
+                                                    }elseif($gg['gg_type'] == 2){
+                                                        echo "แพะแม่พันธุ์";
+                                                    }else{
+                                                        echo "แพะขุน";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($gg['gg_range_age'] == 1){
+                                                        echo "1-2 ปี";
+                                                    }elseif($gg['gg_range_age'] == 2){
+                                                        echo "3-5 ปี";
+                                                    }elseif($gg['gg_range_age'] == 3){
+                                                        echo "5 ปีขึ้นไป";
+                                                    }elseif($gg['gg_range_age'] == 4){
+                                                        echo "ไม่เกิน 4 เดือน";
+                                                    }elseif($gg['gg_range_age'] == 5){
+                                                        echo "ไม่เกิน 5 เดือน";
+                                                    }elseif($gg['gg_range_age'] == 6){
+                                                        echo "ไม่เกิน 6 เดือน";
+                                                    }else{
+                                                        echo "6 เดือนขึ้นไป";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['gg_quantity']; ?></td>
-                                            <td>นายสุพล ทิมทอง</td>
-                                            <!-- <td><a href="Edit_gg.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td> -->
-                                            <!-- <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td> -->
+                                            <td><a href="Edit_gg.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
