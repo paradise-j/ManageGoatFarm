@@ -3,18 +3,31 @@
     session_start();
 
     if(isset($_POST["add_sale"])){
-         $item_array = array(
-                'item_agc'           =>     $_POST["agc"],
-                'item_cus'           =>     $_POST["cus"],
-                'item_gg_type'       =>     $_POST["gg_type"],
-                'item_gg_age'        =>     $_POST["gg_age"],
-                'item_quantity'      =>     $_POST["quantity"],
-                'item_weight'        =>     $_POST["weight"],
-                'item_pricekg'         =>     $_POST["pricekg"]
-             );
-             $_SESSION["shopping_cart"][] =  $item_array;
-            header("location:add_salegoat.php");
-            exit;
+        $gg_type = $_POST['gg_type'];
+        $gg_age = $_POST['gg_age'];
+
+        $gg = $db->prepare("SELECT * FROM `group_g`");
+        $gg->execute();
+        while ($row = $gg->fetch(PDO::FETCH_ASSOC)) {
+            if($gg_type == $row["gg_type"] and $gg_age == $row["gg_range_age"]){
+                $gg_id = $row["gg_id"]; 
+                break;
+            }
+        }
+        $item_array = array(
+            // 'item_agc'           =>     $_POST["agc"],
+            // 'item_cus'           =>     $_POST["cus"],
+            'item_gg_type'       =>     $_POST["gg_type"],
+            'item_gg_age'        =>     $_POST["gg_age"],
+            'item_id_gg'         =>     $gg_id,
+            'item_quantity'      =>     $_POST["quantity"],
+            'item_weight'        =>     $_POST["weight"],
+            'item_pricekg'       =>     $_POST["pricekg"],
+            'item_price'         =>     $_POST["pricekg"]*$_POST["weight"]
+            );
+            $_SESSION["shopping_cart"][] =  $item_array;
+        header("location:add_salegoat.php");
+        exit;
     }
 
     if(isset($_GET['action'])){
@@ -28,22 +41,24 @@
     }
 
 
-    // for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
-    //     foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
-    //         echo $key." => ".$value; 
-    //         echo "<br>" ;
-    //     }
-    // }
+    for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
+        foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
+            echo $key." ==> ".$value;
+            echo "<br>";
+        }
+        echo "<----------------------------------------->";
+        echo "<br>";
+        
+    }
     
 
-    
-    // foreach($_SESSION["shopping_cart"] as $key=>$value){
-    //     $sql = "INSERT INTO `sale` (`sale_quantity`, 
-    //                                 `sale_weight`, `sale_price`, 
-    //                                 `sale_date`, `cus_id`, 
-    //                                 `gg_id`, `agc_id`) VALUES ('')";
-    //     $conn->execute($sql);
-        
+    // if(isset($_GET['save_sale'])){
+    //     foreach($_SESSION["shopping_cart"] as $key=>$value){
+    //         $sql = "INSERT INTO `sale` (`sale_quantity`, `sale_weight`, `sale_price`, `sale_date`, `cus_id`, gg_id`, `agc_id`) VALUES 
+    //                                    ('$value['item_quantity'];')";
+    //         $conn->execute($sql);
+            
+    //     }
     // }
 ?>
 <!DOCTYPE html>
@@ -81,20 +96,20 @@
                         <div class="col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">การขายแพะ</h3>
+                                    <h5 class="m-0 font-weight-bold text-primary">รายละเอียดการขายแพะ</h5>
                                 </div>
                                 <div class="card-body">
                                     <form action="?" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-2">
                                             <div class="col-md-1"></div>
-                                            <div class="col-md-3">
+                                            <!-- <div class="col-md-3">
                                                 <label class="form-label">ชื่อ-สกุล เกษตรกร</label>
                                                 <input type="text" class="form-control" id="name" name="agc" style="border-radius: 30px;" value="นายสมรัก อึอิ" required>
-                                            </div>
-                                            <div class="col-md-3">
+                                            </div> -->
+                                            <!-- <div class="col-md-3">
                                                 <label class="form-label">ชื่อ-สกุล ผู้ซื้อ</label>
                                                 <input type="text" class="form-control" id="Fname" name="cus" style="border-radius: 30px;" value="นายสมยศ คูคู" required>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-2">
                                                 <label class="form-label">ประเภทแพะ</label>
                                                 <select class="form-control" aria-label="Default select example"  name="gg_type" style="border-radius: 30px;" required>
@@ -117,9 +132,6 @@
                                                     <option value="7">6 เดือนขึ้นไป</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-3"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">จำนวน</label>
                                                 <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
@@ -132,6 +144,21 @@
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
                                                 <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
                                             </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-3"></div>
+                                            <!-- <div class="col-md-2">
+                                                <label class="form-label">จำนวน</label>
+                                                <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">น้ำหนักรวม</label>
+                                                <input type="text" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ราคาต่อกิโลกรัม</label>
+                                                <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
+                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="col text-right">
@@ -148,14 +175,14 @@
                             <div class="card shadow mb-4">
                                 <div class="card-body">
                                     <div class="card-header py-3 text-center mb-4">
-                                        <h3 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h3>
+                                        <h5 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h5>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead class="thead-light">
                                                 <tr>
-                                                    <th>ชื่อ-สกุล เกษตรกร</th>
-                                                    <th>ชื่อ-สกุล ผู้ซื้อ</th>
+                                                    <!-- <th>ชื่อ-สกุล เกษตรกร</th> -->
+                                                    <!-- <th>ชื่อ-สกุล ผู้ซื้อ</th> -->
                                                     <th>ประเภทแพะ</th>
                                                     <th>ช่วงอายุแพะ</th>
                                                     <th>จำนวน</th>
@@ -172,8 +199,8 @@
                                                     foreach ($_SESSION['shopping_cart'] as $key => $value) { 
                                                 ?>
                                                     <tr>
-                                                        <td><?php echo $value['item_agc'];?></td>
-                                                        <td><?php echo $value['item_cus'];?></td>
+                                                        <!-- <td><?php echo $value['item_agc'];?></td> -->
+                                                        <!-- <td><?php echo $value['item_cus'];?></td> -->
                                                         <td>
                                                             <?php
                                                                 if($value['item_gg_type'] == 1){
@@ -216,7 +243,7 @@
                                                     }
                                                 ?>
                                                 <tr>
-                                                    <td colspan="7" align="right">ราคารวม</td>
+                                                    <td colspan="5" align="right">ราคารวม</td>
                                                     <td align="right">฿ <?php echo number_format($total, 2); ?> บาท</td>
                                                     <td></td>
                                                 </tr>
@@ -224,8 +251,13 @@
                                                 }
                                                 ?>
                                             </tbody>
-                                            <!-- <?php echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>'; ?>  -->
+                                            <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?> 
                                         </table>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col text-right">
+                                            <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div> 

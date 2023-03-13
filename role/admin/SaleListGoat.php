@@ -126,7 +126,7 @@
                             </div> -->
                             <div class="row mt-4 ml-2">
                                 <div class="col">
-                                    <!-- <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</a> -->
+                                    <a href="add_salegoat.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</a>
                                     <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มการขายแพะ</button> -->
                                 </div>
                             </div>
