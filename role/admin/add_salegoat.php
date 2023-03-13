@@ -41,15 +41,15 @@
     }
 
 
-    for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
-        foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
-            echo $key." ==> ".$value;
-            echo "<br>";
-        }
-        echo "<----------------------------------------->";
-        echo "<br>";
+    // for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
+    //     foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
+    //         echo $value['item_gg_type'][$i];
+    //         echo "<br>";
+    //     }
+    //     echo "<----------------------------------------->";
+    //     echo "<br>";
         
-    }
+    // }
     
 
     // if(isset($_GET['save_sale'])){
@@ -60,6 +60,7 @@
             
     //     }
     // }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
