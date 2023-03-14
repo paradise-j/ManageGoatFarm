@@ -132,9 +132,7 @@
                                         <div class="row">
                                             <div class="col text-center">
                                                 <button class="btn btn-warning" style="border-radius: 30px;" type="submit" onclick="enable()">แก้ไขข้อมูล</button>
-                                                &nbsp&nbsp&nbsp
                                                 <button class="btn btn-blue" style="border-radius: 30px;" type="submit">บันทึกข้อมูล</button>
-                                                &nbsp&nbsp&nbsp
                                                 <button class="btn btn-danger" style="border-radius: 30px;" type="submit" onclick="disable()">ยกเลิกการแก้ไข</button>
                                             </div>
                                         </div>

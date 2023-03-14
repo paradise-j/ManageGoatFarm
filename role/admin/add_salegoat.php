@@ -40,10 +40,10 @@
           }
     }
 
-
+    
     // for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
     //     foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
-    //         echo $value['item_gg_type'][$i];
+    //         echo $key." ==> ".$value;
     //         echo "<br>";
     //     }
     //     echo "<----------------------------------------->";
@@ -51,15 +51,22 @@
         
     // }
     
-
-    // if(isset($_GET['save_sale'])){
-    //     foreach($_SESSION["shopping_cart"] as $key=>$value){
-    //         $sql = "INSERT INTO `sale` (`sale_quantity`, `sale_weight`, `sale_price`, `sale_date`, `cus_id`, gg_id`, `agc_id`) VALUES 
-    //                                    ('$value['item_quantity'];')";
-    //         $conn->execute($sql);
-            
-    //     }
-    // }
+    // echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; 
+    if(isset($_GET['type'])){
+        if($_GET['type'] == "submit"){
+            foreach($_SESSION["shopping_cart"] as $key=>$value){
+                $quantity = $value["item_quantity"];
+                $weight = $value["item_weight"];
+                $pricekg = $value["item_pricekg"];
+                $price = $value["item_price"];
+                $sql = $db->prepare("INSERT INTO `salelist` (`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`) 
+                                 VALUES ($quantity, $weight, $pricekg, $price,'')");
+                $sql->execute();
+                 
+            }
+            unset($_SESSION["shopping_cart"]);
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -256,7 +263,8 @@
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col text-right">
-                                            <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button>
+                                            <a href="add_salegoat.php?type=submit" class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</a>
+                                            <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button> -->
                                         </div>
                                     </div>
                                 </div>
