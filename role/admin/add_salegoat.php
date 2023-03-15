@@ -65,6 +65,7 @@
                  
             }
             unset($_SESSION["shopping_cart"]);
+            header("location:add_salegoat.php");
         }
     }
 
@@ -258,7 +259,7 @@
                                                 }
                                                 ?>
                                             </tbody>
-                                            <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?> 
+                                            <!-- <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?>  -->
                                         </table>
                                     </div>
                                     <div class="row mt-4">
