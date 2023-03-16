@@ -41,22 +41,64 @@
     }
     
     // echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; 
-    if(isset($_GET['type'])){
-        if($_GET['type'] == "submit"){
-            foreach($_SESSION["shopping_cart"] as $key=>$value){
-                $quantity = $value["item_quantity"];
-                $weight = $value["item_weight"];
-                $pricekg = $value["item_pricekg"];
-                $price = $value["item_price"];
-                $gg_id = $value["item_id_gg"];
-                $sql = $db->prepare("INSERT INTO `salelist`(`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`, `gg_id`) 
-                                 VALUES ($quantity, $weight, $pricekg, $price,'','$gg_id')");
-                $sql->execute();
-                 
+    if(isset($_POST["save_sale"])){
+        $agc = $_POST["agc"]; echo $agc; 
+        $cus = $_POST["cus"]; echo $cus; 
+        $phone = $_POST["phone"];
+        $date = $_POST["date"];
+        echo "<br>";
+
+
+        $sql = $db->prepare("INSERT INTO `customer`(`cus_name`, `cus_phone`) VALUES ('$cus', '$phone')");
+        $sql->execute();
+        
+        // ----------------------------- agriculturist -----------------------------
+        $agcs = $db->prepare("SELECT * FROM `agriculturist`");
+        $agcs->execute();
+
+        while ($row = $agcs->fetch(PDO::FETCH_ASSOC)) {
+            if($agc == $row["agc_name"]){
+                $agc_id = $row["agc_id"]; 
+                break;
             }
-            unset($_SESSION["shopping_cart"]);
-            header("location:add_salegoat.php");
         }
+
+        // ----------------------------- customer -----------------------------
+        $cuss = $db->prepare("SELECT * FROM `customer`");
+        $cuss->execute();
+        while ($row = $cuss->fetch(PDO::FETCH_ASSOC)) {
+            if($cus == $row["cus_name"]){
+                $cus_id = $row["cus_id"]; 
+                break;
+            }
+        }
+
+        $sql = $db->prepare("INSERT INTO `sale`(`sale_date`, `agc_id`, `cus_id`) VALUES ('$date', '$agc_id', '$cus_id')");
+        $sql->execute();
+
+        $sales = $db->prepare("SELECT * FROM `sale`");
+        $sales->execute();
+        while ($row = $sales->fetch(PDO::FETCH_ASSOC)) {
+            if($cus_id == $row["cus_id"] and $agc_id == $row["agc_id"]){
+                $sale_id = $row["sale_id"]; 
+                // $_SESSION["shopping_cart"][] =  $sale_id;
+                break;
+            }
+        }
+
+        foreach($_SESSION["shopping_cart"] as $key=>$value){
+            $quantity = $value["item_quantity"];
+            $weight = $value["item_weight"];
+            $pricekg = $value["item_pricekg"];
+            $price = $value["item_price"];
+            $gg_id = $value["item_id_gg"];
+            $sql = $db->prepare("INSERT INTO `salelist`(`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`, `gg_id`) 
+                                VALUES ($quantity, $weight, $pricekg, $price,'$sale_id','$gg_id')");
+            $sql->execute();
+                
+        }
+        unset($_SESSION["shopping_cart"]);
+        header("location:add_salegoat.php");
     }
 
 ?>
@@ -160,89 +202,114 @@
                                     <div class="card-header py-3 text-center mb-4">
                                         <h5 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h5>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <!-- <th>ชื่อ-สกุล เกษตรกร</th> -->
-                                                    <!-- <th>ชื่อ-สกุล ผู้ซื้อ</th> -->
-                                                    <th>ประเภทแพะ</th>
-                                                    <th>ช่วงอายุแพะ</th>
-                                                    <th>จำนวน</th>
-                                                    <th>น้ำหนักรวม</th>
-                                                    <th>ราคาต่อกิโลกรัม</th>
-                                                    <th>ราคา</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                if(!empty($_SESSION["shopping_cart"])){
-                                                    $total=0;
-                                                    foreach ($_SESSION['shopping_cart'] as $key => $value) { 
-                                                ?>
-                                                    <tr>
-                                                        <!-- <td><?php echo $value['item_agc'];?></td> -->
-                                                        <!-- <td><?php echo $value['item_cus'];?></td> -->
-                                                        <td>
-                                                            <?php
-                                                                if($value['item_gg_type'] == 1){
-                                                                    echo "แพะพ่อพันธุ์";
-                                                                }elseif($value['item_gg_type'] == 1){
-                                                                    echo "แพะแม่พันธุ์";
-                                                                }else{
-                                                                    echo "แพะขุน";
-                                                                }
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php 
-                                                                if($value['item_gg_age'] == 1){
-                                                                    echo "1-2 ปี";
-                                                                }elseif($value['item_gg_age'] == 2){
-                                                                    echo "3-5 ปี";
-                                                                }elseif($value['item_gg_age'] == 3){
-                                                                    echo "5 ปีขึ้นไป";
-                                                                }elseif($value['item_gg_age'] == 4){
-                                                                    echo "ไม่เกิน 4 เดือน";
-                                                                }elseif($value['item_gg_age'] == 5){
-                                                                    echo "ไม่เกิน 5 เดือน";
-                                                                }elseif($value['item_gg_age'] == 6){
-                                                                    echo "ไม่เกิน 6 เดือน";
-                                                                }else{
-                                                                    echo "6 เดือนขึ้นไป";
-                                                                }
-                                                            
-                                                            ?>
-                                                        </td>
-                                                        <td align="right"><?php echo number_format($value['item_quantity'],2);?> ตัว</td>
-                                                        <td align="right"><?php echo number_format($value['item_weight'],2);?> กก.</td>
-                                                        <td align="right">฿ <?php echo number_format($value['item_pricekg'],2);?> บาท</td>
-                                                        <td align="right">฿ <?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?> บาท</td>
-                                                        <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
-                                                    </tr>
-                                                <?php
-                                                    $total=$total+($value['item_weight']*$value['item_pricekg']);
-                                                    }
-                                                ?>
-                                                <tr>
-                                                    <td colspan="5" align="right">ราคารวม</td>
-                                                    <td align="right">฿ <?php echo number_format($total, 2); ?> บาท</td>
-                                                    <td></td>
-                                                </tr>
-                                                <?php
-                                                }
-                                                ?>
-                                            </tbody>
-                                            <!-- <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?>  -->
-                                        </table>
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="col text-right">
-                                            <a href="add_salegoat.php?type=submit" class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</a>
-                                            <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button> -->
+                                    <form action="add_salegoat.php?type=submit" method="post">
+                                        <div class="row mb-4">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">รหัสการขาย</label>
+                                                <input type="text" class="form-control" name="agc" style="border-radius: 30px;">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ชื่อเกษตรกร</label>
+                                                <input type="text" class="form-control" name="agc" style="border-radius: 30px;" value="นายสุพล ทิมทอง" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ชื่อผู้ซื้อ</label>
+                                                <input type="text" class="form-control" name="cus" style="border-radius: 30px;" value="นายประเทือง ทมทม" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">เบอร์โทรศัพท์</label>
+                                                <input type="text" class="form-control" name="phone" style="border-radius: 30px;" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">วันที่ขาย</label>
+                                                <input type="date" class="form-control" name="date" style="border-radius: 30px;" required>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <!-- <th>ชื่อ-สกุล เกษตรกร</th> -->
+                                                        <!-- <th>ชื่อ-สกุล ผู้ซื้อ</th> -->
+                                                        <th>ประเภทแพะ</th>
+                                                        <th>ช่วงอายุแพะ</th>
+                                                        <th>จำนวน</th>
+                                                        <th>น้ำหนักรวม</th>
+                                                        <th>ราคาต่อกิโลกรัม</th>
+                                                        <th>ราคา</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    if(!empty($_SESSION["shopping_cart"])){
+                                                        $total=0;
+                                                        foreach ($_SESSION['shopping_cart'] as $key => $value) { 
+                                                    ?>
+                                                        <tr>
+                                                            <!-- <td><?php echo $value['item_agc'];?></td> -->
+                                                            <!-- <td><?php echo $value['item_cus'];?></td> -->
+                                                            <td>
+                                                                <?php
+                                                                    if($value['item_gg_type'] == 1){
+                                                                        echo "แพะพ่อพันธุ์";
+                                                                    }elseif($value['item_gg_type'] == 1){
+                                                                        echo "แพะแม่พันธุ์";
+                                                                    }else{
+                                                                        echo "แพะขุน";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php 
+                                                                    if($value['item_gg_age'] == 1){
+                                                                        echo "1-2 ปี";
+                                                                    }elseif($value['item_gg_age'] == 2){
+                                                                        echo "3-5 ปี";
+                                                                    }elseif($value['item_gg_age'] == 3){
+                                                                        echo "5 ปีขึ้นไป";
+                                                                    }elseif($value['item_gg_age'] == 4){
+                                                                        echo "ไม่เกิน 4 เดือน";
+                                                                    }elseif($value['item_gg_age'] == 5){
+                                                                        echo "ไม่เกิน 5 เดือน";
+                                                                    }elseif($value['item_gg_age'] == 6){
+                                                                        echo "ไม่เกิน 6 เดือน";
+                                                                    }else{
+                                                                        echo "6 เดือนขึ้นไป";
+                                                                    }
+                                                                
+                                                                ?>
+                                                            </td>
+                                                            <td align="right"><?php echo number_format($value['item_quantity'],2);?> ตัว</td>
+                                                            <td align="right"><?php echo number_format($value['item_weight'],2);?> กก.</td>
+                                                            <td align="right">฿ <?php echo number_format($value['item_pricekg'],2);?> บาท</td>
+                                                            <td align="right">฿ <?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?> บาท</td>
+                                                            <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
+                                                        </tr>
+                                                    <?php
+                                                        $total=$total+($value['item_weight']*$value['item_pricekg']);
+                                                        }
+                                                    ?>
+                                                    <tr>
+                                                        <td colspan="5" align="right">ราคารวม</td>
+                                                        <td align="right">฿ <?php echo number_format($total, 2); ?> บาท</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                                <!-- <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?>  -->
+                                            </table>
+                                        </div>
+                                        <div class="row mt-4 mb-4">
+                                            <div class="col text-right">
+                                                <!-- <a href="add_salegoat.php?type=submit" class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</a> -->
+                                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button>
+                                            </div>  
+                                        </div>
+                                    </form>
                                 </div>
                             </div> 
                         </div>
