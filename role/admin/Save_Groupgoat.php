@@ -88,13 +88,16 @@
                                             <th>ประเภทกลุ่มแพะ</th>
                                             <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
+                                            <th>ชื่อเกษตรกร</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `group_g`");
+                                            $stmt = $db->query("SELECT group_g.gg_id , group_g.gg_type , group_g.gg_range_age , group_g.gg_quantity , agriculturist.agc_name 
+                                                                FROM `group_g` 
+                                                                INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id; ");
                                             $stmt->execute();
                                             $ggs = $stmt->fetchAll();
 
@@ -136,6 +139,7 @@
                                                 ?>
                                             </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
+                                            <td><?= $gg['agc_name']; ?></td>
                                             <td><a href="Edit_gg.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>

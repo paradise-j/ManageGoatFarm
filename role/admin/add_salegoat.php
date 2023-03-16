@@ -81,7 +81,6 @@
         while ($row = $sales->fetch(PDO::FETCH_ASSOC)) {
             if($cus_id == $row["cus_id"] and $agc_id == $row["agc_id"]){
                 $sale_id = $row["sale_id"]; 
-                // $_SESSION["shopping_cart"][] =  $sale_id;
                 break;
             }
         }
@@ -95,6 +94,17 @@
             $sql = $db->prepare("INSERT INTO `salelist`(`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`, `gg_id`) 
                                 VALUES ($quantity, $weight, $pricekg, $price,'$sale_id','$gg_id')");
             $sql->execute();
+
+            $ggs = $db->prepare("SELECT * FROM `group_g` WHERE `gg_id`= '$gg_id'");
+            $ggs->execute();
+            $row = $ggs->fetch(PDO::FETCH_ASSOC);
+
+            // echo $row["gg_quantity"];
+            // echo $quantity;
+            $totals = $row["gg_quantity"] - $quantity;
+            $sql2 = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $totals WHERE `gg_id` = '$gg_id'");
+            $sql2->execute();
+
                 
         }
         unset($_SESSION["shopping_cart"]);
@@ -215,7 +225,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ชื่อผู้ซื้อ</label>
-                                                <input type="text" class="form-control" name="cus" style="border-radius: 30px;" value="นายประเทือง ทมทม" required>
+                                                <input type="text" class="form-control" name="cus" style="border-radius: 30px;" value="นายไก่กา อิอิ" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เบอร์โทรศัพท์</label>
