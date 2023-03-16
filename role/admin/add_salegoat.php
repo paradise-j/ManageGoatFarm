@@ -49,7 +49,6 @@
 
         $cu = $db->prepare("SELECT * FROM `customer`");
         $cu->execute();
-
         $check = array();
         while ($row = $cu->fetch(PDO::FETCH_ASSOC)){
             $name = $row["cus_name"];
