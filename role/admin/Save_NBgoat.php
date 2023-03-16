@@ -63,7 +63,7 @@
                                     
                                     foreach($fms as $fm){
                                 ?>
-                                <option value="<?= $fm['fm_name']?>"><?= $fm['fm_name']?></option>
+                                <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
                                 <?php
                                     }
                                 ?>
@@ -80,7 +80,7 @@
                                     
                                     foreach($fms as $fm){
                                 ?>
-                                <option value="<?= $fm['fm_name']?>"><?= $fm['fm_name']?></option>
+                                <option value="<?= $fm['fm_id']?>"><?= $fm['fm_name']?></option>
                                 <?php
                                     }
                                 ?>
@@ -97,6 +97,10 @@
                         <div class="mb-3">
                             <label class="form-label">จำนวนเพศเมีย</label>
                             <input type="text" class="form-control" name="g_female" style="border-radius: 30px;" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputState" class="form-label">วันที่แพะเกิด</label>
+                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
@@ -132,13 +136,16 @@
                                             <th>จำนวนแพะที่เกิด</th>
                                             <th>จำนวนเพศผู้</th>
                                             <th>จำนวนเพศเมีย</th>
+                                            <th>วันที่เกิด</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `nbg_data`");
+                                            $stmt = $db->query("SELECT nbg_data.nbg_id , nbg_data.F_id as Father, nbg_data.M_id as Mother , nbg_data.nbg_quantity , nbg_data.nbg_male , nbg_data.nbg_female , nbg_data.nbg_date 
+                                                                FROM `nbg_data` 
+                                                                INNER JOIN `fm_data` ON nbg_data.F_id = fm_data.fm_id");
                                             $stmt->execute();
                                             $nbgs = $stmt->fetchAll();
 
@@ -149,11 +156,12 @@
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $nbg['nbg_id']; ?></th>
-                                            <td><?= $nbg['nbg_Fg']; ?></td>
-                                            <td><?= $nbg['nbg_Mg']; ?></td>
+                                            <td><?= $nbg['Father']; ?></td>
+                                            <td><?= $nbg['Mother']; ?></td>
                                             <td><?= $nbg['nbg_quantity']; ?></td>
                                             <td><?= $nbg['nbg_male']; ?></td>
                                             <td><?= $nbg['nbg_female']; ?></td>
+                                            <td class="date_th"><?= $nbg['nbg_date']; ?></td>
                                             <td><a href="Edit_nbg.php?edit_id=<?= $nbg['nbg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $nbg['nbg_id']; ?>" href="?delete=<?= $nbg['nbg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
@@ -236,6 +244,21 @@
                 },
             });
         }
+
+        const dom_date = document.querySelectorAll('.date_th')
+        dom_date.forEach((elem)=>{
+
+            const my_date = elem.textContent
+            const date = new Date(my_date)
+            const result = date.toLocaleDateString('th-TH', {
+
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+
+            }) 
+            elem.textContent=result
+        })
     </script>
 
 </body>

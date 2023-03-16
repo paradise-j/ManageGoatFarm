@@ -10,8 +10,11 @@
         $quantity = $_POST['quantity'];
         $g_male = $_POST['g_male'];
         $g_female = $_POST['g_female'];
-        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_Fg`, `nbg_Mg`, `nbg_quantity`, `nbg_male`, `nbg_female`)
-                             VALUES ('$FB','$MB','$quantity','$g_male','$g_female')");
+        $date = $_POST['date'];
+
+
+        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_quantity`, `nbg_male`, `nbg_female`, `nbg_date`, `F_id`, `M_id`)
+                             VALUES ($quantity, $g_male, $g_female, '$date', '$FB', '$MB')");
         $sql->execute();
 
         if ($sql) {

@@ -39,17 +39,6 @@
             $total = $total-($_SESSION["shopping_cart"]['item_weight']*$_SESSION["shopping_cart"]['item_pricekg']);
           }
     }
-
-    
-    // for($i=0; $i<count($_SESSION["shopping_cart"]); $i++){
-    //     foreach($_SESSION["shopping_cart"][$i] as $key=>$value){
-    //         echo $key." ==> ".$value;
-    //         echo "<br>";
-    //     }
-    //     echo "<----------------------------------------->";
-    //     echo "<br>";
-        
-    // }
     
     // echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; 
     if(isset($_GET['type'])){
@@ -59,8 +48,9 @@
                 $weight = $value["item_weight"];
                 $pricekg = $value["item_pricekg"];
                 $price = $value["item_price"];
-                $sql = $db->prepare("INSERT INTO `salelist` (`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`) 
-                                 VALUES ($quantity, $weight, $pricekg, $price,'')");
+                $gg_id = $value["item_id_gg"];
+                $sql = $db->prepare("INSERT INTO `salelist`(`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`, `gg_id`) 
+                                 VALUES ($quantity, $weight, $pricekg, $price,'','$gg_id')");
                 $sql->execute();
                  
             }
@@ -152,21 +142,6 @@
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
                                                 <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
                                             </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-3"></div>
-                                            <!-- <div class="col-md-2">
-                                                <label class="form-label">จำนวน</label>
-                                                <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">น้ำหนักรวม</label>
-                                                <input type="text" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                                <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
-                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="col text-right">

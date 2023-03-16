@@ -59,7 +59,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="SaleListGoat.php">
+        <a class="nav-link" href="add_salegoat.php">
             <i class="fa-solid fa-basket-shopping"></i>
             <span>การขายแพะ</span></a>
     </li>
