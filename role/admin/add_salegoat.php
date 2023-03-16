@@ -42,15 +42,26 @@
     
     // echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; 
     if(isset($_POST["save_sale"])){
-        $agc = $_POST["agc"]; echo $agc; 
-        $cus = $_POST["cus"]; echo $cus; 
+        $agc = $_POST["agc"];
+        $cus = $_POST["cus"];
         $phone = $_POST["phone"];
         $date = $_POST["date"];
-        echo "<br>";
 
+        $cu = $db->prepare("SELECT * FROM `customer`");
+        $cu->execute();
 
-        $sql = $db->prepare("INSERT INTO `customer`(`cus_name`, `cus_phone`) VALUES ('$cus', '$phone')");
-        $sql->execute();
+        $check = array();
+        while ($row = $cu->fetch(PDO::FETCH_ASSOC)){
+            $name = $row["cus_name"];
+            array_push($check,$name);
+        }
+        // print_r($check);
+        // echo $cus;
+        if(!in_array($cus, $check)){
+            $sql = $db->prepare("INSERT INTO `customer`(`cus_name`, `cus_phone`) VALUES ('$cus', '$phone')");
+            $sql->execute();
+        }
+            
         
         // ----------------------------- agriculturist -----------------------------
         $agcs = $db->prepare("SELECT * FROM `agriculturist`");
@@ -91,6 +102,7 @@
             $pricekg = $value["item_pricekg"];
             $price = $value["item_price"];
             $gg_id = $value["item_id_gg"];
+
             $sql = $db->prepare("INSERT INTO `salelist`(`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`, `gg_id`) 
                                 VALUES ($quantity, $weight, $pricekg, $price,'$sale_id','$gg_id')");
             $sql->execute();
@@ -225,7 +237,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ชื่อผู้ซื้อ</label>
-                                                <input type="text" class="form-control" name="cus" style="border-radius: 30px;" value="นายไก่กา อิอิ" required>
+                                                <input type="text" class="form-control" name="cus" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เบอร์โทรศัพท์</label>
