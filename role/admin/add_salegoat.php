@@ -8,12 +8,14 @@
 
         $gg = $db->prepare("SELECT * FROM `group_g`");
         $gg->execute();
+
         while ($row = $gg->fetch(PDO::FETCH_ASSOC)) {
             if($gg_type == $row["gg_type"] and $gg_age == $row["gg_range_age"]){
                 $gg_id = $row["gg_id"]; 
                 break;
             }
         }
+
         $item_array = array(
             // 'item_agc'           =>     $_POST["agc"],
             // 'item_cus'           =>     $_POST["cus"],
@@ -49,6 +51,7 @@
 
         $cu = $db->prepare("SELECT * FROM `customer`");
         $cu->execute();
+
         $check = array();
         while ($row = $cu->fetch(PDO::FETCH_ASSOC)){
             $name = $row["cus_name"];
@@ -65,7 +68,6 @@
         // ----------------------------- agriculturist -----------------------------
         $agcs = $db->prepare("SELECT * FROM `agriculturist`");
         $agcs->execute();
-
         while ($row = $agcs->fetch(PDO::FETCH_ASSOC)) {
             if($agc == $row["agc_name"]){
                 $agc_id = $row["agc_id"]; 
@@ -358,17 +360,6 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
-    
-    <script>
-        let imgInput = document.getElementById('imgInput');
-        let previewImg = document.getElementById('previewImg');
-
-        imgInput.onchange = evt => {
-            const [file] = imgInput.files;
-                if (file) {
-                    previewImg.src = URL.createObjectURL(file)
-            }
-        }
 
 </body>
 
