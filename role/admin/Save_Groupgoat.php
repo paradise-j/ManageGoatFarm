@@ -53,7 +53,30 @@
                 <div class="modal-body">
                     <form action="Check_add_fg.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภทกลุ่มแพะ</label>
+                            <label for="firstname" class="col-form-label">ประเภท</label>
+                            <!-- <input type="text" required class="form-control" name="type" style="border-radius: 30px;"> -->
+                            <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">แพะพ่อพันธุ์</option>
+                                <option value="2">แพะแม่พันธุ์</option>
+                                <option value="3">แพะขุน</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ช่วงอายุ</label>
+                            <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">1-2 ปี</option>
+                                <option value="2">1-2 ปี</option>
+                                <option value="3">5 ปีขึ้นไป</option>
+                                <option value="4">ไม่เกิน 4 เดือน</option>
+                                <option value="5">ไม่เกิน 5 เดือน</option>
+                                <option value="6">ไม่เกิน 6 เดือน</option>
+                                <option value="7">6 เดือนขึ้นไป</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">จำนวน</label>
                             <input type="text" required class="form-control" name="type" style="border-radius: 30px;">
                         </div>
                         <div class="modal-footer">
