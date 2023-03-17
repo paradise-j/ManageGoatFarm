@@ -88,7 +88,7 @@
                                             <th>ประเภทกลุ่มแพะ</th>
                                             <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
-                                            <th>ชื่อเกษตรกร</th>
+                                            <!-- <th>ชื่อเกษตรกร</th> -->
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -139,7 +139,7 @@
                                                 ?>
                                             </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><?= $gg['agc_name']; ?></td>
+                                            <!-- <td><?= $gg['agc_name']; ?></td> -->
                                             <td><a href="Edit_gg.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
