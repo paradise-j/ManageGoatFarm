@@ -105,8 +105,36 @@
                                         ?>
                                         <tr>
                                             <th scope="row"><?= $gg['gg_id']; ?></th>
-                                            <td><?= $gg['gg_type']; ?></td>
-                                            <td><?= $gg['gg_range_age']; ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($gg['gg_type'] == 1){
+                                                        echo "แพะพ่อพันธุ์";
+                                                    }elseif($gg['gg_type'] == 2){
+                                                        echo "แพะแม่พันธุ์";
+                                                    }else{
+                                                        echo "แพะขุน";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($gg['gg_range_age'] == 1){
+                                                        echo "1-2 ปี";
+                                                    }elseif($gg['gg_range_age'] == 2){
+                                                        echo "3-5 ปี";
+                                                    }elseif($gg['gg_range_age'] == 3){
+                                                        echo "5 ปีขึ้นไป";
+                                                    }elseif($gg['gg_range_age'] == 4){
+                                                        echo "ไม่เกิน 4 เดือน";
+                                                    }elseif($gg['gg_range_age'] == 5){
+                                                        echo "ไม่เกิน 5 เดือน";
+                                                    }elseif($gg['gg_range_age'] == 6){
+                                                        echo "ไม่เกิน 6 เดือน";
+                                                    }else{
+                                                        echo "6 เดือนขึ้นไป";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
                                             <td><a href="Edit_gg.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
