@@ -10,7 +10,7 @@
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Mange_Gfarm.php");
+            header("refresh:1; url=Manage_Gfarm.php");
         }
     }
 
@@ -126,13 +126,19 @@
                                             <th>ตำบล</th>
                                             <th>อำเภอ</th>
                                             <th>จังหวัด</th>
+                                            <th>รหัสไปรษณีย์</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `group_farm`");
+                                            $stmt = $db->query("SELECT group_farm.gf_id , group_farm.gf_name , districts.name_th as districts, amphures.name_th  as amphures, 
+                                                                provinces.name_th  as provinces, districts.zip_code
+                                                                FROM `group_farm` 
+                                                                INNER JOIN `provinces` ON provinces.id = group_farm.gf_province
+                                                                INNER JOIN `amphures` ON amphures.id = group_farm.gf_dis
+                                                                INNER JOIN `districts` ON districts.id = group_farm.gf_subdis");
                                             $stmt->execute();
                                             $gfs = $stmt->fetchAll();
 
@@ -144,9 +150,10 @@
                                         <tr>
                                             <th scope="row"><?= $gf['gf_id']; ?></th>
                                             <td><?= $gf['gf_name']; ?></td>
-                                            <td><?= $gf['gf_subdis']; ?></td>
-                                            <td><?= $gf['gf_dis']; ?></td>
-                                            <td><?= $gf['gf_province']; ?></td>
+                                            <td><?= $gf['districts']; ?></td>
+                                            <td><?= $gf['amphures']; ?></td>
+                                            <td><?= $gf['provinces']; ?></td>
+                                            <td><?= $gf['zip_code']; ?></td>
                                             <td><a href="Edit_gf.php?edit_id=<?= $gf['gf_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
                                             <td><a data-id="<?= $gf['gf_id']; ?>" href="?delete=<?= $gf['gf_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
@@ -205,7 +212,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Mange_Gfarm.php',
+                                url: 'Manage_Gfarm.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -215,7 +222,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Mange_Gfarm.php';
+                                    document.location.href = 'Manage_Gfarm.php';
                                 })
                             })
                             .fail(function() {

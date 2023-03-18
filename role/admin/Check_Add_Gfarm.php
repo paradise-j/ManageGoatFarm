@@ -10,8 +10,8 @@
         $amphures = $_POST['amphures'];
         $districts = $_POST['districts'];
         $zipcode = $_POST['zipcode'];
-        $sql = $db->prepare("INSERT INTO `group_farm`(`gf_name`, `gf_subdis`, `gf_dis`, `gf_province`) VALUES
-                             VALUES ('$namegf','$provinces','$amphures','$districts','$zipcode')");
+        $sql = $db->prepare("INSERT INTO `group_farm`(`gf_name`, `gf_subdis`, `gf_dis`, `gf_province`, `gf_zipcode`)
+                             VALUES ('$namegf','$districts','$amphures','$provinces','$zipcode')");
         $sql->execute();
 
         if ($sql) {
@@ -27,10 +27,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Mange_Gfarm.php");
+            header("refresh:1; url=Manage_Gfarm.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Mange_Gfarm.php");
+            header("location: Manage_Gfarm.php");
         }
     }
 ?>

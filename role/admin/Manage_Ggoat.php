@@ -4,7 +4,7 @@
 
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
-        echo $delete_id;
+        // echo $delete_id;
         $deletestmt = $db->query("DELETE FROM `group_g` WHERE `gg_id` = '$delete_id'");
         $deletestmt->execute();
         
@@ -13,6 +13,7 @@
             header("refresh:1; url=Manage_food.php");
         }
     }
+
 
     
 ?>
@@ -55,6 +56,47 @@
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภทกลุ่มแพะ</label>
                             <input type="text" required class="form-control" name="type" style="border-radius: 30px;">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EditGgoatModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">                        
+                    <form action="Check_add_fg.php" method="POST">
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">รหัสกลุ่มแพะ</label>
+                            <input type="text" required class="form-control" name="update_id" style="border-radius: 30px;" value="<?= $gg_id; ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ประเภท</label>
+                            <select class="form-control" aria-label="Default select example" name="update_type" style="border-radius: 30px;" value="<?= $gg_type; ?>" required>
+                                <option value="1">แพะพ่อพันธุ์</option>
+                                <option value="2">แพะแม่พันธุ์</option>
+                                <option value="3">แพะขุน</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ช่วงอายุ</label>
+                            <select class="form-control" aria-label="Default select example" name="update_range_age" style="border-radius: 30px;" value="<?= $gg_range_age; ?>" required>
+                                <option value="1">1-2 ปี</option>
+                                <option value="2">1-2 ปี</option>
+                                <option value="3">5 ปีขึ้นไป</option>
+                                <option value="4">ไม่เกิน 4 เดือน</option>
+                                <option value="5">ไม่เกิน 5 เดือน</option>
+                                <option value="6">ไม่เกิน 6 เดือน</option>
+                                <option value="7">6 เดือนขึ้นไป</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">จำนวน</label>
+                            <input type="text" required class="form-control" name="update_quantity" style="border-radius: 30px;" value="<?= $gg_quantity; ?>">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
@@ -136,7 +178,8 @@
                                                 ?>
                                             </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
-                                            <td><a href="Edit_gg.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><button  type="button" class="btn btn-warning editbtn" >Edit</button></td>
+                                            <!-- <td><a href="?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning editbtn" data-toggle="modal" data-target="#EditGgoatModal">Edit</a></td> -->
                                             <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
                                         </tr>
                                         <?php }  
@@ -181,6 +224,8 @@
             deleteConfirm(userId);
         })
 
+
+
         function deleteConfirm(userId) {
             Swal.fire({
                 title: 'ลบข้อมูล',
@@ -218,6 +263,23 @@
                 },
             });
         }
+        
+        // $(document).ready(function(){
+            $('.editbtn').on('click',function(){
+                $('#EditGgoatModal').modal('show');
+                    $tr = $(this).closest('tr');
+
+                    var data = $tr.children("td").map(function(){
+                        return $(this).text();
+                    }).get();
+
+                    $('#update_id').val(data[0]);
+                    $('#update_type').val(data[1]);
+                    $('#update_range_age').val(data[2]);
+                    $('#update_quantity').val(data[3]);
+            });
+        // });
+        
     </script>
 
 </body>
