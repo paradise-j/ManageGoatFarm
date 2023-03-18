@@ -26,6 +26,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="Manage_agc.php">ข้อมูลเกษตรกร</a>
                 <a class="collapse-item" href="Manage_Ggoat.php">ข้อมูลกลุ่มแพะ</a>
+                <a class="collapse-item" href="Manage_Gfarm.php">ข้อมูลกลุ่มเลี้ยง</a>
                 <a class="collapse-item" href="Manage_food.php">ข้อมูลอาหาร</a>
                 <a class="collapse-item" href="Manage_disease.php">ข้อมูลโรค</a>
                 <a class="collapse-item" href="Manage_vm.php">ข้อมูลยาและวัคซีน</a>
