@@ -272,7 +272,6 @@
                 url : "address.php",
                 data : {id:id_districts,function:'districts'},
                 success: function(data){
-                    // console.log(data)
                     $('#zipcode').val(data)
                 }
             });
