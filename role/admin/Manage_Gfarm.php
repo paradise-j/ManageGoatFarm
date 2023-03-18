@@ -5,12 +5,12 @@
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
         echo $delete_id;
-        $deletestmt = $db->query("DELETE FROM `gf_data` WHERE `gf_id` = '$delete_id'");
+        $deletestmt = $db->query("DELETE FROM `group_farm` WHERE `gf_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
             echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Manage_vm.php");
+            header("refresh:1; url=Mange_Gfarm.php");
         }
     }
 
@@ -51,18 +51,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_vm.php" method="POST">
-                        <!-- <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" id="typevm" name="typevm" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">ยา</option>
-                                <option value="2">วัคซีน</option>
-                            </select>
-                        </div> -->
+                    <form action="Check_Add_Gfarm.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ชื่อกลุ่ม</label>
-                            <input type="text" required class="form-control" name="namevm" style="border-radius: 30px;">
+                            <input type="text" required class="form-control" name="namegf" style="border-radius: 30px;">
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">จังหวัด</label>
@@ -213,7 +205,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_vm.php',
+                                url: 'Mange_Gfarm.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -223,7 +215,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_vm.php';
+                                    document.location.href = 'Mange_Gfarm.php';
                                 })
                             })
                             .fail(function() {
