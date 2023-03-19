@@ -111,7 +111,7 @@
                                             <td><?= $gdis['gdis_name']; ?></td>
                                             <td><?= $gdis['gdis_descrip']; ?></td>
                                             <td><a href="Edit_gdis.php?edit_id=<?= $gdis['gdis_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                            <td><a data-id="<?= $gdis['gdis_id']; ?>" href="?delete=<?= $gdis['gdis_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></a></td>
+                                            <td><a data-id="<?= $gdis['gdis_id']; ?>" href="?delete=<?= $gdis['gdis_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
