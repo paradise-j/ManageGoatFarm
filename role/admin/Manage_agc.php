@@ -91,6 +91,8 @@
                                                             echo "ประธานกลุ่ม";
                                                         }elseif($agc['agc_position_G'] == 2){
                                                             echo "รองประธานกลุ่ม";
+                                                        }elseif($agc['agc_position_G'] == 3){
+                                                            echo "เลขานุการ";
                                                         }
                                                     ?>
                                                 </td>
