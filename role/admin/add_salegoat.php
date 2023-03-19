@@ -164,14 +164,6 @@
                                     <form action="?" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-2">
                                             <div class="col-md-1"></div>
-                                            <!-- <div class="col-md-3">
-                                                <label class="form-label">ชื่อ-สกุล เกษตรกร</label>
-                                                <input type="text" class="form-control" id="name" name="agc" style="border-radius: 30px;" value="นายสมรัก อึอิ" required>
-                                            </div> -->
-                                            <!-- <div class="col-md-3">
-                                                <label class="form-label">ชื่อ-สกุล ผู้ซื้อ</label>
-                                                <input type="text" class="form-control" id="Fname" name="cus" style="border-radius: 30px;" value="นายสมยศ คูคู" required>
-                                            </div> -->
                                             <div class="col-md-2">
                                                 <label class="form-label">ประเภทแพะ</label>
                                                 <select class="form-control" aria-label="Default select example"  name="gg_type" style="border-radius: 30px;" required>

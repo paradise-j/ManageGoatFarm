@@ -4,7 +4,6 @@
 
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
-        echo $delete_id;
         $deletestmt = $db->query("DELETE FROM `group_g` WHERE `gg_id` = '$delete_id'");
         $deletestmt->execute();
         
@@ -12,6 +11,12 @@
             echo "<script>alert('Data has been deleted successfully');</script>";
             header("refresh:1; url=Manage_food.php");
         }
+    }
+
+    // echo '<pre>' . print_r($_SESSION["id"], TRUE) . '</pre>';
+
+    if (isset($_SESSION["id"])){
+        $id = $_SESSION["id"];
     }
 
     
@@ -51,7 +56,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_add_fg.php" method="POST">
+                    <form action="Check_add_SaveGgoat.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภท</label>
                             <!-- <input type="text" required class="form-control" name="type" style="border-radius: 30px;"> -->

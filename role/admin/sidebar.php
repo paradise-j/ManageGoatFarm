@@ -67,7 +67,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="Report.php">
             <i class="fa-solid fa-clipboard-list"></i>
             <span>การออกรายงาน</span></a>
     </li>
