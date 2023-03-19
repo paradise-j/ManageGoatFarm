@@ -108,8 +108,8 @@
                                         <tr>
                                             <th scope="row"><?= $gb['gb_id']; ?></th>
                                             <td><?= $gb['gb_name']; ?></td>
-                                            <td><a href="Edit_gb.php?edit_id=<?= $gb['gb_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gb['gb_id']; ?>" href="?delete=<?= $gb['gb_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="Edit_gb.php?edit_id=<?= $gb['gb_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $gb['gb_id']; ?>" href="?delete=<?= $gb['gb_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>

@@ -107,7 +107,7 @@
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
-                                            <!-- <th></th> -->
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -157,11 +157,8 @@
                                             <td><?= $gg['gg_quantity']; ?></td>
                                             <!-- <td><button  type="button" class="btn btn-warning editbtn" >Edit</button></td> -->
                                             <!-- <td><a href="edit_Ggoat.php?edit_id=<?= $gg['gg_id'];?>" class="btn btn-warning" data-toggle="modal" data-target="#EditGgoatModal">Edit</a></td> -->
-                                            <td>
-                                                <a href="edit_Ggoat.php?edit_id=<?= $gg['gg_id'];?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a>
-                                            </td>
-                                            <!-- <td></td> -->
+                                            <td><a href="edit_Ggoat.php?edit_id=<?= $gg['gg_id'];?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>

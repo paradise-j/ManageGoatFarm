@@ -42,7 +42,7 @@
             <!-- <i class="fas fa-fw fa-wrench"></i> -->
             <!-- <i class="fas fa-fw fa-cog"></i> -->
             <i class="fa-solid fa-folder"></i>
-            <span>บันทึกข้อมูลการเลี้งแพะ</span>
+            <span>บันทึกข้อมูลการเลี้ยงแพะ</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">

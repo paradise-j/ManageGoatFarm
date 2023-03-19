@@ -103,8 +103,8 @@
                                                 </td>
                                                 <td><?= $agc['agc_phone']; ?></td>
                                                 <td width="100px"><img class="rounded" width="100%" src="uploads/<?= $agc['agc_img']; ?>" alt=""></td>
-                                                <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                                <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                                <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></a></td>
+                                                <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></a></td>
                                             </tr>
                                             <?php }  
                                                 } ?>
