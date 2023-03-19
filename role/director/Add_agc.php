@@ -1,6 +1,10 @@
 <?php 
-    require_once 'connect.php';
     session_start();
+    if(!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 1){
+        header("location: ../../index.php");
+        exit;
+    }
+    require_once 'connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -195,34 +199,34 @@
                     previewImg.src = URL.createObjectURL(file)
             }
         }
-        function enable() {
-            document.getElementById("idAgc").disabled = false;
-            document.getElementById("name").disabled = false;
-            document.getElementById("Fname").disabled = false;
-            document.getElementById("position").disabled = false;
-            document.getElementById("Gname").disabled = false;
-            document.getElementById("personid").disabled = false;
-            document.getElementById("phone").disabled = false;
-            document.getElementById("edu").disabled = false;
-            document.getElementById("exper").disabled = false;
-            document.getElementById("obj").disabled = false;
-            document.getElementById("type").disabled = false;
-            document.getElementById("imgInput").disabled = false;
-        }
-        function disable() {
-            document.getElementById("idAgc").disabled = true;
-            document.getElementById("name").disabled = true;
-            document.getElementById("Fname").disabled = true;
-            document.getElementById("position").disabled = true;
-            document.getElementById("Gname").disabled = true;
-            document.getElementById("personid").disabled = true;
-            document.getElementById("phone").disabled = true;
-            document.getElementById("edu").disabled = true;
-            document.getElementById("exper").disabled = true;
-            document.getElementById("obj").disabled = true;
-            document.getElementById("type").disabled = true;
-            document.getElementById("imgInput").disabled = true;
-        }
+        // function enable() {
+        //     document.getElementById("idAgc").disabled = false;
+        //     document.getElementById("name").disabled = false;
+        //     document.getElementById("Fname").disabled = false;
+        //     document.getElementById("position").disabled = false;
+        //     document.getElementById("Gname").disabled = false;
+        //     document.getElementById("personid").disabled = false;
+        //     document.getElementById("phone").disabled = false;
+        //     document.getElementById("edu").disabled = false;
+        //     document.getElementById("exper").disabled = false;
+        //     document.getElementById("obj").disabled = false;
+        //     document.getElementById("type").disabled = false;
+        //     document.getElementById("imgInput").disabled = false;
+        // }
+        // function disable() {
+        //     document.getElementById("idAgc").disabled = true;
+        //     document.getElementById("name").disabled = true;
+        //     document.getElementById("Fname").disabled = true;
+        //     document.getElementById("position").disabled = true;
+        //     document.getElementById("Gname").disabled = true;
+        //     document.getElementById("personid").disabled = true;
+        //     document.getElementById("phone").disabled = true;
+        //     document.getElementById("edu").disabled = true;
+        //     document.getElementById("exper").disabled = true;
+        //     document.getElementById("obj").disabled = true;
+        //     document.getElementById("type").disabled = true;
+        //     document.getElementById("imgInput").disabled = true;
+        // }
     </script>
 
 </body>

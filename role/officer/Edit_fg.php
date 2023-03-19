@@ -1,6 +1,10 @@
 <?php 
     session_start();
-    require_once "connect.php";
+    if(!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 1){
+        header("location: ../../index.php");
+        exit;
+    }
+    require_once 'connect.php';
 
     if (isset($_REQUEST['edit_id'])) {
         $id = $_REQUEST['edit_id'];

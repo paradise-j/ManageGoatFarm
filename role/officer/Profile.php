@@ -1,6 +1,10 @@
 <?php 
-    require_once 'connect.php';
     session_start();
+    if(!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 1){
+        header("location: ../../index.php");
+        exit;
+    }
+    require_once 'connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
