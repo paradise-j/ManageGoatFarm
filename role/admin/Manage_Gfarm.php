@@ -53,11 +53,11 @@
                 <div class="modal-body">
                     <form action="Check_Add_Gfarm.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ชื่อกลุ่ม</label>
+                            <label for="" class="col-form-label">ชื่อกลุ่ม</label>
                             <input type="text" required class="form-control" name="namegf" style="border-radius: 30px;">
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">จังหวัด</label>
+                            <label for="" class="col-form-label">จังหวัด</label>
                             <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกจังหวัด....</option>
                                 <?php 
@@ -74,19 +74,15 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">อำเภอ</label>
+                            <label for="" class="col-form-label">อำเภอ</label>
                             <select class="form-control" aria-label="Default select example" id="amphures" name="amphures" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกอำเภอ....</option>
-                                <!-- <option value="1">ยา</option>
-                                <option value="2">วัคซีน</option> -->
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ตำบล</label>
                             <select class="form-control" aria-label="Default select example" id="districts" name="districts" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกตำบล....</option>
-                                <!-- <option value="1">ยา</option>
-                                <option value="2">วัคซีน</option> -->
                             </select>
                         </div>
                         <div class="mb-3">
@@ -154,8 +150,8 @@
                                             <td><?= $gf['amphures']; ?></td>
                                             <td><?= $gf['provinces']; ?></td>
                                             <td><?= $gf['zip_code']; ?></td>
-                                            <td><a href="Edit_gf.php?edit_id=<?= $gf['gf_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gf['gf_id']; ?>" href="?delete=<?= $gf['gf_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="Edit_gf.php?edit_id=<?= $gf['gf_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $gf['gf_id']; ?>" href="?delete=<?= $gf['gf_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
@@ -258,7 +254,6 @@
                 url : "address.php",
                 data : {id:id_amphures,function:'amphures'},
                 success: function(data){
-                    // console.log(data)
                     $('#districts').html(data);
                 }
             });

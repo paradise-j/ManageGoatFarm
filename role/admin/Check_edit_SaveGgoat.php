@@ -5,11 +5,11 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
+        $id = $_POST['id'];
         $type = $_POST['type'];
-        $name = $_POST['name'];
-        $gb_id = $_POST['gb'];
-        $sql = $db->prepare("INSERT INTO `fm_data`(`fm_type`, `fm_name`, `gb_id`)
-                             VALUES ('$type','$name','$gb_id')");
+        $range_age = $_POST['range_age'];
+        $quantity = $_POST['quantity'];
+        $sql = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $quantity WHERE `gg_id` = '$id' ");
         $sql->execute();
 
         if ($sql) {
@@ -25,10 +25,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Save_FMgoat.php");
+            header("refresh:2; url=Save_Groupgoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Save_FMgoat.php");
+            header("location: Save_Groupgoat.php");
         }
     }
 ?>

@@ -5,11 +5,11 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
+        $id = $_POST['id'];
         $type = $_POST['type'];
         $name = $_POST['name'];
-        $gb_id = $_POST['gb'];
-        $sql = $db->prepare("INSERT INTO `fm_data`(`fm_type`, `fm_name`, `gb_id`)
-                             VALUES ('$type','$name','$gb_id')");
+        $breed = $_POST['breed'];
+        $sql = $db->prepare("UPDATE `fm_data` SET `fm_type`='$type',`fm_name`='$name',`gb_id`='$breed' WHERE `fm_id`='$id'");
         $sql->execute();
 
         if ($sql) {

@@ -5,11 +5,18 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $type = $_POST['type'];
-        $name = $_POST['name'];
-        $gb_id = $_POST['gb'];
-        $sql = $db->prepare("INSERT INTO `fm_data`(`fm_type`, `fm_name`, `gb_id`)
-                             VALUES ('$type','$name','$gb_id')");
+        $id = $_POST['id'];
+        $FB = $_POST['FB'];
+        $MB = $_POST['MB'];
+        $quantity = $_POST['quantity'];
+        $g_male = $_POST['g_male'];
+        $g_female = $_POST['g_female'];
+        $date = $_POST['date'];
+
+
+        $sql = $db->prepare("UPDATE `nbg_data` SET `nbg_quantity`='$quantity',`nbg_male`='$g_male',`nbg_female`='$g_female',
+                                                   `nbg_date`='$date',`F_id`='$FB',`M_id`='$MB' 
+                                                   WHERE `nbg_id`='$id'");
         $sql->execute();
 
         if ($sql) {
@@ -25,10 +32,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Save_FMgoat.php");
+            header("refresh:1; url=Save_NBgoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Save_FMgoat.php");
+            header("location: Save_NBgoat.php");
         }
     }
 ?>
