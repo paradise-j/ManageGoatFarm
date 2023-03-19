@@ -89,6 +89,8 @@
                                                     <?php 
                                                         if($agc['agc_position_G'] == 1 ) {
                                                             echo "ประธานกลุ่ม";
+                                                        }elseif($agc['agc_position_G'] == 2){
+                                                            echo "รองประธานกลุ่ม";
                                                         }
                                                     ?>
                                                 </td>

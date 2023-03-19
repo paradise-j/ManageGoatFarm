@@ -62,7 +62,7 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">รหัสเกษตรกร</label>
-                                                <input type="text" class="form-control" id="id" name="id" style="border-radius: 30px;" value="<?= $agc_id; ?>" required>
+                                                <input type="text" class="form-control" id="id" name="id" style="border-radius: 30px;" value="<?= $agc_id; ?>" readonly required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อ-สกุล</label>
@@ -74,12 +74,12 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ตำแหน่ง</label>
-                                                <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" value="<?= $agc_position_G; ?>" required>
-                                                    <option value="1">ประธาน</option>
-                                                    <option value="2">รองประธาน</option>
-                                                    <option value="3">เลขานุการ</option>
-                                                    <option value="4">สมาชิก</option>
-                                                    <option value="4">การตลาด</option>
+                                                <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
+                                                    <option <?php if($agc_position_G == '1') echo "selected"; ?> value="1">ประธาน</option>
+                                                    <option <?php if($agc_position_G == '2') echo "selected"; ?> value="2">รองประธาน</option>
+                                                    <option <?php if($agc_position_G == '3') echo "selected"; ?> value="3">เลขานุการ</option>
+                                                    <option <?php if($agc_position_G == '4') echo "selected"; ?> value="4">สมาชิก</option>
+                                                    <option <?php if($agc_position_G == '5') echo "selected"; ?> value="5">การตลาด</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
-                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" value="<?= $agc_personid; ?>" required>
+                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" value="<?= $agc_personid; ?>" readonly required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เบอร์โทรศัพท์</label>
@@ -98,12 +98,12 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ระดับการศึกษา</label>
-                                                <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" value="<?= $agc_edu; ?>" required>
-                                                    <option value="1">ประถมศึกษา</option>
-                                                    <option value="2">มัธยมศึกษา</option>
-                                                    <option value="3">ปวช.</option>
-                                                    <option value="4">ปวส.</option>
-                                                    <option value="5">ปริญาตรี</option>
+                                                <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
+                                                    <option <?php if($agc_edu == '1') echo "selected"; ?> value="1" >ประถมศึกษา</option>
+                                                    <option <?php if($agc_edu == '2') echo "selected"; ?> value="2" >มัธยมศึกษา</option>
+                                                    <option <?php if($agc_edu == '3') echo "selected"; ?> value="3" >ปวช.</option>
+                                                    <option <?php if($agc_edu == '4') echo "selected"; ?> value="4" >ปวส.</option>
+                                                    <option <?php if($agc_edu == '5') echo "selected"; ?> value="5" >ปริญาตรี</option>
                                                 </select>
                                             </div>
 
@@ -112,26 +112,26 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประสบการณ์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;"  value="<?= $agc_exper; ?>" required>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
+                                                <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;" required>
+                                                    <option <?php if($agc_exper == '1') echo "selected"; ?> value="1">1-2 ปี</option>
+                                                    <option <?php if($agc_exper == '2') echo "selected"; ?> value="2">3-5 ปี</option>
+                                                    <option <?php if($agc_exper == '3') echo "selected"; ?> value="3">5 ปีขึ้นไป</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">จุดประสงค์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;"  value="<?= $agc_obj; ?>" required>
-                                                    <option value="1">เพื่อขุนขาย</option>
-                                                    <option value="2">เพื่อขายพ่อ-แม่พันธุ์</option>
-                                                    <option value="3">เพื่อขุนขายและขายพ่อ-แม่พันธุ์</option>
+                                                <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;" required>
+                                                    <option <?php if($agc_obj == '1') echo "selected"; ?> value="1">เพื่อขุนขาย</option>
+                                                    <option <?php if($agc_obj == '2') echo "selected"; ?> value="2">เพื่อขายพ่อ-แม่พันธุ์</option>
+                                                    <option <?php if($agc_obj == '3') echo "selected"; ?> value="3">เพื่อขุนขายและขายพ่อ-แม่พันธุ์</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประเภทลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" value="<?= $agc_type; ?>" required>
-                                                    <option value="1">แบบยืนโรง</option>
-                                                    <option value="2">แบบกึ่ง</option>
-                                                    <option value="3">แบบธรรมชาติ</option>
+                                                <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                                    <option <?php if($agc_type == '1') echo "selected"; ?> value="1">แบบยืนโรง</option>
+                                                    <option <?php if($agc_type == '2') echo "selected"; ?> value="2">แบบกึ่ง</option>
+                                                    <option <?php if($agc_type == '3') echo "selected"; ?> value="3">แบบธรรมชาติ</option>
                                                 </select>
                                             </div>
                                         </div>

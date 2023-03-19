@@ -79,7 +79,7 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
-                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" value="1" required>
+                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
