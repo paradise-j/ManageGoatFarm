@@ -1,15 +1,27 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <hr class="sidebar-divider my-0">
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="index.php">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>ผู้ดูแลระบบ</span>
+        </a>
+    </li> -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fa-solid fa-house-chimney"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">ผู้ดูแลระบบ</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>หน้าหลัก</span>
         </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="Profile.php">
             <i class="fa-solid fa-user-pen"></i>
@@ -36,11 +48,9 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
-            <!-- <i class="fas fa-fw fa-wrench"></i> -->
-            <!-- <i class="fas fa-fw fa-cog"></i> -->
             <i class="fa-solid fa-folder"></i>
             <span>บันทึกข้อมูลการเลี้ยงแพะ</span>
         </a>
@@ -56,14 +66,14 @@
                 <a class="collapse-item" href="Save_money.php">รายรับ-รายจ่าย</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="add_salegoat.php">
             <i class="fa-solid fa-basket-shopping"></i>
             <span>การขายแพะ</span></a>
-    </li>
+    </li> -->
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">

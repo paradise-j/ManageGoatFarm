@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-lg-3 col-md-6">
                             <div class="card border-left-primary shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-lg-3 col-md-6">
                             <div class="card border-left-success shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -126,8 +126,34 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-80">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-md font-weight-bold text-info text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
+                                            <div class="h5 mb-1 font-weight-bold text-gray-800">
+                                                <?php
+                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
+                                                    $stmt->execute();
+                                                    $ggs = $stmt->fetchAll();
+                                                    foreach($ggs as $gg){
+                                                        echo $gg['total'];
+                                                    }
+                                                ?>
+                                                 ตัว
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
+                                            <i class="fa-light fa-paw-simple text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="col-xl-3 col-md-6">
                             <div class="card border-left-info shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -153,9 +179,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -170,11 +196,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-9 col-lg-7">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">สรุปยอดขาย</h6>
@@ -186,8 +212,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-3 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดแพะ</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <!-- <canvas id="myPieChart"></canvas> -->
+                                    </div>
+                                    <div class="mt-4 text-center small"> 
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle"></i> สรุปยอดขายของแพะแต่ละประเภท
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="col-xl-4 col-lg-5">
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-7">
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -202,21 +249,6 @@
                                             <i class="fas fa-circle"></i> สรุปยอดขายของแพะแต่ละประเภท
                                         </span>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                                </div>
-                                <div class="card-body">
-                                    <!-- <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
