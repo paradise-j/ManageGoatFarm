@@ -69,7 +69,7 @@
                                             <div class="col-md-2">
                                                 <label class="form-label">ตำแหน่ง</label>
                                                 <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option selected disabled>กรุณาเลือก....</option>
                                                     <option value="1">ประธาน</option>
                                                     <option value="2">รองประธาน</option>
                                                     <option value="3">เลขานุการ</option>
@@ -96,7 +96,7 @@
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ระดับการศึกษา</label>
                                                 <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option selected disabled>กรุณาเลือก....</option>
                                                     <option value="1">ประถมศึกษา</option>
                                                     <option value="2">มัธยมศึกษา</option>
                                                     <option value="3">ปวช.</option>
@@ -111,7 +111,7 @@
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประสบการณ์เลี้ยง</label>
                                                 <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option selected disabled>กรุณาเลือก....</option>
                                                     <option value="1">1-2 ปี</option>
                                                     <option value="2">3-5 ปี</option>
                                                     <option value="3">5 ปีขึ้นไป</option>
@@ -120,7 +120,7 @@
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">จุดประสงค์เลี้ยง</label>
                                                 <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option selected disabled>กรุณาเลือก....</option>
                                                     <option value="1">เพื่อขุนขาย</option>
                                                     <option value="2">เพื่อขายพ่อ-แม่พันธุ์</option>
                                                     <option value="3">เพื่อขุนขายและขายพ่อ-แม่พันธุ์</option>
@@ -129,7 +129,7 @@
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประเภทลี้ยง</label>
                                                 <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
+                                                    <option selected disabled>กรุณาเลือก....</option>
                                                     <option value="1">แบบยืนโรง</option>
                                                     <option value="2">แบบกึ่ง</option>
                                                     <option value="3">แบบธรรมชาติ</option>

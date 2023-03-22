@@ -83,13 +83,6 @@
                             <label class="col-form-label">ช่วงอายุแพะ</label>
                             <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
-                                <option value="1">1-2 ปี</option>
-                                <option value="2">3-5 ปี</option>
-                                <option value="3">5 ปีขึ้นไป</option>
-                                <option value="4">ไม่เกิน 3 เดือน</option>
-                                <option value="5">3-4 เดือน</option>
-                                <option value="6">4-5 เดือน</option>
-                                <option value="7">5 เดือนขึ้นไป</option>
                             </select>
                         </div>
                         <div class="mb-3">
