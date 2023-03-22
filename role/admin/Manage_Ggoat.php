@@ -54,29 +54,46 @@
                 <div class="modal-body">
                     <form action="Check_add_Ggoat.php" method="POST">
                         <div class="mb-3">
-                            <label for="update_type" class="col-form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
+                            <label for="update_type" class="col-form-label">เกษตรกร</label>
+                            <select class="form-control" aria-label="Default select example" name="name" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกเกษตรกร....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `agriculturist`");
+                                    $stmt->execute();
+                                    $agcs = $stmt->fetchAll();
+                                    
+                                    foreach($agcs as $agc){
+                                ?>
+                                <option value="<?= $agc['agc_id']?>"><?= $agc['agc_name']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update_type" class="col-form-label">ประเภทแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกประเภท....</option>
-                                <option value="1">แพะพ่อพันธุ์</option>
-                                <option value="2">แพะแม่พันธุ์</option>
+                                <option value="1">พ่อพันธุ์</option>
+                                <option value="2">แม่พันธุ์</option>
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="update_range_age" class="col-form-label">ช่วงอายุ</label>
-                            <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
+                            <label class="col-form-label">ช่วงอายุแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                                 <option value="1">1-2 ปี</option>
                                 <option value="2">3-5 ปี</option>
                                 <option value="3">5 ปีขึ้นไป</option>
-                                <option value="4">ไม่เกิน 4 เดือน</option>
-                                <option value="5">ไม่เกิน 5 เดือน</option>
-                                <option value="6">ไม่เกิน 6 เดือน</option>
-                                <option value="7">6 เดือนขึ้นไป</option>
+                                <option value="4">ไม่เกิน 3 เดือน</option>
+                                <option value="5">3-4 เดือน</option>
+                                <option value="6">4-5 เดือน</option>
+                                <option value="7">5 เดือนขึ้นไป</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">จำนวน</label>
+                            <label for="firstname" class="col-form-label">จำนวนแพะ (ตัว)</label>
                             <input type="text" required class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
                         <div class="modal-footer">
@@ -107,27 +124,29 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr align="center">
-                                            <th>รหัสกลุ่มแพะ</th>
+                                            <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>เกษตรกร</th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `group_g`");
+                                            $stmt = $db->query("SELECT group_g.gg_id , group_g.gg_type , group_g.gg_range_age , group_g.gg_quantity , agriculturist.agc_name 
+                                                                FROM `group_g` INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id; ");
                                             $stmt->execute();
                                             $ggs = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$ggs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($ggs as $gg)  {  
                                         ?>
-                                        <tr>
-                                            <td scope="row"><?= $gg['gg_id']; ?></td>
+                                        <tr align="center">
+                                            <td scope="row"><?= $count ;?></td>
                                             <td>
                                                 <?php 
                                                     if($gg['gg_type'] == 1){
@@ -148,23 +167,25 @@
                                                     }elseif($gg['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
                                                     }elseif($gg['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 4 เดือน";
+                                                        echo "ไม่เกิน 3 เดือน";
                                                     }elseif($gg['gg_range_age'] == 5){
-                                                        echo "ไม่เกิน 5 เดือน";
+                                                        echo "3-4 เดือน";
                                                     }elseif($gg['gg_range_age'] == 6){
-                                                        echo "ไม่เกิน 6 เดือน";
+                                                        echo "4-5 เดือน";
                                                     }else{
-                                                        echo "6 เดือนขึ้นไป";
+                                                        echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
+                                            <td><?= $gg['agc_name']; ?></td>
                                             <!-- <td><button  type="button" class="btn btn-warning editbtn" >Edit</button></td> -->
                                             <!-- <td><a href="edit_Ggoat.php?edit_id=<?= $gg['gg_id'];?>" class="btn btn-warning" data-toggle="modal" data-target="#EditGgoatModal">Edit</a></td> -->
                                             <td><a href="edit_Ggoat.php?edit_id=<?= $gg['gg_id'];?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
-                                        <?php }  
+                                            <?php $count++ ;?> 
+                                        <?php }
                                             } ?>
                                     </tbody>
                                 </table>
@@ -242,7 +263,39 @@
                 },
             });
         }
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
 
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
     </script>
 </body>
 
