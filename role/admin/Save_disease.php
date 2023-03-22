@@ -156,7 +156,7 @@
                                             </td>
                                             <td class="date_th"><?= $gd['gd_date']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>

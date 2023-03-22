@@ -195,8 +195,8 @@
                                             <td><?= $gfg['gfg_quantity']; ?></td>
                                             <td><?= $gfg['gfg_price']; ?></td>
                                             <td class="date_th"><?= $gfg['gfg_date']; ?></td>
-                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>

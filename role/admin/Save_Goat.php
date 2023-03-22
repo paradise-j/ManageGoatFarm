@@ -130,8 +130,8 @@
                                         <tr>
                                             <th scope="row"><?= $fg['fg_id']; ?></th>
                                             <td><?= $fg['fg_type']; ?></td>
-                                            <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>

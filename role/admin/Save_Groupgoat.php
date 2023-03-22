@@ -15,15 +15,7 @@
             echo "<script>alert('Data has been deleted successfully');</script>";
             header("refresh:1; url=Manage_food.php");
         }
-    }
-
-    // echo '<pre>' . print_r($_SESSION["id"], TRUE) . '</pre>';
-
-    if (isset($_SESSION["id"])){
-        $id = $_SESSION["id"];
-    }
-
-    
+    }    
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +32,7 @@
     <title>จัดการข้อมูลกลุ่มแพะ</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/seedling-solid.svg" />
+    <link rel="icon" type="image/png" href="img/Goat2.png" />
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -62,31 +54,23 @@
                 <div class="modal-body">
                     <form action="Check_add_SaveGgoat.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภท</label>
-                            <!-- <input type="text" required class="form-control" name="type" style="border-radius: 30px;"> -->
-                            <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">แพะพ่อพันธุ์</option>
-                                <option value="2">แพะแม่พันธุ์</option>
+                            <label for="update_type" class="col-form-label">ประเภทแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกประเภท....</option>
+                                <option value="1">พ่อพันธุ์</option>
+                                <option value="2">แม่พันธุ์</option>
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ช่วงอายุ</label>
-                            <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">1-2 ปี</option>
-                                <option value="2">1-2 ปี</option>
-                                <option value="3">5 ปีขึ้นไป</option>
-                                <option value="4">ไม่เกิน 4 เดือน</option>
-                                <option value="5">ไม่เกิน 5 เดือน</option>
-                                <option value="6">ไม่เกิน 6 เดือน</option>
-                                <option value="7">6 เดือนขึ้นไป</option>
+                            <label class="col-form-label">ช่วงอายุแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">จำนวน</label>
-                            <input type="text" required class="form-control" name="type" style="border-radius: 30px;">
+                            <label for="firstname" class="col-form-label">จำนวนแพะ (ตัว)</label>
+                            <input type="number" required class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
@@ -115,14 +99,14 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
+                                        <tr align="center">
                                             <th>รหัสกลุ่มแพะ</th>
                                             <th>ประเภทกลุ่มแพะ</th>
                                             <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
                                             <!-- <th>ชื่อเกษตรกร</th> -->
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,14 +116,14 @@
                                                                 INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id; ");
                                             $stmt->execute();
                                             $ggs = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$ggs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($ggs as $gg)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $gg['gg_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count;?> </th>
                                             <td>
                                                 <?php
                                                     if($gg['gg_type'] == 1){
@@ -160,21 +144,22 @@
                                                     }elseif($gg['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
                                                     }elseif($gg['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 4 เดือน";
+                                                        echo "ไม่เกิน 3 เดือน";
                                                     }elseif($gg['gg_range_age'] == 5){
-                                                        echo "ไม่เกิน 5 เดือน";
+                                                        echo "3-4 เดือน";
                                                     }elseif($gg['gg_range_age'] == 6){
-                                                        echo "ไม่เกิน 6 เดือน";
+                                                        echo "4-5 เดือน";
                                                     }else{
-                                                        echo "6 เดือนขึ้นไป";
+                                                        echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
                                             <td><?= $gg['gg_quantity']; ?></td>
                                             <!-- <td><?= $gg['agc_name']; ?></td> -->
-                                            <td><a href="edit_SaveGgoat.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="edit_SaveGgoat.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                            <?php $count++ ;?> 
                                         <?php }  
                                             } ?>
                                     </tbody>
@@ -254,6 +239,40 @@
                 },
             });
         }
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
+
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
     </script>
 
 </body>

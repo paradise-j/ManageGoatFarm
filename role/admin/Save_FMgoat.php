@@ -35,7 +35,7 @@
     <title>บันทึกข้อมูลพ่อ-แม่พันธุ์</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/Vaccine.png"/>
+    <link rel="icon" type="image/png" href="img/Goat2.png"/>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -112,13 +112,13 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสพ่อ-แม่พันธุ์</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>ชื่อ</th>
                                             <th>สายพันธุ์</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -128,14 +128,14 @@
                                                                 INNER JOIN g_breed ON fm_data.gb_id = g_breed.gb_id");
                                             $stmt->execute();
                                             $fms = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$fms) {
                                                 echo "<p><td colspan='6' class='text-center'>ไม่มีข้อมูลที่สามารถใช้ได้</td></p>";
                                             } else {
                                             foreach($fms as $fm)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $fm['fm_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count ;?> </th>
                                             <td>
                                                 <?php 
                                                     if($fm['fm_type']==1){
@@ -147,9 +147,10 @@
                                             </td>
                                             <td><?= $fm['fm_name']; ?></td>
                                             <td><?= $fm['gb_name']; ?></td>
-                                            <td><a href="Edit_fm.php?edit_id=<?= $fm['fm_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $fm['fm_id']; ?>" href="?delete=<?= $fm['fm_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="Edit_fm.php?edit_id=<?= $fm['fm_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $fm['fm_id']; ?>" href="?delete=<?= $fm['fm_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++ ;?> 
                                         <?php }  
                                             } ?>
                                     </tbody>
@@ -229,6 +230,27 @@
                 },
             });
         }
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
     </script>
 
 </body>

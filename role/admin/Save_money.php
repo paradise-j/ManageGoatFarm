@@ -140,8 +140,8 @@
                                             <td><?= $money['money_list']; ?></td>
                                             <td><?= $money['money_quan']; ?></td>
                                             <td class="date_th"><?= $money['money_date']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
-                                            <td><a data-id="<?= $money['money_id']; ?>" href="?delete=<?= $money['money_id']; ?>" class="btn btn-danger delete-btn">Delete</a></td>
+                                            <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td><a data-id="<?= $money['money_id']; ?>" href="?delete=<?= $money['money_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php }  
                                             } ?>
