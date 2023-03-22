@@ -134,15 +134,15 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสการให้อาหาร</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
                                             <th>ปริมาณอาหาร</th>
                                             <th>ราคา</th>
                                             <th>เดือนที่ให้</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,14 +150,14 @@
                                             $stmt = $db->query("SELECT * FROM `gfg_data`");
                                             $stmt->execute();
                                             $gfgs = $stmt->fetchAll();
-
+                                            $count = 1 ; 
                                             if (!$gfgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($gfgs as $gfg)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $gfg['gfg_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count;?> </th>
                                             <td>
                                                 <?php 
                                                     if($gfg['gfg_type'] == 1){
@@ -191,9 +191,10 @@
                                             <td><?= $gfg['gfg_quantity']; ?></td>
                                             <td><?= $gfg['gfg_price']; ?></td>
                                             <td><?= $gfg['gfg_month']; ?></td>
-                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++ ;?> 
                                         <?php }  
                                             } ?>
                                     </tbody>

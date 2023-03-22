@@ -145,8 +145,8 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสการให้ยาและวัคซีน</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
                                             <th>ประเภทการให้</th>
@@ -154,8 +154,8 @@
                                             <th>ปริมาณ</th>
                                             <th>ราคา</th>
                                             <th>เดือนที่ให้</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -172,7 +172,7 @@
                                             } else {
                                             foreach($vms as $vm)  {  
                                         ?>
-                                        <tr>
+                                        <tr align="center">
                                             <th scope="row"><?= $vm['gvc_id']; ?></th>
                                             <td>
                                                 <?php 

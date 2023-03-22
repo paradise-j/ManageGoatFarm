@@ -134,16 +134,16 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสการเกิดแพะ</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>พ่อพัน</th>
                                             <th>แม่พันธุ์</th>
                                             <th>จำนวนแพะที่เกิด</th>
                                             <th>จำนวนเพศผู้</th>
                                             <th>จำนวนเพศเมีย</th>
                                             <th>วันที่เกิด</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,14 +153,14 @@
                                                                 INNER JOIN `fm_data` ON nbg_data.F_id = fm_data.fm_id");
                                             $stmt->execute();
                                             $nbgs = $stmt->fetchAll();
-
+                                            $count = 1 ; 
                                             if (!$nbgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($nbgs as $nbg)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $nbg['nbg_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count ;?> </th>
                                             <td><?= $nbg['Father']; ?></td>
                                             <td><?= $nbg['Mother']; ?></td>
                                             <td><?= $nbg['nbg_quantity']; ?></td>
@@ -170,6 +170,7 @@
                                             <td><a href="Edit_nbg.php?edit_id=<?= $nbg['nbg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $nbg['nbg_id']; ?>" href="?delete=<?= $nbg['nbg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++ ;?> 
                                         <?php }  
                                             } ?>
                                     </tbody>

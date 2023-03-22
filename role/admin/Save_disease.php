@@ -118,13 +118,13 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสการเป็นโรคของแพะ</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ชื่อโรค</th>
                                             <th>ระดับความรุนแรง</th>
                                             <th>วันที่พบโรค</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -140,7 +140,7 @@
                                             } else {
                                             foreach($gds as $gd)  {  
                                         ?>
-                                        <tr>
+                                        <tr align="center">
                                             <th scope="row"><?= $gd['gd_id']; ?></th>
                                             <td><?= $gd['gdis_name']; ?></td>
                                             <td>
@@ -155,9 +155,10 @@
                                                 ?>
                                             </td>
                                             <td class="date_th"><?= $gd['gd_date']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id">Edit</a></td>
+                                            <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++ ;?> 
                                         <?php }  
                                             } ?>
                                     </tbody>

@@ -106,13 +106,13 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>รหัสรายรับ-รายจ่าย</th>
+                                            <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>รายการ</th>
                                             <th>จำนวนเงิน</th>
                                             <th>วันที่ทำรายการ</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
