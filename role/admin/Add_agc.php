@@ -87,11 +87,11 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
-                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" minlength="13" maxlength="13" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เบอร์โทรศัพท์</label>
-                                                <input type="text" class="form-control" id="phone" name="phone" style="border-radius: 30px;" required>
+                                                <input type="text" class="form-control" id="phone" name="phone" style="border-radius: 30px;" minlength="10" maxlength="10" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ระดับการศึกษา</label>

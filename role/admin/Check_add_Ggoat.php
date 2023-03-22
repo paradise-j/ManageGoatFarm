@@ -8,8 +8,9 @@
         $type = $_POST['type'];
         $range_age = $_POST['range_age'];
         $quantity = $_POST['quantity'];
-        $sql = $db->prepare("INSERT INTO `group_g`( `gg_type`, `gg_range_age`, `gg_quantity`) 
-                            VALUES ('$type', '$range_age', '$quantity')");
+        $agc_id = $_POST['name'];
+        $sql = $db->prepare("INSERT INTO `group_g`( `gg_type`, `gg_range_age`, `gg_quantity` , `agc_id`) 
+                            VALUES ('$type', '$range_age', '$quantity' , '$agc_id')");
         $sql->execute();
 
         if ($sql) {
@@ -25,7 +26,7 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_Ggoat.php");
+            header("refresh:1; url=Manage_Ggoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
             header("location: Manage_Ggoat.php");

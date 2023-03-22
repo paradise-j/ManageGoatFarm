@@ -87,7 +87,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">จำนวนแพะ (ตัว)</label>
-                            <input type="text" required class="form-control" name="quantity" style="border-radius: 30px;" required>
+                            <input type="number" required class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>

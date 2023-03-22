@@ -127,8 +127,8 @@
                                             <th>อำเภอ</th>
                                             <th>จังหวัด</th>
                                             <th>รหัสไปรษณีย์</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -259,7 +259,7 @@
         });
         $('.table').DataTable();
 
-        
+
         $('#provinces').change(function(){
             var id_provnce = $(this).val();
             $.ajax({
