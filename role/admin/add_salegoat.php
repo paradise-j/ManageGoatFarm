@@ -170,32 +170,25 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ประเภทแพะ</label>
-                                                <select class="form-control" aria-label="Default select example"  name="gg_type" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">แพะพ่อพันธุ์</option>
-                                                    <option value="2">แพะแม่พันธุ์</option>
+                                                <select class="form-control" aria-label="Default select example"  id="gg_type" name="gg_type" style="border-radius: 30px;" required>
+                                                    <option selected disabled>กรุณาเลือก....</option>
+                                                    <option value="1">พ่อพันธุ์</option>
+                                                    <option value="2">แม่พันธุ์</option>
                                                     <option value="3">แพะขุน</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <label class="form-label">ช่วงอายุ</label>
-                                                <select class="form-control" aria-label="Default select example"  name="gg_age" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
-                                                    <option value="4">ไม่เกิน 4 เดือน</option>
-                                                    <option value="5">ไม่เกิน 5 เดือน</option>
-                                                    <option value="6">ไม่เกิน 6 เดือน</option>
-                                                    <option value="7">6 เดือนขึ้นไป</option>
+                                                <label class="form-label">ช่วงอายุแพะ</label>
+                                                <select class="form-control" aria-label="Default select example"  id="gg_age" name="gg_age" style="border-radius: 30px;" required>
+                                                    <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <label class="form-label">จำนวน</label>
+                                                <label class="form-label">จำนวน (ตัว)</label>
                                                 <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <label class="form-label">น้ำหนักรวม</label>
+                                                <label class="form-label">น้ำหนักรวม (กิโลกรัม)</label>
                                                 <input type="text" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
@@ -222,10 +215,8 @@
                                     </div>
                                     <form action="add_salegoat.php?type=submit" method="post">
                                         <div class="row mb-4">
-                                            <div class="col-md-1"></div>
                                             <div class="col-md-2">
-                                                <label class="form-label">รหัสการขาย</label>
-                                                <input type="text" class="form-control" name="agc" style="border-radius: 30px;">
+                                                <input type="hidden" class="form-control" name="id" style="border-radius: 30px;">
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ชื่อเกษตรกร</label>
@@ -356,6 +347,21 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script>
+
+        $('#gg_type').change(function(){
+            var id_gg_type = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg2.php",
+                data : {id:id_gg_type,function:'gg_type'},
+                success: function(data){
+                    $('#gg_age').html(data);
+                }
+            });
+        });
+    </script>
 
 </body>
 
