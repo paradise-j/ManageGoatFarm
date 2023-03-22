@@ -99,8 +99,8 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสยาและวัคซีน</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>ชื่อ</th>
                                             <th>รายละเอียด</th>
@@ -113,14 +113,14 @@
                                             $stmt = $db->query("SELECT * FROM `vc_data`");
                                             $stmt->execute();
                                             $vcs = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$vcs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($vcs as $vc)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $vc['vc_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count; ?></th>
                                             <td>
                                                 <?php 
                                                     if($vc['vc_type'] == 1){
@@ -135,6 +135,7 @@
                                             <td><a href="Edit_vc.php?edit_id=<?= $vc['vc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $vc['vc_id']; ?>" href="?delete=<?= $vc['vc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++; ?>
                                         <?php }  
                                             } ?>
                                     </tbody>

@@ -120,8 +120,8 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสกลุ่มเลี้ยง</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ชื่อกลุ่มเลี้ยง</th>
                                             <th>ตำบล</th>
                                             <th>อำเภอ</th>
@@ -141,14 +141,14 @@
                                                                 INNER JOIN `districts` ON districts.id = group_farm.gf_subdis");
                                             $stmt->execute();
                                             $gfs = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$gfs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($gfs as $gf)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $gf['gf_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count; ?></th>
                                             <td><?= $gf['gf_name']; ?></td>
                                             <td><?= $gf['districts']; ?></td>
                                             <td><?= $gf['amphures']; ?></td>
@@ -157,6 +157,7 @@
                                             <td><a href="Edit_gf.php?edit_id=<?= $gf['gf_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gf['gf_id']; ?>" href="?delete=<?= $gf['gf_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++; ?>
                                         <?php }  
                                             } ?>
                                     </tbody>

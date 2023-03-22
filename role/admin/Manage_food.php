@@ -87,8 +87,8 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสอาหาร</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ประเภทอาหาร</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -99,14 +99,14 @@
                                             $stmt = $db->query("SELECT * FROM `fg_data`");
                                             $stmt->execute();
                                             $fgs = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$fgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($fgs as $fg)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $fg['fg_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count; ?></th>
                                             <td>
                                                 <?php
                                                     if($fg['fg_type'] == 1){
@@ -121,6 +121,7 @@
                                             <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++; ?>
                                         <?php }  
                                             } ?>
                                     </tbody>

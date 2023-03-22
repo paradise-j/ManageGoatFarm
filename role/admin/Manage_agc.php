@@ -58,8 +58,8 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="thead-light">
-                                            <tr>
-                                                <th>รหัสเกษตรกร</th>
+                                            <tr align="center">
+                                                <th>ลำดับที่</th>
                                                 <th>ชื่อ-สกุล</th>
                                                 <th>ชื่อฟาร์ม</th>
                                                 <th>ตำแหน่ง</th>
@@ -75,14 +75,14 @@
                                                 $stmt = $db->query("SELECT * FROM `agriculturist`");
                                                 $stmt->execute();
                                                 $agcs = $stmt->fetchAll();
-
+                                                $count = 1;
                                                 if (!$agcs) {
                                                     echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                                 } else {
                                                 foreach($agcs as $agc)  {  
                                             ?>
-                                            <tr>
-                                                <th scope="row"><?= $agc['agc_id']; ?></th>
+                                            <tr align="center">
+                                                <th scope="row"><?= $count; ?></th>
                                                 <td><?= $agc['agc_name']; ?></td>
                                                 <td><?= $agc['agc_nfarm']; ?></td>
                                                 <td>
@@ -108,6 +108,7 @@
                                                 <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></a></td>
                                                 <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></a></td>
                                             </tr>
+                                            <?php $count++ ;?> 
                                             <?php }  
                                                 } ?>
                                         </tbody>

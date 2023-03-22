@@ -91,8 +91,8 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th>รหัสโรค</th>
+                                        <tr align="center">
+                                            <th>ลำดับที่</th>
                                             <th>ชื่อโรค</th>
                                             <th>อาการ</th>
                                             <th>แก้ไขรายการ</th>
@@ -104,19 +104,20 @@
                                             $stmt = $db->query("SELECT * FROM `gdis_data`");
                                             $stmt->execute();
                                             $gdiss = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$gdiss) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($gdiss as $gdis)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $gdis['gdis_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count; ?></th>
                                             <td><?= $gdis['gdis_name']; ?></td>
                                             <td><?= $gdis['gdis_descrip']; ?></td>
                                             <td><a href="Edit_gdis.php?edit_id=<?= $gdis['gdis_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gdis['gdis_id']; ?>" href="?delete=<?= $gdis['gdis_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++; ?>
                                         <?php }  
                                             } ?>
                                     </tbody>
