@@ -93,16 +93,16 @@
                                 ?>
                             </select>
                         </div>                       
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label class="form-label">จำนวนแพะที่เกิด</label>
                             <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
-                            <label class="form-label">จำนวนเพศผู้</label>
+                            <label class="form-label">จำนวนแพะเพศผู้ (ตัว)</label>
                             <input type="text" class="form-control" name="g_male" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">จำนวนเพศเมีย</label>
+                            <label class="form-label">จำนวนแพะเพศเมีย (ตัว)</label>
                             <input type="text" class="form-control" name="g_female" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">

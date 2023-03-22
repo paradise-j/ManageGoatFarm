@@ -56,70 +56,52 @@
                 </div>
                 <div class="modal-body">
                     <form action="Check_Add_GVM.php" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label">ประเภทแพะ</label>
-                                <select class="form-control" aria-label="Default select example" name="Gtype" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">แพะพ่อพันธุ์</option>
-                                    <option value="2">แพะแม่พันธุ์</option>
-                                    <option value="3">แพะขุน</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ช่วงอายุ</label>
-                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">1-2 ปี</option>
-                                    <option value="2">3-5 ปี</option>
-                                    <option value="3">5 ปีขึ้นไป</option>
-                                    <option value="4">ไม่เกิน 4 เดือน</option>
-                                    <option value="5">ไม่เกิน 5 เดือน</option>
-                                    <option value="6">ไม่เกิน 6 เดือน</option>
-                                    <option value="7">6 เดือนขึ้นไป</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ประเภท</label>
-                                <select class="form-control" aria-label="Default select example" name="VMtype" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <option value="1">ให้ยา</option>
-                                    <option value="2">ให้วัคซีน</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ชื่อผลิตภัณฑ์</label>
-                                <select class="form-control" aria-label="Default select example"name="VMname" style="border-radius: 30px;" required>
-                                    <option selected>กรุณาเลือก....</option>
-                                    <?php 
-                                        $stmt = $db->query("SELECT * FROM `vc_data`");
-                                        $stmt->execute();
-                                        $vcs = $stmt->fetchAll();
-                                        
-                                        foreach($vcs as $vc){
-                                    ?>
-                                    <option value="<?= $vc['vc_id']?>"><?= $vc['vc_name']?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ปริมาณ</label>
-                                <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ราคา</label>
-                                <input type="text" class="form-control" name="price" style="border-radius: 30px;" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputState" class="form-label">วันที่ให้ยาและวัคซีน</label>
-                                <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
-                            </div>
-                            <div class="col text-center">
-                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
-                                &nbsp&nbsp&nbsp
-                                <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="inputState" class="form-label">วันที่ให้ยาและวัคซีน</label>
+                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update_type" class="col-form-label">ประเภทแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกประเภท....</option>
+                                <option value="1">พ่อพันธุ์</option>
+                                <option value="2">แม่พันธุ์</option>
+                                <option value="3">แพะขุน</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">ช่วงอายุแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ประเภท</label>
+                            <select class="form-control" aria-label="Default select example" id="VMtype" name="VMtype" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือก....</option>
+                                <option value="1">ให้ยา</option>
+                                <option value="2">ให้วัคซีน</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ชื่อผลิตภัณฑ์</label>
+                            <select class="form-control" aria-label="Default select example" id="VMname" name="VMname" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือกผลิตภัณฑ์....</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ปริมาณยาหรือวัคซีน</label>
+                            <input type="number" class="form-control" name="quantity" style="border-radius: 30px;" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ราคา</label>
+                            <input type="number" class="form-control" name="price" style="border-radius: 30px;" required>
+                        </div>
+
+                        <div class="col text-center">
+                            <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
+                            &nbsp&nbsp&nbsp
+                            <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
                         </div>
                     </form>
                 </div>
@@ -166,14 +148,14 @@
                                                                 INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
                                             $stmt->execute();
                                             $vms = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$vms) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($vms as $vm)  {  
                                         ?>
                                         <tr align="center">
-                                            <th scope="row"><?= $vm['gvc_id']; ?></th>
+                                            <th scope="row"><?= $count; ?></th>
                                             <td>
                                                 <?php 
                                                     if($vm['gg_type'] == 1){
@@ -220,6 +202,7 @@
                                             <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++; ?>
                                         <?php }  
                                             } ?>
                                     </tbody>
@@ -337,6 +320,31 @@
             }
         });
         $('.table').DataTable();
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
+
+        $('#VMtype').change(function(){
+            var id_VMtype = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "vm.php",
+                data : {id:id_VMtype,function:'VMtype'},
+                success: function(data){
+                    // console.log(data)
+                    $('#VMname').html(data);
+                }
+            });
+        });
     </script>
 
 </body>

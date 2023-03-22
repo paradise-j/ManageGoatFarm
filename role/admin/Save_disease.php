@@ -134,14 +134,14 @@
                                                                 INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id");
                                             $stmt->execute();
                                             $gds = $stmt->fetchAll();
-
+                                            $count = 1 ;
                                             if (!$gds) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($gds as $gd)  {  
                                         ?>
                                         <tr align="center">
-                                            <th scope="row"><?= $gd['gd_id']; ?></th>
+                                            <th scope="row"><?= $count;?></th>
                                             <td><?= $gd['gdis_name']; ?></td>
                                             <td>
                                                 <?php 
@@ -259,6 +259,27 @@
             }) 
             elem.textContent=result
         })
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
 
     </script>
 

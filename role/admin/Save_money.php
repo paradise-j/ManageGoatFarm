@@ -58,6 +58,10 @@
                 <div class="modal-body">
                     <form action="Check_Add_monry.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
+                            <label class="form-label">วันที่พบโรค</label>
+                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">ประเภท</label>
                             <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
@@ -73,10 +77,7 @@
                             <label class="form-label">จำนวนเงิน</label>
                             <input type="text" style="border-radius: 30px;" name="quan" class="form-control" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">วันที่พบโรค</label>
-                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
-                        </div>
+
                         <div class="modal-footer"> 
                             <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
@@ -105,7 +106,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
+                                        <tr align="center">
                                             <th>ลำดับที่</th>
                                             <th>ประเภท</th>
                                             <th>รายการ</th>
@@ -120,14 +121,14 @@
                                             $stmt = $db->query("SELECT * FROM `money_inex`");
                                             $stmt->execute();
                                             $moneys = $stmt->fetchAll();
-
+                                            $count = 1;
                                             if (!$moneys) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($moneys as $money)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $money['money_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count; ?></th>
                                             <td>
                                                 <?php 
                                                     if($money['money_type'] == 1){
@@ -143,6 +144,7 @@
                                             <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $money['money_id']; ?>" href="?delete=<?= $money['money_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++ ;?> 
                                         <?php }  
                                             } ?>
                                     </tbody>

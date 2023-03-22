@@ -65,26 +65,19 @@
                                     <form action="Check_Add_GVM.php" method="POST">
                                         <div class="row mb-4">
                                             <div class="col-md-2"></div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ประเภทแพะ</label>
-                                                <select class="form-control" aria-label="Default select example" name="Gtype" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">แพะพ่อพันธุ์</option>
-                                                    <option value="2">แพะแม่พันธุ์</option>
+                                            <div class="mb-3">
+                                                <label for="update_type" class="col-form-label">ประเภทแพะ</label>
+                                                <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                                    <option selected disabled>กรุณาเลือกประเภท....</option>
+                                                    <option value="1">พ่อพันธุ์</option>
+                                                    <option value="2">แม่พันธุ์</option>
                                                     <option value="3">แพะขุน</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label">ช่วงอายุ</label>
-                                                <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                                    <option selected>กรุณาเลือก....</option>
-                                                    <option value="1">1-2 ปี</option>
-                                                    <option value="2">3-5 ปี</option>
-                                                    <option value="3">5 ปีขึ้นไป</option>
-                                                    <option value="4">ไม่เกิน 4 เดือน</option>
-                                                    <option value="5">ไม่เกิน 5 เดือน</option>
-                                                    <option value="6">ไม่เกิน 6 เดือน</option>
-                                                    <option value="7">6 เดือนขึ้นไป</option>
+                                            <div class="mb-3">
+                                                <label class="col-form-label">ช่วงอายุแพะ</label>
+                                                <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
+                                                    <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
@@ -148,7 +141,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
+                                        <tr align="center">
                                             <th>รหัสการให้ยาและวัคซีน</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
@@ -175,7 +168,7 @@
                                             } else {
                                             foreach($gvcs as $gvc)  {  
                                         ?>
-                                        <tr>
+                                        <tr align="center">
                                             <th scope="row"><?= $gvc['gvc_id']; ?></th>
                                             <td>
                                                 <?php 
@@ -312,6 +305,18 @@
             }
         });
         $('.table').DataTable();
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
     </script>
 
 </body>

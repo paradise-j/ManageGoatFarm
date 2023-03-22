@@ -35,7 +35,7 @@
     <title>บันทึกข้อมูลการให้อาหาร</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/Vaccine.png"/>
+    <link rel="icon" type="image/png" href="img/seedling-solid.svg"/>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -58,30 +58,50 @@
                 <div class="modal-body">
                     <form action="Check_Add_seeding.php" method="POST">
                         <div class="mb-3">
-                            <label class="form-label">ประเภทแพะ</label>
-                            <select class="form-control" aria-label="Default select example"name="type" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">แพะพ่อพันธุ์</option>
-                                <option value="2">แพะแม่พันธุ์</option>
+                            <label for="inputState" class="form-label">วันที่ให้อาหาร</label>
+                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update_type" class="col-form-label">ประเภทแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกประเภท....</option>
+                                <option value="1">พ่อพันธุ์</option>
+                                <option value="2">แม่พันธุ์</option>
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">ช่วงอายุ</label>
-                            <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">1-2 ปี</option>
-                                <option value="2">3-5 ปี</option>
-                                <option value="3">5 ปีขึ้นไป</option>
-                                <option value="4">ไม่เกิน 4 เดือน</option>
-                                <option value="5">ไม่เกิน 5 เดือน</option>
-                                <option value="6">ไม่เกิน 6 เดือน</option>
-                                <option value="7">6 เดือนขึ้นไป</option>
+                            <label class="col-form-label">ช่วงอายุแพะ</label>
+                            <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ประเภทอาหาร</label>
-                            <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกประเภทอาหาร....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `fg_data`");
+                                    $stmt->execute();
+                                    $fgs = $stmt->fetchAll();
+                                    
+                                    foreach($fgs as $fg){
+                                ?>
+                                <option value="<?= $fg['fg_id']?>">
+                                    <?php 
+                                        if($fg['fg_type'] == 1){
+                                            echo "ธรรมชาติ";
+                                        }elseif($fg['fg_type'] == 2){
+                                            echo "ข้น";
+                                        }else{
+                                            echo "TMR";
+                                        }
+                                    ?>
+                                </option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ปริมาณอาหาร</label>
@@ -91,10 +111,7 @@
                             <label class="form-label">ราคาต่อกิโลกรัม</label>
                             <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputState" class="form-label">วันที่ให้อาหาร</label>
-                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
-                        </div>
+
                         <div class="modal-footer">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
                             <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
@@ -123,7 +140,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
-                                        <tr>
+                                        <tr align="center">
                                             <th>รหัสการให้อาหาร</th>
                                             <th>ประเภท</th>
                                             <th>ช่วงอายุ</th>
@@ -131,8 +148,8 @@
                                             <th>ปริมาณอาหาร</th>
                                             <th>ราคา</th>
                                             <th>วันที่ให้</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>แก้ไขรายการ</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,14 +160,15 @@
                                                                 INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id ");
                                             $stmt->execute();
                                             $gfgs = $stmt->fetchAll();
+                                            $count = 1;
 
                                             if (!$gfgs) {
                                                 echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                             } else {
                                             foreach($gfgs as $gfg)  {  
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $gfg['gfg_id']; ?></th>
+                                        <tr align="center">
+                                            <th scope="row"><?= $count; ?></th>
                                             <td>
                                                 <?php 
                                                     if($gfg['gg_type'] == 1){
@@ -198,6 +216,7 @@
                                             <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
+                                        <?php $count++; ?>
                                         <?php }  
                                             } ?>
                                     </tbody>
@@ -294,6 +313,40 @@
             }) 
             elem.textContent=result
         })
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
+
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
     </script>
 
 </body>
