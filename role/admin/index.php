@@ -212,8 +212,55 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-2">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดแพะทั้งหมด</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <!-- <canvas id="myPieChart"></canvas> -->
+                                    </div>
+                                    <div class="mt-3 text-center small"> 
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle"></i> สรุปยอดของแพะแต่ละประเภท
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละเดือน</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <!-- <canvas id="myAreaChart2"></canvas> -->
+                                        <canvas id="myBarChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
                     <div class="row">
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-5">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปรายได้แฝง-รายจ่ายทั้งหมด</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-2">
                                 <div
@@ -273,19 +320,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-5">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">สรุปรายได้แฝง-รายจ่ายทั้งหมด</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -310,8 +345,10 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-area2-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/demo/chart-bar2-demo.js"></script>
 </body>
 
 </html>
