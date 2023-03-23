@@ -42,7 +42,7 @@
 
                     <div class="row mb-4">
                         <div class="col-md-2">
-                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 10px;" required>
+                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <option value="1">ประธาน</option>
                                 <option value="2">รองประธาน</option>
@@ -59,7 +59,7 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 10px;" required>
+                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <option value="1">ประธาน</option>
                                 <option value="2">รองประธาน</option>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col text-right">
                             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                                class="fas fa-download fa-sm text-white-50"></i>  ออกรายงาน</a>
                         </div>
                     </div>
                     <div class="row">
@@ -145,50 +145,30 @@
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
-                                            <i class="fa-light fa-paw-simple text-gray-300"></i>
+                                            <img src="img/Goat_gray.png" width="58">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- <div class="col-xl-3 col-md-6">
-                            <div class="card border-left-info shadow h-80">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
 
-                        <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase">
-                                                Pending Requests</div>
-                                            <div class="h5 font-weight-bold text-gray-800">18</div>
+                                        <div class="col mr-2">
+                                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
+                                            <div class="h5 mb-1 font-weight-bold text-gray-800">
+                                                <?php
+                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
+                                                    $stmt->execute();
+                                                    $ggs = $stmt->fetchAll();
+                                                    foreach($ggs as $gg){
+                                                        echo $gg['total'];
+                                                    }
+                                                ?>
+                                                 ตัว
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -196,14 +176,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-9 col-lg-7">
+                        <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดขาย</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละประเภท</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -212,19 +192,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-5">
-                            <div class="card shadow mb-4">
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-2">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดแพะ</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดแพะทั้งหมด</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <!-- <canvas id="myPieChart"></canvas> -->
+                                        <canvas id="myPieChart"></canvas>
                                     </div>
-                                    <div class="mt-4 text-center small"> 
+                                    <div class="mt-3 text-center small"> 
                                         <span class="mr-2">
-                                            <i class="fas fa-circle"></i> สรุปยอดขายของแพะแต่ละประเภท
+                                            <i class="fas fa-circle"></i> สรุปยอดของแพะแต่ละประเภท
                                         </span>
                                     </div>
                                 </div>
@@ -234,29 +214,70 @@
 
 
                     <div class="row">
-                        <div class="col-xl-4 col-lg-7">
-                            <div class="card shadow mb-4">
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-2">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดแพะ</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">สถานะการเป็นโรคของแพะทั้งหมด</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small"> 
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle"></i> สรุปยอดขายของแพะแต่ละประเภท
-                                        </span>
+                                    <div class="table-responsive">
+                                        <table class="table" id="dataTable" width="100%" cellspacing="0" >
+                                            <thead>
+                                                <tr align="center" style="font-size: 0.8em;">
+                                                    <th>ชื่อฟาร์ม</th>
+                                                    <th>ชื่อโรค</th>
+                                                    <th>สถานะ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                    $stmt = $db->query("SELECT agriculturist.agc_nfarm , gdis_data.gdis_name , g_disease.gd_level 
+                                                                        FROM `g_disease` 
+                                                                        INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id
+                                                                        INNER JOIN `group_g` ON group_g.gg_id = g_disease.gg_id
+                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id");
+                                                    $stmt->execute();
+                                                    $ggs = $stmt->fetchAll();
+                                                    if (!$ggs) {
+                                                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                    } else {
+                                                    foreach($ggs as $gg)  {  
+                                                ?>
+                                                <tr align="center" style="font-size: 0.8em;">
+                                                    <td><?= $gg['agc_nfarm']; ?></td>
+                                                    <td><?= $gg['gdis_name']; ?></td>
+                                                    <td>
+                                                        <?php 
+                                                            if($gg['gd_level'] == 1){
+                                                        ?>
+                                                                <span class="btnsmall btnsmall-success" style="border-radius: 30px; font-size: 0.8em;">ไม่รุนแรง</span>
+                                                        <?php
+                                                            }elseif($gg['gd_level'] == 2){
+                                                        ?>
+                                                                <span class="btnsmall btnsmall-warning" style="border-radius: 30px; font-size: 0.8em;">ปานกลาง</span>
+                                                        <?php
+                                                            }else{
+                                                        ?>
+                                                                <span class="btnsmall btnsmall-danger" style="border-radius: 30px; font-size: 0.8em;">รุนแรงมาก</span>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                                <?php }
+                                                    } ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-5">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">สรุปรายรับ-รายจ่ายทั้งหมด</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปรายได้แฝง-รายจ่ายทั้งหมด</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
