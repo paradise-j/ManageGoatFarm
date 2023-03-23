@@ -36,45 +36,45 @@ window.addEventListener('DOMContentLoaded', async (event) => {
   }
   // Bar Chart Example
   var ctx = document.getElementById("myBarChart");
-  const data = await get_total_goat();
-  var my_data = [];
-  var my_label = [];
-  data.forEach(item => {
-    my_data.push(item.total)
-    switch (item.gg_type) {
-      case '1':
-        my_label.push('พ่อพันธุ์')
-        break;
-      case '2':
-        my_label.push('แม่พันธุ์')
-        break;
-      case '3':
-        my_label.push('ขุน')
-        break;
-    }
-  });
+  // const data = await get_total_goat();
+  // var my_data = [];
+  // var my_label = [];
+  // data.forEach(item => {
+  //   my_data.push(item.total)
+  //   switch (item.gg_type) {
+  //     case '1':
+  //       my_label.push('พ่อพันธุ์')
+  //       break;
+  //     case '2':
+  //       my_label.push('แม่พันธุ์')
+  //       break;
+  //     case '3':
+  //       my_label.push('ขุน')
+  //       break;
+  //   }
+  // });
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
       // labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
       labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
       datasets: [{
-        label: my_label,
-        backgroundColor: "#ed2222",
+        label: "แพะพ่อพันธุ์",
+        backgroundColor: "#2a86e9",
         // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#4e73df",
+        borderColor: "#2a86e9",
         data: [150, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
       }, {
         label: "แพะแม่พันธุ์",
-        backgroundColor: "#22ed75",
+        backgroundColor: "#2ae955",
         // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#4e73df",
+        borderColor: "#2ae955",
         data: [100, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
       }, {
         label: "แพะขุน",
-        backgroundColor: "#22eddb",
+        backgroundColor: "#e9452a",
         // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#4e73df",
+        borderColor: "#e9452a",
         data: [160, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
       }],
     },

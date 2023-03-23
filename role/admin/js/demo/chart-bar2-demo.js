@@ -85,8 +85,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     type: 'bar',
     data: {
       // labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-    //   labels: my_label,
-      labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
+      labels: my_label,
+      // labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
       datasets: [{
         label: "ยอดขายสุทธิ",
         backgroundColor: "#22eddb",
@@ -158,7 +158,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         callbacks: {
           label: function (tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + number_format(tooltipItem.yLabel) + ' ตัว';
+            return datasetLabel+' ' + number_format(tooltipItem.yLabel) + ' บาท ';
           }
         }
       },

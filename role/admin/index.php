@@ -39,38 +39,84 @@
             <div id="content">
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
+                    <div class="row mb-2">
+                        <label class="form-label mt-2">ตั้งแต่วันที่</label>
+                        <div class="col-md-2">
+                            <input type="date" style="border-radius: 30px;" name="start_date" class="form-control" required>
+                        </div>
+                        <label class="form-label mt-2">ถึงวันที่</label>
+                        <div class="col-md-2">
+                            <input type="date" style="border-radius: 30px;" name="end_date" class="form-control" required>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
+                            &nbsp&nbsp
+                            <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
+                        </div>
 
-                    <div class="row mb-4">
+                    </div>
+                    <div class="row mb-2">
+                        <label class="form-label mt-2">จังหวัด</label>
                         <div class="col-md-2">
-                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">ประธาน</option>
-                                <option value="2">รองประธาน</option>
-                                <option value="3">เลขานุการ</option>
-                                <option value="4">สมาชิก</option>
-                                <option value="5">การตลาด</option>
-                                <option value="6">การตลาด</option>
-                                <option value="7">การตลาด</option>
-                                <option value="8">การตลาด</option>
-                                <option value="9">การตลาด</option>
-                                <option value="10">การตลาด</option>
-                                <option value="11">การตลาด</option>
-                                <option value="12">การตลาด</option>
+                            <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกจังหวัด....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `provinces`");
+                                    $stmt->execute();
+                                    $pvs = $stmt->fetchAll();
+                                    
+                                    foreach($pvs as $pv){
+                                ?>
+                                <option value="<?= $pv['id']?>"><?= $pv['name_th']?></option>
+                                <?php
+                                    }
+                                ?>
                             </select>
                         </div>
+                        <label class="form-label mt-2">อำเภอ</label>
                         <div class="col-md-2">
-                            <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
-                                <option value="1">ประธาน</option>
-                                <option value="2">รองประธาน</option>
+                            <select class="form-control" aria-label="Default select example" id="amphures" name="amphures" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกอำเภอ....</option>
                             </select>
                         </div>
+                        <label class="form-label mt-2">ตำบล</label>
                         <div class="col-md-2">
-                            <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">ตรวจสอบ</button>
+                            <select class="form-control" aria-label="Default select example" id="districts" name="districts" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกตำบล....</option>
+                            </select>
                         </div>
-                        <div class="col text-right">
+                        <div class="col-md-3">
+                            <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
+                            &nbsp&nbsp
+                            <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
+                        </div>                       
+                        <!-- <div class="col text-right">
                             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i>  ออกรายงาน</a>
+                        </div> -->
+                    </div>
+                    <div class="row mb-2">
+                        <label class="form-label mt-2">กลุ่มเลี้ยง</label>
+                        <div class="col-md-2">
+                            <select class="form-control" aria-label="Default select example" id="gfarm" name="gfarm" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกกลุ่มเลี้ยง....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `provinces`");
+                                    $stmt->execute();
+                                    $pvs = $stmt->fetchAll();
+                                    
+                                    foreach($pvs as $pv){
+                                ?>
+                                <option value="<?= $pv['id']?>"><?= $pv['name_th']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
+                            &nbsp&nbsp
+                            <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
                         </div>
                     </div>
                     <div class="row">
@@ -349,6 +395,45 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
     <script src="js/demo/chart-bar2-demo.js"></script>
+
+    <script>
+
+        $('#provinces').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "address.php",
+                data : {id:id_provnce,function:'provinces'},
+                success: function(data){
+                    $('#amphures').html(data);
+                }
+            });
+        });
+
+        $('#amphures').change(function(){
+            var id_amphures = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "address.php",
+                data : {id:id_amphures,function:'amphures'},
+                success: function(data){
+                    $('#districts').html(data);
+                }
+            });
+        });
+
+        $('#districts').change(function(){
+            var id_districts = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "address.php",
+                data : {id:id_districts,function:'districts'},
+                success: function(data){
+                    $('#zipcode').val(data)
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
