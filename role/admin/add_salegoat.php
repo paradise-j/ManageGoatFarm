@@ -262,9 +262,9 @@
                                                             <td>
                                                                 <?php
                                                                     if($value['item_gg_type'] == 1){
-                                                                        echo "แพะพ่อพันธุ์";
-                                                                    }elseif($value['item_gg_type'] == 1){
-                                                                        echo "แพะแม่พันธุ์";
+                                                                        echo "พ่อพันธุ์";
+                                                                    }elseif($value['item_gg_type'] == 2){
+                                                                        echo "แม่พันธุ์";
                                                                     }else{
                                                                         echo "แพะขุน";
                                                                     }
@@ -279,13 +279,13 @@
                                                                     }elseif($value['item_gg_age'] == 3){
                                                                         echo "5 ปีขึ้นไป";
                                                                     }elseif($value['item_gg_age'] == 4){
-                                                                        echo "ไม่เกิน 4 เดือน";
+                                                                        echo "ไม่เกิน 3 เดือน";
                                                                     }elseif($value['item_gg_age'] == 5){
-                                                                        echo "ไม่เกิน 5 เดือน";
+                                                                        echo "3-4 เดือน";
                                                                     }elseif($value['item_gg_age'] == 6){
-                                                                        echo "ไม่เกิน 6 เดือน";
+                                                                        echo "4-5 เดือน";
                                                                     }else{
-                                                                        echo "6 เดือนขึ้นไป";
+                                                                        echo "5 เดือนขึ้นไป";
                                                                     }
                                                                 
                                                                 ?>
@@ -309,7 +309,7 @@
                                                     }
                                                     ?>
                                                 </tbody>
-                                                <!-- <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?>  -->
+                                                <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?> 
                                             </table>
                                         </div>
                                         <div class="row mt-4 mb-4">
