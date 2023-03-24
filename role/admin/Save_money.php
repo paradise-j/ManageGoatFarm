@@ -63,19 +63,23 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" name="type" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
-                                <option value="1">รายรับ</option>
+                                <option value="1">รายได้แฝง</option>
                                 <option value="2">รายจ่าย</option>
+                                <option value="3">ประหยัดค่าใช้จ่าย</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">รายการ</label>
-                            <input type="text" style="border-radius: 30px;" name="list" class="form-control" required>
+                            <!-- <input type="text" style="border-radius: 30px;" name="list" class="form-control" required> -->
+                            <select class="form-control" aria-label="Default select example" id="list" name="list" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกรายการ....</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">จำนวนเงิน</label>
-                            <input type="text" style="border-radius: 30px;" name="quan" class="form-control" required>
+                            <input type="number" style="border-radius: 30px;" name="quan" class="form-control" required>
                         </div>
 
                         <div class="modal-footer"> 
@@ -262,6 +266,22 @@
             }
         });
         $('.table').DataTable();
+
+
+        
+        $('#type').change(function(){
+            var id_money = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "money.php",
+                data : {id:id_money,function:'type'},
+                success: function(data){
+                    $('#list').html(data);
+                }
+            });
+        });
+
+        
     </script>
 
 </body>
