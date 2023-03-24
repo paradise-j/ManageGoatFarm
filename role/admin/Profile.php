@@ -48,10 +48,10 @@
                                         <div class="row mb-4">
                                             <div class="col-md-5"></div>
                                             <div class="col-md-1 text-center">
-                                                <img loading="lazy" width="175px" style="border-radius: 200px;" src="uploads/494225.jpg" id="previewImg" alt="">
+                                                <img loading="lazy" width="180px" height="200px" style="border-radius: 100%; border-style: outset;" src="uploads/494225.jpg" id="previewImg" alt="">
                                             </div>
                                             <div class="col-md-1"></div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 mt-6">
                                                 <label for="validationDefault01" class="form-label">อัปโหลดรูปภาพ</label>
                                                 <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" required disabled>
                                             </div>
