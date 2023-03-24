@@ -6,7 +6,7 @@
             INNER JOIN group_g ON group_g.gg_id = salelist.gg_id 
             INNER JOIN sale ON sale.sale_id = salelist.sale_id 
             GROUP BY MONTH(sale.sale_date)
-            ORDER BY group_g.gg_type";
+            ORDER BY MONTH(sale.sale_date)";
     $result = $db->query($sql);
     $result->execute();
     // $data = $result->fetch(PDO::FETCH_ASSOC);

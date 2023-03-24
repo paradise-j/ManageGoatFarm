@@ -29,53 +29,207 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     return s.join(dec);
   }
 
+
   async function get_total_goat() {
-    const res = await fetch("api/get_goat_sale.php");
+    const res = await fetch("api/get_sum_price.php");
     const json = await res.json()
     return json;
   }
   // Bar Chart Example
   var ctx = document.getElementById("myBarChart");
-  // const data = await get_total_goat();
-  // var my_data = [];
-  // var my_label = [];
-  // data.forEach(item => {
-  //   my_data.push(item.total)
-  //   switch (item.gg_type) {
-  //     case '1':
-  //       my_label.push('พ่อพันธุ์')
-  //       break;
-  //     case '2':
-  //       my_label.push('แม่พันธุ์')
-  //       break;
-  //     case '3':
-  //       my_label.push('ขุน')
-  //       break;
-  //   }
-  // });
+  const data = await get_total_goat();
+  var my_data1 = [];
+  var my_data2 = [];
+  var my_data3 = [];
+  var my_label = [];
+  data.forEach(item => {
+    switch (item.gg_type) {
+      case '1':
+        switch (item.month) {
+          case '1':
+            my_data1.push(item.total)
+            break;
+          case '2':
+            my_data1.push(item.total)
+            break;
+          case '3':
+            my_data1.push(item.total)
+            break;
+          case '4':
+            my_data1.push(item.total)
+            break;
+          case '5':
+            my_data1.push(item.total)
+            break;
+          case '6':
+            my_data1.push(item.total)
+            break;
+          case '7':
+            my_data1.push(item.total)
+            break;
+          case '8':
+            my_data1.push(item.total)
+            break;
+          case '9':
+            my_data1.push(item.total)
+            break;
+          case '10':
+            my_data1.push(item.total)
+            break;
+          case '11':
+            my_data1.push(item.total)
+            break;
+          case '12':
+            my_data1.push(item.total)
+            break;
+        }
+      case '2':
+        switch (item.month) {
+          case '1':
+            my_data2.push(item.total)
+            break;
+          case '2':
+            my_data2.push(item.total)
+            break;
+          case '3':
+            my_data2.push(item.total)
+            break;
+          case '4':
+            my_data2.push(item.total)
+            break;
+          case '5':
+            my_data2.push(item.total)
+            break;
+          case '6':
+            my_data2.push(item.total)
+            break;
+          case '7':
+            my_data2.push(item.total)
+            break;
+          case '8':
+            my_data2.push(item.total)
+            break;
+          case '9':
+            my_data2.push(item.total)
+            break;
+          case '10':
+            my_data2.push(item.total)
+            break;
+          case '11':
+            my_data2.push(item.total)
+            break;
+          case '12':
+            my_data2.push(item.total)
+            break;
+        }
+      case '3':
+        switch (item.month) {
+          case '1':
+            my_data3.push(item.total)
+            break;
+          case '2':
+            my_data3.push(item.total)
+            break;
+          case '3':
+            my_data3.push(item.total)
+            break;
+          case '4':
+            my_data3.push(item.total)
+            break;
+          case '5':
+            my_data3.push(item.total)
+            break;
+          case '6':
+            my_data3.push(item.total)
+            break;
+          case '7':
+            my_data3.push(item.total)
+            break;
+          case '8':
+            my_data3.push(item.total)
+            break;
+          case '9':
+            my_data3.push(item.total)
+            break;
+          case '10':
+            my_data3.push(item.total)
+            break;
+          case '11':
+            my_data3.push(item.total)
+            break;
+          case '12':
+            my_data3.push(item.total)
+            break;
+        }
+      
+    }
+    console.log("my_data1 => "+ my_data1);
+    console.log("my_data2 => "+ my_data2);
+    console.log("my_data3 => "+ my_data3);
+
+    switch (item.month) {
+      case '1':
+        my_label.push('ม.ค.')
+        break;
+      case '2':
+        my_label.push('ก.พ.')
+        break;
+      case '3':
+        my_label.push('มี.ค.')
+        break;
+      case '4':
+        my_label.push('เม.ษ.')
+        break;
+      case '5':
+        my_label.push('พ.ค.')
+        break;
+      case '6':
+        my_label.push('มิ.ย.')
+        break;
+      case '7':
+        my_label.push('ก.ค.')
+        break;
+      case '8':
+        my_label.push('ส.ค.')
+        break;
+      case '9':
+        my_label.push('ก.ย.')
+        break;
+      case '10':
+        my_label.push('ต.ค.')
+        break;
+      case '11':
+        my_label.push('พ.ย.')
+        break;
+      case '12':
+        my_label.push('ธ.ค.')
+        break;
+        
+    }
+  });
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
       // labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-      labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
+      labels: my_label,
       datasets: [{
         label: "แพะพ่อพันธุ์",
         backgroundColor: "#2a86e9",
         // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
         borderColor: "#2a86e9",
-        data: [150, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
+        data: my_data1
       }, {
         label: "แพะแม่พันธุ์",
         backgroundColor: "#2ae955",
         // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
         borderColor: "#2ae955",
-        data: [100, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
+        data: my_data2
       }, {
         label: "แพะขุน",
         backgroundColor: "#e9452a",
         // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
         borderColor: "#e9452a",
-        data: [160, 120, 100, 110, 89, 115, 90, 110, 100, 120, 170, 165]
+        data: my_data3
       }],
     },
     // plugins: [ChartDataLabels],
@@ -106,7 +260,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         yAxes: [{
           ticks: {
             min: 0,
-            max: 200,
+            max: 10000,
             maxTicksLimit: 6,
             padding: 10,
             // Include a dollar sign in the ticks
@@ -141,7 +295,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         callbacks: {
           label: function (tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + number_format(tooltipItem.yLabel) + ' ตัว';
+            return datasetLabel +' '+ number_format(tooltipItem.yLabel) + ' บาท';
           }
         }
       },
