@@ -6419,6 +6419,9 @@ a.close.disabled {
     height: 50px;
     overflow: scroll
 }
+.scrollbar {
+    overflow-y: scroll;
+}
 
 @media (min-width:576px) {
     .modal-dialog {
@@ -6449,6 +6452,7 @@ a.close.disabled {
         max-width: 300px
     }
 }
+
 
 @media (min-width:992px) {
 

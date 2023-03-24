@@ -308,13 +308,13 @@
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-2">
+                            <div class="card shadow">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">สถานะการเป็นโรคของแพะทั้งหมด</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive scrollbar">
                                         <table class="table" id="dataTable" width="100%" cellspacing="0" >
                                             <thead>
                                                 <tr align="center" style="font-size: 0.8em;">
@@ -395,6 +395,7 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
     <script src="js/demo/chart-bar2-demo.js"></script>
+    
 
     <script>
 
