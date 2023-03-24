@@ -95,19 +95,19 @@
                                 class="fas fa-download fa-sm text-white-50"></i>  ออกรายงาน</a>
                         </div> -->
                     </div>
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <label class="form-label mt-2">กลุ่มเลี้ยง</label>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <select class="form-control" aria-label="Default select example" id="gfarm" name="gfarm" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกกลุ่มเลี้ยง....</option>
                                 <?php 
-                                    $stmt = $db->query("SELECT * FROM `provinces`");
+                                    $stmt = $db->query("SELECT * FROM `group_farm`");
                                     $stmt->execute();
-                                    $pvs = $stmt->fetchAll();
+                                    $gfs = $stmt->fetchAll();
                                     
-                                    foreach($pvs as $pv){
+                                    foreach($gfs as $gf){
                                 ?>
-                                <option value="<?= $pv['id']?>"><?= $pv['name_th']?></option>
+                                <option value="<?= $gf['gf_id']?>"><?= $gf['gf_name']?></option>
                                 <?php
                                     }
                                 ?>
