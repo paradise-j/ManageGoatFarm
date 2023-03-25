@@ -42,6 +42,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
   var my_data2 = [];
   var my_data3 = [];
   var my_label = [];
+  var Unique_label = [];
   data.forEach(item => {
     switch (item.gg_type) {
       case '1':
@@ -83,6 +84,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             my_data1.push(item.total)
             break;
         }
+      break;
       case '2':
         switch (item.month) {
           case '1':
@@ -122,6 +124,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             my_data2.push(item.total)
             break;
         }
+      break;
       case '3':
         switch (item.month) {
           case '1':
@@ -161,12 +164,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             my_data3.push(item.total)
             break;
         }
+      break;
       
     }
-    console.log("my_data1 => "+ my_data1);
-    console.log("my_data2 => "+ my_data2);
-    console.log("my_data3 => "+ my_data3);
-
     switch (item.month) {
       case '1':
         my_label.push('ม.ค.')
@@ -203,15 +203,26 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         break;
       case '12':
         my_label.push('ธ.ค.')
-        break;
-        
+        break; 
     }
   });
+
+  for( var i=0; i<my_label.length; i++ ) {
+    if ( Unique_label.indexOf( my_label[i] ) < 0 ) {
+      Unique_label.push( my_label[i] );
+    }
+  } 
+
+  // console.log("my_data1 => "+ my_data1);
+  // console.log("my_data2 => "+ my_data2);
+  // console.log("my_data3 => "+ my_data3);
+  // console.log("my_label => "+ Unique_label);
+
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
       // labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-      labels: my_label,
+      labels: Unique_label,
       datasets: [{
         label: "แพะพ่อพันธุ์",
         backgroundColor: "#2a86e9",
@@ -260,7 +271,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         yAxes: [{
           ticks: {
             min: 0,
-            max: 10000,
+            max: 50000,
             maxTicksLimit: 6,
             padding: 10,
             // Include a dollar sign in the ticks

@@ -89,9 +89,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       // labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
       datasets: [{
         label: "ยอดขายสุทธิ",
-        backgroundColor: "#22eddb",
-        // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#22eddb",
+        backgroundColor: "#f34c29",
+        hoverBackgroundColor: "#b12c10",
+        borderColor: "#f34c29",
         data: my_data
       }],
     },
@@ -123,7 +123,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         yAxes: [{
           ticks: {
             min: 0,
-            max: 10000,
+            max: 50000,
             maxTicksLimit: 6,
             padding: 10,
             // Include a dollar sign in the ticks

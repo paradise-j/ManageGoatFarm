@@ -172,7 +172,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="col-lg-3 col-md-6">
                             <div class="card border-left-info shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -198,8 +198,34 @@
                             </div>
                         </div>
 
+                        <!-- <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-md font-weight-bold text-info text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
+                                            <div class="h5 mb-1 font-weight-bold text-gray-800">
+                                                <?php
+                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
+                                                    $stmt->execute();
+                                                    $ggs = $stmt->fetchAll();
+                                                    foreach($ggs as $gg){
+                                                        echo $gg['total'];
+                                                    }
+                                                ?>
+                                                 ตัว
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <img src="img/Goat_gray.png" width="58">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-80">
+                            <div class="card border-left-warning shadow">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -295,7 +321,7 @@
 
                     <div class="row">
                         <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-5">
+                            <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">สรุปรายได้แฝง-รายจ่ายทั้งหมด</h6>
@@ -308,7 +334,7 @@
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow">
+                            <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">สถานะการเป็นโรคของแพะทั้งหมด</h6>
