@@ -436,11 +436,9 @@
         });
 
         function filterData() {
-            // const date2 = [Unique_label];
             const start_date = document.getElementById("start_date").value;
             const end_date = document.getElementById("end_date").value;
-            console.log(start_date);
-            console.log(end_date);
+
         }
     </script>
 </body>
