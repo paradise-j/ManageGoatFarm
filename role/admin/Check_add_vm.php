@@ -5,7 +5,7 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $typevm = $_POST['typevm'];
+        $typevm = $_POST['type'];
         $namevm = $_POST['namevm'];
         $descripvm = $_POST['descripvm'];
         $sql = $db->prepare("INSERT INTO `vc_data`(`vc_type`, `vc_name`, `vc_descrip`) VALUES ('$typevm','$namevm','$descripvm')");
@@ -24,7 +24,7 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_vm.php");
+            header("refresh:1; url=Manage_vm.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
             header("location: Manage_vm.php");

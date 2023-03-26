@@ -10,8 +10,8 @@
         $amount = $_POST['amount'];
         $priceKG = $_POST['priceKG'];
         $month = $_POST['month'];
-        $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_type`, `gfg_range_age`, `gfg_quantity`, `gfg_price`, `gfg_month`) 
-                             VALUES ('$type','$range_age','$amount','$priceKG','$month')");
+        $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_type`, `gfg_range_age`, `gfg_quantity`, `gfg_month`) 
+                             VALUES ('$type','$range_age','$amount','$month')");
         $sql->execute();
 
         if ($sql) {

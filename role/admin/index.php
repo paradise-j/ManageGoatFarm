@@ -42,11 +42,11 @@
                     <div class="row mb-2">
                         <label class="form-label mt-2">ตั้งแต่วันที่</label>
                         <div class="col-md-2">
-                            <input type="date" style="border-radius: 30px;" name="start_date" class="form-control" required>
+                            <input onchange="filterData()" type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
                         </div>
                         <label class="form-label mt-2">ถึงวันที่</label>
                         <div class="col-md-2">
-                            <input type="date" style="border-radius: 30px;" name="end_date" class="form-control" required>
+                            <input onchange="filterData()" type="date" style="border-radius: 30px;" id="end_date" name="end_date" class="form-control" required>
                         </div>
                         <div class="col-md-3">
                             <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
@@ -197,32 +197,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-md font-weight-bold text-info text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
-                                            <div class="h5 mb-1 font-weight-bold text-gray-800">
-                                                <?php
-                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
-                                                    $stmt->execute();
-                                                    $ggs = $stmt->fetchAll();
-                                                    foreach($ggs as $gg){
-                                                        echo $gg['total'];
-                                                    }
-                                                ?>
-                                                 ตัว
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <img src="img/Goat_gray.png" width="58">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
 
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow">
@@ -460,6 +434,14 @@
                 }
             });
         });
+
+        function filterData() {
+            // const date2 = [Unique_label];
+            const start_date = document.getElementById("start_date").value;
+            const end_date = document.getElementById("end_date").value;
+            console.log(start_date);
+            console.log(end_date);
+        }
     </script>
 </body>
 

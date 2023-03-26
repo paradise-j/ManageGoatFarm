@@ -57,21 +57,38 @@
                 <div class="modal-body">
                     <form action="Check_add_vm.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" id="typevm" name="typevm" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
+                            <label for="firstname" class="col-form-label">ประเภทการให้</label>
+                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือก....</option>
                                 <option value="1">ยา</option>
                                 <option value="2">วัคซีน</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ชื่อ</label>
-                            <input type="text" required class="form-control" name="namevm" style="border-radius: 30px;">
+                            <label for="firstname" class="col-form-label">ชื่อผลิตภัณฑ์</label>
+                            <!-- <input type="text" required class="form-control" name="namevm" style="border-radius: 30px;"> -->
+                            <select class="form-control" aria-label="Default select example" id="namevm" name="namevm" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือกชื่อผลิตภัณฑ์....</option>
+                                <option value="1">ยา</option>
+                                <option value="2">วัคซีน</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">รายละเอียด</label>
-                            <input type="text" required class="form-control" name="descripvm" style="border-radius: 30px;">
+                            <textarea type="text"  class="form-control" name="descripvm" id="descripvm" rows="5" style="border-radius: 20px;"></textarea>
                         </div>
+                        <!-- <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ส่วนประกอบ</label>
+                            <textarea type="text"  class="form-control" name="descripvm" id="descripvm" rows="5" style="border-radius: 20px;" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">วิธีการใช้</label>
+                            <textarea type="text"  class="form-control" name="descripvm" id="descripvm" rows="5" style="border-radius: 20px;" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ปริมาณการฉีด</label>
+                            <textarea type="text"  class="form-control" name="descripvm" id="descripvm" rows="5" style="border-radius: 20px;" required></textarea>
+                        </div> -->
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
                         </div>
@@ -101,8 +118,8 @@
                                     <thead class="thead-light">
                                         <tr align="center">
                                             <th>ลำดับที่</th>
-                                            <th>ประเภท</th>
-                                            <th>ชื่อ</th>
+                                            <th>ประเภทการให้</th>
+                                            <th>ชื่อผลิตภัณฑ์</th>
                                             <th>รายละเอียด</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -215,6 +232,36 @@
                 },
             });
         }
+
+        $('#type').change(function(){
+            var id_type = $(this).val();
+            // console.log(id_type)
+            $.ajax({
+                type : "post",
+                url : "M_vm.php",
+                data : {id:id_type,function:'type'},
+                success: function(data){
+                    console.log(data);
+                    $('#namevm').html(data);
+                }
+            });
+        });
+
+
+        $('#namevm').change(function(){
+            var id_namevm = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "M_vm.php",
+                data : {id:id_namevm,function:'namevm'},
+                success: function(data){
+                    // console.log(data);
+                    $('#descripvm').html(data);
+                }
+            });
+        });
+
+
 
         $.extend(true, $.fn.dataTable.defaults, {
             "language": {

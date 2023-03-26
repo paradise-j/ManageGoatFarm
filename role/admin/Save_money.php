@@ -33,7 +33,7 @@
     <title>บันทึกข้อมูลรายรับ-รายจ่าย</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/Vaccine.png"/>
+    <link rel="icon" type="image/png" href="img/money-bill-transfer-solid.svg"/>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -56,15 +56,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Check_Add_monry.php" method="POST" enctype="multipart/form-data">
+                    <form action="Check_Add_money.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">วันที่พบโรค</label>
                             <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ประเภท</label>
-                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือก....</option>
+                            <select class="form-control" aria-label="Default select example" id="typemoney" name="typemoney" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือก....</option>
                                 <option value="1">รายได้แฝง</option>
                                 <option value="2">รายจ่าย</option>
                                 <option value="3">ประหยัดค่าใช้จ่าย</option>
@@ -72,7 +72,6 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">รายการ</label>
-                            <!-- <input type="text" style="border-radius: 30px;" name="list" class="form-control" required> -->
                             <select class="form-control" aria-label="Default select example" id="list" name="list" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกรายการ....</option>
                             </select>
@@ -112,17 +111,20 @@
                                     <thead class="thead-light">
                                         <tr align="center">
                                             <th>ลำดับที่</th>
+                                            <th>วันที่ทำรายการ</th>
                                             <th>ประเภท</th>
                                             <th>รายการ</th>
                                             <th>จำนวนเงิน</th>
-                                            <th>วันที่ทำรายการ</th>
+                                            <th>เกษตรกร</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `money_inex`");
+                                            $stmt = $db->query("SELECT `money_id`,`money_type`,`money_list`,`money_quan`,`money_date`,agriculturist.agc_name
+                                                                FROM `money_inex` 
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = money_inex.agc_id");
                                             $stmt->execute();
                                             $moneys = $stmt->fetchAll();
                                             $count = 1;
@@ -133,6 +135,7 @@
                                         ?>
                                         <tr align="center">
                                             <th scope="row"><?= $count; ?></th>
+                                            <td class="date_th"><?= $money['money_date']; ?></td>
                                             <td>
                                                 <?php 
                                                     if($money['money_type'] == 1){
@@ -142,9 +145,31 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td><?= $money['money_list']; ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($money['money_type'] == 1 ){
+                                                        if ($money['money_list'] == 1){
+                                                            echo "ขายมูลแพะ";
+                                                        }
+                                                    }elseif($money['money_type'] == 2){
+                                                        if($money['money_list'] == 1) {
+                                                            echo "ค่ายา";
+                                                        }elseif($money['money_list'] == 2){
+                                                            echo "ค่าวัคซีน";
+                                                        }elseif($money['money_list'] == 3){
+                                                            echo "ค่าอาหาร";
+                                                        }
+                                                    }else{
+                                                        if($money['money_list'] == 1) {
+                                                            echo "ค่าน้ำมันตัดหญ้า";
+                                                        }else{
+                                                            echo "ค่าปุ๋ย";
+                                                        }
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?= $money['money_quan']; ?></td>
-                                            <td class="date_th"><?= $money['money_date']; ?></td>
+                                            <td><?= $money['agc_name']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $money['money_id']; ?>" href="?delete=<?= $money['money_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
@@ -246,6 +271,21 @@
             elem.textContent=result
         })
 
+
+        $('#typemoney').change(function(){
+            var id_money = $(this).val();
+            console.log(id_money)
+            $.ajax({
+                type : "post",
+                url : "money.php",
+                data : {id:id_money,function:'typemoney'},
+                success: function(data){
+                    // console.log(data);
+                    $('#list').html(data);
+                }
+            });
+        });
+
         $.extend(true, $.fn.dataTable.defaults, {
             "language": {
                     "sProcessing": "กำลังดำเนินการ...",
@@ -265,21 +305,8 @@
                     }
             }
         });
+
         $('.table').DataTable();
-
-
-        
-        $('#type').change(function(){
-            var id_money = $(this).val();
-            $.ajax({
-                type : "post",
-                url : "money.php",
-                data : {id:id_money,function:'type'},
-                success: function(data){
-                    $('#list').html(data);
-                }
-            });
-        });
 
         
     </script>

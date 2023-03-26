@@ -93,10 +93,10 @@
                             <label class="form-label">ปริมาณยาหรือวัคซีน</label>
                             <input type="number" class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label class="form-label">ราคา</label>
                             <input type="number" class="form-control" name="price" style="border-radius: 30px;" required>
-                        </div>
+                        </div> -->
 
                         <div class="col text-center">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
@@ -134,7 +134,7 @@
                                             <th>ประเภทการให้</th>
                                             <th>ชื่อผลิตภัณฑ์</th>
                                             <th>ปริมาณ</th>
-                                            <th>ราคา</th>
+                                            <!-- <th>ราคา</th> -->
                                             <th>เดือนที่ให้</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -142,7 +142,7 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity , gvc_data.gvc_price , gvc_data.gvc_date 
+                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity ,  gvc_data.gvc_date 
                                                                 FROM `gvc_data` 
                                                                 INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
                                                                 INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
@@ -176,13 +176,13 @@
                                                     }elseif($vm['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
                                                     }elseif($vm['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 4 เดือน";
+                                                        echo "ไม่เกิน 3 เดือน";
                                                     }elseif($vm['gg_range_age'] == 5){
-                                                        echo "ไม่เกิน 5 เดือน";
+                                                        echo "3-4 เดือน";
                                                     }elseif($vm['gg_range_age'] == 6){
-                                                        echo "ไม่เกิน 6 เดือน";
+                                                        echo "4-5 เดือน";
                                                     }else{
-                                                        echo "6 เดือนขึ้นไป";
+                                                        echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
@@ -197,7 +197,7 @@
                                             </td>
                                             <td><?= $vm['vc_name']; ?></td>
                                             <td><?= $vm['gvc_quantity']; ?></td>
-                                            <td><?= $vm['gvc_price']; ?></td>
+                                            <!-- <td><?= $vm['gvc_price']; ?></td> -->
                                             <td class="date_th"><?= $vm['gvc_date']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
@@ -300,27 +300,6 @@
             elem.textContent=result
         })
 
-        $.extend(true, $.fn.dataTable.defaults, {
-            "language": {
-                    "sProcessing": "กำลังดำเนินการ...",
-                    "sLengthMenu": "แสดง _MENU_ รายการ",
-                    "sZeroRecords": "ไม่พบข้อมูล",
-                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
-                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
-                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
-                    "sInfoPostFix": "",
-                    "sSearch": "ค้นหา:",
-                    "sUrl": "",
-                    "oPaginate": {
-                                    "sFirst": "เริ่มต้น",
-                                    "sPrevious": "ก่อนหน้า",
-                                    "sNext": "ถัดไป",
-                                    "sLast": "สุดท้าย"
-                    }
-            }
-        });
-        $('.table').DataTable();
-
         $('#type').change(function(){
             var id_provnce = $(this).val();
             $.ajax({
@@ -345,6 +324,29 @@
                 }
             });
         });
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
+
+
     </script>
 
 </body>

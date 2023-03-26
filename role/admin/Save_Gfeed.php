@@ -104,13 +104,13 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">ปริมาณอาหาร</label>
+                            <label class="form-label">ปริมาณอาหาร (กิโลกรัม)</label>
                             <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">ราคาต่อกิโลกรัม</label>
+                        <!-- <div class="mb-3">
+                            <label class="form-label">ราคาต่อกิโลกรัม (บาท)</label>
                             <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
-                        </div>
+                        </div> -->
 
                         <div class="modal-footer">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
@@ -172,9 +172,9 @@
                                             <td>
                                                 <?php 
                                                     if($gfg['gg_type'] == 1){
-                                                        echo "แพะพ่อพันธุ์";
+                                                        echo "พ่อพันธุ์";
                                                     }elseif($gfg['gg_type'] == 2){
-                                                        echo "แพะแม่พันธุ์";
+                                                        echo "แม่พันธุ์";
                                                     }else{
                                                         echo "แพะขุน";
                                                     }
@@ -189,13 +189,13 @@
                                                     }elseif($gfg['gg_range_age'] == 3){
                                                         echo "5 ปีขึ้นไป";
                                                     }elseif($gfg['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 4 เดือน";
+                                                        echo "ไม่เกิน 3 เดือน";
                                                     }elseif($gfg['gg_range_age'] == 5){
-                                                        echo "ไม่เกิน 5 เดือน";
+                                                        echo "3-4 เดือน";
                                                     }elseif($gfg['gg_range_age'] == 6){
-                                                        echo "ไม่เกิน 6 เดือน";
+                                                        echo "4-5 เดือน";
                                                     }else{
-                                                        echo "6 เดือนขึ้นไป";
+                                                        echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>
@@ -203,7 +203,7 @@
                                                 <?php 
                                                     if($gfg['fg_type'] == 1 ){
                                                         echo "ธรรมชาติ";
-                                                    }elseif($gfg['fg_type'] == 1 ){
+                                                    }elseif($gfg['fg_type'] == 2 ){
                                                         echo "ข้น";
                                                     }else{
                                                         echo "TMR";

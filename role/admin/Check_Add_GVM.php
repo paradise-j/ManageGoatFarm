@@ -5,12 +5,12 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $Gtype = $_POST['Gtype'];
+        $Gtype = $_POST['type'];
         $range_age = $_POST['range_age'];
         $VMtype = $_POST['VMtype'];
-        $VMname = $_POST['VMname'];
+        $vc_id = $_POST['VMname'];
         $quantity = $_POST['quantity'];
-        $price = $_POST['price'];
+        // $price = $_POST['price'];
         $date = $_POST['date'];
 
 
@@ -26,8 +26,8 @@
         }
 
 
-        $sql = $db->prepare("INSERT INTO `gvc_data`(`gvc_type`, `gvc_quantity`, `gvc_price`, `gvc_date`, `gg_id`, `vc_id`) 
-                                            VALUES ('$VMtype','$quantity','$price','$date','$gg_id','$VMname')");
+        $sql = $db->prepare("INSERT INTO `gvc_data`(`gvc_type`, `gvc_quantity`, `gvc_date`, `gg_id`, `vc_id`) VALUES 
+                            ('$VMtype','$quantity','$date','$gg_id','$vc_id')");
         $sql->execute();
 
         if ($sql) {

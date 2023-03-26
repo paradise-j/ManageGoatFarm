@@ -5,7 +5,7 @@
     require_once "connect.php";
 
     if (isset($_POST['submit'])) {
-        $type = $_POST['type'];
+        $type = $_POST['typemoney'];
         $list = $_POST['list'];
         $quan = $_POST['quan'];
         $date = $_POST['date'];
@@ -25,7 +25,7 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Save_money.php");
+            header("refresh:1; url=Save_money.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
             header("location: Save_money.php");
