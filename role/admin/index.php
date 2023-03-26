@@ -4,6 +4,7 @@
         header("Location: ../../index.php");
         exit;
     }
+    require_once("connect.php");
     // echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 ?>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
     <title>หน้าหลัก</title>
 
     <!-- Custom fonts for this template-->
-    <link rel="icon" type="image/png" href="img/home.png" />
+    <link rel="icon" type="image/png" href="img/home.png">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -42,14 +43,14 @@
                     <div class="row mb-2">
                         <label class="form-label mt-2">ตั้งแต่วันที่</label>
                         <div class="col-md-2">
-                            <input onchange="filterData()" type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
+                            <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
                         </div>
                         <label class="form-label mt-2">ถึงวันที่</label>
                         <div class="col-md-2">
-                            <input onchange="filterData()" type="date" style="border-radius: 30px;" id="end_date" name="end_date" class="form-control" required>
+                            <input type="date" style="border-radius: 30px;" id="end_date" name="end_date" class="form-control" required>
                         </div>
                         <div class="col-md-3">
-                            <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
+                            <button onclick="filterData()" class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
                             &nbsp&nbsp
                             <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
                         </div>
@@ -438,6 +439,9 @@
         function filterData() {
             const start_date = document.getElementById("start_date").value;
             const end_date = document.getElementById("end_date").value;
+
+            console.log(start_date);
+            console.log(end_date); 
 
         }
     </script>

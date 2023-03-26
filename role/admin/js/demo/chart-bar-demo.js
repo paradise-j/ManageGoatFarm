@@ -35,6 +35,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     const json = await res.json()
     return json;
   }
+  
   // Bar Chart Example
   var ctx = document.getElementById("myBarChart");
   const data = await get_total_goat();

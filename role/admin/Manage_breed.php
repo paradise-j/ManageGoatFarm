@@ -105,7 +105,7 @@
                                             $gbs = $stmt->fetchAll();
                                             $count = 1;
                                             if (!$gbs) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='6' class='text-center'>ไม่มีข้อมูลที่สามารถใช้ได้</td></p>";
                                             } else {
                                             foreach($gbs as $gb)  {  
                                         ?>
