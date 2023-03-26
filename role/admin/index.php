@@ -40,22 +40,23 @@
             <div id="content">
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
-                    <div class="row mb-2">
-                        <label class="form-label mt-2">ตั้งแต่วันที่</label>
-                        <div class="col-md-2">
-                            <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
+                    <form action="api/get_date.php" method="post">
+                        <div class="row mb-2">
+                            <label class="form-label mt-2">ตั้งแต่วันที่</label>
+                            <div class="col-md-2">
+                                <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
+                            </div>
+                            <label class="form-label mt-2">ถึงวันที่</label>
+                            <div class="col-md-2">
+                                <input type="date" style="border-radius: 30px;" id="end_date" name="end_date" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
+                                &nbsp&nbsp
+                                <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
+                            </div>
                         </div>
-                        <label class="form-label mt-2">ถึงวันที่</label>
-                        <div class="col-md-2">
-                            <input type="date" style="border-radius: 30px;" id="end_date" name="end_date" class="form-control" required>
-                        </div>
-                        <div class="col-md-3">
-                            <button onclick="filterData()" class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
-                            &nbsp&nbsp
-                            <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
-                        </div>
-
-                    </div>
+                    </form>
                     <div class="row mb-2">
                         <label class="form-label mt-2">จังหวัด</label>
                         <div class="col-md-2">
@@ -396,6 +397,7 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
     <script src="js/demo/chart-bar2-demo.js"></script>
+    <script src="js/demo/chart-update-bar-demo.js"></script>
     
 
     <script>
@@ -439,9 +441,6 @@
         function filterData() {
             const start_date = document.getElementById("start_date").value;
             const end_date = document.getElementById("end_date").value;
-
-            console.log(start_date);
-            console.log(end_date); 
 
         }
     </script>
