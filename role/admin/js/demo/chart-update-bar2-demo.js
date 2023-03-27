@@ -141,7 +141,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
           }],
         },
         legend: {
-          display: true
+          display: true;
         },
         tooltips: {
           titleMarginBottom: 10,

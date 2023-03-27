@@ -40,7 +40,7 @@
             <div id="content">
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
-                    <!-- <form action="api/get_date.php" method="post">
+                    <form action="api/get_date.php" method="post">
                         <div class="row mb-2">
                             <label class="form-label mt-2">ตั้งแต่วันที่</label>
                             <div class="col-md-2">
@@ -56,7 +56,7 @@
                                 <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
                             </div>
                         </div>
-                    </form> -->
+                    </form>
                     <!-- <div class="row mb-2">
                         <label class="form-label mt-2">จังหวัด</label>
                         <div class="col-md-2">
