@@ -4,7 +4,7 @@
         header("location: ../../index.php");
         exit;
     }
-    
+
     require_once 'connect.php';
 
     if (isset($_GET['delete'])) {
@@ -19,12 +19,9 @@
         }
     }
 
-    if(isset($_REQUEST['submit'])){
-        $start_date = $_POST["start_date"];
-        $end_date = $_POST["end_date"];
 
 
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -88,37 +85,64 @@
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead class="thead-light">
                                                 <tr>
-                                                    <th>รหัสการขาย</th>
+                                                    <th>ลำดับที่</th>
+                                                    <th>ประเภทแพะ</th>
+                                                    <!-- <th>เดือนที่ขาย</th> -->
                                                     <th>จำนวนยอดขายแพะ</th>
-                                                    <th>น้ำหนักรวม</th>
-                                                    <th>ราคาต่อกิโลกรัม</th>
-                                                    <th>ราคารวม</th>
+                                                    <!-- <th>ชื่อเกษตรกร</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                    $stmt = $db->query("SELECT sale.sale_id , salelist.slist_quantity , salelist.slist_weight , salelist.slist_KgPirce , salelist.slist_price 
-                                                                        FROM `salelist` 
-                                                                        INNER JOIN `sale` ON salelist.sale_id = sale.sale_id
-                                                                        WHERE sale.sale_date
-                                                                        BETWEEN '$start_date' AND '$end_date'");
-                                                    $stmt->execute();
-                                                    $vms = $stmt->fetchAll();
+                                                    if(isset($_POST["submit"])){
+                                                        $start_date = $_POST["start_date"];
+                                                        $end_date = $_POST["end_date"];
+                                                        $count = 1;
+                                                        $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total , agriculturist.agc_name
+                                                                            FROM `salelist` 
+                                                                            INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                            INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                                                            INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
+                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('2023-01-01') AND MONTH('2023-03-31')
+                                                                            GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                                        $stmt->execute();
+                                                        $vms = $stmt->fetchAll();
 
-                                                    if (!$vms) {
-                                                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
-                                                    } else {
-                                                    foreach($vms as $vm)  {  
+                                                        if (!$vms) {
+                                                            echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                        } else {
+                                                            foreach($vms as $vm)  {  
                                                 ?>
                                                 <tr>
-                                                    <th scope="row"><?= $vm['sale_id']; ?></th>
-                                                    <td><?= $vm['slist_quantity']; ?></td>
-                                                    <td><?= $vm['slist_weight']; ?></td>
-                                                    <td><?= $vm['slist_KgPirce']; ?></td>
-                                                    <td><?= $vm['slist_price']; ?></td>
+                                                    <th scope="row"><?= $count; ?></th>
+                                                    <td>
+                                                        <?php 
+                                                            if($vm['gg_type'] == 1){
+                                                                echo "พ่อพันธุ์";
+                                                            }elseif($vm['gg_type'] == 2){
+                                                                echo "แม่พันธุ์";
+                                                            }else{
+                                                                echo "แพะขุน";
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                    <!-- <td>
+                                                        <?php 
+                                                            if($vm['month'] == 1){
+                                                                echo "พ่อพันธุ์";
+                                                            }elseif($vm['month'] == 2){
+                                                                echo "แม่พันธุ์";
+                                                            }else{
+                                                                echo "แพะขุน";
+                                                            }
+                                                        ?>
+                                                    </td> -->
+                                                    <td><?= $vm['total']; ?></td>
+                                                    <!-- <td><?= $vm['agc_name']; ?></td> -->
                                                 </tr>
-                                                <?php }  
-                                                    } ?>
+                                                <?php    $count++;   }  
+                                                        } 
+                                                    }    ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -229,48 +253,45 @@
             });
         }
 
-        
+        var my_data = [];
+        var my_label = [];
+        // $vms.forEach(item => {
+        //     my_data.push(item.total)
+        //     switch (item.gg_type) {
+        //         case '1':
+        //             my_label.push('พ่อพันธุ์')
+        //             break;
+        //         case '2':
+        //             my_label.push('แม่พันธุ์')
+        //             break;
+        //         case '3':
+        //             my_label.push('ขุน')
+        //             break;
+        //     }
+        // });
 
+        
         var ctx = document.getElementById('myChartBar');
         var myChartBar = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
+                labels: ["แพะพ่อพันธุ์","แพะแม่พันธุ์","แพะขุน"],
                 datasets: [{
-                    label: 'ยอดขายสุทธิ',
-                    data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],hoverBackgroundColor: [
-                        'rgba(216,68,99,1)',
-                        'rgba(23,123,190,1)',
-                        'rgba(23,123,190,1)',
-                        'rgba(23,123,190,1)',
-                        'rgba(23,123,190,1)',
-                        'rgba(23,123,190,1)'
-
-                    ],
-                    borderWidth: 1
-                }]
+                label: "แพะพ่อพันธุ์",
+                backgroundColor: "#2a86e9",
+                borderColor: "#2a86e9",
+                data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800]
+                },{
+                label: "แพะแม่พันธุ์",
+                backgroundColor: "#2ae955",
+                borderColor: "#2ae955",
+                data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800]
+                }, {
+                label: "แพะขุน",
+                backgroundColor: "#e9452a",
+                borderColor: "#e9452a",
+                data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800]
+                }],
             },
             options: {
                 scales: {
@@ -332,6 +353,27 @@
                 }
             }
         });
+
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                    "sProcessing": "กำลังดำเนินการ...",
+                    "sLengthMenu": "แสดง _MENU_ รายการ",
+                    "sZeroRecords": "ไม่พบข้อมูล",
+                    "sInfo": "แสดงรายการ _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดงรายการ 0 ถึง 0 จาก 0 รายการ",
+                    "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกรายการ)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ค้นหา:",
+                    "sUrl": "",
+                    "oPaginate": {
+                                    "sFirst": "เริ่มต้น",
+                                    "sPrevious": "ก่อนหน้า",
+                                    "sNext": "ถัดไป",
+                                    "sLast": "สุดท้าย"
+                    }
+            }
+        });
+        $('.table').DataTable();
 
     </script>
 
