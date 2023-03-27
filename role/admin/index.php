@@ -40,7 +40,7 @@
             <div id="content">
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
-                    <form action="api/get_date.php" method="post">
+                    <!-- <form action="api/get_date.php" method="post">
                         <div class="row mb-2">
                             <label class="form-label mt-2">ตั้งแต่วันที่</label>
                             <div class="col-md-2">
@@ -56,8 +56,8 @@
                                 <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
                             </div>
                         </div>
-                    </form>
-                    <div class="row mb-2">
+                    </form> -->
+                    <!-- <div class="row mb-2">
                         <label class="form-label mt-2">จังหวัด</label>
                         <div class="col-md-2">
                             <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
@@ -92,12 +92,12 @@
                             &nbsp&nbsp
                             <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
                         </div>                       
-                        <!-- <div class="col text-right">
+                        <div class="col text-right">
                             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i>  ออกรายงาน</a>
-                        </div> -->
-                    </div>
-                    <div class="row mb-3">
+                        </div>
+                    </div> -->
+                    <!-- <div class="row mb-3">
                         <label class="form-label mt-2">กลุ่มเลี้ยง</label>
                         <div class="col-md-3">
                             <select class="form-control" aria-label="Default select example" id="gfarm" name="gfarm" style="border-radius: 30px;" required>
@@ -120,7 +120,7 @@
                             &nbsp&nbsp
                             <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <div class="card border-left-primary shadow h-80">
@@ -438,11 +438,6 @@
             });
         });
 
-        function filterData() {
-            const start_date = document.getElementById("start_date").value;
-            const end_date = document.getElementById("end_date").value;
-
-        }
     </script>
 </body>
 

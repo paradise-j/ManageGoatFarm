@@ -32,7 +32,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ออกรายงาน</title>
+    <title>สรุปยอดขายแพะ</title>
 
     <!-- Custom fonts for this template -->
     <link rel="icon" type="image/png" href="img/virus.png" />
@@ -55,24 +55,27 @@
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h3 class="m-0 font-weight-bold text-primary">ออกรายงาน</h3>
+                                    <h2 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะ</h2>
                                 </div>
                                 <div class="card-body">
+                                    <!-- <div class="row">
+                                        <div class="col text-center">
+                                            <label class="form-label" style="font-size: 2rem;">ประจำวันที่ ถึงวันที่ </label>
+                                        </div>
+                                    </div> -->
                                     <form action="Report_result.php" method="post">
                                         <div class="row mt-2 mb-4">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
+                                            <!-- <div class="col-md-3">
                                                 <label class="form-label">หัวข้อรายงาน</label>
                                                 <select class="form-control" aria-label="Default select example" name="topic" style="border-radius: 30px;" required>
                                                     <option selected disabled>กรุณาเลือก....</option>
                                                     <option value="1">สรุปยอดขายแพะ</option>
                                                     <option value="2">สรุปยอดข้อมูลแพะเกิด</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ตั้งแต่วันที่</label>
                                                 <input type="date" style="border-radius: 30px;" name="start_date" class="form-control" required>
@@ -92,7 +95,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-1"></div>
                     </div>
                 </div>
             </div>
