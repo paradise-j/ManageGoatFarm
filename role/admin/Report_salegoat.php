@@ -475,11 +475,6 @@
                 }],
             },
             options: {
-                // plugins: {
-                //     datalabels: {
-                //         formatter: (value, context) => context.datasetIndex === 0 ? value :''
-                //     }
-                // },
                 scales: {
                     y: {
                         beginAtZero: true
