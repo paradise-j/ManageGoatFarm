@@ -32,7 +32,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>รายงานการขายแพะ</title>
+    <title>สรุปยอดขายแพะ</title>
 
     <!-- Custom fonts for this template -->
     <link rel="icon" type="image/png" href="img/virus.png" />
@@ -58,7 +58,7 @@
                         <div class="col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h2 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะทั้งหมดละกลุ่มเลี้ยง</h2>
+                                    <h2 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะทั้งหมด</h2>
                                 </div>
                                 <div class="card-body">
                                     <form action="" method="post">

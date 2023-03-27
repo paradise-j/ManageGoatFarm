@@ -75,25 +75,6 @@
             <span>การขายแพะ</span></a>
     </li>
     
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fa-solid fa-folder"></i>
-            <span>บันทึกข้อมูลการเลี้ยงแพะ</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="Save_Groupgoat.php">บันทึกข้อมูลกลุ่มแพะ</a>
-                <a class="collapse-item" href="Save_FMgoat.php">บันทึกแพะพ่อ-แม่พันธุ์</a>
-                <a class="collapse-item" href="Save_NBgoat.php">บันทึกข้อมูลแพะเกิด</a>
-                <a class="collapse-item" href="Save_Gfeed.php">การให้อาหาร</a>
-                <a class="collapse-item" href="Save_GVM.php">การให้ยาและวัคซีน</a>
-                <a class="collapse-item" href="Save_disease.php">การเป็นโรค</a>
-                <a class="collapse-item" href="Save_money.php">รายรับ-รายจ่าย</a>
-            </div>
-        </div>
-    </li>
     <!-- Nav Item - Charts -->
     <!-- <li class="nav-item">
         <a class="nav-link" href="Report.php">
@@ -110,8 +91,10 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="Report_agc.php">สรุปข้อมูลเกษตรกร</a>
-                <a class="collapse-item" href="Report_salegoat.php">สรุปยอดขายแพะ</a>
-                <a class="collapse-item" href="Report_money.php">สรุปข้อมูลได้แฝง-รายจ่าย</a>
+                <a class="collapse-item" href="Report_salegoatAll.php">ยอดขายแพะทั้งหมด</a>
+                <a class="collapse-item" href="Report_salegoat.php">ยอดขายแพะแต่ละกลุ่ม</a>
+                <a class="collapse-item" href="Report_moneyAll.php">รายได้แฝง-รายจ่ายทั้งหมด</a>
+                <a class="collapse-item" href="Report_money.php">รายได้แฝง-รายจ่ายแต่ละกลุ่ม</a>
             </div>
         </div>
     </li>

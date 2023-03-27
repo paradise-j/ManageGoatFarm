@@ -76,11 +76,11 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ตั้งแต่วันที่</label>
-                                                <input type="date" style="border-radius: 30px;" name="start_date" class="form-control" required>
+                                                <input type="month" style="border-radius: 30px;" name="start_date" class="form-control" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ถึงวันที่</label>
-                                                <input type="date" style="border-radius: 30px;" name="end_date" class="form-control" required>
+                                                <input type="month" style="border-radius: 30px;" name="end_date" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
