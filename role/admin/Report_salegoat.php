@@ -1,4 +1,5 @@
 <?php 
+    // header('Content-Type: application/json; charset=utf-8');
     session_start();
     if(!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 1){
         header("location: ../../index.php");
@@ -18,10 +19,6 @@
             header("refresh:1; url=Manage_disease.php");
         }
     }
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +61,7 @@
                                     <h2 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะ</h2>
                                 </div>
                                 <div class="card-body">
-                                    <form action="Report_salegoat.php?" method="post">
+                                    <form action="" method="post">
                                         <div class="row mt-2">
                                             <div class="col-md-3"></div>
                                             <label for="inputState" class="form-label mt-2">ตั้งแต่วันที่</label>
@@ -87,9 +84,7 @@
                                                 <tr>
                                                     <th>ลำดับที่</th>
                                                     <th>ประเภทแพะ</th>
-                                                    <!-- <th>เดือนที่ขาย</th> -->
                                                     <th>จำนวนยอดขายแพะ</th>
-                                                    <!-- <th>ชื่อเกษตรกร</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -98,16 +93,44 @@
                                                         $start_date = $_POST["start_date"];
                                                         $end_date = $_POST["end_date"];
                                                         $count = 1;
-                                                        $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total , agriculturist.agc_name
+
+                                                        $stmt2 = $db->query("SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month 
+                                                                            FROM `sale` 
+                                                                            INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
+                                                                            WHERE MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                            GROUP BY MONTH(sale_date)");
+                                                        $stmt2->execute();
+
+                                                        $arr2 = array();
+                                                        while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                                                            $arr2[] = $row;
+                                                        }
+                                                        $dataResult2 = json_encode($arr2);
+
+                                                        $stmt1 = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
                                                                             FROM `salelist` 
                                                                             INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
                                                                             INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                            INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
-                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('2023-01-01') AND MONTH('2023-03-31')
+                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
                                                                             GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
-                                                        $stmt->execute();
-                                                        $vms = $stmt->fetchAll();
+                                                        $stmt1->execute();
 
+                                                        $arr = array();
+                                                        while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                                                            $arr[] = $row;
+                                                        }
+                                                        $dataResult = json_encode($arr);
+
+
+                                                        $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
+                                                                            FROM `salelist` 
+                                                                            INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                            INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                            GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                                        $stmt->execute();                                                        
+                                                        $vms = $stmt->fetchAll();
+                                                        
                                                         if (!$vms) {
                                                             echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
                                                         } else {
@@ -149,20 +172,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="card shadow">
-                                        <div class="card-body">
+                                        <div class="card-body mb-5">
                                             <div class="chart-area mb-5">
-                                                <canvas id="myChartBar" height="280"></canvas>
+                                                <canvas id="myChartBar" height="240"></canvas>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <div class="card shadow">
-                                        <div class="card-body">
+                                        <div class="card-body mb-5">
                                             <div class="chart-area mb-5">
-                                                <canvas id="myAreaChart" height="130"></canvas>
+                                                <canvas id="myAreaChart" height="165"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +231,6 @@
     <script src="js/demo/chartjs-plugin-datalabels.js"></script>
 
     <script type="text/javascript">
-
         $(".delete-btn").click(function(e) {
             var userId = $(this).data('id');
             e.preventDefault();
@@ -252,69 +274,279 @@
                 },
             });
         }
-
-        var my_data = [];
+// ============================================= myChartBar =============================================
+        const my_dataAll = <?= $dataResult; ?> ; 
+        var my_data1 = [];
+        var my_data2 = [];
+        var my_data3 = [];
         var my_label = [];
-        // $vms.forEach(item => {
-        //     my_data.push(item.total)
-        //     switch (item.gg_type) {
-        //         case '1':
-        //             my_label.push('พ่อพันธุ์')
-        //             break;
-        //         case '2':
-        //             my_label.push('แม่พันธุ์')
-        //             break;
-        //         case '3':
-        //             my_label.push('ขุน')
-        //             break;
-        //     }
-        // });
+        var Unique_label = [];
+        my_dataAll.forEach(item => {
+            switch (item.gg_type) {
+                case '1':
+                    switch (item.month) {
+                        case '1':
+                            my_data1.push(item.total)
+                            break;
+                        case '2':
+                            my_data1.push(item.total)
+                            break;
+                        case '3':
+                            my_data1.push(item.total)
+                            break;
+                        case '4':
+                            my_data1.push(item.total)
+                            break;
+                        case '5':
+                            my_data1.push(item.total)
+                            break;
+                        case '6':
+                            my_data1.push(item.total)
+                            break;
+                        case '7':
+                            my_data1.push(item.total)
+                            break;
+                        case '8':
+                            my_data1.push(item.total)
+                            break;
+                        case '9':
+                            my_data1.push(item.total)
+                            break;
+                        case '10':
+                            my_data1.push(item.total)
+                            break;
+                        case '11':
+                            my_data1.push(item.total)
+                            break;
+                        case '12':
+                            my_data1.push(item.total)
+                            break;
+                        }
+                    break;
+                case '2':
+                    switch (item.month) {
+                        case '1':
+                            my_data2.push(item.total)
+                            break;
+                        case '2':
+                            my_data2.push(item.total)
+                            break;
+                        case '3':
+                            my_data2.push(item.total)
+                            break;
+                        case '4':
+                            my_data2.push(item.total)
+                            break;
+                        case '5':
+                            my_data2.push(item.total)
+                            break;
+                        case '6':
+                            my_data2.push(item.total)
+                            break;
+                        case '7':
+                            my_data2.push(item.total)
+                            break;
+                        case '8':
+                            my_data2.push(item.total)
+                            break;
+                        case '9':
+                            my_data2.push(item.total)
+                            break;
+                        case '10':
+                            my_data2.push(item.total)
+                            break;
+                        case '11':
+                            my_data2.push(item.total)
+                            break;
+                        case '12':
+                            my_data2.push(item.total)
+                            break;
+                        }
+                    break;
+                case '3':
+                    switch (item.month) {
+                        case '1':
+                            my_data3.push(item.total)
+                            break;
+                        case '2':
+                            my_data3.push(item.total)
+                            break;
+                        case '3':
+                            my_data3.push(item.total)
+                            break;
+                        case '4':
+                            my_data3.push(item.total)
+                            break;
+                        case '5':
+                            my_data3.push(item.total)
+                            break;
+                        case '6':
+                            my_data3.push(item.total)
+                            break;
+                        case '7':
+                            my_data3.push(item.total)
+                            break;
+                        case '8':
+                            my_data3.push(item.total)
+                            break;
+                        case '9':
+                            my_data3.push(item.total)
+                            break;
+                        case '10':
+                            my_data3.push(item.total)
+                            break;
+                        case '11':
+                            my_data3.push(item.total)
+                            break;
+                        case '12':
+                            my_data3.push(item.total)
+                            break;
+                        }
+                    break;
+            }
+            switch (item.month) {
+                case '1':
+                    my_label.push('ม.ค.')
+                    break;
+                case '2':
+                    my_label.push('ก.พ.')
+                    break;
+                case '3':
+                    my_label.push('มี.ค.')
+                    break;
+                case '4':
+                    my_label.push('เม.ษ.')
+                    break;
+                case '5':
+                    my_label.push('พ.ค.')
+                    break;
+                case '6':
+                    my_label.push('มิ.ย.')
+                    break;
+                case '7':
+                    my_label.push('ก.ค.')
+                    break;
+                case '8':
+                    my_label.push('ส.ค.')
+                    break;
+                case '9':
+                    my_label.push('ก.ย.')
+                    break;
+                case '10':
+                    my_label.push('ต.ค.')
+                    break;
+                case '11':
+                    my_label.push('พ.ย.')
+                    break;
+                case '12':
+                    my_label.push('ธ.ค.')
+                    break; 
+            }
+        });
 
-        
+        for( var i=0; i<my_label.length; i++ ) {
+            if ( Unique_label.indexOf( my_label[i] ) < 0 ) {
+            Unique_label.push( my_label[i] );
+            }
+        } 
+        console.log(my_data1);
+        console.log(Unique_label);
+
         var ctx = document.getElementById('myChartBar');
         var myChartBar = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["แพะพ่อพันธุ์","แพะแม่พันธุ์","แพะขุน"],
+                labels: Unique_label,
                 datasets: [{
                 label: "แพะพ่อพันธุ์",
                 backgroundColor: "#2a86e9",
                 borderColor: "#2a86e9",
-                data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800]
+                data: my_data1
                 },{
                 label: "แพะแม่พันธุ์",
                 backgroundColor: "#2ae955",
                 borderColor: "#2ae955",
-                data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800]
+                data: my_data2
                 }, {
                 label: "แพะขุน",
                 backgroundColor: "#e9452a",
                 borderColor: "#e9452a",
-                data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800]
+                data: my_data3
                 }],
             },
             options: {
+                // plugins: {
+                //     datalabels: {
+                //         formatter: (value, context) => context.datasetIndex === 0 ? value :''
+                //     }
+                // },
                 scales: {
                     y: {
                         beginAtZero: true
                     }
                 },
                 legend: {
-                    display: false
+                    display: true
                 }
             }
         });
 
+// ============================================= myAreaChart =============================================
+        const my_dataAll2 = <?= $dataResult2; ?> ; 
+        var my_data02 = [];
+        var my_label02 = [];
+
+        my_dataAll2.forEach(item => {
+            my_data02.push(item.total)
+            switch (item.month) {
+                case '1':
+                    my_label02.push('ม.ค.')
+                    break;
+                case '2':
+                    my_label02.push('ก.พ.')
+                    break;
+                case '3':
+                    my_label02.push('มี.ค.')
+                    break;
+                case '4':
+                    my_label02.push('เม.ษ.')
+                    break;
+                case '5':
+                    my_label02.push('พ.ค.')
+                    break;
+                case '6':
+                    my_label02.push('มิ.ย.')
+                    break;
+                case '7':
+                    my_label02.push('ก.ค.')
+                    break;
+                case '8':
+                    my_label02.push('ส.ค.')
+                    break;
+                case '9':
+                    my_label02.push('ก.ย.')
+                    break;
+                case '10':
+                    my_label02.push('ต.ค.')
+                    break;
+                case '11':
+                    my_label02.push('พ.ย.')
+                    break;
+                case '12':
+                    my_label02.push('ธ.ค.')
+                    break; 
+            }
+        });
 
 
         var ctx = document.getElementById("myAreaChart");
         var myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ษ.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค", "พ.ย.", "ธ.ค"],
+                labels: my_label02,
                 datasets: [{
-                    label: "รายได้แฝง",
-                    lineTension: 0.3,
+                    label: "ยอดขายสุทธิ",
+                    lineTension: 0,
                     backgroundColor: "rgba(78, 115, 223, 0.07)",
                     borderColor: "rgba(78, 115, 223, 1)",
                     pointRadius: 5,
@@ -325,21 +557,7 @@
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800],
-                },{
-                    label: "รายจ่าย",
-                    lineTension: 0.3,
-                    backgroundColor: "rgba(255,23,0,0.07)",
-                    borderColor: "rgba(255,23,0,1)",
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(255,23,0,1)",
-                    pointBorderColor: "rgba(255,23,0,1)",
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(178,21,6,1)",
-                    pointHoverBorderColor: "rgba(178,21,6,1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                    data: [5690, 6870, 7450, 6500, 6540, 5870, 6840, 6500, 7800, 8500, 4580, 3500],
+                    data: my_data02,
                 }],
             },
             options: {
@@ -349,7 +567,7 @@
                     }
                 },
                 legend: {
-                    display: false
+                    display: true
                 }
             }
         });
