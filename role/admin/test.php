@@ -5,14 +5,9 @@
 
 
     // ===================== Check id agriculturist =====================
-    $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                        FROM `salelist` 
-                        INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                        INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                        INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
-                        INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
-                        WHERE group_farm.gf_id ='GF0006' AND MONTH(sale.sale_date) BETWEEN MONTH('2023-01-01') AND MONTH('2023-03-31')
-                        GROUP BY  group_g.gg_type");
+    $stmt = $db->query("SELECT `money_type`, `money_list`, MONTH(`money_date`) as month, SUM(`money_quan`) as total FROM `money_inex` 
+    WHERE MONTH(`money_date`) BETWEEN MONTH('2023-01-01') AND MONTH('2023-06-30') 
+    GROUP BY `money_type`, `money_list` ,MONTH(`money_date`)");
     $stmt->execute();
     $arr = array();
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
