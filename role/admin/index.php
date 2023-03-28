@@ -208,7 +208,7 @@
                             <div class="card shadow mb-2">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">สรุปยอดแพะทั้งหมด</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">สรุปเกษตรกรแต่ละกลุ่มเลี้ยง</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
@@ -216,7 +216,7 @@
                                     </div>
                                     <div class="mt-3 text-center small"> 
                                         <span class="mr-2">
-                                            <i class="fas fa-circle"></i> สรุปยอดของแพะแต่ละประเภท
+                                            <i class="fas fa-circle"></i> สรุปเกษตรกรแต่ละกลุ่มเลี้ยง
                                         </span>
                                     </div>
                                 </div>

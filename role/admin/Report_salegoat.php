@@ -116,7 +116,7 @@
                                                                             INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
                                                                             INNER JOIN agriculturist ON sale.agc_id = agriculturist.agc_id
                                                                             INNER JOIN group_farm ON group_farm.gf_id = agriculturist.gf_id
-                                                                            WHERE group_farm.gf_id ='Gname' AND MONTH(sale_date) BETWEEN MONTH('start_date') AND MONTH('end_date')
+                                                                            WHERE group_farm.gf_id ='$Gname' AND MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
                                                                             GROUP BY MONTH(sale_date)"); 
                                                         $stmt2->execute();
 
@@ -127,13 +127,13 @@
                                                         $dataResult2 = json_encode($arr2);
 
                                                         $stmt1 = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                                                                            FROM `salelist` 
-                                                                            INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                                                                            INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                            INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
-                                                                            INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
-                                                                            WHERE group_farm.gf_id = '$Gname' AND MONTH('sale.sale_date') BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                            GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                                                             FROM `salelist` 
+                                                                             INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                             INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                                                             INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
+                                                                             INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
+                                                                             WHERE group_farm.gf_id ='$Gname' AND MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                             GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
                                                         $stmt1->execute();
 
                                                         $arr = array();
@@ -466,8 +466,8 @@
             Unique_label.push( my_label[i] );
             }
         } 
-        // console.log(my_data1);
-        // console.log(Unique_label);
+        console.log(my_data1);
+        console.log(Unique_label);
 
         var ctx = document.getElementById('myChartBar');
         var myChartBar = new Chart(ctx, {

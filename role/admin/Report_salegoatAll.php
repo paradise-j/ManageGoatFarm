@@ -445,8 +445,8 @@
             Unique_label.push( my_label[i] );
             }
         } 
-        // console.log(my_data1);
-        // console.log(Unique_label);
+        console.log(my_data1);
+        console.log(Unique_label);
 
         var ctx = document.getElementById('myChartBar');
         var myChartBar = new Chart(ctx, {

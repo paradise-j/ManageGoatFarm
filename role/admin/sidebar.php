@@ -63,7 +63,7 @@
                 <a class="collapse-item" href="Save_Gfeed.php">การให้อาหาร</a>
                 <a class="collapse-item" href="Save_GVM.php">การให้ยาและวัคซีน</a>
                 <a class="collapse-item" href="Save_disease.php">การเป็นโรค</a>
-                <a class="collapse-item" href="Save_money.php">รายรับ-รายจ่าย</a>
+                <a class="collapse-item" href="Save_money.php">รายได้แฝง-รายจ่าย</a>
             </div>
         </div>
     </li>
