@@ -148,17 +148,17 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
+                                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">ยอดขายรวมสุทธิ</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
+                                                    $stmt = $db->prepare("SELECT SUM(`slist_price`) as total FROM `salelist`");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
                                                         echo $gg['total'];
                                                     }
                                                 ?>
-                                                 ตัว
+                                                 บาท
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -204,7 +204,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-4 col-lg-5">
+                        <div class="col-xl-5 col-lg-5">
                             <div class="card shadow mb-2">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-7 col-lg-7">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละเดือน</h6>
