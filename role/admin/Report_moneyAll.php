@@ -78,45 +78,51 @@
                                             </div>
                                         </div>
                                     </form>
-                                        <?php 
-                                            if(isset($_POST["submit"])){
-                                                $start_date = $_POST["start_date"];
-                                                $end_date = $_POST["end_date"];
-                                                $count = 1;
-                                                // ============================================================================================================================
-                                                $stmt2 = $db->query("SELECT `money_type`, MONTH(`money_date`) as month, SUM(`money_quan`) as total 
-                                                                    FROM `money_inex` 
-                                                                    WHERE MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
-                                                                    GROUP BY `money_type`, MONTH(`money_date`)"); 
-                                                $stmt2->execute();
+                                    
+                                    <?php 
+                                        if(isset($_POST["submit"])){
+                                            $start_date = $_POST["start_date"];
+                                            $end_date = $_POST["end_date"];
+                                            $count = 1;
+                                            // ============================================================================================================================
+                                            $stmt2 = $db->query("SELECT `money_type`, MONTH(`money_date`) as month, SUM(`money_quan`) as total 
+                                                                FROM `money_inex` 
+                                                                WHERE MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
+                                                                GROUP BY `money_type`, MONTH(`money_date`)"); 
+                                            $stmt2->execute();
 
-                                                $arr2 = array();
-                                                while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
-                                                    $arr2[] = $row;
-                                                }
-                                                $dataResult2 = json_encode($arr2);
-                                                // echo $dataResult2 ;
-                                                // ============================================================================================================================
-                                                $stmt1 = $db->query("SELECT MONTH(`money_date`) as month, SUM(`money_quan`) as total 
-                                                                    FROM `money_inex` 
-                                                                    WHERE (`money_type`= '1' AND `money_list`= '1') AND MONTH(`money_date`) BETWEEN MONTH('2023-01-01') AND MONTH('2023-06-30') 
-                                                                    GROUP BY `money_type`, `money_list` ,MONTH(`money_date`)");
-                                                $stmt1->execute();
-
-                                                $arr = array();
-                                                while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
-                                                    $arr[] = $row;
-                                                }
-                                                $dataResult_type1_1 = json_encode($arr);
+                                            $arr2 = array();
+                                            while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                                                $arr2[] = $row;
                                             }
-                                        ?>
+                                            $dataResult2 = json_encode($arr2);
+                                            // echo $dataResult2 ;
+                                            // ============================================================================================================================
+                                            $stmt1 = $db->query("SELECT MONTH(`money_date`) as month, SUM(`money_quan`) as total 
+                                                                FROM `money_inex` 
+                                                                WHERE (`money_type`= '1' AND `money_list`= '1') AND MONTH(`money_date`) BETWEEN MONTH('2023-01-01') AND MONTH('2023-06-30') 
+                                                                GROUP BY `money_type`, `money_list` ,MONTH(`money_date`)");
+                                            $stmt1->execute();
+
+                                            $arr = array();
+                                            while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                                                $arr[] = $row;
+                                            }
+                                            $dataResult_type1_1 = json_encode($arr);
+                                        }
+                                    ?>
+                                    <div class="row mt-2">
+                                        <div class="col text-center">
+                                            <h3 class="date_th"><?php echo " ประจำวันที่ ".$start_date." ถึงวันที่ ".$end_date; ?></h3>
+                                        </div>
+                                    </div>
                                 </div>
                             
                                 <div class="row mb-2 mr-2 ml-2">
                                     <div class="col-xl-5 col-lg-4">
                                         <div class="card shadow">
                                             <div class="card-header py-3">
-                                                <h5 class="m-0 font-weight-bold text-primary">สรุปรายได้</h5>
+                                                <h5 class="m-0 font-weight-bold text-primary">สรุปรายได้แฝงในแต่ละเดือน</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="chart-area mt-2">
@@ -128,7 +134,7 @@
                                     <div class="col-xl-7 col-lg-8">
                                         <div class="card shadow mb-2">
                                             <div class="card-header py-3">
-                                                <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะในแต่ละเดือน</h5>
+                                                <h5 class="m-0 font-weight-bold text-primary">สรุปยอดรายได้แฝง-รายจ่ายในแต่ละเดือน</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="chart-area">
@@ -178,7 +184,24 @@
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="js/demo/chartjs-plugin-datalabels.js"></script>
 
+    <script>
+        const dom_date = document.querySelectorAll('.date_th')
+                dom_date.forEach((elem)=>{
+                const my_date = elem.textContent
+                const date = new Date(my_date)
+                const result = date.toLocaleDateString('th-TH', {
+
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+
+            }) 
+                elem.textContent= result
+        })
+    </script>
     <script type="text/javascript">
+
+
         $(".delete-btn").click(function(e) {
             var userId = $(this).data('id');
             e.preventDefault();
@@ -269,14 +292,6 @@
             }
         });
 
-        // for( var i=0; i<my_label.length; i++ ) {
-        //     if ( Unique_label.indexOf( my_label[i] ) < 0 ) {
-        //     Unique_label.push( my_label[i] );
-        //     }
-        // } 
-        // console.log(my_data1);
-        // console.log(Unique_label);
-
         var ctx = document.getElementById('myChartBar');
         var myChartBar = new Chart(ctx, {
             type: 'bar',
@@ -290,16 +305,31 @@
                 }],
             },
             options: {
+                maintainAspectRatio: false,
                 scales: {
-                    y: {
-                        max: 50000,
-                        min: 0
-                        // beginAtZero: true
-                    }
+                    xAxes: [{
+                    time: {
+                        unit: 'month'
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 12
+                    },
+                        maxBarThickness: 50,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            // max: 25000,
+                        }
+                    }],
                 },
                 legend: {
                     display: true
-                }
+                },
             }
         });
 
@@ -483,13 +513,16 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        min: 0,
+                        max: 50000
+                        // beginAtZero: true
                     }
                 },
                 legend: {
                     display: true
                 }
             }
+            
         });
 
         $.extend(true, $.fn.dataTable.defaults, {
