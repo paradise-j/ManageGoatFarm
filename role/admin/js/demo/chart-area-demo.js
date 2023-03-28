@@ -28,13 +28,159 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     return s.join(dec);
   }
 
+  async function get_money_All() {
+    const res = await fetch("api/get_money_All.php");
+    const json = await res.json()
+    return json;
+  }
+
+
+  const data = await get_money_All();
+  var my_data1 = [];
+  var my_data2 = [];
+  var my_label = [];
+  var Unique_label = [];
+  data.forEach(item => {
+    switch (item.money_type) {
+      case '1':
+          switch (item.month) {
+              case '1':
+                  my_data1.push(item.total)
+                  break;
+              case '2':
+                  my_data1.push(item.total)
+                  break;
+              case '3':
+                  my_data1.push(item.total)
+                  break;
+              case '4':
+                  my_data1.push(item.total)
+                  break;
+              case '5':
+                  my_data1.push(item.total)
+                  break;
+              case '6':
+                  my_data1.push(item.total)
+                  break;
+              case '7':
+                  my_data1.push(item.total)
+                  break;
+              case '8':
+                  my_data1.push(item.total)
+                  break;
+              case '9':
+                  my_data1.push(item.total)
+                  break;
+              case '10':
+                  my_data1.push(item.total)
+                  break;
+              case '11':
+                  my_data1.push(item.total)
+                  break;
+              case '12':
+                  my_data1.push(item.total)
+                  break;
+              }
+        break;
+      case '2':
+          switch (item.month) {
+              case '1':
+                  my_data2.push(item.total)
+                  break;
+              case '2':
+                  my_data2.push(item.total)
+                  break;
+              case '3':
+                  my_data2.push(item.total)
+                  break;
+              case '4':
+                  my_data2.push(item.total)
+                  break;
+              case '5':
+                  my_data2.push(item.total)
+                  break;
+              case '6':
+                  my_data2.push(item.total)
+                  break;
+              case '7':
+                  my_data2.push(item.total)
+                  break;
+              case '8':
+                  my_data2.push(item.total)
+                  break;
+              case '9':
+                  my_data2.push(item.total)
+                  break;
+              case '10':
+                  my_data2.push(item.total)
+                  break;
+              case '11':
+                  my_data2.push(item.total)
+                  break;
+              case '12':
+                  my_data2.push(item.total)
+                  break;
+            }
+      break;
+    }
+    
+    switch (item.month) {
+      case '1':
+          my_label.push('มกราคม')
+          break;
+      case '2':
+          my_label.push('กุมภาพันธ์')
+          break;
+      case '3':
+          my_label.push('มีนาคม')
+          break;
+      case '4':
+          my_label.push('เมษายน')
+          break;
+      case '5':
+          my_label.push('พฤษภาคม')
+          break;
+      case '6':
+          my_label.push('มิถุนายน')
+          break;
+      case '7':
+          my_label.push('กรกฎาคม')
+          break;
+      case '8':
+          my_label.push('สิงหาคม')
+          break;
+      case '9':
+          my_label.push('กันยายน')
+          break;
+      case '10':
+          my_label.push('ตุลาคม')
+          break;
+      case '11':
+          my_label.push('พฤศจิกายน')
+          break;
+      case '12':
+          my_label.push('ธันวาคม')
+          break; 
+    }
+    
+  });
+  console.log(my_data1);
+  console.log(my_data2);
+  console.log(my_label);
+
+
+  for( var i=0; i<my_label.length; i++ ) {
+    if ( Unique_label.indexOf( my_label[i] ) < 0 ) {
+      Unique_label.push( my_label[i] );
+    }
+  } 
 
   // Area Chart Example
   var ctx = document.getElementById("myAreaChart");
-  var myLineChart = new Chart(ctx, {
+  var myAreaChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"],
+      labels: Unique_label,
       datasets: [{
         label: "รายได้แฝง",
         lineTension: 0.3,
@@ -48,7 +194,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         pointHoverBorderColor: "rgba(78, 115, 223, 1)",
         pointHitRadius: 10,
         pointBorderWidth: 2,
-        data: [6500, 8400, 7800, 9500, 8500, 7500, 10000, 9500, 7700, 8400, 6900, 5800],
+        data: my_data1,
       },{
         label: "รายจ่าย",
         lineTension: 0.3,
@@ -62,7 +208,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         pointHoverBorderColor: "rgba(178,21,6,1)",
         pointHitRadius: 10,
         pointBorderWidth: 2,
-        data: [5690, 6870, 7450, 6500, 6540, 5870, 6840, 6500, 7800, 8500, 4580, 3500],
+        data: my_data2,
       }],
     },
     options: {
