@@ -146,7 +146,7 @@
                                             <th>ช่วงอายุ</th>
                                             <th>ประเภทอาหาร</th>
                                             <th>ปริมาณอาหาร</th>
-                                            <th>ราคา</th>
+                                            <!-- <th>ราคา</th> -->
                                             <th>วันที่ให้</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -154,7 +154,7 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gfg_data.gfg_id , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , gfg_data.gfg_quantity , gfg_data.gfg_price , gfg_data.gfg_date
+                                            $stmt = $db->query("SELECT gfg_data.gfg_id , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , gfg_data.gfg_quantity , gfg_data.gfg_date
                                                                 FROM `gfg_data` 
                                                                 INNER JOIN `group_g` ON group_g.gg_id = gfg_data.gg_id
                                                                 INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id ");
@@ -211,7 +211,7 @@
                                                 ?>
                                             </td>
                                             <td><?= $gfg['gfg_quantity']; ?></td>
-                                            <td><?= $gfg['gfg_price']; ?></td>
+                                            <!-- <td><?= $gfg['gfg_price']; ?></td> -->
                                             <td class="date_th"><?= $gfg['gfg_date']; ?></td>
                                             <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
