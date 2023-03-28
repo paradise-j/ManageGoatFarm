@@ -83,7 +83,21 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
-                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required>
+                                                <!-- <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required> -->
+                                                <select class="form-control" aria-label="Default select example"name="Gf_id" style="border-radius: 30px;" required>
+                                                    <option selected disabled>กรุณาเลือกชื่อกลุ่มเลี้ยง....</option>
+                                                    <?php 
+                                                        $stmt = $db->query("SELECT * FROM `group_farm`");
+                                                        $stmt->execute();
+                                                        $gfs = $stmt->fetchAll();
+                                                        
+                                                        foreach($gfs as $gf){
+                                                    ?>
+                                                    <option value="<?= $gf['gf_id']?>"><?= $gf['gf_name']?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>

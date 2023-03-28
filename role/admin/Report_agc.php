@@ -61,71 +61,64 @@
                                     <h2 class="m-0 font-weight-bold text-primary">รายงานข้อมูลเกษตรกร</h2>
                                 </div>
                                 <div class="card-body">
-                                    <form action="" method="post">
-                                        <div class="row mt-4 mb-5">
-                                            <div class="col-md-2"></div>
-                                            <label class="form-label mt-2">จังหวัด</label>
-                                            <div class="col-md-2">
-                                                <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
-                                                    <option selected disabled>กรุณาเลือกจังหวัด....</option>
+                                    <!-- <form action="" method="post">
+                                        <div class="row mb-3">
+                                            <div class="col-md-1"></div>
+                                            <label class="form-label mt-2">กลุ่มเลี้ยง</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" aria-label="Default select example" id="Gname" name="Gname" style="border-radius: 30px;" required>
+                                                    <option selected disabled>กรุณาเลือกกลุ่มเลี้ยง....</option>
                                                     <?php 
-                                                        $stmt = $db->query("SELECT * FROM `provinces`");
+                                                        $stmt = $db->query("SELECT * FROM `group_farm`");
                                                         $stmt->execute();
-                                                        $pvs = $stmt->fetchAll();
+                                                        $gfs = $stmt->fetchAll();
                                                         
-                                                        foreach($pvs as $pv){
+                                                        foreach($gfs as $gf){
                                                     ?>
-                                                    <option value="<?= $pv['id']?>"><?= $pv['name_th']?></option>
+                                                    <option value="<?= $gf['gf_name']?>"><?= $gf['gf_name']?></option>
                                                     <?php
                                                         }
                                                     ?>
                                                 </select>
                                             </div>
-                                            <label class="form-label mt-2">อำเภอ</label>
                                             <div class="col-md-2">
-                                                <select class="form-control" aria-label="Default select example" id="amphures" name="amphures" style="border-radius: 30px;" required>
-                                                    <option selected disabled>กรุณาเลือกอำเภอ....</option>
-                                                </select>
-                                            </div>
-                                            <label class="form-label mt-2">ตำบล</label>
-                                            <div class="col-md-2">
-                                                <select class="form-control" aria-label="Default select example" id="districts" name="districts" style="border-radius: 30px;" required>
-                                                    <option selected disabled>กรุณาเลือกตำบล....</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
-                                                <!-- &nbsp&nbsp -->
-                                                <!-- <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button> -->
+                                                <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit" onclick="filterdata()" >เรียกดู</button>
                                             </div>                       
-                                            <!-- <div class="col text-right">
-                                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                    class="fas fa-download fa-sm text-white-50"></i>  ออกรายงาน</a>
-                                            </div> -->
                                         </div>
-                                    </form>
-
+                                    </form> -->
+                                <?php
+                                    $stmt = $db->query("SELECT COUNT(`agc_id`) as total , group_farm.gf_name 
+                                                        FROM `agriculturist` 
+                                                        INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id 
+                                                        GROUP BY group_farm.gf_name");
+                                    $stmt->execute();
+                                    $arr = array();
+                                    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                        $arr[] = $row;
+                                    }
+                                    $dataResultAll = json_encode($arr);
+                                ?>
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="card shadow">
                                         <div class="card-header py-3">
                                             <h5 class="m-0 font-weight-bold text-primary">สรุปยอดเกษตรแต่ละกลุ่มเลี้ยง</h5>
                                         </div>
-                                            <div class="card-body mb-5">
-                                                <div class="chart-area mb-5">
-                                                    <canvas id="myChartBar" height="240"></canvas>
+                                            <div class="card-body">
+                                                <div class="chart-area mt-2">
+                                                    <!-- <canvas id="myChartBar" height="240"></canvas> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-6">
                                         <div class="card shadow">
                                             <div class="card-header py-3">
                                                 <h5 class="m-0 font-weight-bold text-primary">สรุปยอดเกษตรแต่ละกลุ่มเลี้ยง</h5>
                                             </div>
-                                            <div class="card-body mb-5">
-                                                <div class="chart-area mb-5">
-                                                    <canvas id="myAreaChart" height="165"></canvas>
+                                            <div class="card-body">
+                                                <div class="chart-area mt-4">
+                                                    <canvas id="myPieChart"></canvas>
                                                 </div>
                                             </div>
                                         </div>
@@ -209,6 +202,63 @@
     </script>
 
     <script type="text/javascript">
+        const my_dataAll = <?= $dataResultAll; ?> ; 
+        var my_data = [];
+        var my_label = [];
+
+        my_dataAll.forEach(item => {
+            my_data.push(item.total)
+            my_label.push(item.gf_name)
+
+        });
+
+        console.log(my_data)
+        console.log(my_label)
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: my_label,
+                datasets: [{
+                data: my_data,
+                backgroundColor: ['#2a86e9', '#2ae955', '#e9452a'],
+                hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: '#36A2EB'
+                    }
+                },
+                maintainAspectRatio: true,
+                tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: true,
+                caretPadding: 10,
+                },
+                legend: {
+                display: true
+                },
+                cutoutPercentage: 65,
+            },
+        });
+
+        // function filterdata(){
+        //     var GName = document.getElementById('Gname').value;
+        //     console.log(GName)
+        //     myPieChart.data.labels = GName;
+        //     myPieChart.update();
+            
+        // } 
+
+
         $(".delete-btn").click(function(e) {
             var userId = $(this).data('id');
             e.preventDefault();
@@ -254,296 +304,6 @@
         }
 
 
-// ============================================= myChartBar =============================================
-        const my_dataAll = <?= $dataResult; ?> ; 
-        var my_data1 = [];
-        var my_data2 = [];
-        var my_data3 = [];
-        var my_label = [];
-        var Unique_label = [];
-        my_dataAll.forEach(item => {
-            switch (item.gg_type) {
-                case '1':
-                    switch (item.month) {
-                        case '1':
-                            my_data1.push(item.total)
-                            break;
-                        case '2':
-                            my_data1.push(item.total)
-                            break;
-                        case '3':
-                            my_data1.push(item.total)
-                            break;
-                        case '4':
-                            my_data1.push(item.total)
-                            break;
-                        case '5':
-                            my_data1.push(item.total)
-                            break;
-                        case '6':
-                            my_data1.push(item.total)
-                            break;
-                        case '7':
-                            my_data1.push(item.total)
-                            break;
-                        case '8':
-                            my_data1.push(item.total)
-                            break;
-                        case '9':
-                            my_data1.push(item.total)
-                            break;
-                        case '10':
-                            my_data1.push(item.total)
-                            break;
-                        case '11':
-                            my_data1.push(item.total)
-                            break;
-                        case '12':
-                            my_data1.push(item.total)
-                            break;
-                        }
-                    break;
-                case '2':
-                    switch (item.month) {
-                        case '1':
-                            my_data2.push(item.total)
-                            break;
-                        case '2':
-                            my_data2.push(item.total)
-                            break;
-                        case '3':
-                            my_data2.push(item.total)
-                            break;
-                        case '4':
-                            my_data2.push(item.total)
-                            break;
-                        case '5':
-                            my_data2.push(item.total)
-                            break;
-                        case '6':
-                            my_data2.push(item.total)
-                            break;
-                        case '7':
-                            my_data2.push(item.total)
-                            break;
-                        case '8':
-                            my_data2.push(item.total)
-                            break;
-                        case '9':
-                            my_data2.push(item.total)
-                            break;
-                        case '10':
-                            my_data2.push(item.total)
-                            break;
-                        case '11':
-                            my_data2.push(item.total)
-                            break;
-                        case '12':
-                            my_data2.push(item.total)
-                            break;
-                        }
-                    break;
-                case '3':
-                    switch (item.month) {
-                        case '1':
-                            my_data3.push(item.total)
-                            break;
-                        case '2':
-                            my_data3.push(item.total)
-                            break;
-                        case '3':
-                            my_data3.push(item.total)
-                            break;
-                        case '4':
-                            my_data3.push(item.total)
-                            break;
-                        case '5':
-                            my_data3.push(item.total)
-                            break;
-                        case '6':
-                            my_data3.push(item.total)
-                            break;
-                        case '7':
-                            my_data3.push(item.total)
-                            break;
-                        case '8':
-                            my_data3.push(item.total)
-                            break;
-                        case '9':
-                            my_data3.push(item.total)
-                            break;
-                        case '10':
-                            my_data3.push(item.total)
-                            break;
-                        case '11':
-                            my_data3.push(item.total)
-                            break;
-                        case '12':
-                            my_data3.push(item.total)
-                            break;
-                        }
-                    break;
-            }
-            switch (item.month) {
-                case '1':
-                    my_label.push('มกราคม')
-                    break;
-                case '2':
-                    my_label.push('กุมภาพันธ์')
-                    break;
-                case '3':
-                    my_label.push('มีนาคม')
-                    break;
-                case '4':
-                    my_label.push('เมษายน')
-                    break;
-                case '5':
-                    my_label.push('พฤษภาคม')
-                    break;
-                case '6':
-                    my_label.push('มิถุนายน')
-                    break;
-                case '7':
-                    my_label.push('กรกฎาคม')
-                    break;
-                case '8':
-                    my_label.push('สิงหาคม')
-                    break;
-                case '9':
-                    my_label.push('กันยายน')
-                    break;
-                case '10':
-                    my_label.push('ตุลาคม')
-                    break;
-                case '11':
-                    my_label.push('พฤศจิกายน')
-                    break;
-                case '12':
-                    my_label.push('ธันวาคม')
-                    break; 
-            }
-        });
-
-        for( var i=0; i<my_label.length; i++ ) {
-            if ( Unique_label.indexOf( my_label[i] ) < 0 ) {
-            Unique_label.push( my_label[i] );
-            }
-        } 
-        // console.log(my_data1);
-        // console.log(Unique_label);
-
-        var ctx = document.getElementById('myChartBar');
-        var myChartBar = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: Unique_label,
-                datasets: [{
-                label: "แพะพ่อพันธุ์",
-                backgroundColor: "#2a86e9",
-                borderColor: "#2a86e9",
-                data: my_data1
-                },{
-                label: "แพะแม่พันธุ์",
-                backgroundColor: "#2ae955",
-                borderColor: "#2ae955",
-                data: my_data2
-                }, {
-                label: "แพะขุน",
-                backgroundColor: "#e9452a",
-                borderColor: "#e9452a",
-                data: my_data3
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                legend: {
-                    display: true
-                }
-            }
-        });
-
-// ============================================= myAreaChart =============================================
-        const my_dataAll2 = <?= $dataResult2; ?> ; 
-        var my_data02 = [];
-        var my_label02 = [];
-        my_dataAll2.forEach(item => {
-            my_data02.push(item.total)
-            switch (item.month) {
-                case '1':
-                    my_label02.push('มกราคม')
-                    break;
-                case '2':
-                    my_label02.push('กุมภาพันธ์')
-                    break;
-                case '3':
-                    my_label02.push('มีนาคม')
-                    break;
-                case '4':
-                    my_label02.push('เมษายน')
-                    break;
-                case '5':
-                    my_label02.push('พฤษภาคม')
-                    break;
-                case '6':
-                    my_label02.push('มิถุนายน')
-                    break;
-                case '7':
-                    my_label02.push('กรกฎาคม')
-                    break;
-                case '8':
-                    my_label02.push('สิงหาคม')
-                    break;
-                case '9':
-                    my_label02.push('กันยายน')
-                    break;
-                case '10':
-                    my_label02.push('ตุลาคม')
-                    break;
-                case '11':
-                    my_label02.push('พฤศจิกายน')
-                    break;
-                case '12':
-                    my_label02.push('ธันวาคม')
-                    break; 
-            }
-        });
-        
-        var ctx = document.getElementById("myAreaChart");
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: my_label02,
-                datasets: [{
-                    label: "ยอดขายสุทธิ",
-                    lineTension: 0,
-                    backgroundColor: "rgba(78, 115, 223, 0.07)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                    pointHitRadius: 10,
-                    pointBorderWidth: 2,
-                    data: my_data02,
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                legend: {
-                    display: true
-                }
-            }
-        });
 
         $.extend(true, $.fn.dataTable.defaults, {
             "language": {

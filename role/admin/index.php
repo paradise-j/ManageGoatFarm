@@ -212,7 +212,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <!-- <canvas id="myPieChart"></canvas> -->
+                                        <canvas id="myPieChart2"></canvas>
                                     </div>
                                     <div class="mt-3 text-center small"> 
                                         <span class="mr-2">
@@ -338,6 +338,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-area2-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-pie2-demo.js"></script>
     <script src="js/demo/chart-bar-demo.js"></script>
     <script src="js/demo/chart-bar2-demo.js"></script>
     <script src="js/demo/chart-update-bar-demo.js"></script>

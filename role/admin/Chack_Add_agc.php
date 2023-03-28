@@ -8,7 +8,7 @@
         $name = $_POST['name'];
         $Fname = $_POST['Fname'];
         $position = $_POST['position'];
-        $Gname = $_POST['Gname'];
+        $Gf_id = $_POST['Gf_id'];
         $personid = $_POST['personid'];
         $phone = $_POST['phone'];
         $edu = $_POST['edu'];
@@ -28,8 +28,7 @@
                     if (move_uploaded_file($img['tmp_name'], $filePath)) {
                         $sql = $db->prepare("INSERT INTO `agriculturist`( 
                                                                          `agc_name`, 
-                                                                         `agc_nfarm`, 
-                                                                         `agc_gfarm`, 
+                                                                         `agc_nfarm`,  
                                                                          `agc_position_G`, 
                                                                          `agc_personid`, 
                                                                          `agc_phone`, 
@@ -37,9 +36,9 @@
                                                                          `agc_edu`, 
                                                                          `agc_obj`, 
                                                                          `agc_type`, 
-                                                                         `agc_img`) VALUES (:name, 
-                                                                                            :Fname, 
-                                                                                            :Gname, 
+                                                                         `agc_img`,
+                                                                         `gf_id`) VALUES (:name, 
+                                                                                            :Fname,
                                                                                             :position, 
                                                                                             :personid, 
                                                                                             :phone, 
@@ -47,11 +46,12 @@
                                                                                             :exper, 
                                                                                             :obj,
                                                                                             :type, 
-                                                                                            :img)");
+                                                                                            :img,
+                                                                                            :Gf_id)");
                         $sql->bindParam(":name", $name);
                         $sql->bindParam(":Fname", $Fname);
                         $sql->bindParam(":position", $position);
-                        $sql->bindParam(":Gname", $Gname);
+                        $sql->bindParam(":Gf_id", $Gf_id);
                         $sql->bindParam(":personid", $personid);
                         $sql->bindParam(":phone", $phone);
                         $sql->bindParam(":edu", $edu);
