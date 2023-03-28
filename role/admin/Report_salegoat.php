@@ -64,7 +64,7 @@
                                     <form action="" method="post">
                                         <div class="row mt-2 mb-4">
                                             <div class="col-md-1"></div>
-                                            <label for="inputState" class="form-label mt-2">ตั้งแต่วันที่</label>
+                                            <label for="inputState" class="form-label mt-2">กลุ่มเลี้ยง</label>
                                             <div class="col-md-3">
                                                 <select class="form-control" aria-label="Default select example" id="Gname" name="Gname" style="border-radius: 30px;" required>
                                                     <option selected disabled>กรุณาเลือกกลุ่มเลี้ยง....</option>
@@ -94,121 +94,85 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>ลำดับที่</th>
-                                                    <th>ประเภทแพะ</th>
-                                                    <th>จำนวนยอดขายแพะ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                    if(isset($_POST["submit"])){
-                                                        $Gname = $_POST["Gname"];
-                                                        $start_date = $_POST["start_date"];
-                                                        $end_date = $_POST["end_date"];
-                                                        $count = 1;
+                                    <?php 
+                                        if(isset($_POST["submit"])){
+                                            $Gname = $_POST["Gname"];
+                                            $start_date = $_POST["start_date"];
+                                            $end_date = $_POST["end_date"];
+                                            $count = 1;
 
-                                                        $stmt2 = $db->query("SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month
-                                                                            FROM `sale` 
-                                                                            INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
-                                                                            INNER JOIN agriculturist ON sale.agc_id = agriculturist.agc_id
-                                                                            INNER JOIN group_farm ON group_farm.gf_id = agriculturist.gf_id
-                                                                            WHERE group_farm.gf_id ='$Gname' AND MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                            GROUP BY MONTH(sale_date)"); 
-                                                        $stmt2->execute();
+                                            $stmt2 = $db->query("SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month
+                                                                FROM `sale` 
+                                                                INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
+                                                                INNER JOIN agriculturist ON sale.agc_id = agriculturist.agc_id
+                                                                INNER JOIN group_farm ON group_farm.gf_id = agriculturist.gf_id
+                                                                WHERE group_farm.gf_id ='$Gname' AND MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                GROUP BY MONTH(sale_date)"); 
+                                            $stmt2->execute();
 
-                                                        $arr2 = array();
-                                                        while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
-                                                            $arr2[] = $row;
-                                                        }
-                                                        $dataResult2 = json_encode($arr2);
+                                            $arr2 = array();
+                                            while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                                                $arr2[] = $row;
+                                            }
+                                            $dataResult2 = json_encode($arr2);
 
-                                                        $stmt1 = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                                                                             FROM `salelist` 
-                                                                             INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                                                                             INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                             INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
-                                                                             INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
-                                                                             WHERE group_farm.gf_id ='$Gname' AND MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                             GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
-                                                        $stmt1->execute();
+                                            $stmt1 = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
+                                                                    FROM `salelist` 
+                                                                    INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                    INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                                                    INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
+                                                                    INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
+                                                                    WHERE group_farm.gf_id ='$Gname' AND MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                    GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                            $stmt1->execute();
 
-                                                        $arr = array();
-                                                        while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
-                                                            $arr[] = $row;
-                                                        }
-                                                        $dataResult = json_encode($arr);
+                                            $arr = array();
+                                            while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                                                $arr[] = $row;
+                                            }
+                                            $dataResult = json_encode($arr);
 
 
-                                                        $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                                                                            FROM `salelist` 
-                                                                            INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                                                                            INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                            GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
-                                                        $stmt->execute();                                                        
-                                                        $vms = $stmt->fetchAll();
-                                                        
-                                                        if (!$vms) {
-                                                            echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
-                                                        } else {
-                                                            foreach($vms as $vm)  {  
-                                                ?>
-                                                <tr>
-                                                    <th scope="row"><?= $count; ?></th>
-                                                    <td>
-                                                        <?php 
-                                                            if($vm['gg_type'] == 1){
-                                                                echo "พ่อพันธุ์";
-                                                            }elseif($vm['gg_type'] == 2){
-                                                                echo "แม่พันธุ์";
-                                                            }else{
-                                                                echo "แพะขุน";
-                                                            }
-                                                        ?>
-                                                    </td>
-                                                    <td><?= $vm['total']; ?></td>
-                                                </tr>
-                                                <?php    $count++;   }  
-                                                        } 
-                                                    }    
-                                                        ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
+                                                                FROM `salelist` 
+                                                                INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                                                WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                            $stmt->execute();                                                        
+                                            $vms = $stmt->fetchAll();
+                                        }
+                                    ?>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-5 col-lg-4">
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละประเภท</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="chart-area">
-                                                <canvas id="myChartBar" ></canvas>
+                            
+                                <div class="row ml-2 mb-4 mr-2">
+                                    <div class="col-xl-5 col-lg-4">
+                                        <div class="card shadow">
+                                            <div class="card-header py-3">
+                                                <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละประเภท</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-area">
+                                                    <canvas id="myChartBar" ></canvas>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-7 col-lg-8">
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะในแต่ละเดือน</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="chart-area">
-                                                <canvas id="myAreaChart" ></canvas>
-                                                
+                                    <div class="col-xl-7 col-lg-8">
+                                        <div class="card shadow">
+                                            <div class="card-header py-3">
+                                                <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะในแต่ละเดือน</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-area">
+                                                    <canvas id="myAreaChart" ></canvas>
+                                                    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -571,14 +535,39 @@
                 }],
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                    left: 10,
+                    right: 25,
+                    top: 25,
+                    bottom: 0
                     }
+                },
+                scales: {
+                    xAxes: [{
+                    time: {
+                        unit: 'month'
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 12
+                    },
+                        maxBarThickness: 50,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            // max: 25000,
+                        }
+                    }],
                 },
                 legend: {
                     display: true
-                }
+                },
             }
         });
 
