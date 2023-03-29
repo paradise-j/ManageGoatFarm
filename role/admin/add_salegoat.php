@@ -47,86 +47,6 @@
     }
     
     // echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; 
-    if(isset($_POST["save_sale"])){
-        $agc = $_POST["agc"];
-        $cus = $_POST["cus"];
-        $phone = $_POST["phone"];
-        $date = $_POST["date"];
-
-        $cu = $db->prepare("SELECT * FROM `customer`");
-        $cu->execute();
-
-        $check = array();
-        while ($row = $cu->fetch(PDO::FETCH_ASSOC)){
-            $name = $row["cus_name"];
-            array_push($check,$name);
-        }
-        // print_r($check);
-        // echo $cus;
-        if(!in_array($cus, $check)){
-            $sql = $db->prepare("INSERT INTO `customer`(`cus_name`, `cus_phone`) VALUES ('$cus', '$phone')");
-            $sql->execute();
-        }
-            
-        
-        // ----------------------------- agriculturist -----------------------------
-        $agcs = $db->prepare("SELECT * FROM `agriculturist`");
-        $agcs->execute();
-        while ($row = $agcs->fetch(PDO::FETCH_ASSOC)) {
-            if($agc == $row["agc_name"]){
-                $agc_id = $row["agc_id"]; 
-                break;
-            }
-        }
-
-        // ----------------------------- customer -----------------------------
-        $cuss = $db->prepare("SELECT * FROM `customer`");
-        $cuss->execute();
-        while ($row = $cuss->fetch(PDO::FETCH_ASSOC)) {
-            if($cus == $row["cus_name"]){
-                $cus_id = $row["cus_id"]; 
-                break;
-            }
-        }
-
-        $sql = $db->prepare("INSERT INTO `sale`(`sale_date`, `agc_id`, `cus_id`) VALUES ('$date', '$agc_id', '$cus_id')");
-        $sql->execute();
-
-        $sales = $db->prepare("SELECT * FROM `sale`");
-        $sales->execute();
-        while ($row = $sales->fetch(PDO::FETCH_ASSOC)) {
-            if($cus_id == $row["cus_id"] and $agc_id == $row["agc_id"]){
-                $sale_id = $row["sale_id"]; 
-                break;
-            }
-        }
-
-        foreach($_SESSION["shopping_cart"] as $key=>$value){
-            $quantity = $value["item_quantity"];
-            $weight = $value["item_weight"];
-            $pricekg = $value["item_pricekg"];
-            $price = $value["item_price"];
-            $gg_id = $value["item_id_gg"];
-
-            $sql = $db->prepare("INSERT INTO `salelist`(`slist_quantity`, `slist_weight`, `slist_KgPirce`, `slist_price`, `sale_id`, `gg_id`) 
-                                VALUES ($quantity, $weight, $pricekg, $price,'$sale_id','$gg_id')");
-            $sql->execute();
-
-            $ggs = $db->prepare("SELECT * FROM `group_g` WHERE `gg_id`= '$gg_id'");
-            $ggs->execute();
-            $row = $ggs->fetch(PDO::FETCH_ASSOC);
-
-            // echo $row["gg_quantity"];
-            // echo $quantity;
-            $totals = $row["gg_quantity"] - $quantity;
-            $sql2 = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $totals WHERE `gg_id` = '$gg_id'");
-            $sql2->execute();
-
-                
-        }
-        unset($_SESSION["shopping_cart"]);
-        header("location:add_salegoat.php");
-    }
 
 ?>
 <!DOCTYPE html>
@@ -213,7 +133,7 @@
                                     <div class="card-header py-3 text-center mb-4">
                                         <h5 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h5>
                                     </div>
-                                    <form action="add_salegoat.php?type=submit" method="post">
+                                    <form action="Check_Add_salegoat.php" method="post">
                                         <div class="row mb-4">
                                             <div class="col-md-2">
                                                 <input type="hidden" class="form-control" name="id" style="border-radius: 30px;">
@@ -309,13 +229,13 @@
                                                     }
                                                     ?>
                                                 </tbody>
-                                                <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?> 
+                                                <!-- <?php echo '<pre>' . print_r($_SESSION["shopping_cart"], TRUE) . '</pre>'; ?>  -->
                                             </table>
                                         </div>
                                         <div class="row mt-4 mb-4">
                                             <div class="col text-right">
                                                 <!-- <a href="add_salegoat.php?type=submit" class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</a> -->
-                                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button>
+                                                <button class="btn btn-blue save_saleall" style="border-radius: 30px;" type="submit" id="save_saleall" name="save_sale">บึนทึกรายการขาย</button>
                                             </div>  
                                         </div>
                                     </form>
@@ -347,6 +267,7 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
 
@@ -361,6 +282,27 @@
                 }
             });
         });
+
+
+
+        // doucument.getElemetById('save_saleall').onclick = function(){save_saleall()} ;
+
+        // function save_saleall() {
+
+        $(document).ready(function() {
+            $('#save_saleall').click(function(){
+                Swal.fire({
+                    title: 'บันทึกข้อมูลสำเร็จ',
+                    text: 'เพิ่มข้อมูลเรียบร้อยแล้ว',
+                    icon: 'success',
+                    timer: 5000,
+                    showConfirmButton: false
+                });
+            });
+        });   
+        // }
+       
+        
     </script>
 
 </body>
