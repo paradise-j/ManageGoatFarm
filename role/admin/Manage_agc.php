@@ -67,7 +67,7 @@
                                                 <th>ชื่อ-สกุล</th>
                                                 <th>ชื่อฟาร์ม</th>
                                                 <th>ตำแหน่ง</th>
-                                                <th>ชื่อกลุ่มเลี้ยง</th>
+                                                <!-- <th>ชื่อกลุ่มเลี้ยง</th> -->
                                                 <th>เบอร์โทรศัพท์</th>
                                                 <th>รูปภาพ</th>
                                                 <th>แก้ไขรายการ</th>
@@ -100,13 +100,7 @@
                                                         }
                                                     ?>
                                                 </td>
-                                                <td>
-                                                    <?php 
-                                                        if($agc['agc_gfarm'] == 1 ) {
-                                                            echo "วิสาหกิจชุมชนเกษตรปศุสัตว์บ้านในเสียด";
-                                                        }
-                                                    ?>
-                                                </td>
+                
                                                 <td><?= $agc['agc_phone']; ?></td>
                                                 <td width="100px"><img class="rounded" width="100%" src="uploads/<?= $agc['agc_img']; ?>" alt=""></td>
                                                 <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>

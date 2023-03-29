@@ -32,7 +32,7 @@
     <title>จัดการข้อมูลกลุ่มแพะ</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/seedling-solid.svg" />
+    <link rel="icon" type="image/png" href="img/Goat2.png" />
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
