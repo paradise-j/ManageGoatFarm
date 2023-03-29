@@ -249,8 +249,7 @@
                                                     $stmt = $db->query("SELECT agriculturist.agc_nfarm , gdis_data.gdis_name , g_disease.gd_level 
                                                                         FROM `g_disease` 
                                                                         INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id
-                                                                        INNER JOIN `group_g` ON group_g.gg_id = g_disease.gg_id
-                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id");
+                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = g_disease.agc_id");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     if (!$ggs) {
