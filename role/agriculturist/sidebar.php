@@ -10,7 +10,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-house-chimney"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">ผู้ดูแลระบบ</div>
+        <div class="sidebar-brand-text mx-3">เกษตรกร</div>
     </a>
 
     <!-- Divider -->
@@ -28,7 +28,7 @@
             <span>ประวัติส่วนตัว</span>
         </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fa-solid fa-file-pen"></i>
@@ -45,7 +45,7 @@
                 <a class="collapse-item" href="Manage_breed.php">ข้อมูลสายพันธุ์</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
@@ -75,12 +75,6 @@
             <span>บันทึกการขายแพะ</span></a>
     </li>
     
-    <!-- Nav Item - Charts -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="Report.php">
-            <i class="fa-solid fa-clipboard-list"></i>
-            <span>การออกรายงาน</span></a>
-    </li> -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
             aria-expanded="true" aria-controls="collapseReport">
@@ -91,9 +85,9 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="Report_salegoatAll.php">ยอดขายแพะทั้งหมด</a>
-                <a class="collapse-item" href="Report_salegoat.php">ยอดขายแพะแต่ละกลุ่ม</a>
+                <!-- <a class="collapse-item" href="Report_salegoat.php">ยอดขายแพะแต่ละกลุ่ม</a> -->
                 <a class="collapse-item" href="Report_moneyAll.php">รายได้แฝง-รายจ่ายทั้งหมด</a>
-                <a class="collapse-item" href="Report_money.php">รายได้แฝง-รายจ่ายแต่ละกลุ่ม</a>
+                <!-- <a class="collapse-item" href="Report_money.php">รายได้แฝง-รายจ่ายแต่ละกลุ่ม</a> -->
             </div>
         </div>
     </li>

@@ -35,7 +35,7 @@
             echo "<script>
                 $(document).ready(function() {
                     Swal.fire({
-                        title: 'success',
+                        title: 'สำเร็จ',
                         text: 'เพิ่มข้อมูลเรียบร้อยแล้ว',
                         icon: 'success',
                         timer: 5000,
