@@ -47,7 +47,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">ต้นทุนค่าโรงเรือน</div>
+                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">พื้นที่โรงเรือน</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
                                                     $stmt = $db->prepare("SELECT COUNT(`Gf_id`) as total_gfarm FROM `group_farm`");
@@ -57,7 +57,7 @@
                                                         echo $Gf['total_gfarm'];
                                                     }
                                                 ?>
-                                                บาท
+                                                ตารางเมตร
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -73,7 +73,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-md font-weight-bold text-success text-uppercase mb-1">จำนวนเกษตรกร</div>
+                                            <div class="text-md font-weight-bold text-success text-uppercase mb-1">ต้นทุนค่าโรงเรือน</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
                                                     $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc FROM `agriculturist`");
@@ -83,7 +83,7 @@
                                                         echo $agc['total_agc'];
                                                     }
                                                 ?>
-                                                คน
+                                                บาท
                                             </div>
                                         </div>
                                         <div class="col-auto">
