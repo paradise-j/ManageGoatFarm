@@ -25,7 +25,7 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Save_Groupgoat.php");
+            header("refresh:1; url=Save_Groupgoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
             header("location: Save_Groupgoat.php");

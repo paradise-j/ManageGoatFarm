@@ -29,7 +29,7 @@
                     });
                 })
             </script>";
-            header("refresh:2; url=Manage_Ggoat.php");
+            header("refresh:1; url=Manage_Ggoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
             header("location: Manage_Ggoat.php");
