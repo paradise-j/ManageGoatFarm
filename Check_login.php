@@ -6,9 +6,9 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         try {
-            $select_stmt = $db->prepare("SELECT * FROM `user_login` WHERE `user_name` = :uusername AND `user_password` = :upassword");
-            $select_stmt->bindParam(":uusername", $username);
-            $select_stmt->bindParam(":upassword", $password);
+            $select_stmt = $db->prepare("SELECT * FROM `user_login` WHERE `user_name` = '$username' AND `user_password` = '$password'");
+            // $select_stmt->bindParam(":uusername", $username);
+            // $select_stmt->bindParam(":upassword", $password);
             $select_stmt->execute(); 
 
             while($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {

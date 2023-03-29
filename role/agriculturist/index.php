@@ -1,11 +1,12 @@
 <?php 
     session_start();
-    if (!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 1) {
+    if (!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 5) {
         header("Location: ../../index.php");
         exit;
     }
     require_once("connect.php");
     // echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">จำนวนกลุ่ม</div>
+                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">ต้นทุนค่าโรงเรือน</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
                                                     $stmt = $db->prepare("SELECT COUNT(`Gf_id`) as total_gfarm FROM `group_farm`");
@@ -56,7 +57,7 @@
                                                         echo $Gf['total_gfarm'];
                                                     }
                                                 ?>
-                                                กลุ่ม
+                                                บาท
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -101,7 +102,12 @@
                                             <div class="text-md font-weight-bold text-info text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
+                                                    
+                                                    $stmt = $db->prepare("SELECT COUNT(`gg_id`) as total
+                                                                         FROM `group_g` 
+                                                                         INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
+                                                                         INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                         WHERE user_login.user_id ='$id'");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
@@ -118,7 +124,17 @@
                                 </div>
                             </div>
                         </div>
-
+                        <?php
+                            $_SESSION['id'] = $id;
+                            $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                                     FROM `user_login` 
+                                                     INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                                     WHERE user_login.user_id = '$id'");
+                            $check_id->execute();
+                            $row = $check_id->fetch(PDO::FETCH_ASSOC);
+                            $agc_id = $row["agc_id"] ;
+                            // echo  $agc_id;
+                        ?>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow">
                                 <div class="card-body">
@@ -127,11 +143,18 @@
                                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">ยอดขายรวมสุทธิ</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT SUM(`slist_price`) as total FROM `salelist`");
+                                                    $stmt = $db->prepare("SELECT SUM(`slist_price`) as total
+                                                                          FROM `salelist`
+                                                                          INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                          WHERE sale.agc_id ='$agc_id'");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
-                                                        echo $gg['total'];
+                                                        if($gg['total'] == null){
+                                                            echo 0;
+                                                        }else{
+                                                            echo $gg['total'];
+                                                        }
                                                     }
                                                 ?>
                                                  บาท
