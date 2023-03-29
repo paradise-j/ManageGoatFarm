@@ -130,7 +130,7 @@
                                             <th>ชื่อผลิตภัณฑ์</th>
                                             <th>ปริมาณ</th>
                                             <th>เดือนที่ให้</th>
-                                            <th>แก้ไขรายการ</th>
+                                            <!-- <th>แก้ไขรายการ</th> -->
                                             <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
@@ -148,7 +148,7 @@
                                             $vms = $stmt->fetchAll();
                                             $count = 1;
                                             if (!$vms) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='8' class='text-center'>ลบข้อมูลเรียบร้อยแล้ว</td></p>";
                                             } else {
                                             foreach($vms as $vm)  {  
                                         ?>
@@ -196,7 +196,7 @@
                                             <td><?= $vm['vc_name']; ?></td>
                                             <td><?= $vm['gvc_quantity']; ?></td>
                                             <td class="date_th"><?= $vm['gvc_date']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <!-- <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td> -->
                                             <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php $count++; ?>

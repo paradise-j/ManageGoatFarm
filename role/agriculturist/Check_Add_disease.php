@@ -4,11 +4,21 @@
     session_start();
     require_once "connect.php";
 
+    $id = $_SESSION['id'];
+    $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                FROM `user_login` 
+                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                WHERE user_login.user_id = '$id'");
+    $check_id->execute();
+    $row = $check_id->fetch(PDO::FETCH_ASSOC);
+    $agc_id = $row["agc_id"];
+
     if (isset($_POST['submit'])) {
         $Dname = $_POST['Dname'];
         $level = $_POST['level'];
         $date = $_POST['date'];
-        $sql = $db->prepare("INSERT INTO `g_disease`(`gd_date`, `gd_level`, `gdis_id`) VALUES ('$date','$level','$Dname')");
+        $sql = $db->prepare("INSERT INTO `g_disease`(`gd_date`, `gd_level`, `gdis_id`, `agc_id`) VALUES 
+                                                    ('$date','$level','$Dname','$agc_id')");
         $sql->execute();
 
         if ($sql) {

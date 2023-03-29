@@ -135,13 +135,13 @@
                                     </div>
                                     <form action="Check_Add_salegoat.php" method="post">
                                         <div class="row mb-4">
-                                            <div class="col-md-2">
-                                                <input type="hidden" class="form-control" name="id" style="border-radius: 30px;">
+                                            <div class="col-md-3">
+                                                <!-- <input type="hidden" class="form-control" name="id" style="border-radius: 30px;"> -->
                                             </div>
-                                            <div class="col-md-2">
+                                            <!-- <div class="col-md-2">
                                                 <label class="form-label">ชื่อเกษตรกร</label>
                                                 <input type="text" class="form-control" name="agc" style="border-radius: 30px;" value="นายสุพล ทิมทอง" required>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-2">
                                                 <label class="form-label">ชื่อผู้ซื้อ</label>
                                                 <input type="text" class="form-control" name="cus" style="border-radius: 30px;" required>

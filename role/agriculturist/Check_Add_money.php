@@ -4,12 +4,24 @@
     session_start();
     require_once "connect.php";
 
+
+    $id = $_SESSION['id'];
+    $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                FROM `user_login` 
+                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                WHERE user_login.user_id = '$id'");
+    $check_id->execute();
+    $row = $check_id->fetch(PDO::FETCH_ASSOC);
+    $agc_id = $row["agc_id"];
+
+
     if (isset($_POST['submit'])) {
         $type = $_POST['typemoney'];
         $list = $_POST['list'];
         $quan = $_POST['quan'];
         $date = $_POST['date'];
-        $sql = $db->prepare("INSERT INTO `money_inex`(`money_type`, `money_list`, `money_quan`, `money_date`) VALUES ('$type','$list','$quan','$date')");
+        $sql = $db->prepare("INSERT INTO `money_inex`(`money_type`, `money_list`, `money_quan`, `money_date`, `agc_id`) VALUES 
+                                                    ('$type','$list','$quan','$date','$agc_id')");
         $sql->execute();
 
         if ($sql) {

@@ -4,9 +4,17 @@
 
     session_start();
     require_once "connect.php";
+
+    $id = $_SESSION['id'];
+    $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                FROM `user_login` 
+                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                WHERE user_login.user_id = '$id'");
+    $check_id->execute();
+    $row = $check_id->fetch(PDO::FETCH_ASSOC);
+    $agc_id = $row["agc_id"];
     
     if(isset($_POST["save_sale"])){
-        $agc = $_POST["agc"];
         $cus = $_POST["cus"];
         $phone = $_POST["phone"];
         $date = $_POST["date"];
@@ -27,16 +35,6 @@
         }
             
         
-        // ----------------------------- agriculturist -----------------------------
-        $agcs = $db->prepare("SELECT * FROM `agriculturist`");
-        $agcs->execute();
-        while ($row = $agcs->fetch(PDO::FETCH_ASSOC)) {
-            if($agc == $row["agc_name"]){
-                $agc_id = $row["agc_id"]; 
-                break;
-            }
-        }
-
         // ----------------------------- customer -----------------------------
         $cuss = $db->prepare("SELECT * FROM `customer`");
         $cuss->execute();
@@ -74,8 +72,7 @@
             $ggs->execute();
             $row = $ggs->fetch(PDO::FETCH_ASSOC);
 
-            // echo $row["gg_quantity"];
-            // echo $quantity;
+
             $totals = $row["gg_quantity"] - $quantity;
             $sql2 = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $totals WHERE `gg_id` = '$gg_id'");
             $sql2->execute();

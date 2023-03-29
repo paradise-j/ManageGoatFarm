@@ -98,7 +98,7 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 text-center">
-                            <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลรายรับ-รายจ่าย</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลรายได้แฝง-รายจ่าย</h3>
                         </div>
                         <div class="row mt-4 ml-2">
                             <div class="col">
@@ -115,21 +115,24 @@
                                             <th>ประเภท</th>
                                             <th>รายการ</th>
                                             <th>จำนวนเงิน</th>
-                                            <th>เกษตรกร</th>
-                                            <th>แก้ไขรายการ</th>
+                                            <!-- <th>เกษตรกร</th> -->
+                                            <!-- <th>แก้ไขรายการ</th> -->
                                             <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT `money_id`,`money_type`,`money_list`,`money_quan`,`money_date`,agriculturist.agc_name
+                                            $id = $_SESSION['id'];
+                                            $stmt = $db->query("SELECT `money_id`,`money_type`,`money_list`,`money_quan`,`money_date`
                                                                 FROM `money_inex` 
-                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = money_inex.agc_id");
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = money_inex.agc_id
+                                                                INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $moneys = $stmt->fetchAll();
                                             $count = 1;
                                             if (!$moneys) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
                                             } else {
                                             foreach($moneys as $money)  {  
                                         ?>
@@ -140,8 +143,10 @@
                                                 <?php 
                                                     if($money['money_type'] == 1){
                                                         echo "รายรับ";
-                                                    }else{
+                                                    }elseif($money['money_type'] == 2){
                                                         echo "รายจ่าย";
+                                                    }else{
+                                                        echo "ประหยัดค่าใช้จ่าย";
                                                     }
                                                 ?>
                                             </td>
@@ -159,7 +164,7 @@
                                                         }elseif($money['money_list'] == 3){
                                                             echo "ค่าอาหาร";
                                                         }
-                                                    }else{
+                                                    }elseif($money['money_type'] == 3){
                                                         if($money['money_list'] == 1) {
                                                             echo "ค่าน้ำมันตัดหญ้า";
                                                         }else{
@@ -169,8 +174,8 @@
                                                 ?>
                                             </td>
                                             <td><?= $money['money_quan']; ?></td>
-                                            <td><?= $money['agc_name']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <!-- <td><?= $money['agc_name']; ?></td> -->
+                                            <!-- <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td> -->
                                             <td><a data-id="<?= $money['money_id']; ?>" href="?delete=<?= $money['money_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php $count++ ;?> 

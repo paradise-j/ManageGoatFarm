@@ -262,20 +262,19 @@
                                         <table class="table" id="dataTable" width="100%" cellspacing="0" >
                                             <thead>
                                                 <tr align="center" style="font-size: 0.8em;">
-                                                    <th>ชื่อฟาร์ม</th>
+                                                    <!-- <th>ชื่อฟาร์ม</th> -->
                                                     <th>ชื่อโรค</th>
                                                     <th>สถานะ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                    $stmt = $db->query("SELECT agriculturist.agc_nfarm , gdis_data.gdis_name , g_disease.gd_level 
+                                                    $stmt = $db->query("SELECT gdis_data.gdis_name , g_disease.gd_level 
                                                                         FROM `g_disease` 
                                                                         INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id
-                                                                        INNER JOIN `group_g` ON group_g.gg_id = g_disease.gg_id
-                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
-                                                                        INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
-                                                                        WHERE user_login.user_id = '$id' ");
+                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = g_disease.agc_id
+                                                                        INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                        WHERE user_login.user_id = '$id'");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     if (!$ggs) {
@@ -284,7 +283,7 @@
                                                     foreach($ggs as $gg)  {  
                                                 ?>
                                                 <tr align="center" style="font-size: 0.8em;">
-                                                    <td><?= $gg['agc_nfarm']; ?></td>
+                                                    <!-- <td><?= $gg['agc_nfarm']; ?></td> -->
                                                     <td><?= $gg['gdis_name']; ?></td>
                                                     <td>
                                                         <?php 

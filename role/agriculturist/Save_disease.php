@@ -123,20 +123,24 @@
                                             <th>ชื่อโรค</th>
                                             <th>ระดับความรุนแรง</th>
                                             <th>วันที่พบโรค</th>
-                                            <th>แก้ไขรายการ</th>
+                                            <!-- <th>แก้ไขรายการ</th> -->
                                             <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT g_disease.gd_id , gdis_data.gdis_name ,  g_disease.gd_level , g_disease.gd_date
-                                                                FROM `g_disease`
-                                                                INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id");
+                                            $id = $_SESSION['id'] ;
+                                            $stmt = $db->query("SELECT gdis_data.gdis_name , g_disease.gd_level , `gd_date`
+                                                                FROM `g_disease` 
+                                                                INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = g_disease.agc_id
+                                                                INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $gds = $stmt->fetchAll();
                                             $count = 1 ;
                                             if (!$gds) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
                                             } else {
                                             foreach($gds as $gd)  {  
                                         ?>
@@ -155,7 +159,7 @@
                                                 ?>
                                             </td>
                                             <td class="date_th"><?= $gd['gd_date']; ?></td>
-                                            <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <!-- <td><a href="Edit_vm.php?edit_id=<?= $gd['gd_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td> -->
                                             <td><a data-id="<?= $gd['gd_id']; ?>" href="?delete=<?= $gd['gd_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                         <?php $count++ ;?> 

@@ -80,6 +80,7 @@
                                     </form>
                                     
                                     <?php 
+                                        $id = $_SESSION['id'];
                                         if(isset($_POST["submit"])){
                                             $start_date = $_POST["start_date"];
                                             $end_date = $_POST["end_date"];
@@ -87,7 +88,9 @@
                                             // ===========================================================myAreaChart=================================================================
                                                 $stmt2 = $db->query("SELECT `money_type`, MONTH(`money_date`) as month, SUM(`money_quan`) as total 
                                                                     FROM `money_inex` 
-                                                                    WHERE MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
+                                                                    INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+                                                                    INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+                                                                    WHERE user_login.user_id = '$id' AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
                                                                     GROUP BY `money_type`, MONTH(`money_date`)"); 
                                                 $stmt2->execute();
 
@@ -100,7 +103,9 @@
                                             // ====================================================myChartBar========================================================================
                                                 $stmt1 = $db->query("SELECT MONTH(`money_date`) as month, SUM(`money_quan`) as total 
                                                                     FROM `money_inex` 
-                                                                    WHERE (`money_type`= '1' AND `money_list`= '1') AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
+                                                                    INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+                                                                    INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+                                                                    WHERE user_login.user_id = '$id' AND (`money_type`= '1' AND `money_list`= '1') AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date')  
                                                                     GROUP BY MONTH(`money_date`)");
                                                 $stmt1->execute();
 
@@ -111,10 +116,11 @@
                                                 $dataResult_type1_1 = json_encode($arr);
                                             // ===========================================================myChartBar1=================================================================
                                                 $stmt3 = $db->query("SELECT `money_list`, MONTH(`money_date`) as month, SUM(`money_quan`) as total 
-                                                                     FROM `money_inex` 
-                                                                     WHERE `money_type`= '2' AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
-                                                                     GROUP BY `money_list`,MONTH(`money_date`)
-                                                                     ORDER By MONTH(`money_date`)");
+                                                                    FROM `money_inex` 
+                                                                    INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+                                                                    INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+                                                                    WHERE user_login.user_id = '$id' AND `money_type`= '3' AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date')  
+                                                                    GROUP BY `money_list`, MONTH(`money_date`)");
                                                 $stmt3->execute();
 
                                                 $arr3 = array();
@@ -124,9 +130,11 @@
                                                 $my_dataAll_money_out = json_encode($arr3);
                                             // ===========================================================myChartBar1=================================================================
                                                 $stmt4 = $db->query("SELECT `money_list` , SUM(`money_quan`) as total 
-                                                                     FROM `money_inex` 
-                                                                     WHERE `money_type`= '3' AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
-                                                                     GROUP BY `money_list`");
+                                                                    FROM `money_inex` 
+                                                                    INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+                                                                    INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+                                                                    WHERE user_login.user_id = '$id' AND `money_type`= '3' AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
+                                                                    GROUP BY `money_list`");
                                                 $stmt4->execute();
 
                                                 $arr4 = array();
