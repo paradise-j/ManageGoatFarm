@@ -40,30 +40,6 @@
             <div id="content">
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
-                    <!-- <div class="row mb-3">
-                        <label class="form-label mt-2">กลุ่มเลี้ยง</label>
-                        <div class="col-md-3">
-                            <select class="form-control" aria-label="Default select example" id="gfarm" name="gfarm" style="border-radius: 30px;" required>
-                                <option selected disabled>กรุณาเลือกกลุ่มเลี้ยง....</option>
-                                <?php 
-                                    $stmt = $db->query("SELECT * FROM `group_farm`");
-                                    $stmt->execute();
-                                    $gfs = $stmt->fetchAll();
-                                    
-                                    foreach($gfs as $gf){
-                                ?>
-                                <option value="<?= $gf['gf_id']?>"><?= $gf['gf_name']?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btnsmall btn-success" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">เรียกดู</button>
-                            &nbsp&nbsp
-                            <button class="btnsmall btn-info" style="border-radius: 30px; font-size: 0.8rem;" type="submit" name="submit">คืนค่าเริ่มต้น</button>
-                        </div>
-                    </div> -->
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <div class="card border-left-primary shadow h-80">
