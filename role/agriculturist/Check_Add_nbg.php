@@ -4,17 +4,27 @@
     session_start();
     require_once "connect.php";
 
+
+    $id = $_SESSION['id'];
+    $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                FROM `user_login` 
+                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                WHERE user_login.user_id = '$id'");
+    $check_id->execute();
+    $row = $check_id->fetch(PDO::FETCH_ASSOC);
+    $agc_id = $row["agc_id"] ;
+
     if (isset($_POST['submit'])) {
         $FB = $_POST['FB'];
         $MB = $_POST['MB'];
-        $quantity = $_POST['quantity'];
         $g_male = $_POST['g_male'];
         $g_female = $_POST['g_female'];
+        $quantity = $g_male + $g_female;
         $date = $_POST['date'];
 
 
-        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_quantity`, `nbg_male`, `nbg_female`, `nbg_date`, `F_id`, `M_id`)
-                             VALUES ($quantity, $g_male, $g_female, '$date', '$FB', '$MB')");
+        $sql = $db->prepare("INSERT INTO `nbg_data`(`nbg_quantity`, `nbg_male`, `nbg_female`, `nbg_date`, `F_id`, `M_id`, `agc_id`)
+                             VALUES ($quantity, $g_male, $g_female, '$date', '$FB', '$MB', '$agc_id')");
         $sql->execute();
 
         if ($sql) {

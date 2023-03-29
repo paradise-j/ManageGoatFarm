@@ -138,11 +138,11 @@
                                     <thead class="thead-light">
                                         <tr align="center">
                                             <th>ลำดับที่</th>
-                                            <th>พ่อพัน</th>
-                                            <th>แม่พันธุ์</th>
-                                            <th>จำนวนแพะที่เกิด</th>
-                                            <th>จำนวนเพศผู้</th>
-                                            <th>จำนวนเพศเมีย</th>
+                                            <th>รหัสพ่อพันธุ์</th>
+                                            <th>รหัสแม่พันธุ์</th>
+                                            <th>จำนวนแพะที่เกิด (ตัว)</th>
+                                            <th>จำนวนเพศผู้ (ตัว)</th>
+                                            <th>จำนวนเพศเมีย (ตัว)</th>
                                             <th>วันที่เกิด</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -150,21 +150,26 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT nbg_data.nbg_id , nbg_data.F_id as Father, nbg_data.M_id as Mother , nbg_data.nbg_quantity , nbg_data.nbg_male , nbg_data.nbg_female , nbg_data.nbg_date 
+
+                                            $id = $_SESSION['id'] ;
+                                            $stmt = $db->query("SELECT `nbg_id`,`nbg_quantity`,`nbg_male`,`nbg_female`,`nbg_date`, `F_id`,`M_id`, agriculturist.agc_name
                                                                 FROM `nbg_data` 
-                                                                INNER JOIN `fm_data` ON nbg_data.F_id = fm_data.fm_id");
+                                                                INNER JOIN `fm_data` ON nbg_data.F_id = fm_data.fm_id
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = nbg_data.agc_id
+                                                                INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $nbgs = $stmt->fetchAll();
                                             $count = 1 ; 
                                             if (!$nbgs) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='6' class='text-center'>ไม่พบข้อมูลที่จะให้แสดง</td></p>";
                                             } else {
                                             foreach($nbgs as $nbg)  {  
                                         ?>
                                         <tr align="center">
                                             <th scope="row"><?= $count ;?> </th>
-                                            <td><?= $nbg['Father']; ?></td>
-                                            <td><?= $nbg['Mother']; ?></td>
+                                            <td><?= $nbg['F_id']; ?></td>
+                                            <td><?= $nbg['M_id']; ?></td>
                                             <td><?= $nbg['nbg_quantity']; ?></td>
                                             <td><?= $nbg['nbg_male']; ?></td>
                                             <td><?= $nbg['nbg_female']; ?></td>

@@ -8,12 +8,12 @@
 
     if (isset($_GET['delete'])) {
         $delete_id = $_GET['delete'];
-        echo $delete_id;
+        // echo $delete_id;
         $deletestmt = $db->query("DELETE FROM `gvc_data` WHERE `gvc_id` = '$delete_id'");
         $deletestmt->execute();
         
         if ($deletestmt) {
-            echo "<script>alert('Data has been deleted successfully');</script>";
+            echo "<script>alert('ลบข้อมูลเรียบร้อยแล้ว');</script>";
             header("refresh:1; url=Save_GVM.php");
         }
     }
@@ -93,11 +93,6 @@
                             <label class="form-label">ปริมาณยาหรือวัคซีน</label>
                             <input type="number" class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label class="form-label">ราคา</label>
-                            <input type="number" class="form-control" name="price" style="border-radius: 30px;" required>
-                        </div> -->
-
                         <div class="col text-center">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
                             &nbsp&nbsp&nbsp
@@ -134,7 +129,6 @@
                                             <th>ประเภทการให้</th>
                                             <th>ชื่อผลิตภัณฑ์</th>
                                             <th>ปริมาณ</th>
-                                            <!-- <th>ราคา</th> -->
                                             <th>เดือนที่ให้</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -142,10 +136,14 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gvc_data.gvc_id , group_g.gg_type , group_g.gg_range_age , gvc_data.gvc_type , vc_data.vc_name , gvc_data.gvc_quantity ,  gvc_data.gvc_date 
+                                            $id = $_SESSION['id'] ;
+                                            $stmt = $db->query("SELECT `gvc_id` , group_g.gg_type , group_g.gg_range_age , `gvc_type` , vc_data.vc_name , `gvc_quantity` ,  `gvc_date`
                                                                 FROM `gvc_data` 
                                                                 INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
-                                                                INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id ");
+                                                                INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
+                                                                INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $vms = $stmt->fetchAll();
                                             $count = 1;
@@ -197,7 +195,6 @@
                                             </td>
                                             <td><?= $vm['vc_name']; ?></td>
                                             <td><?= $vm['gvc_quantity']; ?></td>
-                                            <!-- <td><?= $vm['gvc_price']; ?></td> -->
                                             <td class="date_th"><?= $vm['gvc_date']; ?></td>
                                             <td><a href="Edit_vm.php?edit_id=<?= $vm['gvc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $vm['gvc_id']; ?>" href="?delete=<?= $vm['gvc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>

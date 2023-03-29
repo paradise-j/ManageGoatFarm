@@ -78,7 +78,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ประเภทอาหาร</label>
-                            <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
+                            <select class="form-control" aria-label="Default select example" id="typefg" name="typefg" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกประเภทอาหาร....</option>
                                 <?php 
                                     $stmt = $db->query("SELECT * FROM `fg_data`");
@@ -105,13 +105,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ปริมาณอาหาร (กิโลกรัม)</label>
-                            <input type="text" class="form-control" name="amount" style="border-radius: 30px;" required>
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label class="form-label">ราคาต่อกิโลกรัม (บาท)</label>
                             <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
-                        </div> -->
-
+                        </div>
                         <div class="modal-footer">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
                             <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
@@ -154,16 +149,20 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT gfg_data.gfg_id , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , gfg_data.gfg_quantity , gfg_data.gfg_date
+                                            $id = $_SESSION['id'] ;
+                                            $stmt = $db->query("SELECT `gfg_id` , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , `gfg_quantity` , `gfg_date`
                                                                 FROM `gfg_data` 
                                                                 INNER JOIN `group_g` ON group_g.gg_id = gfg_data.gg_id
-                                                                INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id ");
+                                                                INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
+                                                                INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                WHERE user_login.user_id = '$id' ");
                                             $stmt->execute();
                                             $gfgs = $stmt->fetchAll();
                                             $count = 1;
 
                                             if (!$gfgs) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
                                             } else {
                                             foreach($gfgs as $gfg)  {  
                                         ?>
@@ -314,6 +313,19 @@
             elem.textContent=result
         })
 
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
+
         $.extend(true, $.fn.dataTable.defaults, {
             "language": {
                     "sProcessing": "กำลังดำเนินการ...",
@@ -336,17 +348,7 @@
         $('.table').DataTable();
 
 
-        $('#type').change(function(){
-            var id_provnce = $(this).val();
-            $.ajax({
-                type : "post",
-                url : "gg.php",
-                data : {id:id_provnce,function:'type'},
-                success: function(data){
-                    $('#range_age').html(data);
-                }
-            });
-        });
+
     </script>
 
 </body>

@@ -4,6 +4,15 @@
     session_start();
     require_once "connect.php";
 
+    $id = $_SESSION['id'];
+    $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                FROM `user_login` 
+                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                WHERE user_login.user_id = '$id'");
+    $check_id->execute();
+    $row = $check_id->fetch(PDO::FETCH_ASSOC);
+    $agc_id = $row["agc_id"] ;
+
     if (isset($_POST['submit'])) {
         $Gtype = $_POST['type'];
         $range_age = $_POST['range_age'];
@@ -14,7 +23,7 @@
         $date = $_POST['date'];
 
 
-        $VM = $db->prepare("SELECT * FROM `group_g`");
+        $VM = $db->prepare("SELECT * FROM `group_g` WHERE `agc_id` = '$agc_id'");
         $VM->execute();
 
         

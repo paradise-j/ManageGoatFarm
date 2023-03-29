@@ -4,21 +4,11 @@
     session_start();
     require_once "connect.php";
 
-    $id = $_SESSION['id'];
-    $check_id = $db->prepare("SELECT agriculturist.agc_id
-                                FROM `user_login` 
-                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
-                                WHERE user_login.user_id = '$id'");
-    $check_id->execute();
-    $row = $check_id->fetch(PDO::FETCH_ASSOC);
-    $agc_id = $row["agc_id"] ;
-
     if (isset($_POST['submit'])) {
-        $type = $_POST['type'];
-        $name = $_POST['name'];
-        $gb_id = $_POST['gb'];
-        $sql = $db->prepare("INSERT INTO `fm_data`(`fm_type`, `fm_name`, `gb_id`, `agc_id`)
-                             VALUES ('$type','$name','$gb_id','$agc_id')");
+        $id = $_POST['id'];
+        $date = $_POST['date'];
+        $quantity = $_POST['quantity'];
+        $sql = $db->prepare("UPDATE `gfg_data` SET `gfg_quantity`='$quantity',`gfg_date`='$date' WHERE `gfg_id`='$id'");
         $sql->execute();
 
         if ($sql) {
@@ -34,10 +24,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Save_FMgoat.php");
+            header("refresh:1; url=Save_Gfeed.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Save_FMgoat.php");
+            header("location: Save_Gfeed.php");
         }
     }
 ?>

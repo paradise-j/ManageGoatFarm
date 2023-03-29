@@ -123,9 +123,14 @@
                                     </thead>
                                     <tbody>
                                         <?php 
+                                            $id = $_SESSION['id'] ;
+
                                             $stmt = $db->query("SELECT fm_data.fm_id , fm_data.fm_type , fm_data.fm_name , g_breed.gb_name
-                                                                FROM `fm_data` 
-                                                                INNER JOIN g_breed ON fm_data.gb_id = g_breed.gb_id");
+                                                                FROM `fm_data`
+                                                                INNER JOIN `g_breed` ON fm_data.gb_id = g_breed.gb_id
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = fm_data.agc_id
+                                                                INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $fms = $stmt->fetchAll();
                                             $count = 1;

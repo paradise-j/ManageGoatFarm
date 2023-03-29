@@ -12,8 +12,8 @@
         $deletestmt->execute();
         
         if ($deletestmt) {
-            echo "<script>alert('Data has been deleted successfully');</script>";
-            header("refresh:1; url=Manage_food.php");
+            echo "<script>alert('ลบข้อมูลเรียบร้อยแล้ว');</script>";
+            header("refresh:1; url=Save_Groupgoat.php");
         }
     }    
 ?>
@@ -111,14 +111,17 @@
                                     </thead>
                                     <tbody>
                                         <?php 
+                                            $id = $_SESSION['id'] ;
                                             $stmt = $db->query("SELECT group_g.gg_id , group_g.gg_type , group_g.gg_range_age , group_g.gg_quantity , agriculturist.agc_name 
                                                                 FROM `group_g` 
-                                                                INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id; ");
+                                                                INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
+                                                                INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $ggs = $stmt->fetchAll();
                                             $count = 1;
                                             if (!$ggs) {
-                                                echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                echo "<p><td colspan='6' class='text-center'>ไม่มีพบข้อมูล</td></p>";
                                             } else {
                                             foreach($ggs as $gg)  {  
                                         ?>
@@ -127,9 +130,9 @@
                                             <td>
                                                 <?php
                                                     if($gg['gg_type'] == 1){
-                                                        echo "แพะพ่อพันธุ์";
+                                                        echo "พ่อพันธุ์";
                                                     }elseif($gg['gg_type'] == 2){
-                                                        echo "แพะแม่พันธุ์";
+                                                        echo "แม่พันธุ์";
                                                     }else{
                                                         echo "แพะขุน";
                                                     }
@@ -214,7 +217,7 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                                url: 'Manage_food.php',
+                                url: 'Save_Groupgoat.php',
                                 type: 'GET',
                                 data: 'delete=' + userId,
                             })
@@ -224,7 +227,7 @@
                                     text: 'ลบข้อมูลเรียบร้อยแล้ว',
                                     icon: 'success',
                                 }).then(() => {
-                                    document.location.href = 'Manage_food.php';
+                                    document.location.href = 'Save_Groupgoat.php';
                                 })
                             })
                             .fail(function() {
@@ -239,6 +242,18 @@
                 },
             });
         }
+
+        $('#type').change(function(){
+            var id_provnce = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "gg.php",
+                data : {id:id_provnce,function:'type'},
+                success: function(data){
+                    $('#range_age').html(data);
+                }
+            });
+        });
 
         $.extend(true, $.fn.dataTable.defaults, {
             "language": {
@@ -262,17 +277,7 @@
         $('.table').DataTable();
 
 
-        $('#type').change(function(){
-            var id_provnce = $(this).val();
-            $.ajax({
-                type : "post",
-                url : "gg.php",
-                data : {id:id_provnce,function:'type'},
-                success: function(data){
-                    $('#range_age').html(data);
-                }
-            });
-        });
+
     </script>
 
 </body>

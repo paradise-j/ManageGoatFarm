@@ -4,13 +4,21 @@
     session_start();
     require_once "connect.php";
 
+    $id = $_SESSION['id'];
+    $check_id = $db->prepare("SELECT agriculturist.agc_id
+                                FROM `user_login` 
+                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                WHERE user_login.user_id = '$id'");
+    $check_id->execute();
+    $row = $check_id->fetch(PDO::FETCH_ASSOC);
+    $agc_id = $row["agc_id"] ;
+
     if (isset($_POST['submit'])) {
-        $id = $_POST['id'];
         $type = $_POST['type'];
         $range_age = $_POST['range_age'];
         $quantity = $_POST['quantity'];
-        $quantity = $_POST['quantity'];
-        $sql = $db->prepare("INSERT INTO `group_g`(`gg_id`, `gg_type`, `gg_range_age`, `gg_quantity`, `agc_id`) VALUES");
+        $sql = $db->prepare("INSERT INTO `group_g`( `gg_type`, `gg_range_age`, `gg_quantity`, `agc_id`) VALUES
+                                                ( $type,$range_age,'$quantity','$agc_id')");
         $sql->execute();
 
         if ($sql) {
@@ -26,10 +34,10 @@
                     });
                 })
             </script>";
-            header("refresh:1; url=Manage_Ggoat.php");
+            header("refresh:1; url=Save_Groupgoat.php");
         } else {
             $_SESSION['error'] = "เพิ่มข้อมูลเรียบร้อยไม่สำเร็จ";
-            header("location: Manage_Ggoat.php");
+            header("location: Save_Groupgoat.php");
         }
     }
 ?>
