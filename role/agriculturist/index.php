@@ -273,7 +273,9 @@
                                                                         FROM `g_disease` 
                                                                         INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id
                                                                         INNER JOIN `group_g` ON group_g.gg_id = g_disease.gg_id
-                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id");
+                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
+                                                                        INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+                                                                        WHERE user_login.user_id = '$id' ");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     if (!$ggs) {

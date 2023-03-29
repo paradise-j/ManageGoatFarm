@@ -1,7 +1,7 @@
 <?php 
     
     session_start();
-    if(!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 1){
+    if(!isset($_SESSION["username"]) and !isset($_SESSION["password"]) and $_SESSION["permission"] != 5){
         header("location: ../../index.php");
         exit;
     }
