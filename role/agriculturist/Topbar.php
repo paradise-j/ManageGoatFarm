@@ -34,21 +34,20 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php
-                    $select_stmt = $db->query("SELECT officer.officer_name, officer.officer_img
-                                                FROM `user_login` 
-                                                INNER JOIN `officer` ON user_login.officer_id = officer.officer_id
+                    $select_stmt = $db->query("SELECT `agc_name`,`agc_nfarm`,`agc_img` 
+                                                FROM `agriculturist` 
+                                                INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id
                                                 WHERE user_login.user_id = '$id'");
                     $select_stmt->execute(); 
                     $logins = $select_stmt->fetchAll();
                     foreach($logins as $login){
                 ?>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small text-right">
-                        <?= $login["officer_name"]; ?>
-
-                        <!-- <br>
-                    ชื่อฟาร์ม -->
+                        <?= $login["agc_name"]; ?>
+                        <br>
+                        <?= $login["agc_nfarm"]; ?>
                     </span>
-                    <img class="img-profile rounded-circle" src="uploads/<?= $login["officer_img"]; ?>">
+                    <img class="img-profile rounded-circle" src="uploads/<?= $login["agc_img"]; ?>">
                 <?php
                     } 
                 ?>

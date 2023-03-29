@@ -3,7 +3,7 @@
     require_once 'connect.php';
 ?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <label for="inputState" class="form-label" style="font-size: 2rem;" >ระบบจัดการข้อมูลการเลี้ยงแพะ จังหวัดสุราษฎร์ธานี</label>
+    <label for="inputState" class="form-label" style="font-size: 1.5rem;" >ระบบจัดการข้อมูลการเลี้ยงแพะ จังหวัดสุราษฎร์ธานี</label>
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
