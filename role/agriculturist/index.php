@@ -50,6 +50,7 @@
                                             <div class="text-md font-weight-bold text-primary text-uppercase mb-1">พื้นที่โรงเรือน</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
+                                                    $_SESSION['id'] = $id;
                                                     $stmt = $db->prepare("SELECT COUNT(`Gf_id`) as total_gfarm FROM `group_farm`");
                                                     $stmt->execute();
                                                     $Gfs = $stmt->fetchAll();
@@ -103,7 +104,7 @@
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
                                                     
-                                                    $stmt = $db->prepare("SELECT COUNT(`gg_id`) as total
+                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total
                                                                          FROM `group_g` 
                                                                          INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
                                                                          INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
@@ -125,7 +126,7 @@
                             </div>
                         </div>
                         <?php
-                            $_SESSION['id'] = $id;
+                           
                             $check_id = $db->prepare("SELECT agriculturist.agc_id
                                                      FROM `user_login` 
                                                      INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id

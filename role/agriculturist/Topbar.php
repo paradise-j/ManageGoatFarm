@@ -1,5 +1,5 @@
 <?php
-    $id = $_SESSION["id"];
+    // session_start();
     require_once 'connect.php';
 ?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -34,6 +34,9 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php
+                    // session_start();
+                    $id = $_SESSION["id"];
+                    // echo $id;
                     $select_stmt = $db->query("SELECT `agc_name`,`agc_nfarm`,`agc_img` 
                                                 FROM `agriculturist` 
                                                 INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id

@@ -74,7 +74,7 @@
 
 
             $totals = $row["gg_quantity"] - $quantity;
-            $sql2 = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $totals WHERE `gg_id` = '$gg_id'");
+            $sql2 = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $totals WHERE `gg_id` = '$gg_id' and `agc_id` = '$agc_id'");
             $sql2->execute();
         }
 
