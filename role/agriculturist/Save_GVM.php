@@ -69,12 +69,12 @@
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label class="col-form-label">ช่วงอายุแพะ</label>
                             <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label class="form-label">ประเภท</label>
                             <select class="form-control" aria-label="Default select example" id="VMtype" name="VMtype" style="border-radius: 30px;" required>
@@ -125,7 +125,7 @@
                                         <tr align="center">
                                             <th>ลำดับที่</th>
                                             <th>ประเภท</th>
-                                            <th>ช่วงอายุ</th>
+                                            <!-- <th>ช่วงอายุ</th> -->
                                             <th>ประเภทการให้</th>
                                             <th>ชื่อผลิตภัณฑ์</th>
                                             <th>ปริมาณ</th>
@@ -137,7 +137,7 @@
                                     <tbody>
                                         <?php 
                                             $id = $_SESSION['id'] ;
-                                            $stmt = $db->query("SELECT `gvc_id` , group_g.gg_type , group_g.gg_range_age , `gvc_type` , vc_data.vc_name , `gvc_quantity` ,  `gvc_date`
+                                            $stmt = $db->query("SELECT `gvc_id` , group_g.gg_type , `gvc_type` , vc_data.vc_name , `gvc_quantity` ,  `gvc_date`
                                                                 FROM `gvc_data` 
                                                                 INNER JOIN `group_g` ON gvc_data.gg_id = group_g.gg_id 
                                                                 INNER JOIN `vc_data` ON gvc_data.vc_id = vc_data.vc_id
@@ -165,7 +165,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?php
                                                     if($vm['gg_range_age'] == 1){
                                                         echo "1-2 ปี";
@@ -183,7 +183,7 @@
                                                         echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <?php 
                                                     if($vm['gvc_type'] == 1) {

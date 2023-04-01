@@ -70,37 +70,25 @@
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label class="col-form-label">ช่วงอายุแพะ</label>
                             <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label class="form-label">ประเภทอาหาร</label>
                             <select class="form-control" aria-label="Default select example" id="typefg" name="typefg" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกประเภทอาหาร....</option>
-                                <?php 
-                                    $stmt = $db->query("SELECT * FROM `fg_data`");
-                                    $stmt->execute();
-                                    $fgs = $stmt->fetchAll();
-                                    
-                                    foreach($fgs as $fg){
-                                ?>
-                                <option value="<?= $fg['fg_id']?>">
-                                    <?php 
-                                        if($fg['fg_type'] == 1){
-                                            echo "ธรรมชาติ";
-                                        }elseif($fg['fg_type'] == 2){
-                                            echo "ข้น";
-                                        }else{
-                                            echo "TMR";
-                                        }
-                                    ?>
-                                </option>
-                                <?php
-                                    }
-                                ?>
+                                <option value="1">ธรรมชาติ</option>
+                                <option value="2">ข้น</option>
+                                <option value="3">TMR</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">ชื่ออาหาร</label>
+                            <select class="form-control" aria-label="Default select example" id="nameFood" name="nameFood" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -138,7 +126,7 @@
                                         <tr align="center">
                                             <th>รหัสการให้อาหาร</th>
                                             <th>ประเภท</th>
-                                            <th>ช่วงอายุ</th>
+                                            <!-- <th>ช่วงอายุ</th> -->
                                             <th>ประเภทอาหาร</th>
                                             <th>ปริมาณอาหาร</th>
                                             <!-- <th>ราคา</th> -->
@@ -150,7 +138,7 @@
                                     <tbody>
                                         <?php 
                                             $id = $_SESSION['id'] ;
-                                            $stmt = $db->query("SELECT `gfg_id` , group_g.gg_type , group_g.gg_range_age , fg_data.fg_type , `gfg_quantity` , `gfg_date`
+                                            $stmt = $db->query("SELECT `gfg_id` , group_g.gg_type , fg_data.fg_name , `gfg_quantity` , `gfg_date`
                                                                 FROM `gfg_data` 
                                                                 INNER JOIN `group_g` ON group_g.gg_id = gfg_data.gg_id
                                                                 INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id
@@ -179,7 +167,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?php
                                                     if($gfg['gg_range_age'] == 1){
                                                         echo "1-2 ปี";
@@ -197,8 +185,8 @@
                                                         echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
-                                            </td>
-                                            <td>
+                                            </td> -->
+                                            <!-- <td>
                                                 <?php 
                                                     if($gfg['fg_type'] == 1 ){
                                                         echo "ธรรมชาติ";
@@ -208,7 +196,8 @@
                                                         echo "TMR";
                                                     }
                                                 ?>
-                                            </td>
+                                            </td> -->
+                                            <td><?= $gfg['fg_name']; ?></td>
                                             <td><?= $gfg['gfg_quantity']; ?></td>
                                             <!-- <td><?= $gfg['gfg_price']; ?></td> -->
                                             <td class="date_th"><?= $gfg['gfg_date']; ?></td>
@@ -314,14 +303,15 @@
         })
 
 
-        $('#type').change(function(){
-            var id_provnce = $(this).val();
+        $('#typefg').change(function(){
+            var id_typefg = $(this).val();
             $.ajax({
                 type : "post",
-                url : "gg.php",
-                data : {id:id_provnce,function:'type'},
+                url : "food.php",
+                data : {id:id_typefg,function:'typefg'},
                 success: function(data){
-                    $('#range_age').html(data);
+                    // console.log(data);
+                    $('#nameFood').html(data);
                 }
             });
         });

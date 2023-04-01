@@ -15,10 +15,9 @@
 
     if (isset($_POST['submit'])) {
         $type = $_POST['type'];
-        $range_age = $_POST['range_age'];
         $quantity = $_POST['quantity'];
-        $sql = $db->prepare("INSERT INTO `group_g`( `gg_type`, `gg_range_age`, `gg_quantity`, `agc_id`) VALUES
-                                                ( $type,$range_age,'$quantity','$agc_id')");
+        $sql = $db->prepare("INSERT INTO `group_g`( `gg_type`, `gg_quantity`, `agc_id`) VALUES
+                                                ( $type,'$quantity','$agc_id')");
         $sql->execute();
 
         if ($sql) {

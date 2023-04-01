@@ -6,15 +6,23 @@
     }
     require_once 'connect.php';
 
+
     if(isset($_POST["add_sale"])){
         $gg_type = $_POST['gg_type'];
         $gg_age = $_POST['gg_age'];
 
-        $gg = $db->prepare("SELECT * FROM `group_g`");
+        $id_user = $_SESSION["id"];
+        $agc = $db->prepare("SELECT `agc_id` FROM `user_login` WHERE `user_id` = '$id_user'");
+        $agc->execute();
+        $row = $agc->fetch(PDO::FETCH_ASSOC);
+        extract($row);
+
+
+        $gg = $db->prepare("SELECT * FROM `group_g` WHERE `agc_id` = '$agc_id'");
         $gg->execute();
 
         while ($row = $gg->fetch(PDO::FETCH_ASSOC)) {
-            if($gg_type == $row["gg_type"] and $gg_age == $row["gg_range_age"]){
+            if($gg_type == $row["gg_type"]){
                 $gg_id = $row["gg_id"]; 
                 break;
             }
@@ -24,7 +32,7 @@
             // 'item_agc'           =>     $_POST["agc"],
             // 'item_cus'           =>     $_POST["cus"],
             'item_gg_type'       =>     $_POST["gg_type"],
-            'item_gg_age'        =>     $_POST["gg_age"],
+            // 'item_gg_age'        =>     $_POST["gg_age"],
             'item_id_gg'         =>     $gg_id,
             'item_quantity'      =>     $_POST["quantity"],
             'item_weight'        =>     $_POST["weight"],
@@ -87,7 +95,7 @@
                                 <div class="card-body">
                                     <form action="?" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-2">
-                                            <div class="col-md-1"></div>
+                                            <div class="col-md-2"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ประเภทแพะ</label>
                                                 <select class="form-control" aria-label="Default select example"  id="gg_type" name="gg_type" style="border-radius: 30px;" required>
@@ -97,12 +105,12 @@
                                                     <option value="3">แพะขุน</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2">
+                                            <!-- <div class="col-md-2">
                                                 <label class="form-label">ช่วงอายุแพะ</label>
                                                 <select class="form-control" aria-label="Default select example"  id="gg_age" name="gg_age" style="border-radius: 30px;" required>
                                                     <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-2">
                                                 <label class="form-label">จำนวน (ตัว)</label>
                                                 <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
@@ -152,15 +160,15 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">วันที่ขาย</label>
-                                                <input type="date" class="form-control" name="date" style="border-radius: 30px;" required>
+                                                <?php $date = date('Y-m-d'); ?>
+                                                
+                                                <input type="date" class="form-control" name="date" max="<?= $date; ?>" style="border-radius: 30px;" required>
                                             </div>
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <!-- <th>ชื่อ-สกุล เกษตรกร</th> -->
-                                                        <!-- <th>ชื่อ-สกุล ผู้ซื้อ</th> -->
                                                         <th>ประเภทแพะ</th>
                                                         <th>ช่วงอายุแพะ</th>
                                                         <th>จำนวน</th>
@@ -177,8 +185,6 @@
                                                         foreach ($_SESSION['shopping_cart'] as $key => $value) { 
                                                     ?>
                                                         <tr>
-                                                            <!-- <td><?php echo $value['item_agc'];?></td> -->
-                                                            <!-- <td><?php echo $value['item_cus'];?></td> -->
                                                             <td>
                                                                 <?php
                                                                     if($value['item_gg_type'] == 1){
@@ -190,7 +196,7 @@
                                                                     }
                                                                 ?>
                                                             </td>
-                                                            <td>
+                                                            <!-- <td>
                                                                 <?php 
                                                                     if($value['item_gg_age'] == 1){
                                                                         echo "1-2 ปี";
@@ -209,7 +215,7 @@
                                                                     }
                                                                 
                                                                 ?>
-                                                            </td>
+                                                            </td> -->
                                                             <td align="right"><?php echo number_format($value['item_quantity'],2);?> ตัว</td>
                                                             <td align="right"><?php echo number_format($value['item_weight'],2);?> กก.</td>
                                                             <td align="right">฿ <?php echo number_format($value['item_pricekg'],2);?> บาท</td>
@@ -235,7 +241,7 @@
                                         <div class="row mt-4 mb-4">
                                             <div class="col text-right">
                                                 <!-- <a href="add_salegoat.php?type=submit" class="btn btn-blue" style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</a> -->
-                                                <button class="btn btn-blue save_saleall" style="border-radius: 30px;" type="submit" id="save_saleall" name="save_sale">บึนทึกรายการขาย</button>
+                                                <button class="btn btn-blue " style="border-radius: 30px;" type="submit" name="save_sale">บึนทึกรายการขาย</button>
                                             </div>  
                                         </div>
                                     </form>

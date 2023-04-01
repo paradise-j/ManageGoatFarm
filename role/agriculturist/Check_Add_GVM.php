@@ -5,7 +5,6 @@
     require_once "connect.php";
 
     $id = $_SESSION['id'];
-    // echo $id;
     $check_id = $db->prepare("SELECT agriculturist.agc_id
                                 FROM `user_login` 
                                 INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
@@ -17,7 +16,7 @@
 
     if (isset($_POST['submit'])) {
         $Gtype = $_POST['type'];
-        $range_age = $_POST['range_age'];
+        // $range_age = $_POST['range_age'];
         $VMtype = $_POST['VMtype'];
         $vc_id = $_POST['VMname'];
         $quantity = $_POST['quantity'];
@@ -30,7 +29,7 @@
         
 
         while ($row = $VM->fetch(PDO::FETCH_ASSOC)) {
-            if($Gtype == $row["gg_type"] and $range_age == $row["gg_range_age"]){
+            if($Gtype == $row["gg_type"]){
                 $gg_id = $row["gg_id"]; 
                 break;
             }

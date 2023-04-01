@@ -103,6 +103,11 @@
                         <div class="card-header py-3 text-center">
                             <h3 class="m-0 font-weight-bold text-primary">บันทึกข้อมูลพ่อ-แม่พันธุ์</h3>
                         </div>
+                        <!-- <div class="row mt-4">
+                            <div class="col text-center">
+                                <label style="color:red;" >**** ในกรณีบันทึกข้อมูลครั้งแรก ให้ระบุกลุ่มแพะให้ครบทุกประเภท ****</label>
+                            </div>
+                        </div> -->
                         <div class="row mt-4 ml-2">
                             <div class="col">
                                 <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลพ่อ-แม่พันธุ์</a>

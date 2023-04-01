@@ -63,13 +63,13 @@
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label class="col-form-label">ช่วงอายุแพะ</label>
                             <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
                                 <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
-                        </div>
-                        <label class="col-form-label" style="color:red;">**** ถ้าไม่มีข้อมูลในประเภทนั้น ๆ ให้ระบุค่า 0 ลงในช่องจำนวน ****</label>
+                        </div> -->
+                        <label class="col-form-label" style="color:red;">**** ถ้าไม่มีข้อมูลในประเภทนั้น ๆ ให้ระบุค่า 0 ลงในช่องจำนวนแพะ ****</label>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">จำนวนแพะ (ตัว)</label>
                             <input type="number" required class="form-control" name="quantity" style="border-radius: 30px;" required>
@@ -92,13 +92,12 @@
                         <div class="card-header py-3 text-center">
                             <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลกลุ่มแพะในฟาร์ม</h3>
                         </div>
-                        <!-- <div class="row mt-4">
+                        <div class="row mt-4">
                             <div class="col text-center">
-                                <label for="">**** ในกรณีบันทึกข้อมูลครั้งแรก ถ้าไม่มีข้อมูลในประเภทนั้น ๆ ให้ระบุค่า 0 ลงในช่องจำนวน ****</label>
+                                <label style="color:red;" >**** ในกรณีบันทึกข้อมูลครั้งแรก ให้ระบุกลุ่มแพะให้ครบทุกประเภท ****</label>
                             </div>
-                        </div> -->
-                        
-                        <div class="row mt-4 ml-2">
+                        </div>
+                        <div class="row mt-1 ml-2">
                             <div class="col">
                                 <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลกลุ่มแพะ</a>
                             </div>
@@ -110,16 +109,16 @@
                                         <tr align="center">
                                             <th>ลำดับ</th>
                                             <th>ประเภทกลุ่มแพะ</th>
-                                            <th>ช่วงอายุ</th>
+                                            <!-- <th>ช่วงอายุ</th> -->
                                             <th>จำนวน</th>
                                             <th>แก้ไขรายการ</th>
-                                            <th>ลบรายการ</th>
+                                            <!-- <th>ลบรายการ</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $id = $_SESSION['id'] ;
-                                            $stmt = $db->query("SELECT group_g.gg_id , group_g.gg_type , group_g.gg_range_age , group_g.gg_quantity , agriculturist.agc_name 
+                                            $stmt = $db->query("SELECT `gg_id` , `gg_type` , `gg_quantity` , agriculturist.agc_name 
                                                                 FROM `group_g` 
                                                                 INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
                                                                 INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id
@@ -145,7 +144,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <?php
                                                     if($gg['gg_range_age'] == 1){
                                                         echo "1-2 ปี";
@@ -163,11 +162,11 @@
                                                         echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
-                                            </td>
+                                            </td> -->
                                             <td><?= $gg['gg_quantity']; ?></td>
                                             <!-- <td><?= $gg['agc_name']; ?></td> -->
                                             <td><a href="edit_SaveGgoat.php?edit_id=<?= $gg['gg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                            <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
+                                            <!-- <td><a data-id="<?= $gg['gg_id']; ?>" href="?delete=<?= $gg['gg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td> -->
                                         </tr>
                                             <?php $count++ ;?> 
                                         <?php }  

@@ -6,10 +6,7 @@
     require_once "connect.php";
 
     $id = $_SESSION['id'];
-    $check_id = $db->prepare("SELECT agriculturist.agc_id
-                                FROM `user_login` 
-                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
-                                WHERE user_login.user_id = '$id'");
+    $check_id = $db->prepare("SELECT `agc_id` FROM `user_login` WHERE user_login.user_id = '$id'");
     $check_id->execute();
     $row = $check_id->fetch(PDO::FETCH_ASSOC);
     $agc_id = $row["agc_id"];
@@ -27,8 +24,7 @@
             $name = $row["cus_name"];
             array_push($check,$name);
         }
-        // print_r($check);
-        // echo $cus;
+
         if(!in_array($cus, $check)){
             $sql = $db->prepare("INSERT INTO `customer`(`cus_name`, `cus_phone`) VALUES ('$cus', '$phone')");
             $sql->execute();

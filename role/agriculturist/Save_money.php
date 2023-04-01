@@ -150,29 +150,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>
-                                                <?php 
-                                                    if($money['money_type'] == 1 ){
-                                                        if ($money['money_list'] == 1){
-                                                            echo "ขายมูลแพะ";
-                                                        }
-                                                    }elseif($money['money_type'] == 2){
-                                                        if($money['money_list'] == 1) {
-                                                            echo "ค่ายา";
-                                                        }elseif($money['money_list'] == 2){
-                                                            echo "ค่าวัคซีน";
-                                                        }elseif($money['money_list'] == 3){
-                                                            echo "ค่าอาหาร";
-                                                        }
-                                                    }elseif($money['money_type'] == 3){
-                                                        if($money['money_list'] == 1) {
-                                                            echo "ค่าน้ำมันตัดหญ้า";
-                                                        }else{
-                                                            echo "ค่าปุ๋ย";
-                                                        }
-                                                    }
-                                                ?>
-                                            </td>
+                                            <td><?= $money['money_list']; ?></td>
                                             <td><?= $money['money_quan']; ?></td>
                                             <!-- <td><?= $money['agc_name']; ?></td> -->
                                             <!-- <td><a href="Edit_vm.php?edit_id=<?= $money['money_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td> -->
