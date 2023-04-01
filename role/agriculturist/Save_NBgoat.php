@@ -162,7 +162,7 @@
                                             $nbgs = $stmt->fetchAll();
                                             $count = 1 ; 
                                             if (!$nbgs) {
-                                                echo "<p><td colspan='6' class='text-center'>ไม่พบข้อมูลที่จะให้แสดง</td></p>";
+                                                echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
                                             } else {
                                             foreach($nbgs as $nbg)  {  
                                         ?>

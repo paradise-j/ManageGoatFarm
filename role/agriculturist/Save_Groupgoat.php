@@ -29,7 +29,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>จัดการข้อมูลกลุ่มแพะ</title>
+    <title>จัดการข้อมูลกลุ่มแพะในฟาร์ม</title>
 
     <!-- Custom fonts for this template -->
     <link rel="icon" type="image/png" href="img/Goat2.png" />
@@ -48,11 +48,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลกลุ่มแพะ</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลกลุ่มแพะในฟาร์ม</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="Check_add_SaveGgoat.php" method="POST">
+                        
                         <div class="mb-3">
                             <label for="update_type" class="col-form-label">ประเภทแพะ</label>
                             <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
@@ -68,6 +69,7 @@
                                 <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
                             </select>
                         </div>
+                        <label class="col-form-label" style="color:red;">**** ถ้าไม่มีข้อมูลในประเภทนั้น ๆ ให้ระบุค่า 0 ลงในช่องจำนวน ****</label>
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">จำนวนแพะ (ตัว)</label>
                             <input type="number" required class="form-control" name="quantity" style="border-radius: 30px;" required>
@@ -88,8 +90,14 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 text-center">
-                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลกลุ่มแพะ</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลกลุ่มแพะในฟาร์ม</h3>
                         </div>
+                        <!-- <div class="row mt-4">
+                            <div class="col text-center">
+                                <label for="">**** ในกรณีบันทึกข้อมูลครั้งแรก ถ้าไม่มีข้อมูลในประเภทนั้น ๆ ให้ระบุค่า 0 ลงในช่องจำนวน ****</label>
+                            </div>
+                        </div> -->
+                        
                         <div class="row mt-4 ml-2">
                             <div class="col">
                                 <a class="btn btn-blue" style="border-radius: 30px;" type="submit" data-toggle="modal" data-target="#AddFooodModal">เพิ่มข้อมูลกลุ่มแพะ</a>
@@ -100,11 +108,10 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr align="center">
-                                            <th>รหัสกลุ่มแพะ</th>
+                                            <th>ลำดับ</th>
                                             <th>ประเภทกลุ่มแพะ</th>
                                             <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
-                                            <!-- <th>ชื่อเกษตรกร</th> -->
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
                                         </tr>

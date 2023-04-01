@@ -112,7 +112,11 @@
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
-                                                        echo $gg['total'];
+                                                        if($gg['total'] == null){
+                                                            echo 0;
+                                                        }else{
+                                                            echo $gg['total'];
+                                                        }
                                                     }
                                                 ?>
                                                  ตัว
@@ -279,7 +283,7 @@
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     if (!$ggs) {
-                                                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                        echo "<p><td colspan='6' class='text-center'>ไม่มีพบข้อมูล</td></p>";
                                                     } else {
                                                     foreach($ggs as $gg)  {  
                                                 ?>

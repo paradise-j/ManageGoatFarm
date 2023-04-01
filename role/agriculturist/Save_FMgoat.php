@@ -135,7 +135,7 @@
                                             $fms = $stmt->fetchAll();
                                             $count = 1;
                                             if (!$fms) {
-                                                echo "<p><td colspan='6' class='text-center'>ไม่มีข้อมูลที่สามารถใช้ได้</td></p>";
+                                                echo "<p><td colspan='6' class='text-center'>ไม่มีพบข้อมูล</td></p>";
                                             } else {
                                             foreach($fms as $fm)  {  
                                         ?>

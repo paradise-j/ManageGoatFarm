@@ -148,7 +148,7 @@
                                             $vms = $stmt->fetchAll();
                                             $count = 1;
                                             if (!$vms) {
-                                                echo "<p><td colspan='8' class='text-center'>ลบข้อมูลเรียบร้อยแล้ว</td></p>";
+                                                echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
                                             } else {
                                             foreach($vms as $vm)  {  
                                         ?>
