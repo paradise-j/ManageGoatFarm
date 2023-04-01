@@ -161,7 +161,6 @@
                                             <div class="col-md-2">
                                                 <label class="form-label">วันที่ขาย</label>
                                                 <?php $date = date('Y-m-d'); ?>
-                                                
                                                 <input type="date" class="form-control" name="date" max="<?= $date; ?>" style="border-radius: 30px;" required>
                                             </div>
                                         </div>
@@ -170,7 +169,7 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>ประเภทแพะ</th>
-                                                        <th>ช่วงอายุแพะ</th>
+                                                        <!-- <th>ช่วงอายุแพะ</th> -->
                                                         <th>จำนวน</th>
                                                         <th>น้ำหนักรวม</th>
                                                         <th>ราคาต่อกิโลกรัม</th>
@@ -220,14 +219,14 @@
                                                             <td align="right"><?php echo number_format($value['item_weight'],2);?> กก.</td>
                                                             <td align="right">฿ <?php echo number_format($value['item_pricekg'],2);?> บาท</td>
                                                             <td align="right">฿ <?php echo number_format($value['item_pricekg']*$value['item_weight'],2);?> บาท</td>
-                                                            <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบสินค้า</td>
+                                                            <td><a href="add_salegoat.php?action=delete&id=<?php echo $key;?>">ลบรายการ</td>
                                                         </tr>
                                                     <?php
                                                         $total=$total+($value['item_weight']*$value['item_pricekg']);
                                                         }
                                                     ?>
                                                     <tr>
-                                                        <td colspan="5" align="right">ราคารวม</td>
+                                                        <td colspan="4" align="right">ราคารวม</td>
                                                         <td align="right">฿ <?php echo number_format($total, 2); ?> บาท</td>
                                                         <td></td>
                                                     </tr>

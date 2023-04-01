@@ -50,7 +50,7 @@
                         <br>
                         <?= $login["agc_nfarm"]; ?>
                     </span>
-                    <img class="img-profile rounded-circle" src="uploads/<?= $login["agc_img"]; ?>">
+                    <img class="img-profile rounded-circle" src="../admin/uploads/<?= $login["agc_img"]; ?>">
                 <?php
                     } 
                 ?>

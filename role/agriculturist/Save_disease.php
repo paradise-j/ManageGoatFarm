@@ -86,8 +86,9 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <?php $date = date('Y-m-d'); ?>
                             <label class="form-label">วันที่พบโรค</label>
-                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                            <input type="date" style="border-radius: 30px;" name="date" max="<?= $date; ?>" class="form-control" required>
                         </div>
                         <div class="modal-footer"> 
                             <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>

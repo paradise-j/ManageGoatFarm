@@ -58,8 +58,9 @@
                 <div class="modal-body">
                     <form action="Check_Add_money.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label class="form-label">วันที่พบโรค</label>
-                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                            <label class="form-label">วันที่บันทึก</label>
+                            <?php $date = date('Y-m-d'); ?>
+                            <input type="date" style="border-radius: 30px;" name="date" max="<?= $date; ?>" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ประเภท</label>

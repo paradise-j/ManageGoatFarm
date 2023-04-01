@@ -29,7 +29,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     return s.join(dec);
   }
 
-
   async function get_total_goat() {
     const res = await fetch("api/get_sum_price.php");
     const json = await res.json()
@@ -214,89 +213,66 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     }
   } 
 
-  var ctx = document.getElementById("myBarChart");
-  var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      // labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-      labels: Unique_label,
-      datasets: [{
-        label: "แพะพ่อพันธุ์",
-        backgroundColor: "#2a86e9",
-        borderColor: "#2a86e9",
-        data: my_data1
-      }, {
-        label: "แพะแม่พันธุ์",
-        backgroundColor: "#2ae955",
-        borderColor: "#2ae955",
-        data: my_data2
-      }, {
-        label: "แพะขุน",
-        backgroundColor: "#e9452a",
-        borderColor: "#e9452a",
-        data: my_data3
-      }],
-    },
-    options: {
-      maintainAspectRatio: false,
-      layout: {
-        padding: {
-          left: 10,
-          right: 25,
-          top: 25,
-          bottom: 0
-        }
+  console.log("my_data1 => " + my_data1);
+  console.log("my_data2 => " + my_data2);
+  console.log("my_data3 => " + my_data3);
+  console.log("Unique_label => " + Unique_label);
+  var ctx = document.getElementById('myBarChart3');
+  var myBarChart3 = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: Unique_label,
+          datasets: [{
+          label: "แพะพ่อพันธุ์",
+          backgroundColor: "#2a86e9",
+          borderColor: "#2a86e9",
+          data: my_data1
+          },{
+          label: "แพะแม่พันธุ์",
+          backgroundColor: "#2ae955",
+          borderColor: "#2ae955",
+          data: my_data2
+          }, {
+          label: "แพะขุน",
+          backgroundColor: "#e9452a",
+          borderColor: "#e9452a",
+          data: my_data3
+          }],
       },
-      scales: {
-        xAxes: [{
-          time: {
-            unit: 'month'
-          },
-          gridLines: {
-            display: false,
-            drawBorder: false
-          },
-          ticks: {
-            maxTicksLimit: 12
-          },
-          maxBarThickness: 50,
-        }],
-        yAxes: [{
-          ticks: {
-            min: 0,
-            max: 500000,
-            maxTicksLimit: 6,
-            padding: 10,
-            callback: function (value, index, values) {
-              return number_format(value);
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+            padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
             }
-          },
-        }],
-      },
-      legend: {
-        display: true
-      },
-      tooltips: {
-        titleMarginBottom: 10,
-        titleFontColor: '#6e707e',
-        titleFontSize: 14,
-        backgroundColor: "rgb(255,255,255)",
-        bodyFontColor: "#858796",
-        borderColor: '#dddfeb',
-        borderWidth: 1,
-        xPadding: 15,
-        yPadding: 15,
-        displayColors: false,
-        caretPadding: 10,
-        callbacks: {
-          label: function (tooltipItem, chart) {
-            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel +' '+ number_format(tooltipItem.yLabel) + ' บาท';
-          }
-        }
-      },
+        },
+        scales: {
+            xAxes: [{
+            time: {
+                unit: 'month'
+            },
+            gridLines: {
+                display: false,
+                drawBorder: false
+            },
+            ticks: {
+                maxTicksLimit: 12
+            },
+                maxBarThickness: 50,
+            }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    // max: 25000,
+                }
+            }],
+        },
+        legend: {
+            display: true
+        },
     }
   });
-
-
 });

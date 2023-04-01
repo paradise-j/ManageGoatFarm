@@ -60,6 +60,11 @@
                 <div class="modal-body">
                     <form action="Check_Add_nbg.php" method="POST">
                         <div class="mb-3">
+                            <label for="inputState" class="form-label">วันที่แพะเกิด</label>
+                            <?php $date = date('Y-m-d'); ?>
+                            <input type="date" style="border-radius: 30px;" name="date"  max="<?= $date; ?>" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">พ่อพันธุ์</label>
                             <select class="form-control" aria-label="Default select example" name="FB" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
@@ -105,10 +110,7 @@
                             <label class="form-label">จำนวนแพะเพศเมีย (ตัว)</label>
                             <input type="text" class="form-control" name="g_female" style="border-radius: 30px;" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="inputState" class="form-label">วันที่แพะเกิด</label>
-                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
-                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
                         </div>

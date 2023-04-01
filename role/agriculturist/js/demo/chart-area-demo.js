@@ -164,9 +164,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     }
     
   });
-  console.log(my_data1);
-  console.log(my_data2);
-  console.log(my_label);
+  // console.log(my_data1);
+  // console.log(my_data2);
+  // console.log(my_label);
 
 
   for( var i=0; i<my_label.length; i++ ) {

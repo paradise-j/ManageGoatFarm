@@ -5,6 +5,7 @@
     require_once('../connect.php');
 
     $uid = $_SESSION['id'];
+    // echo $uid ;
     $sql = "SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total FROM `salelist` 
                     INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
                     INNER JOIN `sale` ON sale.sale_id = salelist.sale_id 

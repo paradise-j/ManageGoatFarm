@@ -59,7 +59,8 @@
                     <form action="Check_Add_seeding.php" method="POST">
                         <div class="mb-3">
                             <label for="inputState" class="form-label">วันที่ให้อาหาร</label>
-                            <input type="date" style="border-radius: 30px;" name="date" class="form-control" required>
+                            <?php $date = date('Y-m-d'); ?>
+                            <input type="date" style="border-radius: 30px;" name="date" max="<?= $date; ?>" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="update_type" class="col-form-label">ประเภทแพะ</label>

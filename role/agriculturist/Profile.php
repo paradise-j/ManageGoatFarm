@@ -59,7 +59,7 @@
                                         <div class="row mb-4">
                                             <div class="col-md-5"></div>
                                             <div class="col-md-1 text-center">
-                                                <img loading="lazy" width="180px" height="200px" style="border-radius: 100%; border-style: outset;" src="uploads/<?= $agc_img; ?>" id="previewImg" alt="">
+                                                <img loading="lazy" width="180px" height="200px" style="border-radius: 100%; border-style: outset;" src="../admin/uploads/<?= $agc_img; ?>" id="previewImg" alt="">
                                             </div>
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3 mt-6">
