@@ -220,98 +220,62 @@ window.addEventListener('DOMContentLoaded', async (event) => {
   // console.log("my_data3 => "+ my_data3);
   // console.log("my_label => "+ Unique_label);
 
+  var ctx = document.getElementById('myBarChart');
   var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      // labels: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
-      labels: Unique_label,
-      datasets: [{
-        label: "แพะพ่อพันธุ์",
-        backgroundColor: "#2a86e9",
-        // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#2a86e9",
-        data: my_data1
-      }, {
-        label: "แพะแม่พันธุ์",
-        backgroundColor: "#2ae955",
-        // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#2ae955",
-        data: my_data2
-      }, {
-        label: "แพะขุน",
-        backgroundColor: "#e9452a",
-        // hoverBackgroundColor: "#f60e0e, #ff9c00, #f2f10f, #52f20f, #0fdff2, #0f34f2",
-        borderColor: "#e9452a",
-        data: my_data3
-      }],
-    },
-    // plugins: [ChartDataLabels],
-    options: {
-      maintainAspectRatio: false,
-      layout: {
-        padding: {
-          left: 10,
-          right: 25,
-          top: 25,
-          bottom: 0
-        }
+      type: 'bar',
+      data: {
+          labels: Unique_label,
+          datasets: [{
+          label: "แพะพ่อพันธุ์",
+          backgroundColor: "#2a86e9",
+          borderColor: "#2a86e9",
+          data: my_data1
+          },{
+          label: "แพะแม่พันธุ์",
+          backgroundColor: "#2ae955",
+          borderColor: "#2ae955",
+          data: my_data2
+          }, {
+          label: "แพะขุน",
+          backgroundColor: "#e9452a",
+          borderColor: "#e9452a",
+          data: my_data3
+          }],
       },
-      scales: {
-        xAxes: [{
-          time: {
-            unit: 'month'
-          },
-          gridLines: {
-            display: false,
-            drawBorder: false
-          },
-          ticks: {
-            maxTicksLimit: 12
-          },
-          maxBarThickness: 50,
-        }],
-        yAxes: [{
-          ticks: {
-            min: 0,
-            max: 50000,
-            maxTicksLimit: 6,
-            padding: 10,
-            // Include a dollar sign in the ticks
-            callback: function (value, index, values) {
-              return number_format(value);
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+            padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
             }
-          },
-          gridLines: {
-            color: "rgb(234, 236, 244)",
-            zeroLineColor: "rgb(234, 236, 244)",
-            drawBorder: false,
-            borderDash: [2],
-            zeroLineBorderDash: [2]
-          }
-        }],
-      },
-      legend: {
-        display: true
-      },
-      tooltips: {
-        titleMarginBottom: 10,
-        titleFontColor: '#6e707e',
-        titleFontSize: 14,
-        backgroundColor: "rgb(255,255,255)",
-        bodyFontColor: "#858796",
-        borderColor: '#dddfeb',
-        borderWidth: 1,
-        xPadding: 15,
-        yPadding: 15,
-        displayColors: false,
-        caretPadding: 10,
-        callbacks: {
-          label: function (tooltipItem, chart) {
-            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel +' '+ number_format(tooltipItem.yLabel) + ' บาท';
-          }
-        }
-      },
+        },
+        scales: {
+            xAxes: [{
+            time: {
+                unit: 'month'
+            },
+            gridLines: {
+                display: false,
+                drawBorder: false
+            },
+            ticks: {
+                maxTicksLimit: 12
+            },
+                maxBarThickness: 50,
+            }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 100000,
+                }
+            }],
+        },
+        legend: {
+            display: true
+        },
     }
   });
 

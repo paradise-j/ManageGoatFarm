@@ -123,7 +123,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         yAxes: [{
           ticks: {
             min: 0,
-            max: 50000,
+            max: 100000,
             maxTicksLimit: 6,
             padding: 10,
             // Include a dollar sign in the ticks

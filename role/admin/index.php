@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                        <canvas id="myBarChart3"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -314,7 +314,7 @@
     <script src="js/demo/chart-area2-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-pie2-demo.js"></script>
-    <script src="js/demo/chart-bar-demo.js"></script>
+    <script src="js/demo/chart-bar3-demo.js"></script>
     <script src="js/demo/chart-bar2-demo.js"></script>
     <script src="js/demo/chart-update-bar-demo.js"></script>
     

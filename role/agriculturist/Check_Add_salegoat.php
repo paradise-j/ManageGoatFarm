@@ -12,6 +12,7 @@
     $agc_id = $row["agc_id"];
     
     if(isset($_POST["save_sale"])){
+
         $cus = $_POST["cus"];
         $phone = $_POST["phone"];
         $date = $_POST["date"];

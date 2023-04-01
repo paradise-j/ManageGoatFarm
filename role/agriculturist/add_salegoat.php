@@ -9,8 +9,6 @@
 
     if(isset($_POST["add_sale"])){
         $gg_type = $_POST['gg_type'];
-        $gg_age = $_POST['gg_age'];
-
         $id_user = $_SESSION["id"];
         $agc = $db->prepare("SELECT `agc_id` FROM `user_login` WHERE `user_id` = '$id_user'");
         $agc->execute();
@@ -20,7 +18,6 @@
 
         $gg = $db->prepare("SELECT * FROM `group_g` WHERE `agc_id` = '$agc_id'");
         $gg->execute();
-
         while ($row = $gg->fetch(PDO::FETCH_ASSOC)) {
             if($gg_type == $row["gg_type"]){
                 $gg_id = $row["gg_id"]; 
@@ -28,20 +25,30 @@
             }
         }
 
-        $item_array = array(
-            // 'item_agc'           =>     $_POST["agc"],
-            // 'item_cus'           =>     $_POST["cus"],
-            'item_gg_type'       =>     $_POST["gg_type"],
-            // 'item_gg_age'        =>     $_POST["gg_age"],
-            'item_id_gg'         =>     $gg_id,
-            'item_quantity'      =>     $_POST["quantity"],
-            'item_weight'        =>     $_POST["weight"],
-            'item_pricekg'       =>     $_POST["pricekg"],
-            'item_price'         =>     $_POST["pricekg"]*$_POST["weight"]
-            );
-            $_SESSION["shopping_cart"][] =  $item_array;
-        header("location:add_salegoat.php");
-        exit;
+        $gg2 = $db->prepare("SELECT * FROM `group_g` WHERE `agc_id` = '$agc_id' AND `gg_id` = '$gg_id'");
+        $gg2->execute();
+        $row = $gg2->fetch(PDO::FETCH_ASSOC);
+        extract($row);
+
+        if($_POST["quantity"] > $gg_quantity){
+            $_SESSION['error'] = 'ยอดแพะของท่านไม่เพียงพอ';
+            header("refresh:2; url=add_salegoat.php");
+        }else{
+            $item_array = array(
+                // 'item_agc'           =>     $_POST["agc"],
+                // 'item_cus'           =>     $_POST["cus"],
+                'item_gg_type'       =>     $_POST["gg_type"],
+                // 'item_gg_age'        =>     $_POST["gg_age"],
+                'item_id_gg'         =>     $gg_id,
+                'item_quantity'      =>     $_POST["quantity"],
+                'item_weight'        =>     $_POST["weight"],
+                'item_pricekg'       =>     $_POST["pricekg"],
+                'item_price'         =>     $_POST["pricekg"]*$_POST["weight"]
+                );
+                $_SESSION["shopping_cart"][] =  $item_array;
+            header("location:add_salegoat.php");
+            exit;
+        }
     }
 
     if(isset($_GET['action'])){
@@ -94,6 +101,14 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="?" method="POST" enctype="multipart/form-data">
+                                        <?php if(isset($_SESSION['error'])) { ?>
+                                            <div class="alert alert-danger" role="alert">
+                                                <?php 
+                                                    echo $_SESSION['error'];
+                                                    unset($_SESSION['error']);
+                                                ?>
+                                            </div>
+                                        <?php } ?>
                                         <div class="row mb-2">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-2">
@@ -105,12 +120,6 @@
                                                     <option value="3">แพะขุน</option>
                                                 </select>
                                             </div>
-                                            <!-- <div class="col-md-2">
-                                                <label class="form-label">ช่วงอายุแพะ</label>
-                                                <select class="form-control" aria-label="Default select example"  id="gg_age" name="gg_age" style="border-radius: 30px;" required>
-                                                    <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
-                                                </select>
-                                            </div> -->
                                             <div class="col-md-2">
                                                 <label class="form-label">จำนวน (ตัว)</label>
                                                 <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
@@ -142,14 +151,8 @@
                                         <h5 class="m-0 font-weight-bold text-primary">รายการขายแพะ</h5>
                                     </div>
                                     <form action="Check_Add_salegoat.php" method="post">
+        
                                         <div class="row mb-4">
-                                            <div class="col-md-3">
-                                                <!-- <input type="hidden" class="form-control" name="id" style="border-radius: 30px;"> -->
-                                            </div>
-                                            <!-- <div class="col-md-2">
-                                                <label class="form-label">ชื่อเกษตรกร</label>
-                                                <input type="text" class="form-control" name="agc" style="border-radius: 30px;" value="นายสุพล ทิมทอง" required>
-                                            </div> -->
                                             <div class="col-md-2">
                                                 <label class="form-label">ชื่อผู้ซื้อ</label>
                                                 <input type="text" class="form-control" name="cus" style="border-radius: 30px;" required>
@@ -169,7 +172,6 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>ประเภทแพะ</th>
-                                                        <!-- <th>ช่วงอายุแพะ</th> -->
                                                         <th>จำนวน</th>
                                                         <th>น้ำหนักรวม</th>
                                                         <th>ราคาต่อกิโลกรัม</th>
@@ -195,26 +197,6 @@
                                                                     }
                                                                 ?>
                                                             </td>
-                                                            <!-- <td>
-                                                                <?php 
-                                                                    if($value['item_gg_age'] == 1){
-                                                                        echo "1-2 ปี";
-                                                                    }elseif($value['item_gg_age'] == 2){
-                                                                        echo "3-5 ปี";
-                                                                    }elseif($value['item_gg_age'] == 3){
-                                                                        echo "5 ปีขึ้นไป";
-                                                                    }elseif($value['item_gg_age'] == 4){
-                                                                        echo "ไม่เกิน 3 เดือน";
-                                                                    }elseif($value['item_gg_age'] == 5){
-                                                                        echo "3-4 เดือน";
-                                                                    }elseif($value['item_gg_age'] == 6){
-                                                                        echo "4-5 เดือน";
-                                                                    }else{
-                                                                        echo "5 เดือนขึ้นไป";
-                                                                    }
-                                                                
-                                                                ?>
-                                                            </td> -->
                                                             <td align="right"><?php echo number_format($value['item_quantity'],2);?> ตัว</td>
                                                             <td align="right"><?php echo number_format($value['item_weight'],2);?> กก.</td>
                                                             <td align="right">฿ <?php echo number_format($value['item_pricekg'],2);?> บาท</td>
@@ -288,6 +270,7 @@
             });
         });
 
+        
 
 
         // doucument.getElemetById('save_saleall').onclick = function(){save_saleall()} ;
