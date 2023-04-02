@@ -48,7 +48,7 @@ form{
 }
 
 .login-content img{
-    height: 100px;
+    height: 250px;
 }
 
 .login-content h2{
@@ -190,7 +190,7 @@ a:hover{
 
 @media screen and (max-width: 1000px){
 	form{
-		width: 290px;
+		width: 300px;
 	}
 
 	.login-content h2{
@@ -199,7 +199,7 @@ a:hover{
 	}
 
 	.img img{
-		width: 400px;
+		width: 5rem;
 	}
 }
 

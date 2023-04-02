@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Animated Login Form</title>
+	<title>ลงชื่อเข้าใช้ระบบ</title>
+	<link rel="icon" type="image/png" href="img/login2.png">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
@@ -19,7 +20,7 @@
 		</div>
 		<div class="login-content">
 			<form action="Check_login.php" method="POST">
-				<img src="img/avatar.svg">
+				<img src="img/163738.jpg">
 				<h2>ระบบจัดการข้อมูลการเลี้ยงแพะ จังหวัดสุราษฎร์ธานี</h2>
            		<div class="input-div one">
            		   <div class="i">
