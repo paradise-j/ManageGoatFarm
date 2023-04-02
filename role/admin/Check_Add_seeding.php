@@ -6,11 +6,10 @@
 
     if (isset($_POST['submit'])) {
         $type = $_POST['type'];
-        $range_age = $_POST['range_age'];
         $amount = $_POST['amount'];
         $priceKG = $_POST['priceKG'];
-        $month = $_POST['month'];
-        $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_type`, `gfg_range_age`, `gfg_quantity`, `gfg_month`) 
+        $month = $_POST['date'];
+        $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_quantity`, `gfg_date`, `gg_id`, `fg_id`)
                              VALUES ('$type','$range_age','$amount','$month')");
         $sql->execute();
 

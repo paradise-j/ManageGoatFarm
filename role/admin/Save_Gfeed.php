@@ -17,8 +17,6 @@
             header("refresh:1; url=Save_Gfeed.php");
         }
     }
-
-    
 ?>
 
 <!DOCTYPE html>

@@ -119,7 +119,6 @@
                                         <tr align="center">
                                             <th>ลำดับที่</th>
                                             <th>ประเภท</th>
-                                            <th>ช่วงอายุ</th>
                                             <th>จำนวน</th>
                                             <th>เกษตรกร</th>
                                             <th>แก้ไขรายการ</th>
@@ -128,8 +127,9 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT group_g.gg_id , group_g.gg_type , group_g.gg_range_age , group_g.gg_quantity , agriculturist.agc_name 
-                                                                FROM `group_g` INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id; ");
+                                            $stmt = $db->query("SELECT `gg_id`, `gg_type`, `gg_quantity`, agriculturist.agc_name
+                                                                FROM `group_g` 
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id");
                                             $stmt->execute();
                                             $ggs = $stmt->fetchAll();
                                             $count = 1;
@@ -143,30 +143,11 @@
                                             <td>
                                                 <?php 
                                                     if($gg['gg_type'] == 1){
-                                                        echo "แพะพ่อพันธุ์";
+                                                        echo "พ่อพันธุ์";
                                                     }elseif($gg['gg_type'] == 2){
-                                                        echo "แพะแม่พันธุ์";
+                                                        echo "แม่พันธุ์";
                                                     }else{
                                                         echo "แพะขุน";
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                    if($gg['gg_range_age'] == 1){
-                                                        echo "1-2 ปี";
-                                                    }elseif($gg['gg_range_age'] == 2){
-                                                        echo "3-5 ปี";
-                                                    }elseif($gg['gg_range_age'] == 3){
-                                                        echo "5 ปีขึ้นไป";
-                                                    }elseif($gg['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 3 เดือน";
-                                                    }elseif($gg['gg_range_age'] == 5){
-                                                        echo "3-4 เดือน";
-                                                    }elseif($gg['gg_range_age'] == 6){
-                                                        echo "4-5 เดือน";
-                                                    }else{
-                                                        echo "5 เดือนขึ้นไป";
                                                     }
                                                 ?>
                                             </td>

@@ -5,10 +5,13 @@
 
 
     // ===================== Check id agriculturist =====================
-    $stmt = $db->query("SELECT `money_list`, `money_date` as month, SUM(`money_quan`) as total 
+    $stmt = $db->query("SELECT `money_list`, MONTH(`money_date`) as month, SUM(`money_quan`) as total 
     FROM `money_inex` 
-    WHERE `money_type`= '2' AND `money_date` BETWEEN '2023-01-01' AND '2023-12-30' 
-    GROUP BY `money_list`,`money_date`");
+    INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+    INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+    WHERE user_login.user_id = 'US0007' AND `money_type`= '2' AND MONTH(`money_date`) BETWEEN MONTH('2023-01-01') AND MONTH('2023-04-30')  
+    GROUP BY `money_list`, MONTH(`money_date`)
+    ORDER BY MONTH(`money_date`)");
     $stmt->execute();
     $arr = array();
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -16,6 +19,4 @@
     }
     $dataResultAll = json_encode($arr);
     echo $dataResultAll;
-    
-    
 ?>

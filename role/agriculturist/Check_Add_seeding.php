@@ -18,7 +18,6 @@
 
     if (isset($_POST['submit'])) {
         $type = $_POST['type'];
-        $range_age = $_POST['range_age'];
         $typefg = $_POST['typefg'];
         $priceKG = $_POST['priceKG'];
         $month = $_POST['date'];
@@ -29,7 +28,7 @@
 
         
         while ($row = $fg->fetch(PDO::FETCH_ASSOC)) {
-            if($type == $row["gg_type"] and $range_age == $row["gg_range_age"]){
+            if($type == $row["gg_type"]){
                 $gg_id = $row["gg_id"]; 
                 break;
             }

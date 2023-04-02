@@ -51,18 +51,20 @@
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
                                                     $_SESSION['id'] = $id;
-                                                    $stmt = $db->prepare("SELECT COUNT(`Gf_id`) as total_gfarm FROM `group_farm`");
+                                                    $stmt = $db->prepare("SELECT `agc_Farea` FROM `agriculturist`
+                                                                        INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                        WHERE user_login.user_id ='$id'");
                                                     $stmt->execute();
                                                     $Gfs = $stmt->fetchAll();
                                                     foreach($Gfs as $Gf){
-                                                        echo $Gf['total_gfarm'];
+                                                        echo $Gf['agc_Farea'];
                                                     }
                                                 ?>
                                                 ตารางเมตร
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-solid fa-users fa-2x text-gray-300"></i>
+                                            <img src="img/farm.png" width="58">
                                         </div>
                                     </div>
                                 </div>
@@ -77,18 +79,20 @@
                                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">ต้นทุนค่าโรงเรือน</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc FROM `agriculturist`");
+                                                    $stmt = $db->prepare("SELECT `agc_Fcost` FROM `agriculturist`
+                                                                            INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                                            WHERE user_login.user_id ='$id'");
                                                     $stmt->execute();
                                                     $agcs = $stmt->fetchAll();
                                                     foreach($agcs as $agc){
-                                                        echo $agc['total_agc'];
+                                                        echo number_format($agc['agc_Fcost']);
                                                     }
                                                 ?>
                                                 บาท
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
+                                            <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +127,7 @@
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <img src="img/Goat_gray.png" width="58">
+                                            <img src="img/Goat_gray.png" style="color: #dddfeb;" width="58">
                                         </div>
                                     </div>
                                 </div>

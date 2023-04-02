@@ -15,6 +15,8 @@
         $exper = $_POST['exper'];
         $obj = $_POST['obj'];
         $type = $_POST['type'];
+        $Farea = $_POST['Farea'];
+        $Fcost = $_POST['Fcost'];
         $img = $_FILES['img'];
 
             $allow = array('jpg', 'jpeg', 'png');
@@ -35,7 +37,9 @@
                                                                          `agc_exper`, 
                                                                          `agc_edu`, 
                                                                          `agc_obj`, 
-                                                                         `agc_type`, 
+                                                                         `agc_type`,
+                                                                         `agc_Farea`,
+                                                                         `agc_Fcost`,
                                                                          `agc_img`,
                                                                          `gf_id`) VALUES (:name, 
                                                                                             :Fname,
@@ -46,6 +50,8 @@
                                                                                             :exper, 
                                                                                             :obj,
                                                                                             :type, 
+                                                                                            :Farea,
+                                                                                            :Fcost,
                                                                                             :img,
                                                                                             :Gf_id)");
                         $sql->bindParam(":name", $name);
@@ -58,6 +64,8 @@
                         $sql->bindParam(":exper", $exper);
                         $sql->bindParam(":obj", $position);
                         $sql->bindParam(":type", $type);
+                        $sql->bindParam(":Farea", $Farea);
+                        $sql->bindParam(":Fcost", $Fcost);
                         $sql->bindParam(":img", $fileNew);
                         $sql->execute();
 

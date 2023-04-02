@@ -37,8 +37,8 @@
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10">
+                        <!-- <div class="col-lg-1"></div> -->
+                        <div class="col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
                                     <h3 class="m-0 font-weight-bold text-primary">เพิ่มข้อมูลเกษตรกร</h3>
@@ -57,12 +57,12 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-md-2"></div>
+                                            <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อ-สกุล</label>
                                                 <input type="text" class="form-control" id="name" name="name" style="border-radius: 30px;" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <label class="form-label">ชื่อฟาร์ม</label>
                                                 <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" required>
                                             </div>
@@ -73,14 +73,10 @@
                                                     <option value="1">ประธาน</option>
                                                     <option value="2">รองประธาน</option>
                                                     <option value="3">เลขานุการ</option>
-                                                    <option value="4">สมาชิก</option>
+                                                    <option value="5">สมาชิก</option>
                                                     <option value="4">การตลาด</option>
                                                 </select>
                                             </div>
-
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
                                                 <!-- <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" required> -->
@@ -99,6 +95,10 @@
                                                     ?>
                                                 </select>
                                             </div>
+
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-md-1"></div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
                                                 <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" minlength="13" maxlength="13" required>
@@ -118,10 +118,6 @@
                                                     <option value="5">ปริญาตรี</option>
                                                 </select>
                                             </div>
-
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประสบการณ์เลี้ยง</label>
                                                 <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;" required>
@@ -131,6 +127,9 @@
                                                     <option value="3">5 ปีขึ้นไป</option>
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">จุดประสงค์เลี้ยง</label>
                                                 <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;" required>
@@ -149,6 +148,14 @@
                                                     <option value="3">แบบธรรมชาติ</option>
                                                 </select>
                                             </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">พื้นที่โรงเรือน</label>
+                                                <input type="text" class="form-control" id="Farea" name="Farea" style="border-radius: 30px;" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">ต้นทุนโรงเรือน</label>
+                                                <input type="text" class="form-control" id="Fcost" name="Fcost" style="border-radius: 30px;" required>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col text-center">
@@ -161,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-1"></div>
+                        <!-- <div class="col-lg-1"></div> -->
                     </div>
                 </div>
             </div>

@@ -71,12 +71,6 @@
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label class="col-form-label">ช่วงอายุแพะ</label>
-                            <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
-                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
-                            </select>
-                        </div> -->
                         <div class="mb-3">
                             <label class="form-label">ประเภทอาหาร</label>
                             <select class="form-control" aria-label="Default select example" id="typefg" name="typefg" style="border-radius: 30px;" required>
@@ -85,6 +79,20 @@
                                 <option value="2">ข้น</option>
                                 <option value="3">TMR</option>
                             </select>
+                            <!-- <select class="form-control" aria-label="Default select example" id="typefg" name="typefg" style="border-radius: 30px;" required>
+                                <option selected>กรุณาเลือกประเภทอาหาร....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `fg_data`");
+                                    $stmt->execute();
+                                    $fgs = $stmt->fetchAll();
+                                    
+                                    foreach($fgs as $fg){
+                                ?>
+                                <option value="<?= $fg['fg_id']?>"><?= $fg['fg_name']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select> -->
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">ชื่ออาหาร</label>
@@ -127,10 +135,8 @@
                                         <tr align="center">
                                             <th>รหัสการให้อาหาร</th>
                                             <th>ประเภท</th>
-                                            <!-- <th>ช่วงอายุ</th> -->
                                             <th>ประเภทอาหาร</th>
                                             <th>ปริมาณอาหาร</th>
-                                            <!-- <th>ราคา</th> -->
                                             <th>วันที่ให้</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
@@ -145,7 +151,7 @@
                                                                 INNER JOIN `fg_data` ON fg_data.fg_id = gfg_data.fg_id
                                                                 INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
                                                                 INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
-                                                                WHERE user_login.user_id = '$id' ");
+                                                                WHERE user_login.user_id = '$id'");
                                             $stmt->execute();
                                             $gfgs = $stmt->fetchAll();
                                             $count = 1;
@@ -168,39 +174,8 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <!-- <td>
-                                                <?php
-                                                    if($gfg['gg_range_age'] == 1){
-                                                        echo "1-2 ปี";
-                                                    }elseif($gfg['gg_range_age'] == 2){
-                                                        echo "3-5 ปี";
-                                                    }elseif($gfg['gg_range_age'] == 3){
-                                                        echo "5 ปีขึ้นไป";
-                                                    }elseif($gfg['gg_range_age'] == 4){
-                                                        echo "ไม่เกิน 3 เดือน";
-                                                    }elseif($gfg['gg_range_age'] == 5){
-                                                        echo "3-4 เดือน";
-                                                    }elseif($gfg['gg_range_age'] == 6){
-                                                        echo "4-5 เดือน";
-                                                    }else{
-                                                        echo "5 เดือนขึ้นไป";
-                                                    }
-                                                ?>
-                                            </td> -->
-                                            <!-- <td>
-                                                <?php 
-                                                    if($gfg['fg_type'] == 1 ){
-                                                        echo "ธรรมชาติ";
-                                                    }elseif($gfg['fg_type'] == 2 ){
-                                                        echo "ข้น";
-                                                    }else{
-                                                        echo "TMR";
-                                                    }
-                                                ?>
-                                            </td> -->
                                             <td><?= $gfg['fg_name']; ?></td>
                                             <td><?= $gfg['gfg_quantity']; ?></td>
-                                            <!-- <td><?= $gfg['gfg_price']; ?></td> -->
                                             <td class="date_th"><?= $gfg['gfg_date']; ?></td>
                                             <td><a href="Edit_gfg.php?edit_id=<?= $gfg['gfg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $gfg['gfg_id']; ?>" href="?delete=<?= $gfg['gfg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
