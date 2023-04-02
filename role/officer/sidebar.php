@@ -10,7 +10,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-house-chimney"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">ผู้ดูแลระบบ</div>
+        <div class="sidebar-brand-text mx-3">เจ้าหน้าที่</div>
     </a>
 
     <!-- Divider -->
@@ -22,12 +22,7 @@
             <span>หน้าหลัก</span>
         </a>
     </li>
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="Profile.php">
-            <i class="fa-solid fa-user-pen"></i>
-            <span>ประวัติส่วนตัว</span>
-        </a>
-    </li> -->
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">

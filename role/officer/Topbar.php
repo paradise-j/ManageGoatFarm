@@ -44,11 +44,10 @@
                 ?>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small text-right">
                         <?= $login["officer_name"]; ?>
-
-                        <!-- <br>
-                    ชื่อฟาร์ม -->
+                        <!-- <?php echo $login["officer_img"]; ?> -->
+                        
                     </span>
-                    <img class="img-profile rounded-circle" src="uploads/<?= $login["officer_img"]; ?>">
+                    <img class="img-profile rounded-circle" src="../admin/uploads/<?= $login["officer_img"]; ?>">
                 <?php
                     } 
                 ?>

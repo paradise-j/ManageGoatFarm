@@ -44,7 +44,7 @@
                                 $_SESSION['password'] = $dbpassword;
                                 $_SESSION['permission'] = $dbrole;
                                 $_SESSION['success'] = "offficer... Successfully Login...";
-                                header("location: role/offficer/index.php");
+                                header("location: role/officer/index.php");
                             break;
                             case '4':
                                 $_SESSION['id'] = $dbid;
