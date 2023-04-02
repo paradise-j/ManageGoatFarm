@@ -105,7 +105,11 @@
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
-                                                        echo $gg['total'];
+                                                        if ($gg['total']==null) {
+                                                            echo 0;
+                                                        }else{
+                                                            echo number_format($gg['total']);
+                                                        }
                                                     }
                                                 ?>
                                                  ตัว
@@ -131,7 +135,12 @@
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
-                                                        echo $gg['total'];
+                                                        if ($gg['total']==null) {
+                                                            echo 0;
+                                                        }else{
+                                                            echo number_format($gg['total']);
+                                                        }
+                                                        
                                                     }
                                                 ?>
                                                  บาท
