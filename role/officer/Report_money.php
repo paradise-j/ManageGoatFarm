@@ -155,23 +155,23 @@
                                                     $arr4[] = $row;
                                                 }
                                                 $my_dataAll_money_cost = json_encode($arr4);
-                                        }
 
-                                        $checkid = $db->query("SELECT `gf_name` FROM `group_farm` WHERE `gf_id` = '$Gname'");
-                                        $checkid->execute();
-                                        $row = $checkid->fetch(PDO::FETCH_ASSOC);
-                                        extract($row);
-                                        // echo $row["gf_name"];
-                                        // echo $gf_name;
 
+                                                $checkid = $db->query("SELECT `gf_name` FROM `group_farm` WHERE `gf_id` = '$Gname'");
+                                                $checkid->execute();
+                                                $row = $checkid->fetch(PDO::FETCH_ASSOC);
+                                                extract($row);
+                                        
                                     ?>
-                                    
                                     <div class="row mt-3">
                                         <div class="col text-center">
-                                            <!-- <h3><?php echo " ประจำวันที่ ".$start_date." ถึงวันที่ ".$end_date; ?></h3> -->
                                             <label for="inputState" class="form-label mt-2" style="font-size: 2rem;" >ข้อมูลที่แสดง คือ กลุ่มของ <?= $gf_name ; ?></label>
                                         </div>
                                     </div>
+                                    <?php 
+                                        }
+                                    ?>
+
                                 </div>
                             
                                 <div class="row mb-2 mr-2 ml-2">

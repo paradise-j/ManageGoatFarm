@@ -96,15 +96,21 @@
                                             <th>ชื่อผู้ใช้</th>
                                             <th>รหัสผ่าน</th>
                                             <th>สิทธิ์การใช้งาน</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <!-- <th></th> -->
+                                            <th>ชื่อผู้ใช้งาน</th>
+                                            <th>แก้ไข</th>
+                                            <th>ลบรายการ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $stmt = $db->query("SELECT * FROM `user_login`");
+                                            $stmt = $db->query("SELECT `user_id`,`user_name`,`user_password`,`user_role`,officer.officer_name
+                                                                FROM `user_login`
+                                                                INNER JOIN `officer` ON user_login.officer_id = officer.officer_id
+                                                                UNION
+                                                                SELECT `user_id`,`user_name`,`user_password`,`user_role`, agriculturist.agc_name
+                                                                FROM `user_login`
+                                                                RIGHT JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id");
                                             $stmt->execute();
                                             $users = $stmt->fetchAll();
                                             $count = 1;
@@ -117,9 +123,23 @@
                                             <th scope="row"><?= $count; ?></th>
                                             <td><?= $user['user_name']; ?></td>
                                             <td><?= $user['user_password']; ?></td>
-                                            <td><?= $user['user_role']; ?></td>
-                                            <td><?= $user['officer_id']; ?></td>
-                                            <td><?= $user['agc_id']; ?></td>
+                                            <td>
+                                                <?php 
+                                                if($user['user_role'] == 1) {
+                                                    echo "ผู้ดูแลระบบ";
+                                                }elseif($user['user_role'] == 2) {
+                                                    echo "ผู้อำนวยการสภาเกษตร";
+                                                }elseif($user['user_role'] == 3) {
+                                                    echo "เจ้าหน้าที่";
+                                                }elseif($user['user_role'] == 4) {
+                                                    echo "ประธานกลุ่ม";
+                                                }else{
+                                                    echo "สมาชิก";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td><?= $user['officer_name']; ?></td>
+                                            <!-- <td><?= $user['agc_id']; ?></td> -->
                                             <td><a href="Edit_user.php?edit_id=<?= $user['user_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $user['user_id']; ?>" href="?delete=<?= $user['user_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
