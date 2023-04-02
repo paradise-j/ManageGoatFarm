@@ -31,6 +31,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="Manage_user.php">ข้อมูลผู้ใช้งานระบบ</a>
                 <a class="collapse-item" href="Manage_agc.php">ข้อมูลเกษตรกร</a>
                 <a class="collapse-item" href="Manage_Ggoat.php">ข้อมูลกลุ่มแพะ</a>
                 <a class="collapse-item" href="Manage_Gfarm.php">ข้อมูลกลุ่มเลี้ยง</a>
