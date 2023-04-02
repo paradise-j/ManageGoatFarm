@@ -70,12 +70,6 @@
                                 <option value="3">แพะขุน</option>
                             </select>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label class="col-form-label">ช่วงอายุแพะ</label>
-                            <select class="form-control" aria-label="Default select example" id="range_age" name="range_age" style="border-radius: 30px;" required>
-                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
-                            </select>
-                        </div> -->
                         <div class="mb-3">
                             <label class="form-label">ประเภท</label>
                             <select class="form-control" aria-label="Default select example" id="VMtype" name="VMtype" style="border-radius: 30px;" required>
@@ -91,13 +85,13 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">ปริมาณยาหรือวัคซีน</label>
+                            <label class="form-label">ปริมาณยาหรือวัคซีน (มิลลิลิตร)</label>
                             <input type="number" class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div>
                         <div class="col text-center">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
                             &nbsp&nbsp&nbsp
-                            <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
+                            <button class="btn btn-danger" style="border-radius: 30px;" type="submit">ยกเลิก</button>
                         </div>
                     </form>
                 </div>
@@ -126,12 +120,10 @@
                                         <tr align="center">
                                             <th>ลำดับที่</th>
                                             <th>ประเภท</th>
-                                            <!-- <th>ช่วงอายุ</th> -->
                                             <th>ประเภทการให้</th>
                                             <th>ชื่อผลิตภัณฑ์</th>
                                             <th>ปริมาณ</th>
                                             <th>เดือนที่ให้</th>
-                                            <!-- <th>แก้ไขรายการ</th> -->
                                             <th>ลบรายการ</th>
                                         </tr>
                                     </thead>

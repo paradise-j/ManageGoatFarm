@@ -7,7 +7,6 @@
     if (isset($_POST['submit'])) {
         $id = $_POST['id'];
         $type = $_POST['type'];
-        $range_age = $_POST['range_age'];
         $quantity = $_POST['quantity'];
         $sql = $db->prepare("UPDATE `group_g` SET `gg_quantity`= $quantity WHERE `gg_id` = '$id' ");
         $sql->execute();

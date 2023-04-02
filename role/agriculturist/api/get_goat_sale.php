@@ -4,8 +4,8 @@
     require_once('../connect.php');
 
     $uid = $_SESSION['id'];
-
-    $sql = "SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month 
+    // echo $uid;
+    $sql = "SELECT MONTH(sale_date) as month , SUM(salelist.slist_price) as total 
             FROM `salelist` 
             INNER JOIN `sale` ON sale.sale_id = salelist.sale_id 
             INNER JOIN `agriculturist` ON sale.agc_id = agriculturist.agc_id 

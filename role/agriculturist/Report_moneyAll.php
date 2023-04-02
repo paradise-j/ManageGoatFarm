@@ -142,6 +142,12 @@
                                                     $arr4[] = $row;
                                                 }
                                                 $my_dataAll_money_cost = json_encode($arr4);
+
+                                            // ===========================================================myChartBar1=================================================================
+
+
+
+                                            
                                         }
                                     ?>
                                 </div>
@@ -205,31 +211,34 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php 
-                                                                    $stmt3 = $db->query("SELECT `money_list`, `money_date` as month, SUM(`money_quan`) as total 
-                                                                                        FROM `money_inex` 
-                                                                                        INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
-                                                                                        INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
-                                                                                        WHERE user_login.user_id = '$id' AND `money_type`= '2' AND `money_date` BETWEEN '$start_date' AND '$end_date' 
-                                                                                        GROUP BY `money_list`, `money_date`
-                                                                                        ORDER BY `money_date`");
-                                                                    $stmt3->execute();
-                                                                    $mns = $stmt3->fetchAll();
-                                                                    $count = 1 ; 
-                                                                    if (!$mns) {
-                                                                        echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
-                                                                    } else {
-                                                                    foreach($mns as $mn)  {  
+                                                                <?php
+                                                                    if (isset($_POST["submit"])) {
+                                                                    
+                                                                        $stmt3 = $db->query("SELECT `money_list`, `money_date` as month, SUM(`money_quan`) as total 
+                                                                                            FROM `money_inex` 
+                                                                                            INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+                                                                                            INNER JOIN `user_login` ON user_login.agc_id = agriculturist.agc_id 
+                                                                                            WHERE user_login.user_id = '$id' AND `money_type`= '2' AND `money_date` BETWEEN '$start_date' AND '$end_date' 
+                                                                                            GROUP BY `money_list`, `money_date`
+                                                                                            ORDER BY `money_date`");
+                                                                        $stmt3->execute();
+                                                                        $mns = $stmt3->fetchAll();
+                                                                        $count = 1 ; 
+                                                                        if (!$mns) {
+                                                                            echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
+                                                                        } else {
+                                                                        foreach($mns as $mn)  {  
                                                                 ?>
-                                                                <tr align="center">
-                                                                    <th scope="row"><?= $count ;?> </th>
-                                                                    <td><?= $mn['money_list']; ?></td>
-                                                                    <td class="date_th"><?= $mn['month']; ?></td>
-                                                                    <td><?= number_format($mn['total']); ?></td>
-                                                                </tr>
+                                                                    <tr align="center">
+                                                                        <th scope="row"><?= $count ;?> </th>
+                                                                        <td><?= $mn['money_list']; ?></td>
+                                                                        <td class="date_th"><?= $mn['month']; ?></td>
+                                                                        <td><?= number_format($mn['total']); ?></td>
+                                                                    </tr>
                                                                 <?php $count++ ;?> 
-                                                                <?php }  
-                                                                    } ?>
+                                                                <?php   }  
+                                                                        } 
+                                                                    }    ?>
                                                             </tbody>
                                                         </table>
                                                     </div>

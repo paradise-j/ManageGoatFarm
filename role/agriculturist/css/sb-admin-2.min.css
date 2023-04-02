@@ -11636,7 +11636,7 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item {
-    padding: .5rem 1rem;
+    padding: .5rem 0.5rem;
     margin: 0 .5rem;
     display: block;
     color: #3a3b45;

@@ -60,7 +60,7 @@
                                                     <option <?php if($gg_type == '3') echo "selected"; ?> value="3">แพะขุน</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3">
+                                            <!-- <div class="col-md-3">
                                                 <label for="form-label" class="form-label">ช่วงอายุแพะ</label>
                                                 <select class="form-control" aria-label="Default select example" name="range_age" style="border-radius: 30px;" readonly required>
                                                     <option <?php if($gg_range_age == '1') echo "selected"; ?> value="1">1-2 ปี</option>
@@ -71,7 +71,7 @@
                                                     <option <?php if($gg_range_age == '6') echo "selected"; ?> value="6">ไม่เกิน 6 เดือน</option>
                                                     <option <?php if($gg_range_age == '7') echo "selected"; ?> value="7">6 เดือนขึ้นไป</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-3">
                                                 <label class="form-label">จำนวนแพะ</label>
                                                 <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" value="<?= $row["gg_quantity"]; ?>" required>

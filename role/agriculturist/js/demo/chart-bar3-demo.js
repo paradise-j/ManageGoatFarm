@@ -169,40 +169,40 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     }
     switch (item.month) {
       case '1':
-        my_label.push('ม.ค.')
+        my_label.push('มกราคม')
         break;
       case '2':
-        my_label.push('ก.พ.')
+        my_label.push('กุมภาพันธ์')
         break;
       case '3':
-        my_label.push('มี.ค.')
+        my_label.push('มีนาคม')
         break;
       case '4':
-        my_label.push('เม.ษ.')
+        my_label.push('เมษายน')
         break;
       case '5':
-        my_label.push('พ.ค.')
+        my_label.push('พฤษภาคม')
         break;
       case '6':
-        my_label.push('มิ.ย.')
+        my_label.push('มิถุนายน')
         break;
       case '7':
-        my_label.push('ก.ค.')
+        my_label.push('กรกฎาคม')
         break;
       case '8':
-        my_label.push('ส.ค.')
+        my_label.push('สิงหาคม')
         break;
       case '9':
-        my_label.push('ก.ย.')
+        my_label.push('กันยายน')
         break;
       case '10':
-        my_label.push('ต.ค.')
+        my_label.push('ตุลาคม')
         break;
       case '11':
-        my_label.push('พ.ย.')
+        my_label.push('พฤศจิกายน')
         break;
       case '12':
-        my_label.push('ธ.ค.')
+        my_label.push('ธันวาคม')
         break; 
     }
   });

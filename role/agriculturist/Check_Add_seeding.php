@@ -4,23 +4,22 @@
     session_start();
     require_once "connect.php";
 
-
-    $id = $_SESSION['id'];
-    $check_id = $db->prepare("SELECT agriculturist.agc_id
-                                FROM `user_login` 
-                                INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
-                                WHERE user_login.user_id = '$id'");
-    $check_id->execute();
-    $row = $check_id->fetch(PDO::FETCH_ASSOC);
-    $agc_id = $row["agc_id"] ;
-
-
-
     if (isset($_POST['submit'])) {
-        $type = $_POST['type'];
-        $typefg = $_POST['typefg'];
-        $priceKG = $_POST['priceKG'];
-        $month = $_POST['date'];
+        $id = $_SESSION['id'];
+        $check_id = $db->prepare("SELECT agriculturist.agc_id FROM `user_login` 
+                                    INNER JOIN `agriculturist` ON user_login.agc_id = agriculturist.agc_id
+                                    WHERE user_login.user_id = '$id'");
+        $check_id->execute();
+        $row = $check_id->fetch(PDO::FETCH_ASSOC);
+        $agc_id = $row["agc_id"] ;
+
+        $type = $_POST["type"];
+        $typefg = $_POST["typefg"];
+        // echo $typefg;
+        $nameFood = $_POST["nameFood"];
+        // echo $nameFood;
+        $priceKG = $_POST["priceKG"];
+        $month = $_POST["date"];
 
 
         $fg = $db->prepare("SELECT * FROM `group_g` WHERE `agc_id` = '$agc_id'");
@@ -36,7 +35,7 @@
 
 
         $sql = $db->prepare("INSERT INTO `gfg_data`(`gfg_quantity`, `gfg_date`, `gg_id`, `fg_id`)
-                             VALUES ('$priceKG','$month','$gg_id','$typefg')");
+                             VALUES ('$priceKG','$month','$gg_id','$nameFood')");
         $sql->execute();
 
         if ($sql) {

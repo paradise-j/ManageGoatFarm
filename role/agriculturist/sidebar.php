@@ -56,14 +56,14 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="Save_Groupgoat.php">บันทึกข้อมูลกลุ่มแพะ</a>
-                <a class="collapse-item" href="Save_FMgoat.php">บันทึกแพะพ่อ-แม่พันธุ์</a>
-                <a class="collapse-item" href="Save_NBgoat.php">บันทึกข้อมูลแพะเกิด</a>
-                <a class="collapse-item" href="Save_Gfeed.php">การให้อาหาร</a>
-                <a class="collapse-item" href="Save_GVM.php">การให้ยาและวัคซีน</a>
-                <a class="collapse-item" href="Save_disease.php">การเป็นโรค</a>
-                <a class="collapse-item" href="Save_money.php">รายได้แฝง-รายจ่าย</a>
+            <div class="bg-white collapse-inner rounded">
+                <a class="collapse-item" href="Save_Groupgoat.php">บันทึกข้อมูลกลุ่มแพะในฟาร์ม</a>
+                <a class="collapse-item" href="Save_FMgoat.php">บันทึกแพะพ่อ-แม่พันธุ์ในฟาร์ม</a>
+                <a class="collapse-item" href="Save_NBgoat.php">บันทึกข้อมูลแพะเกิดในฟาร์ม</a>
+                <a class="collapse-item" href="Save_Gfeed.php">การให้อาหารในฟาร์ม</a>
+                <a class="collapse-item" href="Save_GVM.php">การให้ยาและวัคซีนในฟาร์ม</a>
+                <a class="collapse-item" href="Save_disease.php">การเป็นโรคในฟาร์ม</a>
+                <a class="collapse-item" href="Save_money.php">รายได้แฝง-รายจ่ายในฟาร์ม</a>
             </div>
         </div>
     </li>

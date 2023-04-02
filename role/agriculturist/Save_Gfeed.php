@@ -79,25 +79,11 @@
                                 <option value="2">ข้น</option>
                                 <option value="3">TMR</option>
                             </select>
-                            <!-- <select class="form-control" aria-label="Default select example" id="typefg" name="typefg" style="border-radius: 30px;" required>
-                                <option selected>กรุณาเลือกประเภทอาหาร....</option>
-                                <?php 
-                                    $stmt = $db->query("SELECT * FROM `fg_data`");
-                                    $stmt->execute();
-                                    $fgs = $stmt->fetchAll();
-                                    
-                                    foreach($fgs as $fg){
-                                ?>
-                                <option value="<?= $fg['fg_id']?>"><?= $fg['fg_name']?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select> -->
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">ชื่ออาหาร</label>
                             <select class="form-control" aria-label="Default select example" id="nameFood" name="nameFood" style="border-radius: 30px;" required>
-                                <option selected disabled>กรุณาเลือกช่วงอายุ....</option>
+                                <option selected disabled>กรุณาเลือกชื่ออาหาร....</option>
                             </select>
                         </div>
                         <div class="mb-3">
