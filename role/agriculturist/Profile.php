@@ -5,6 +5,7 @@
         exit;
     }
     require_once 'connect.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,64 +56,64 @@
                                     <h3 class="m-0 font-weight-bold text-primary">ประวัติส่วนตัว</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form ction="" method="POST">
+                                    <form action="Chack_edit_agc.php" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-4">
                                             <div class="col-md-5"></div>
                                             <div class="col-md-1 text-center">
-                                                <img loading="lazy" width="180px" height="200px" style="border-radius: 100%; border-style: outset;" src="../admin/uploads/<?= $agc_img; ?>" id="previewImg" alt="">
+                                                <img loading="lazy" width="175px" style="border-radius: 200px;" id="previewImg" src="uploads/<?= $agc_img; ?>" alt="">
                                             </div>
                                             <div class="col-md-1"></div>
-                                            <div class="col-md-3 mt-6">
-                                                <label for="validationDefault01" class="form-label">อัปโหลดรูปภาพ</label>
-                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" required disabled>
+                                            <div class="col-md-3">
+                                                <label for="img" class="form-label">อัปโหลดรูปภาพ</label>
+                                                <input type="file" class="form-control" id="imgInput" style="border-radius: 30px;" name="img" value="<?= $agc_img; ?>" required>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-2">
-                                                <label for="validationDefault01" class="form-label">รหัสเกษตรกร</label>
-                                                <input type="text" class="form-control" id="idAgc" style="border-radius: 30px;" value="<?= $agc_id; ?>" required disabled>
+                                                <label class="form-label">รหัสเกษตรกร</label>
+                                                <input type="text" class="form-control" id="id" name="id" style="border-radius: 30px;" value="<?= $agc_id; ?>" readonly required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อ-สกุล</label>
-                                                <input type="text" class="form-control" id="name" style="border-radius: 30px;" value="<?= $agc_name; ?>" required disabled>
+                                                <input type="text" class="form-control" id="name" name="name" style="border-radius: 30px;" value="<?= $agc_name; ?>" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">ชื่อฟาร์ม</label>
-                                                <input type="text" class="form-control" id="Fname" style="border-radius: 30px;" value="<?= $agc_nfarm; ?>" required disabled>
+                                                <input type="text" class="form-control" id="Fname" name="Fname" style="border-radius: 30px;" value="<?= $agc_nfarm; ?>" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ตำแหน่ง</label>
-                                                <select class="form-control" aria-label="Default select example" id="position" style="border-radius: 30px;" required disabled>
+                                                <select class="form-control" aria-label="Default select example" id="position" name="position" style="border-radius: 30px;" required>
                                                     <option <?php if($agc_position_G == '1') echo "selected"; ?> value="1">ประธาน</option>
                                                     <option <?php if($agc_position_G == '2') echo "selected"; ?> value="2">รองประธาน</option>
                                                     <option <?php if($agc_position_G == '3') echo "selected"; ?> value="3">เลขานุการ</option>
                                                     <option <?php if($agc_position_G == '4') echo "selected"; ?> value="4">สมาชิก</option>
+                                                    <option <?php if($agc_position_G == '5') echo "selected"; ?> value="5">การตลาด</option>
                                                 </select>
                                             </div>
-
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-md-4">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
-                                                <input type="text" class="form-control" id="Gname" style="border-radius: 30px;" value="<?= $agc_nfarm; ?>" required disabled>
+                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" value="<?= $gf_name; ?>" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>
-                                                <input type="text" class="form-control" id="personid" style="border-radius: 30px;" value="<?= $agc_personid; ?>" required disabled>
+                                                <input type="text" class="form-control" id="personid" name="personid" style="border-radius: 30px;" value="<?= $agc_personid; ?>" readonly required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">เบอร์โทรศัพท์</label>
-                                                <input type="text" class="form-control" id="phone" style="border-radius: 30px;" value="<?= $agc_phone; ?>" required disabled>
+                                                <input type="text" class="form-control" id="phone" name="phone" style="border-radius: 30px;" value="<?= $agc_phone; ?>" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ระดับการศึกษา</label>
-                                                <select class="form-control" aria-label="Default select example" id="edu" style="border-radius: 30px;" required disabled>
-                                                    <option <?php if($agc_edu == '1') echo "selected"; ?> value="1">ประถมศึกษา</option>
-                                                    <option <?php if($agc_edu == '2') echo "selected"; ?> value="2">มัธยมศึกษา</option>
-                                                    <option <?php if($agc_edu == '3') echo "selected"; ?> value="3">ปวช.</option>
-                                                    <option <?php if($agc_edu == '4') echo "selected"; ?> value="4">ปวส.</option>
-                                                    <option <?php if($agc_edu == '5') echo "selected"; ?> value="5">ปริญาตรี</option>
+                                                <select class="form-control" aria-label="Default select example" id="edu" name="edu" style="border-radius: 30px;" required>
+                                                    <option <?php if($agc_edu == '1') echo "selected"; ?> value="1" >ประถมศึกษา</option>
+                                                    <option <?php if($agc_edu == '2') echo "selected"; ?> value="2" >มัธยมศึกษา</option>
+                                                    <option <?php if($agc_edu == '3') echo "selected"; ?> value="3" >ปวช.</option>
+                                                    <option <?php if($agc_edu == '4') echo "selected"; ?> value="4" >ปวส.</option>
+                                                    <option <?php if($agc_edu == '5') echo "selected"; ?> value="5" >ปริญาตรี</option>
                                                 </select>
                                             </div>
 
@@ -121,7 +122,7 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประสบการณ์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="exper" style="border-radius: 30px;" required disabled>
+                                                <select class="form-control" aria-label="Default select example" id="exper" name="exper" style="border-radius: 30px;" required>
                                                     <option <?php if($agc_exper == '1') echo "selected"; ?> value="1">1-2 ปี</option>
                                                     <option <?php if($agc_exper == '2') echo "selected"; ?> value="2">3-5 ปี</option>
                                                     <option <?php if($agc_exper == '3') echo "selected"; ?> value="3">5 ปีขึ้นไป</option>
@@ -129,7 +130,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">จุดประสงค์เลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="obj" style="border-radius: 30px;" required disabled>
+                                                <select class="form-control" aria-label="Default select example" id="obj" name="obj" style="border-radius: 30px;" required>
                                                     <option <?php if($agc_obj == '1') echo "selected"; ?> value="1">เพื่อขุนขาย</option>
                                                     <option <?php if($agc_obj == '2') echo "selected"; ?> value="2">เพื่อขายพ่อ-แม่พันธุ์</option>
                                                     <option <?php if($agc_obj == '3') echo "selected"; ?> value="3">เพื่อขุนขายและขายพ่อ-แม่พันธุ์</option>
@@ -137,7 +138,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="inputState" class="form-label">ประเภทลี้ยง</label>
-                                                <select class="form-control" aria-label="Default select example" id="type" style="border-radius: 30px;" required disabled>
+                                                <select class="form-control" aria-label="Default select example" id="type" name="type" style="border-radius: 30px;" required>
                                                     <option <?php if($agc_type == '1') echo "selected"; ?> value="1">แบบยืนโรง</option>
                                                     <option <?php if($agc_type == '2') echo "selected"; ?> value="2">แบบกึ่ง</option>
                                                     <option <?php if($agc_type == '3') echo "selected"; ?> value="3">แบบธรรมชาติ</option>
@@ -146,9 +147,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col text-center">
-                                                <button class="btn btn-warning" style="border-radius: 30px;" type="submit" onclick="enable()">แก้ไขข้อมูล</button>
-                                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit">บันทึกข้อมูล</button>
-                                                <button class="btn btn-danger" style="border-radius: 30px;" type="submit" onclick="disable()">ยกเลิกการแก้ไข</button>
+                                                <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>
+                                                &nbsp&nbsp&nbsp
+                                                <button class="btn btn-danger" style="border-radius: 30px;" type="submit"">ยกเลิก</button>
                                             </div>
                                         </div>
                                     </form>
@@ -168,25 +169,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

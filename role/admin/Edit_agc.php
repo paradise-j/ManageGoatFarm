@@ -14,6 +14,11 @@
         $select_stmt->execute();
         $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
         extract($row);
+
+        $check_farm = $db->prepare("SELECT `gf_name` FROM `group_farm` WHERE `gf_id` = '$gf_id'");
+        $check_farm->execute();
+        $row = $check_farm->fetch(PDO::FETCH_ASSOC);
+        extract($row);
     }
 ?>
 <!DOCTYPE html>
@@ -90,7 +95,7 @@
                                         <div class="row mb-4">
                                             <div class="col-md-4">
                                                 <label class="form-label">ชื่อกลุ่มเลี้ยง</label>
-                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" value="<?= $agc_gfarm; ?>" required>
+                                                <input type="text" class="form-control" id="Gname" name="Gname" style="border-radius: 30px;" value="<?= $gf_name; ?>" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label">เลขประจำตัวประชาชน</label>

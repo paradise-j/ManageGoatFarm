@@ -18,18 +18,23 @@
         $type = $_POST['type'];
         $img = $_FILES['img'];
 
+        $stmt = $db->query("SELECT `gf_id` FROM `group_farm` 
+                            WHERE `gf_name` = '$Gname' ");
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        extract($row);
+
             $allow = array('jpg', 'jpeg', 'png');
             $extension = explode('.', $img['name']);
             $fileActExt = strtolower(end($extension));
             $fileNew = rand() . "." . $fileActExt; 
-            $filePath = 'uploads/'.$fileNew;
+            $filePath = '../admin/uploads/'.$fileNew;
 
             if (in_array($fileActExt, $allow)) {
                 if ($img['size'] > 0 && $img['error'] == 0) {
                     if (move_uploaded_file($img['tmp_name'], $filePath)) {
                         $sql = $db->prepare("UPDATE `agriculturist` SET  `agc_name`= :name, 
                                                                          `agc_nfarm`= :Fname, 
-                                                                         `agc_gfarm`= :Gname, 
                                                                          `agc_position_G`= :position, 
                                                                          `agc_personid`= :personid, 
                                                                          `agc_phone`= :phone, 
@@ -37,19 +42,20 @@
                                                                          `agc_edu`= :edu, 
                                                                          `agc_obj`= :obj, 
                                                                          `agc_type`= :type, 
+                                                                         `gf_id`= :gf_id,
                                                                          `agc_img` = :img WHERE `agc_id` = :id");
                         
                         $sql->bindParam(":id", $id);
                         $sql->bindParam(":name", $name);
                         $sql->bindParam(":Fname", $Fname);
                         $sql->bindParam(":position", $position);
-                        $sql->bindParam(":Gname", $Gname);
                         $sql->bindParam(":personid", $personid);
                         $sql->bindParam(":phone", $phone);
                         $sql->bindParam(":edu", $edu);
                         $sql->bindParam(":exper", $exper);
                         $sql->bindParam(":obj", $position);
                         $sql->bindParam(":type", $type);
+                        $sql->bindParam(":gf_id", $gf_id);
                         $sql->bindParam(":img", $fileNew);
                         $sql->execute();
 
@@ -66,10 +72,10 @@
                                     });
                                 })
                             </script>";
-                            header("refresh:1; url=Manage_agc.php");
+                            header("refresh:1; url=Profile.php");
                         } else {
                             $_SESSION['error'] = "แก้ไขข้อมูลเรียบร้อยไม่สำเร็จ";
-                            header("location: Manage_agc.php");
+                            header("location: Profile.php");
                         }
                     }
                 }

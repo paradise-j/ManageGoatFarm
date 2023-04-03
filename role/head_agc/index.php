@@ -79,9 +79,23 @@
                                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">จำนวนเกษตรกร</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc FROM `agriculturist`
-                                                    INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
-                                                    WHERE user_login.user_id = '$id'");
+                                                    // echo $id;
+                                                    $check_id = $db->prepare("SELECT `agc_id` FROM `user_login` WHERE user_login.user_id = '$id'");
+                                                    $check_id->execute();
+                                                    $row1 = $check_id->fetch(PDO::FETCH_ASSOC);
+                                                    extract($row1);
+
+
+                                                    $check_farm = $db->prepare("SELECT `gf_id` FROM `agriculturist` WHERE `agc_id` = '$agc_id'");
+                                                    $check_farm->execute();
+                                                    $row2 = $check_farm->fetch(PDO::FETCH_ASSOC);
+                                                    extract($row2);
+
+
+
+                                                    $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc 
+                                                                            FROM `agriculturist`
+                                                                            WHERE `gf_id` = '$gf_id'");
                                                     $stmt->execute();
                                                     $agcs = $stmt->fetchAll();
                                                     foreach($agcs as $agc){
@@ -107,7 +121,10 @@
                                             <div class="text-md font-weight-bold text-info text-uppercase mb-1">จำนวนแพะทั้งหมด</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total FROM `group_g`");
+                                                    $stmt = $db->prepare("SELECT SUM(`gg_quantity`) as total 
+                                                                FROM `group_g`
+                                                                INNER JOIN `agriculturist` ON agriculturist.agc_id = group_g.agc_id
+                                                                WHERE agriculturist.gf_id = '$gf_id'");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
@@ -137,7 +154,11 @@
                                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">ยอดขายรวมสุทธิ</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT SUM(`slist_price`) as total FROM `salelist`");
+                                                    $stmt = $db->prepare("SELECT SUM(`slist_price`) as total
+                                                                        FROM `salelist` 
+                                                                        INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                        INNER JOIN `agriculturist` ON sale.agc_id = agriculturist.agc_id
+                                                                        WHERE agriculturist.gf_id = '$gf_id'");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     foreach($ggs as $gg){
@@ -264,7 +285,8 @@
                                                     $stmt = $db->query("SELECT agriculturist.agc_nfarm , gdis_data.gdis_name , g_disease.gd_level 
                                                                         FROM `g_disease` 
                                                                         INNER JOIN `gdis_data` ON gdis_data.gdis_id = g_disease.gdis_id
-                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = g_disease.agc_id");
+                                                                        INNER JOIN `agriculturist` ON agriculturist.agc_id = g_disease.agc_id
+                                                                        WHERE agriculturist.gf_id = '$gf_id'");
                                                     $stmt->execute();
                                                     $ggs = $stmt->fetchAll();
                                                     if (!$ggs) {

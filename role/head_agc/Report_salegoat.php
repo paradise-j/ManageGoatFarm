@@ -58,29 +58,12 @@
                         <div class="col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 text-center">
-                                    <h2 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะทั้งหมดละกลุ่มเลี้ยง</h2>
+                                    <h2 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะทั้งหมดภายในกลุ่มเลี้ยง</h2>
                                 </div>
                                 <div class="card-body">
                                     <form action="" method="post">
-                                        <div class="row mt-2 mb-4">
-                                            <div class="col-md-1"></div>
-                                            <label for="inputState" class="form-label mt-2">กลุ่มเลี้ยง</label>
-                                            <div class="col-md-3">
-                                                <select class="form-control" aria-label="Default select example" id="Gname" name="Gname" style="border-radius: 30px;" required>
-                                                    <option selected disabled>กรุณาเลือกกลุ่มเลี้ยง....</option>
-                                                    <?php 
-                                                        $stmt = $db->query("SELECT * FROM `group_farm`");
-                                                        $stmt->execute();
-                                                        $gfs = $stmt->fetchAll();
-                                                        
-                                                        foreach($gfs as $gf){
-                                                    ?>
-                                                    <option value="<?= $gf['gf_id']?>"><?= $gf['gf_name']?></option>
-                                                    <?php
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
+                                        <div class="row mt-2 mb-2">
+                                            <div class="col-md-3"></div>
                                             <div class="col-md-2">
                                                 <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
                                             </div>
@@ -96,17 +79,27 @@
                                     </form>
                                     <?php 
                                         if(isset($_POST["submit"])){
-                                            $Gname = $_POST["Gname"];
+
                                             $start_date = $_POST["start_date"];
                                             $end_date = $_POST["end_date"];
-                                            $count = 1;
+                                        
+                                            $id = $_SESSION['id'];
+                                            $check_id = $db->prepare("SELECT `agc_id` FROM `user_login` WHERE user_login.user_id = '$id'");
+                                            $check_id->execute();
+                                            $row1 = $check_id->fetch(PDO::FETCH_ASSOC);
+                                            extract($row1);
+                                        
+                                        
+                                            $check_farm = $db->prepare("SELECT `gf_id` FROM `agriculturist` WHERE `agc_id` = '$agc_id'");
+                                            $check_farm->execute();
+                                            $row2 = $check_farm->fetch(PDO::FETCH_ASSOC);
+                                            extract($row2);
 
                                             $stmt2 = $db->query("SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month
                                                                 FROM `sale` 
                                                                 INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
                                                                 INNER JOIN agriculturist ON sale.agc_id = agriculturist.agc_id
-                                                                INNER JOIN group_farm ON group_farm.gf_id = agriculturist.gf_id
-                                                                WHERE group_farm.gf_id ='$Gname' AND MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                WHERE agriculturist.gf_id ='$gf_id' AND MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
                                                                 GROUP BY MONTH(sale_date)"); 
                                             $stmt2->execute();
 
@@ -121,8 +114,7 @@
                                                                     INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
                                                                     INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
                                                                     INNER JOIN `agriculturist` ON group_g.agc_id = agriculturist.agc_id
-                                                                    INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
-                                                                    WHERE group_farm.gf_id ='$Gname' AND MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                    WHERE agriculturist.gf_id ='$gf_id' AND MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
                                                                     GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
                                             $stmt1->execute();
 
@@ -133,18 +125,18 @@
                                             $dataResult = json_encode($arr);
 
 
-                                            $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                                                                FROM `salelist` 
-                                                                INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                                                                INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
-                                            $stmt->execute();                                                        
-                                            $vms = $stmt->fetchAll();
+                                            // $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
+                                            //                     FROM `salelist` 
+                                            //                     INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                            //                     INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                            //                     WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                            //                     GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                            // $stmt->execute();                                                        
+                                            // $vms = $stmt->fetchAll();
 
 
 
-                                            $checkid = $db->query("SELECT `gf_name` FROM `group_farm` WHERE `gf_id` = '$Gname'");
+                                            $checkid = $db->query("SELECT `gf_name` FROM `group_farm` WHERE `gf_id` = '$gf_id'");
                                             $checkid->execute();
                                             $row = $checkid->fetch(PDO::FETCH_ASSOC);
                                             extract($row);

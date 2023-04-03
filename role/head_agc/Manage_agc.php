@@ -27,7 +27,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>จัดการข้อมูลเกษตรกร</title>
+        <title>จัดการข้อมูลเกษตรกรภายในกลุ่ม</title>
 
         <!-- Custom fonts for this template -->
         <link rel="icon" type="image/png" href="img/edit_pro.png" />
@@ -50,14 +50,13 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3 text-center">
-                                <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลเกษตรกร</h3>
+                                <h3 class="m-0 font-weight-bold text-primary">จัดการข้อมูลเกษตรกรภายในกลุ่ม</h3>
                             </div>
-                            <div class="row mt-4 ml-2">
+                            <!-- <div class="row mt-4 ml-2">
                                 <div class="col">
-                                    <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</a>
-                                    <!-- <button class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกร</button> -->
+                                    <a href="Add_agc.php" class="btn btn-blue" style="border-radius: 30px;" type="submit">เพิ่มข้อมูลเกษตรกรภายในกลุ่ม</a>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -76,7 +75,21 @@
                                         </thead>
                                         <tbody>
                                             <?php 
-                                                $stmt = $db->query("SELECT * FROM `agriculturist`");
+
+                                                $id = $_SESSION['id'];
+                                                $check_id = $db->prepare("SELECT `agc_id` FROM `user_login` WHERE user_login.user_id = '$id'");
+                                                $check_id->execute();
+                                                $row1 = $check_id->fetch(PDO::FETCH_ASSOC);
+                                                extract($row1);
+
+
+                                                $check_farm = $db->prepare("SELECT `gf_id` FROM `agriculturist` WHERE `agc_id` = '$agc_id'");
+                                                $check_farm->execute();
+                                                $row2 = $check_farm->fetch(PDO::FETCH_ASSOC);
+                                                extract($row2);
+
+
+                                                $stmt = $db->query("SELECT * FROM `agriculturist` WHERE `gf_id` = '$gf_id'");
                                                 $stmt->execute();
                                                 $agcs = $stmt->fetchAll();
                                                 $count = 1;
@@ -106,7 +119,7 @@
                                                 </td>
                 
                                                 <td><?= $agc['agc_phone']; ?></td>
-                                                <td width="100px"><img class="rounded" width="100%" src="uploads/<?= $agc['agc_img']; ?>" alt=""></td>
+                                                <td width="100px"><img class="rounded" width="100%" src="../admin/uploads/<?= $agc['agc_img']; ?>" alt=""></td>
                                                 <td><a href="Edit_agc.php?edit_id=<?= $agc['agc_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                                 <td><a data-id="<?= $agc['agc_id']; ?>" href="?delete=<?= $agc['agc_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                             </tr>

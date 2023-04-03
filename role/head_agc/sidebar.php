@@ -22,6 +22,11 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="Manage_agc.php">
+            <i class="fa-solid fa-file-pen"></i>
+            <span>จัดการข้อมูลเกษตรกรภายในกลุ่ม</span></a>
+    </li>
 <!-- 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -87,10 +92,10 @@
         <div id="collapseReport" class="collapse" aria-labelledby="headingReport"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="Report_salegoatAll.php">ยอดขายแพะทั้งหมด</a>
-                <a class="collapse-item" href="Report_salegoat.php">ยอดขายแพะแต่ละกลุ่ม</a>
-                <a class="collapse-item" href="Report_moneyAll.php">รายได้แฝง-รายจ่ายทั้งหมด</a>
-                <a class="collapse-item" href="Report_money.php">รายได้แฝง-รายจ่ายแต่ละกลุ่ม</a>
+                <!-- <a class="collapse-item" href="Report_salegoatAll.php">ยอดขายแพะทั้งหมด</a> -->
+                <a class="collapse-item" href="Report_salegoat.php">ยอดขายแพะภายในกลุ่ม</a>
+                <!-- <a class="collapse-item" href="Report_moneyAll.php">รายได้แฝง-รายจ่ายทั้งหมด</a> -->
+                <a class="collapse-item" href="Report_money.php">รายได้แฝง-รายจ่ายภายในกลุ่ม</a>
             </div>
         </div>
     </li>
