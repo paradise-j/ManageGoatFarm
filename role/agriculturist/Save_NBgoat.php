@@ -69,7 +69,12 @@
                             <select class="form-control" aria-label="Default select example" name="FB" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <?php 
-                                    $stmt = $db->query("SELECT * FROM `fm_data` WHERE `fm_type` = '1'");
+                                    $id = $_SESSION['id'];
+                                    $stmt = $db->query("SELECT `fm_id`,`fm_type`,`fm_name`
+                                    FROM `fm_data`
+                                    INNER JOIN agriculturist ON agriculturist.agc_id = fm_data.agc_id
+                                    INNER JOIN user_login ON agriculturist.agc_id = user_login.agc_id
+                                    WHERE `fm_type` = '1' AND user_login.user_id = '$id'");
                                     $stmt->execute();
                                     $fms = $stmt->fetchAll();
                                     
@@ -86,7 +91,11 @@
                             <select class="form-control" aria-label="Default select example" name="MB" style="border-radius: 30px;" required>
                                 <option selected>กรุณาเลือก....</option>
                                 <?php 
-                                    $stmt = $db->query("SELECT * FROM `fm_data` WHERE `fm_type` = '2'");
+                                    $stmt = $db->query("SELECT `fm_id`,`fm_type`,`fm_name`
+                                    FROM `fm_data`
+                                    INNER JOIN agriculturist ON agriculturist.agc_id = fm_data.agc_id
+                                    INNER JOIN user_login ON agriculturist.agc_id = user_login.agc_id
+                                    WHERE `fm_type` = '2' AND user_login.user_id = '$id'");
                                     $stmt->execute();
                                     $fms = $stmt->fetchAll();
                                     
