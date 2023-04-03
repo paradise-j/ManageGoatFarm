@@ -100,7 +100,7 @@
                                             // ====================================================myChartBar========================================================================
                                                 $stmt1 = $db->query("SELECT MONTH(`money_date`) as month, SUM(`money_quan`) as total 
                                                                     FROM `money_inex` 
-                                                                    WHERE (`money_type`= '1' AND `money_list`= '1') AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
+                                                                    WHERE (`money_type`= '1' AND `money_list`= 'ขายมูลแพะ') AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
                                                                     GROUP BY MONTH(`money_date`)");
                                                 $stmt1->execute();
 
@@ -124,16 +124,18 @@
                                                 $my_dataAll_money_out = json_encode($arr3);
                                             // ===========================================================myChartBar1=================================================================
                                                 $stmt4 = $db->query("SELECT `money_list` , SUM(`money_quan`) as total 
-                                                                     FROM `money_inex` 
-                                                                     WHERE `money_type`= '3' AND MONTH(`money_date`) BETWEEN MONTH('$start_date') AND MONTH('$end_date') 
-                                                                     GROUP BY `money_list`");
+                                                                    FROM `money_inex` 
+                                                                    WHERE `money_type`= '3' AND MONTH(`money_date`) BETWEEN MONTH('2023-01-01') AND MONTH('2023-04-30')
+                                                                    GROUP BY `money_list`");
                                                 $stmt4->execute();
 
                                                 $arr4 = array();
                                                 while($row = $stmt4->fetch(PDO::FETCH_ASSOC)){
                                                     $arr4[] = $row;
                                                 }
-                                                $my_dataAll_money_cost = json_encode($arr4);
+                                                $my_money_cost = json_encode($arr4);
+                                                // print_r($arr4);
+                                                // echo ;
                                         }
                                     ?>
                                     <!-- <div class="row mt-2">
@@ -189,9 +191,50 @@
                                                 <h5 class="m-0 font-weight-bold text-primary">สรุปรายจ่ายในแต่ละประเภท</h5>
                                             </div>
                                             <div class="card-body">
-                                                <div class="chart-area">
-                                                    <canvas id="myChartBar2" ></canvas>
-                                                </div>
+                                                <!-- <div class="chart-area mb-4"> -->
+                                                    <!-- <canvas id="myChartBar2" ></canvas> -->
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                            <thead class="thead-light">
+                                                                <tr align="center">
+                                                                    <th>ลำดับที่</th>
+                                                                    <th>ชื่อรายการ</th>
+                                                                    <th>เดือนที่จ่าย</th>
+                                                                    <th>ราคา</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                    if (isset($_POST["submit"])) {
+                                                                    
+                                                                        $stmt3 = $db->query("SELECT `money_list`, `money_date` as month, SUM(`money_quan`) as total 
+                                                                                            FROM `money_inex` 
+                                                                                            INNER JOIN `agriculturist` ON money_inex.agc_id = agriculturist.agc_id
+                                                                                            INNER JOIN `group_farm` ON group_farm.gf_id = agriculturist.gf_id
+                                                                                            WHERE `money_type`= '2' AND `money_date` BETWEEN '$start_date' AND '$end_date'
+                                                                                            GROUP BY `money_list`, `money_date`");
+                                                                        $stmt3->execute();
+                                                                        $mns = $stmt3->fetchAll();
+                                                                        $count = 1 ; 
+                                                                        if (!$mns) {
+                                                                            echo "<p><td colspan='8' class='text-center'>ไม่พบข้อมูล</td></p>";
+                                                                        } else {
+                                                                        foreach($mns as $mn)  {  
+                                                                ?>
+                                                                    <tr align="center">
+                                                                        <th scope="row"><?= $count ;?> </th>
+                                                                        <td><?= $mn['money_list']; ?></td>
+                                                                        <td class="date_th"><?= $mn['month']; ?></td>
+                                                                        <td><?= number_format($mn['total']); ?></td>
+                                                                    </tr>
+                                                                <?php $count++ ;?> 
+                                                                <?php   }  
+                                                                        } 
+                                                                    }    ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                <!-- </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -600,257 +643,261 @@
         });
 // ============================================= myChartBar2 =============================================
 
-        const my_dataAll_money_out = <?= $my_dataAll_money_out; ?> ;
-        var my_data_out1 = [];
-        var my_data_out2 = [];
-        var my_data_out3 = [];
-        var my_label_out = [];
-        // var Unique_label = [];
-        my_dataAll_money_out.forEach(item => {
-            switch (item.money_list) {
-                case '1':
-                    switch (item.month) {
-                        case '1':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '2':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '3':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '4':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '5':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '6':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '7':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '8':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '9':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '10':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '11':
-                            my_data_out1.push(item.total)
-                            break;
-                        case '12':
-                            my_data_out1.push(item.total)
-                            break;
-                        }
-                    break;
-                case '2':
-                    switch (item.month) {
-                        case '1':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '2':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '3':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '4':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '5':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '6':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '7':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '8':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '9':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '10':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '11':
-                            my_data_out2.push(item.total)
-                            break;
-                        case '12':
-                            my_data_out2.push(item.total)
-                            break;
-                        }
-                    break;
-                case '3':
-                    switch (item.month) {
-                        case '1':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '2':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '3':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '4':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '5':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '6':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '7':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '8':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '9':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '10':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '11':
-                            my_data_out3.push(item.total)
-                            break;
-                        case '12':
-                            my_data_out3.push(item.total)
-                            break;
-                        }
-                    break;
-            }
-            switch (item.month) {
-                    case '1':
-                        my_label_out.push('มกราคม')
-                        break;
-                    case '2':
-                        my_label_out.push('กุมภาพันธ์')
-                        break;
-                    case '3':
-                        my_label_out.push('มีนาคม')
-                        break;
-                    case '4':
-                        my_label_out.push('เมษายน')
-                        break;
-                    case '5':
-                        my_label_out.push('พฤษภาคม')
-                        break;
-                    case '6':
-                        my_label_out.push('มิถุนายน')
-                        break;
-                    case '7':
-                        my_label_out.push('กรกฎาคม')
-                        break;
-                    case '8':
-                        my_label_out.push('สิงหาคม')
-                        break;
-                    case '9':
-                        my_label_out.push('กันยายน')
-                        break;
-                    case '10':
-                        my_label_out.push('ตุลาคม')
-                        break;
-                    case '11':
-                        my_label_out.push('พฤศจิกายน')
-                        break;
-                    case '12':
-                        my_label_out.push('ธันวาคม')
-                        break; 
-                } 
+        // const my_dataAll_money_out = <?= $my_dataAll_money_out; ?> ;
+        // var my_data_out1 = [];
+        // var my_data_out2 = [];
+        // var my_data_out3 = [];
+        // var my_label_out = [];
+        // // var Unique_label = [];
+        // my_dataAll_money_out.forEach(item => {
+        //     switch (item.money_list) {
+        //         case '1':
+        //             switch (item.month) {
+        //                 case '1':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '2':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '3':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '4':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '5':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '6':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '7':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '8':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '9':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '10':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '11':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 case '12':
+        //                     my_data_out1.push(item.total)
+        //                     break;
+        //                 }
+        //             break;
+        //         case '2':
+        //             switch (item.month) {
+        //                 case '1':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '2':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '3':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '4':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '5':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '6':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '7':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '8':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '9':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '10':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '11':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 case '12':
+        //                     my_data_out2.push(item.total)
+        //                     break;
+        //                 }
+        //             break;
+        //         case '3':
+        //             switch (item.month) {
+        //                 case '1':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '2':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '3':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '4':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '5':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '6':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '7':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '8':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '9':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '10':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '11':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 case '12':
+        //                     my_data_out3.push(item.total)
+        //                     break;
+        //                 }
+        //             break;
+        //     }
+        //     switch (item.month) {
+        //             case '1':
+        //                 my_label_out.push('มกราคม')
+        //                 break;
+        //             case '2':
+        //                 my_label_out.push('กุมภาพันธ์')
+        //                 break;
+        //             case '3':
+        //                 my_label_out.push('มีนาคม')
+        //                 break;
+        //             case '4':
+        //                 my_label_out.push('เมษายน')
+        //                 break;
+        //             case '5':
+        //                 my_label_out.push('พฤษภาคม')
+        //                 break;
+        //             case '6':
+        //                 my_label_out.push('มิถุนายน')
+        //                 break;
+        //             case '7':
+        //                 my_label_out.push('กรกฎาคม')
+        //                 break;
+        //             case '8':
+        //                 my_label_out.push('สิงหาคม')
+        //                 break;
+        //             case '9':
+        //                 my_label_out.push('กันยายน')
+        //                 break;
+        //             case '10':
+        //                 my_label_out.push('ตุลาคม')
+        //                 break;
+        //             case '11':
+        //                 my_label_out.push('พฤศจิกายน')
+        //                 break;
+        //             case '12':
+        //                 my_label_out.push('ธันวาคม')
+        //                 break; 
+        //         } 
 
-        });
+        // });
 
         // console.log("my_data_out1 => " + my_data_out1)
         // console.log("my_data_out2 => " + my_data_out2)
         // console.log("my_data_out2 => " + my_data_out2)
         // console.log("my_label_out => " + my_label_out)
 
-        var ctx = document.getElementById('myChartBar2');
-        var myChartBar2 = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: my_label_out,
-                datasets: [{
-                axis: 'y',
-                label: "ค่ายา",
-                backgroundColor: "#2a86e9",
-                borderColor: "#2a86e9",
-                data: my_data_out1
-                },{
-                axis: 'y',
-                label: "ค่าวัคซีน",
-                backgroundColor: "#4bc0c0",
-                borderColor: "#4bc0c0",
-                data: my_data_out2
-                },{
-                axis: 'y',
-                label: "ค่าอาหาร",
-                backgroundColor: "#9966ff",
-                borderColor: "#9966ff",
-                data: my_data_out2
-                }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                // indexAxis: 'y',
-                scales: {
-                    xAxes: [{
-                    time: {
-                        unit: 'month'
-                    },
-                    gridLines: {
-                        display: false,
-                        drawBorder: true
-                    },
-                    ticks: {
-                        maxTicksLimit: 5
-                    },
-                        maxBarThickness: 50,
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            min: 0,
-                            // max: 25000,
-                        }
-                    }],
-                },
-                legend: {
-                    display: true
-                },
-            }
-        });
+        // var ctx = document.getElementById('myChartBar2');
+        // var myChartBar2 = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: my_label_out,
+        //         datasets: [{
+        //         axis: 'y',
+        //         label: "ค่ายา",
+        //         backgroundColor: "#2a86e9",
+        //         borderColor: "#2a86e9",
+        //         data: my_data_out1
+        //         },{
+        //         axis: 'y',
+        //         label: "ค่าวัคซีน",
+        //         backgroundColor: "#4bc0c0",
+        //         borderColor: "#4bc0c0",
+        //         data: my_data_out2
+        //         },{
+        //         axis: 'y',
+        //         label: "ค่าอาหาร",
+        //         backgroundColor: "#9966ff",
+        //         borderColor: "#9966ff",
+        //         data: my_data_out2
+        //         }],
+        //     },
+        //     options: {
+        //         maintainAspectRatio: false,
+        //         // indexAxis: 'y',
+        //         scales: {
+        //             xAxes: [{
+        //             time: {
+        //                 unit: 'month'
+        //             },
+        //             gridLines: {
+        //                 display: false,
+        //                 drawBorder: true
+        //             },
+        //             ticks: {
+        //                 maxTicksLimit: 5
+        //             },
+        //                 maxBarThickness: 50,
+        //             }],
+        //             yAxes: [{
+        //                 ticks: {
+        //                     min: 0,
+        //                     // max: 25000,
+        //                 }
+        //             }],
+        //         },
+        //         legend: {
+        //             display: true
+        //         },
+        //     }
+        // });
 
 
 
 // ============================================= myPieChart =============================================
 
-        const my_dataAll_money_cost = <?= $my_dataAll_money_cost; ?> ;
+        const $my_money_cost = <?= $my_money_cost; ?> ;
+
         var my_data_cost = [];
         var my_label_cost = [];
 
-        var ctx = document.getElementById("myPieChart");
-        
-        my_dataAll_money_cost.forEach(item => {
+        $my_money_cost.forEach(item => {
             my_data_cost.push(item.total)
             switch (item.money_list) {
-                case '1':
-                my_label_cost.push('ค่าน้ำมันตัดหญ้า')
-                break;
-                case '2':
-                my_label_cost.push('ค่าปุ๋ย')
-                break;
+                case 'ค่าน้ำมันตัดหญ้า':
+                    my_label_cost.push('ค่าน้ำมันตัดหญ้า')
+                    break;
+                case 'ค่าปุ๋ย':
+                    my_label_cost.push('ค่าปุ๋ย')
+                    break;
             }
         });
+
+        console.log("my_data_cost => " + my_data_cost)
+        console.log("my_label_cost => " + my_label_cost)
+
+        var ctx = document.getElementById("myPieChart");
         var myPieChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
