@@ -10,7 +10,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-house-chimney"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">หัวหน้าสำนักงานสภาเกษตรกร</div>
+        <div class="sidebar-brand-text mx-3">ปรธานกลุ่มเลี้ยง</div>
     </a>
 
     <hr class="sidebar-divider">

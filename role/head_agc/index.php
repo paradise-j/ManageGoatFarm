@@ -41,22 +41,26 @@
                 <?php include('Topbar.php'); ?><!-- Topbar -->
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card border-left-primary shadow h-80">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card border-left-primary shadow h-80 mb-4">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">จำนวนกลุ่ม</div>
+                                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">ชื่อกลุ่มเลี้ยง</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT COUNT(`Gf_id`) as total_gfarm FROM `group_farm`");
+                                                    $id = $_SESSION['id'];
+                                                    $stmt = $db->prepare("SELECT `gf_name` 
+                                                    FROM `group_farm` 
+                                                    INNER JOIN `agriculturist` ON group_farm.gf_id = agriculturist.gf_id
+                                                    INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                    WHERE user_login.user_id = '$id'");
                                                     $stmt->execute();
                                                     $Gfs = $stmt->fetchAll();
                                                     foreach($Gfs as $Gf){
-                                                        echo $Gf['total_gfarm'];
+                                                        echo $Gf['gf_name'];
                                                     }
                                                 ?>
-                                                กลุ่ม
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -67,7 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-2 col-md-6">
                             <div class="card border-left-success shadow h-80">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -75,7 +79,9 @@
                                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">จำนวนเกษตรกร</div>
                                             <div class="h5 mb-1 font-weight-bold text-gray-800">
                                                 <?php
-                                                    $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc FROM `agriculturist`");
+                                                    $stmt = $db->prepare("SELECT COUNT(`agc_id`) as total_agc FROM `agriculturist`
+                                                    INNER JOIN `user_login` ON agriculturist.agc_id = user_login.agc_id
+                                                    WHERE user_login.user_id = '$id'");
                                                     $stmt->execute();
                                                     $agcs = $stmt->fetchAll();
                                                     foreach($agcs as $agc){
