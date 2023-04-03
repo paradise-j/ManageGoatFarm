@@ -35,7 +35,7 @@
     <title>รายงานการขายแพะ</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/virus.png" />
+    <link rel="icon" type="image/png" href="img/clipboard-solid.svg" />
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -141,8 +141,21 @@
                                                                 GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
                                             $stmt->execute();                                                        
                                             $vms = $stmt->fetchAll();
-                                        }
+
+
+
+                                            $checkid = $db->query("SELECT `gf_name` FROM `group_farm` WHERE `gf_id` = '$Gname'");
+                                            $checkid->execute();
+                                            $row = $checkid->fetch(PDO::FETCH_ASSOC);
+                                            extract($row);
                                     ?>
+                                    <div class="row mt-3">
+                                        <div class="col text-center">
+                                            <!-- <h3><?php echo " ประจำวันที่ ".$start_date." ถึงวันที่ ".$end_date; ?></h3> -->
+                                            <label for="inputState" class="form-label mt-2" style="font-size: 2rem;" >ข้อมูลที่แสดง คือ กลุ่มของ <?= $gf_name ; ?></label>
+                                        </div>
+                                    </div>
+                                    <?php }  ?>
                                 </div>
                             
                                 <div class="row ml-2 mb-4 mr-2">

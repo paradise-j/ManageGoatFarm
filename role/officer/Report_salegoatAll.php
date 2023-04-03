@@ -35,7 +35,7 @@
     <title>สรุปยอดขายแพะ</title>
 
     <!-- Custom fonts for this template -->
-    <link rel="icon" type="image/png" href="img/virus.png" />
+    <link rel="icon" type="image/png" href="img/clipboard-solid.svg" />
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Kanit:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -78,116 +78,70 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>ลำดับที่</th>
-                                                    <th>ประเภทแพะ</th>
-                                                    <th>จำนวนยอดขายแพะ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                    if(isset($_POST["submit"])){
-                                                        $start_date = $_POST["start_date"];
-                                                        $end_date = $_POST["end_date"];
-                                                        $count = 1;
+                                    <?php 
+                                        if(isset($_POST["submit"])){
+                                            $start_date = $_POST["start_date"];
+                                            $end_date = $_POST["end_date"];
+                                            $count = 1;
 
-                                                        $stmt2 = $db->query("SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month 
-                                                                            FROM `sale` 
-                                                                            INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
-                                                                            WHERE MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                            GROUP BY MONTH(sale_date)"); 
-                                                        $stmt2->execute();
+                                            $stmt2 = $db->query("SELECT SUM(salelist.slist_price) as total , MONTH(sale_date) as month 
+                                                                FROM `sale` 
+                                                                INNER JOIN `salelist` ON sale.sale_id = salelist.sale_id 
+                                                                WHERE MONTH(sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                GROUP BY MONTH(sale_date)"); 
+                                            $stmt2->execute();
 
-                                                        $arr2 = array();
-                                                        while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
-                                                            $arr2[] = $row;
-                                                        }
-                                                        $dataResult2 = json_encode($arr2);
+                                            $arr2 = array();
+                                            while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                                                $arr2[] = $row;
+                                            }
+                                            $dataResult2 = json_encode($arr2);
 
-                                                        $stmt1 = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                                                                            FROM `salelist` 
-                                                                            INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                                                                            INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                            GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
-                                                        $stmt1->execute();
+                                            $stmt1 = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
+                                                                FROM `salelist` 
+                                                                INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
+                                                                INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
+                                                                WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
+                                                                GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
+                                            $stmt1->execute();
 
-                                                        $arr = array();
-                                                        while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
-                                                            $arr[] = $row;
-                                                        }
-                                                        $dataResult = json_encode($arr);
+                                            $arr = array();
+                                            while($row = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                                                $arr[] = $row;
+                                            }
+                                            $dataResult = json_encode($arr);
+                                        }
+                                    ?>
 
-
-                                                        $stmt = $db->query("SELECT group_g.gg_type , MONTH(sale.sale_date) as month , SUM(salelist.slist_price) as total
-                                                                            FROM `salelist` 
-                                                                            INNER JOIN `sale` ON sale.sale_id = salelist.sale_id
-                                                                            INNER JOIN `group_g` ON group_g.gg_id = salelist.gg_id 
-                                                                            WHERE MONTH(sale.sale_date) BETWEEN MONTH('$start_date') AND MONTH('$end_date')
-                                                                            GROUP BY  group_g.gg_type , MONTH(sale.sale_date)");
-                                                        $stmt->execute();                                                        
-                                                        $vms = $stmt->fetchAll();
+                                    <div class="row mt-4">
+                                        <div class="col-xl-5 col-lg-4">
+                                            <div class="card shadow">
+                                                <div class="card-header py-3">
+                                                    <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละประเภท</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-area">
+                                                        <canvas id="myChartBar" ></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-7 col-lg-8">
+                                            <div class="card shadow">
+                                                <div class="card-header py-3">
+                                                    <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะในแต่ละเดือน</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-area">
+                                                        <canvas id="myAreaChart" ></canvas>
                                                         
-                                                        if (!$vms) {
-                                                            echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
-                                                        } else {
-                                                            foreach($vms as $vm)  {  
-                                                ?>
-                                                <tr>
-                                                    <th scope="row"><?= $count; ?></th>
-                                                    <td>
-                                                        <?php 
-                                                            if($vm['gg_type'] == 1){
-                                                                echo "พ่อพันธุ์";
-                                                            }elseif($vm['gg_type'] == 2){
-                                                                echo "แม่พันธุ์";
-                                                            }else{
-                                                                echo "แพะขุน";
-                                                            }
-                                                        ?>
-                                                    </td>
-                                                    <td><?= $vm['total']; ?></td>
-                                                </tr>
-                                                <?php    $count++;   }  
-                                                        } 
-                                                    }    
-                                                        ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-5 col-lg-4">
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะแต่ละประเภท</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="chart-area">
-                                                <canvas id="myChartBar" ></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-7 col-lg-8">
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <h5 class="m-0 font-weight-bold text-primary">สรุปยอดขายแพะในแต่ละเดือน</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="chart-area">
-                                                <canvas id="myAreaChart" ></canvas>
-                                                
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
