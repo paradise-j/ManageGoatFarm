@@ -10,12 +10,11 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-house-chimney"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">เจ้าหน้าที่</div>
+        <div class="sidebar-brand-text mx-3">หัวหน้าสำนักงานสภาเกษตรกร</div>
     </a>
 
-    <!-- Divider -->
     <hr class="sidebar-divider">
-    <!-- Nav Item - Pages Collapse Menu -->
+
     <li class="nav-item">
         <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -23,6 +22,7 @@
         </a>
     </li>
 
+<!-- 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -41,7 +41,7 @@
                 <a class="collapse-item" href="Manage_breed.php">ข้อมูลสายพันธุ์</a>
             </div>
         </div>
-    </li>
+    </li> -->
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <!-- <li class="nav-item">
@@ -77,6 +77,7 @@
             <i class="fa-solid fa-clipboard-list"></i>
             <span>การออกรายงาน</span></a>
     </li> -->
+    
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
             aria-expanded="true" aria-controls="collapseReport">
