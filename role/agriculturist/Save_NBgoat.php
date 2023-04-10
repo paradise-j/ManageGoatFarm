@@ -111,13 +111,18 @@
                             <label class="form-label">จำนวนแพะที่เกิด</label>
                             <input type="text" class="form-control" name="quantity" style="border-radius: 30px;" required>
                         </div> -->
+                        <div class="row mt-4">
+                            <div class="col text-center">
+                                <label style="color:red;" >** ถ้าไม่มีข้อมูลการเกิดในเพศนั้น ๆ ให้ระบุค่า 0 ช่องจำนวนแพะที่ไม่มี **</label>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">จำนวนแพะเพศผู้ (ตัว)</label>
-                            <input type="text" class="form-control" name="g_male" style="border-radius: 30px;" required>
+                            <input type="number" class="form-control" name="g_male" style="border-radius: 30px;" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">จำนวนแพะเพศเมีย (ตัว)</label>
-                            <input type="text" class="form-control" name="g_female" style="border-radius: 30px;" required>
+                            <input type="number" class="form-control" name="g_female" style="border-radius: 30px;" required>
                         </div>
 
                         <div class="modal-footer">

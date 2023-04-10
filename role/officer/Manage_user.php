@@ -57,13 +57,39 @@
                 <div class="modal-body">
                     <form action="Check_add_gb.php" method="POST">
                         <div class="mb-3">
-                            <label for="firstname" class="col-form-label">ชื่อสายพันธุ์</label>
-                            <input type="text" required class="form-control" name="namegb" style="border-radius: 30px;">
+                            <label for="" class="col-form-label">เกษตรกร</label>
+                            <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกเกษตรกร....</option>
+                                <?php 
+                                    $stmt = $db->query("SELECT * FROM `agriculturist`");
+                                    $stmt->execute();
+                                    $agcs = $stmt->fetchAll();
+                                    
+                                    foreach($agcs as $agc){
+                                ?>
+                                <option value="<?= $agc['agc_id']?>"><?= $agc['agc_name']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label for="firstname" class="col-form-label">รายละเอียด</label>
-                            <input type="text" required class="form-control" name="descripB" style="border-radius: 30px;">
-                        </div> -->
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ชื่อผู้ใช้งาน</label>
+                            <input type="text" required class="form-control" name="username" style="border-radius: 30px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">รหัสผ่าน</label>
+                            <input type="text" required class="form-control" name="password" style="border-radius: 30px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="col-form-label">สิทธิ์การใช้งาน</label>
+                            <select class="form-control" aria-label="Default select example" id="role" name="role" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกสิทธิ์การใช้งาน....</option>
+                                <option value="4">ประธานกลุ่มเลี้ยง</option>
+                                <option value="5">เกษตรกร</option>
+                            </select>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
                         </div>

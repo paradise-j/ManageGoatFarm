@@ -88,7 +88,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ปริมาณอาหาร (กิโลกรัม)</label>
-                            <input type="text" class="form-control" name="priceKG" style="border-radius: 30px;" required>
+                            <input type="number" class="form-control" name="priceKG" style="border-radius: 30px;" required>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-blue" style="border-radius: 30px;" type="submit" name="submit">บันทึกข้อมูล</button>

@@ -58,7 +58,16 @@
                     <form action="Check_add_fg.php" method="POST">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">ประเภทอาหาร</label>
-                            <input type="text" required class="form-control" name="type" style="border-radius: 30px;">
+                            <select class="form-control" aria-label="Default select example" id="typefood" name="typefood" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกประเภทอาหาร....</option>
+                                <option value="1">ธรรมชาติ</option>
+                                <option value="2">ข้น</option>
+                                <option value="2">TMR</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="col-form-label">ชื่ออาหาร</label>
+                            <input type="text" required class="form-control" name="namefood" style="border-radius: 30px;">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" name="submit" class="btn btn-blue">เพิ่มข้อมูล</button>
@@ -90,6 +99,7 @@
                                         <tr align="center">
                                             <th>ลำดับที่</th>
                                             <th>ประเภทอาหาร</th>
+                                            <th>ชื่ออาหาร</th>
                                             <th>แก้ไขรายการ</th>
                                             <th>ลบรายการ</th>
                                         </tr>
@@ -118,6 +128,7 @@
                                                     }
                                                 ?>
                                             </td>
+                                            <td><?= $fg['fg_name']; ?></td>
                                             <td><a href="Edit_fg.php?edit_id=<?= $fg['fg_id']; ?>" class="btn btn-warning" name="edit_id"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td><a data-id="<?= $fg['fg_id']; ?>" href="?delete=<?= $fg['fg_id']; ?>" class="btn btn-danger delete-btn"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
