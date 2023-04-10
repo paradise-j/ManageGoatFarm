@@ -46,7 +46,7 @@
                                     <h3 class="m-0 font-weight-bold text-primary">แก้ไขข้อมูลกลุ่มเลี้ยง</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="Check_edit_vc.php" method="POST" enctype="multipart/form-data">
+                                    <form action="Check_edit_gf.php" method="POST" enctype="multipart/form-data">
                                         <div class="row mb-4">
                                             <div class="col-md-2">
                                                 <label class="form-label">รหัสกลุ่มเลี้ยง</label>
