@@ -128,15 +128,15 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">จำนวน (ตัว)</label>
-                                                <input type="text" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
+                                                <input type="number" class="form-control" id="Gname" name="quantity" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">น้ำหนักรวม (กิโลกรัม)</label>
-                                                <input type="text" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
+                                                <input type="number" class="form-control" id="personid" name="weight" style="border-radius: 30px;" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <label class="form-label">ราคาต่อกิโลกรัม</label>
-                                                <input type="text" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
+                                                <input type="number" class="form-control" id="phone" name="pricekg" style="border-radius: 30px;" required>
                                             </div>
                                         </div>
                                         <div class="row">
