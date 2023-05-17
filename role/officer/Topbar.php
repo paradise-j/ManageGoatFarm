@@ -43,7 +43,7 @@
                     foreach($logins as $login){
                 ?>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small text-right">
-                        <?= $login["officer_name"]; ?>
+                        <?php echo $login["officer_name"]; ?>
                         <!-- <?php echo $login["officer_img"]; ?> -->
                         
                     </span>
