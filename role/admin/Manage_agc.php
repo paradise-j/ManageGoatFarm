@@ -67,7 +67,6 @@
                                                 <th>ชื่อ-สกุล</th>
                                                 <th>ชื่อฟาร์ม</th>
                                                 <th>ตำแหน่ง</th>
-                                                <!-- <th>ชื่อกลุ่มเลี้ยง</th> -->
                                                 <th>เบอร์โทรศัพท์</th>
                                                 <th>รูปภาพ</th>
                                                 <th>แก้ไขรายการ</th>
@@ -81,13 +80,13 @@
                                                 $agcs = $stmt->fetchAll();
                                                 $count = 1;
                                                 if (!$agcs) {
-                                                    echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                                    echo "<p><td colspan='6' class='text-center'>ไม่พบข้อมูล</td></p>";
                                                 } else {
                                                 foreach($agcs as $agc)  {  
                                             ?>
                                             <tr align="center">
                                                 <th scope="row"><?= $count; ?></th>
-                                                <td><?= $agc['agc_name']; ?></td>
+                                                <td><?php echo $agc['agc_name']; ?></td>
                                                 <td><?= $agc['agc_nfarm']; ?></td>
                                                 <td>
                                                     <?php 
