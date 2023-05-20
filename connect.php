@@ -1,22 +1,8 @@
 <?php
-    // $servername = "localhost";
-    // $username = "motolife_surat1";
-    // $password = "motolife_surat1";
-    // $dbname = "motolife_surat1";
-
-    // try {
-    //     $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    //     // set the PDO error mode to exception
-    //     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // } catch(PDOException $e) {
-    //     echo "Connection failed: " . $e->getMessage();
-    // }
-?>
-<?php
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "goat";
+    $username = "motolife_surat1";
+    $password = "motolife_surat1";
+    $dbname = "motolife_surat1";
 
     try {
         $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -25,4 +11,18 @@
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
+?>
+<?php
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "goat";
+
+    // try {
+    //     $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    //     // set the PDO error mode to exception
+    //     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // } catch(PDOException $e) {
+    //     echo "Connection failed: " . $e->getMessage();
+    // }
 ?>
