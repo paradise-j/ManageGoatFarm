@@ -274,8 +274,8 @@
                 data : {id:geography_id,function:'geographies'},
                 success: function(data){
                     $('#provinces').html(data);
-                    $('#amphures').html(' ');
-                    $('#districts').html(' ');
+                    $('#amphures').html('กรุณาเลือกอำเภอ....');
+                    $('#districts').html('กรุณาเลือกตำบล....');
                     $('#zipcode').val(' ');
                 }
             });
@@ -289,7 +289,7 @@
                 data : {id:id_provnce,function:'provinces'},
                 success: function(data){
                     $('#amphures').html(data);
-                    $('#districts').html(' ');
+                    $('#districts').html('กรุณาเลือกตำบล....');
                     $('#zipcode').val(' ');
                 }
             });
