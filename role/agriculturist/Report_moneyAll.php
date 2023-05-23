@@ -66,11 +66,12 @@
                                             <div class="col-md-3"></div>
                                             <label for="inputState" class="form-label mt-2">ตั้งแต่วันที่</label>
                                             <div class="col-md-2">
-                                                <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
+                                                <?php $date = date('Y-m-d'); ?>
+                                                <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" max="<?= $date; ?>" class="form-control" required>
                                             </div>
                                             <label for="inputState" class="form-label mt-2">ถึงวันที่</label>
                                             <div class="col-md-2">
-                                                <input type="date" style="border-radius: 30px;" id="end_date" name="end_date" class="form-control" required>
+                                                <input type="date" style="border-radius: 30px;" id="end_date" name="end_date" max="<?= $date; ?>" class="form-control" required>
                                             </div>
                                             <div class="col-md-2">
                                                 <button class="btn btn-success" style="border-radius: 30px;" type="submit" name="submit">เรียกดู</button>
