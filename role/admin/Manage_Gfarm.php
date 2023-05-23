@@ -140,8 +140,9 @@
                                     <tbody>
                                         <?php 
                                             $stmt = $db->query("SELECT group_farm.gf_id , group_farm.gf_name , districts.name_th as districts, amphures.name_th  as amphures, 
-                                                                provinces.name_th  as provinces, districts.zip_code
+                                                                provinces.name_th  as provinces, districts.zip_code, geographies.name as geographiy
                                                                 FROM `group_farm` 
+                                                                INNER JOIN `geographies` ON geographies.id = group_farm.gf_geo
                                                                 INNER JOIN `provinces` ON provinces.id = group_farm.gf_province
                                                                 INNER JOIN `amphures` ON amphures.id = group_farm.gf_dis
                                                                 INNER JOIN `districts` ON districts.id = group_farm.gf_subdis");
@@ -156,6 +157,7 @@
                                         <tr align="center">
                                             <th scope="row"><?= $count; ?></th>
                                             <td><?= $gf['gf_name']; ?></td>
+                                            <td><?= $gf['geographiy']; ?></td>
                                             <td><?= $gf['districts']; ?></td>
                                             <td><?= $gf['amphures']; ?></td>
                                             <td><?= $gf['provinces']; ?></td>
