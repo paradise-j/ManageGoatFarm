@@ -61,20 +61,26 @@
                             <input type="text" required class="form-control" name="namegf" style="border-radius: 30px;">
                         </div>
                         <div class="mb-3">
-                            <label for="" class="col-form-label">จังหวัด</label>
-                            <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
-                                <option selected disabled>กรุณาเลือกจังหวัด....</option>
+                            <label for="" class="col-form-label">ภูมิภาค</label>
+                            <select class="form-control" aria-label="Default select example" id="geographies" name="geographies" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกภูมิภาค....</option>
                                 <?php 
-                                    $stmt = $db->query("SELECT * FROM `provinces`");
+                                    $stmt = $db->query("SELECT * FROM `geographies`");
                                     $stmt->execute();
-                                    $pvs = $stmt->fetchAll();
+                                    $geogs = $stmt->fetchAll();
                                     
-                                    foreach($pvs as $pv){
+                                    foreach($geogs as $geog){
                                 ?>
-                                <option value="<?= $pv['id']?>"><?= $pv['name_th']?></option>
+                                <option value="<?= $geog['id']?>"><?= $geog['name']?></option>
                                 <?php
                                     }
                                 ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="col-form-label">จังหวัด</label>
+                            <select class="form-control" aria-label="Default select example" id="provinces" name="provinces" style="border-radius: 30px;" required>
+                                <option selected disabled>กรุณาเลือกจังหวัด....</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -260,6 +266,17 @@
         });
         $('.table').DataTable();
 
+        $('#geographies').change(function(){
+            var geography_id = $(this).val();
+            $.ajax({
+                type : "post",
+                url : "address.php",
+                data : {id:geography_id,function:'geographies'},
+                success: function(data){
+                    $('#provinces').html(data);
+                }
+            });
+        });
 
         $('#provinces').change(function(){
             var id_provnce = $(this).val();

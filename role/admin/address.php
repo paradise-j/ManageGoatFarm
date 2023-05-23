@@ -2,6 +2,19 @@
     require_once 'connect.php';
     session_start();
 
+
+    if(isset($_POST['function']) and $_POST['function'] == 'geographies'){
+        $id = $_POST['id'];
+        $stmt = $db->query("SELECT * FROM `provinces` WHERE `geography_id` = '$id'");
+        $stmt->execute();
+        $prvis = $stmt->fetchAll();
+        echo '<option selected disabled>กรุณาเลือกจังหวัด....</option>';
+        foreach($prvis as $prvi){
+            echo '<option value="'.$prvi['id'].'">'.$prvi["name_th"].'</option>';
+        }
+        exit();
+    }
+
     if(isset($_POST['function']) and $_POST['function'] == 'provinces'){
         $id = $_POST['id'];
         $stmt = $db->query("SELECT * FROM `amphures` WHERE `province_id` = '$id'");
