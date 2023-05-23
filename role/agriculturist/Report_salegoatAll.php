@@ -67,7 +67,7 @@
                                             <label for="inputState" class="form-label mt-2">ตั้งแต่วันที่</label>
                                             <div class="col-md-2">
                                                 <?php $date = date('Y-m-d'); ?>
-                                                <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" max="<?= $date; ?>" class="form-control" required>
+                                                <input type="date" style="border-radius: 30px;" id="start_date" name="start_date" class="form-control" required>
                                             </div>
                                             <label for="inputState" class="form-label mt-2">ถึงวันที่</label>
                                             <div class="col-md-2">
