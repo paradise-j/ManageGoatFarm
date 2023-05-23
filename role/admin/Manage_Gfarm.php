@@ -274,6 +274,9 @@
                 data : {id:geography_id,function:'geographies'},
                 success: function(data){
                     $('#provinces').html(data);
+                    $('#amphures').html(' ');
+                    $('#districts').html(' ');
+                    $('#zipcode').val(' ');
                 }
             });
         });
@@ -286,6 +289,8 @@
                 data : {id:id_provnce,function:'provinces'},
                 success: function(data){
                     $('#amphures').html(data);
+                    $('#districts').html(' ');
+                    $('#zipcode').val(' ');
                 }
             });
         });
@@ -298,6 +303,7 @@
                 data : {id:id_amphures,function:'amphures'},
                 success: function(data){
                     $('#districts').html(data);
+                    $('#zipcode').val(' ');
                 }
             });
         });
